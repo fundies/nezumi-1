@@ -1,0 +1,8 @@
+# Visual Studio
+.vs/
+.vscode/
+CMakeSettings.json
+
+# Operating System
+._*
+.DS_Store
