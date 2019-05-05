@@ -45,7 +45,9 @@ int nez_game_run(int argc, char **argv, const struct nez_game_config *config)
     NEZ_ASSERT(config->callback_draw);
 
     /* Initialize Window */
-    if (!nez_window_init("Nezumi Game", 1280, 720))
+    if (!nez_window_init(config->window_title,
+                         config->window_width,
+                         config->window_height))
         return EXIT_FAILURE;
 
     /* Initialize Timer */
