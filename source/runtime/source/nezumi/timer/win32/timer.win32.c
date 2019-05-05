@@ -18,44 +18,41 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#include <stdio.h>
-
-#include <nezumi/game.h>
-#include <nezumi/window.h>
 #include <nezumi/timer.h>
+#include <nezumi/timer/timer.internal.h>
 
-void sample_init(void)
+#include <windows.h>
+
+static double frequency;
+static double offset;
+
+nez_b32_t nez_timer_init(void)
 {
+    LARGE_INTEGER result;
+
+    /* Get Frequency */
+    if (!QueryPerformanceFrequency(&result))
+        return NEZ_FALSE;
+
+    frequency = (double)result.QuadPart;
+
+    /* Get Offset */
+    if (!QueryPerformanceCounter(&result))
+        return NEZ_FALSE;
+
+    offset = (double)result.QuadPart;
+
+    /* Success */
+    return NEZ_TRUE;
 }
 
-void sample_exit(void)
+double nez_timer_get(void)
 {
-}
+    LARGE_INTEGER current;
 
-void sample_step(void)
-{
-    printf("%f\n", nez_timer_get());
-}
+    /* Get Current Time */
+    QueryPerformanceCounter(&current);
 
-void sample_draw(void)
-{
-}
-
-int main(int argc, char **argv)
-{
-    struct nez_game_config config;
-
-    /* Setup Window */
-    config.window_title     = "Nezumi Game";
-    config.window_width     = 1280;
-    config.window_height    = 720;
-
-    /* Setup Callbacks */
-    config.callback_init    = sample_init;
-    config.callback_exit    = sample_exit;
-    config.callback_step    = sample_step;
-    config.callback_draw    = sample_draw;
-
-    /* Start Game */
-    return nez_game_run(argc, argv, &config);
+    /* Calculate Timer Value */
+    return ((double)current.QuadPart - offset) / frequency;
 }

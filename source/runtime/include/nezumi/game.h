@@ -23,28 +23,46 @@
 
 #include <nezumi/config.h>
 
-struct temp_callbacks
+struct nez_game_config
 {
-    void (*init)(void);
-    void (*exit)(void);
-    void (*step)(void);
-    void (*draw)(void);
+    /** The title of the window. */
+    const char *window_title;
+
+    /** The width of the window. */
+    int window_width;
+
+    /** The height of the window. */
+    int window_height;
+
+    /** The function to call when the game is started. */
+    void (*callback_init)(void);
+
+    /** The function to call when the game is exited. */
+    void (*callback_exit)(void);
+
+    /** The function to call when the game is updated. */
+    void (*callback_step)(void);
+
+    /** The function to call when the game is rendered. */
+    void (*callback_draw)(void);
 };
 
 /**
- * The main entry point for a Nezumi application.
+ * Initializes the game and begins running the main loop.
  * 
  * @param argc The command-line argument count.
  * @param argv The command-line argument array.
+ * @param config A pointer to the structure providing the initial configuration
+ *               of the game.
  * 
  * @return The exit code for the application.
  */
-extern NEZUMI_API int nez_game_main(int argc, char **argv,
-                                    const struct temp_callbacks *callbacks);
+extern NEZUMI_API int nez_game_run(int argc, char **argv,
+                                    const struct nez_game_config *config);
 
 /**
  * Requests the game to exit on the next frame.
  */
-extern NEZUMI_API void nez_game_exit(void);
+extern NEZUMI_API void nez_game_end(void);
 
 #endif

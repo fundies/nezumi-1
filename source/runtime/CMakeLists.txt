@@ -12,32 +12,37 @@ SET (
 )
 
 # Define Empty Modules
-NEZUMI_MODULE_ENTRY (RUNTIME_WINDOW_MODULE "None" SOURCES "source/nezumi/window/none/window.none.c")
+NEZUMI_MODULE_ENTRY (RUNTIME_MODULE_WINDOW "None" SOURCES "source/nezumi/window/none/window.none.c")
+NEZUMI_MODULE_ENTRY (RUNTIME_MODULE_TIMER "None" SOURCES "source/nezumi/timer/none/timer.none.c")
 
 # Define Platform Modules
 IF (NEZUMI_PLATFORM_WINDOWS)
     # Windows
-    NEZUMI_MODULE_DEFAULT (RUNTIME_WINDOW_MODULE "Win32")
+    NEZUMI_MODULE_DEFAULT (RUNTIME_MODULE_WINDOW "Win32")
+    NEZUMI_MODULE_DEFAULT (RUNTIME_MODULE_TIMER "Win32")
 
     # Windows - Window
-    NEZUMI_MODULE_ENTRY (RUNTIME_WINDOW_MODULE "Win32" SOURCES "source/nezumi/window/win32/window.win32.c")
+    NEZUMI_MODULE_ENTRY (RUNTIME_MODULE_WINDOW "Win32" SOURCES "source/nezumi/window/win32/window.win32.c")
+
+    # Windows - Timer
+    NEZUMI_MODULE_ENTRY (RUNTIME_MODULE_TIMER "Win32" SOURCES "source/nezumi/timer/win32/timer.win32.c")
 ELSE ()
     # Other Platform
     MESSAGE (WARNING "This platform has no supported runtime modules!")
 ENDIF ()
 
 # Define Module Options
-NEZUMI_MODULE_OPTION (RUNTIME_WINDOW_MODULE "The backend to use for the runtime's window module.")
+NEZUMI_MODULE_OPTION (RUNTIME_MODULE_WINDOW "The backend to use for the runtime's window module.")
+NEZUMI_MODULE_OPTION (RUNTIME_MODULE_TIMER "The backend to use for the runtime's timer module.")
 
 # Gather Sources
 SET (
     SOURCE_RUNTIME
 
     ${SOURCE_RUNTIME}
-    ${SOURCE_RUNTIME_WINDOW_MODULE}
+    ${SOURCE_RUNTIME_MODULE_WINDOW}
+    ${SOURCE_RUNTIME_MODULE_TIMER}
 )
-
-MESSAGE (WARNING ${SOURCE_RUNTIME_WINDOW_MODULE})
 
 # Add Target
 IF (RUNTIME_STATIC)
@@ -67,4 +72,5 @@ IF (RUNTIME_PARANOID)
 ENDIF ()
 
 # Add Target Modules
-NEZUMI_MODULE_TARGET (SOURCE_RUNTIME_WINDOW nezumi-runtime)
+NEZUMI_MODULE_TARGET (SOURCE_RUNTIME_MODULE_WINDOW nezumi-runtime)
+NEZUMI_MODULE_TARGET (SOURCE_RUNTIME_MODULE_TIMER nezumi-runtime)

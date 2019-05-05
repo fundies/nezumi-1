@@ -20,11 +20,15 @@
 
 #include <stdlib.h>
 
+#include <nezumi/types.h>
+#include <nezumi/assert.h>
+
 #include <nezumi/game.h>
 #include <nezumi/window.h>
-#include <nezumi/types.h>
+#include <nezumi/timer.h>
 
 #include <nezumi/window/window.internal.h>
+#include <nezumi/timer/timer.internal.h>
 
 /* Whether the game has been flagged to exit. */
 static nez_b32_t exiting;
@@ -32,15 +36,24 @@ static nez_b32_t exiting;
 /* Whether the game has been painted at least once. */
 static nez_b32_t painted;
 
-int nez_game_main(int argc, char **argv,
-                  const struct temp_callbacks *callbacks)
+int nez_game_run(int argc, char **argv, const struct nez_game_config *config)
 {
+    NEZ_ASSERT(config);
+    NEZ_ASSERT(config->callback_init);
+    NEZ_ASSERT(config->callback_exit);
+    NEZ_ASSERT(config->callback_step);
+    NEZ_ASSERT(config->callback_draw);
+
     /* Initialize Window */
     if (!nez_window_init("Nezumi Game", 1280, 720))
         return EXIT_FAILURE;
 
+    /* Initialize Timer */
+    if (!nez_timer_init())
+        return EXIT_FAILURE;
+
     /* Initialize Game */
-    callbacks->init();
+    config->callback_init();
 
     /* Game Loop */
     while (!exiting)
@@ -50,10 +63,10 @@ int nez_game_main(int argc, char **argv,
             break;
 
         /* Update Game */
-        callbacks->step();
+        config->callback_step();
 
         /* Render Game */
-        callbacks->draw();
+        config->callback_draw();
 
         /* Frame Painted */
         if (!painted)
@@ -68,13 +81,13 @@ int nez_game_main(int argc, char **argv,
     }
 
     /* Shutdown Game */
-    callbacks->exit();
+    config->callback_exit();
 
     /* Success */
     return EXIT_SUCCESS;
 }
 
-void nez_game_exit(void)
+void nez_game_end(void)
 {
     exiting = NEZ_TRUE;
 }

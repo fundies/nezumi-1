@@ -18,44 +18,15 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#include <stdio.h>
+#ifndef NEZUMI_RUNTIME_ASSERT_H
+#define NEZUMI_RUNTIME_ASSERT_H
 
-#include <nezumi/game.h>
-#include <nezumi/window.h>
-#include <nezumi/timer.h>
+#include <assert.h>
 
-void sample_init(void)
-{
-}
+#if defined(NEZUMI_PARANOID)
+    #define NEZ_ASSERT(x) assert(x)
+#else
+    #define NEZ_ASSERT(x)
+#endif
 
-void sample_exit(void)
-{
-}
-
-void sample_step(void)
-{
-    printf("%f\n", nez_timer_get());
-}
-
-void sample_draw(void)
-{
-}
-
-int main(int argc, char **argv)
-{
-    struct nez_game_config config;
-
-    /* Setup Window */
-    config.window_title     = "Nezumi Game";
-    config.window_width     = 1280;
-    config.window_height    = 720;
-
-    /* Setup Callbacks */
-    config.callback_init    = sample_init;
-    config.callback_exit    = sample_exit;
-    config.callback_step    = sample_step;
-    config.callback_draw    = sample_draw;
-
-    /* Start Game */
-    return nez_game_run(argc, argv, &config);
-}
+#endif

@@ -18,44 +18,19 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#include <stdio.h>
+#ifndef NEZUMI_RUNTIME_TIMER_H
+#define NEZUMI_RUNTIME_TIMER_H
 
-#include <nezumi/game.h>
-#include <nezumi/window.h>
-#include <nezumi/timer.h>
+#include <nezumi/config.h>
 
-void sample_init(void)
-{
-}
+/**
+ * Gets the current value of the system timer.
+ * 
+ * This function gets the total elapsed time since the start of the game
+ * (measured in seconds) as determined by the system's high-resolution timer.
+ * 
+ * @return The current value of the system timer.
+ */
+extern NEZUMI_API double nez_timer_get();
 
-void sample_exit(void)
-{
-}
-
-void sample_step(void)
-{
-    printf("%f\n", nez_timer_get());
-}
-
-void sample_draw(void)
-{
-}
-
-int main(int argc, char **argv)
-{
-    struct nez_game_config config;
-
-    /* Setup Window */
-    config.window_title     = "Nezumi Game";
-    config.window_width     = 1280;
-    config.window_height    = 720;
-
-    /* Setup Callbacks */
-    config.callback_init    = sample_init;
-    config.callback_exit    = sample_exit;
-    config.callback_step    = sample_step;
-    config.callback_draw    = sample_draw;
-
-    /* Start Game */
-    return nez_game_run(argc, argv, &config);
-}
+#endif

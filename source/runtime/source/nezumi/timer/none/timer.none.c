@@ -18,44 +18,15 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#include <stdio.h>
-
-#include <nezumi/game.h>
-#include <nezumi/window.h>
 #include <nezumi/timer.h>
+#include <nezumi/timer/timer.internal.h>
 
-void sample_init(void)
+nez_b32_t nez_timer_init(void)
 {
+    return NEZ_TRUE;
 }
 
-void sample_exit(void)
+double nez_timer_get(void)
 {
-}
-
-void sample_step(void)
-{
-    printf("%f\n", nez_timer_get());
-}
-
-void sample_draw(void)
-{
-}
-
-int main(int argc, char **argv)
-{
-    struct nez_game_config config;
-
-    /* Setup Window */
-    config.window_title     = "Nezumi Game";
-    config.window_width     = 1280;
-    config.window_height    = 720;
-
-    /* Setup Callbacks */
-    config.callback_init    = sample_init;
-    config.callback_exit    = sample_exit;
-    config.callback_step    = sample_step;
-    config.callback_draw    = sample_draw;
-
-    /* Start Game */
-    return nez_game_run(argc, argv, &config);
+    return 0.0;
 }
