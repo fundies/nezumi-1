@@ -25,7 +25,7 @@ IF (NEZUMI_PLATFORM_WINDOWS)
     NEZUMI_MODULE_ENTRY (RUNTIME_MODULE_WINDOW "Win32" SOURCES "source/nezumi/window/win32/window.win32.c")
 
     # Windows - Timer
-    NEZUMI_MODULE_ENTRY (RUNTIME_MODULE_TIMER "Win32" SOURCES "source/nezumi/timer/win32/timer.win32.c" LIBRARIES "User32.lib")
+    NEZUMI_MODULE_ENTRY (RUNTIME_MODULE_TIMER "Win32" SOURCES "source/nezumi/timer/win32/timer.win32.c")
 ELSE ()
     # Other Platform
     MESSAGE (WARNING "This platform has no supported runtime modules!")
