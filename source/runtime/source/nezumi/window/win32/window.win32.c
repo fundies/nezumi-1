@@ -223,7 +223,7 @@ void nez_window_set_visible(nez_b32_t visible)
     ShowWindow(g_nez_window_handle, visible ? SW_SHOW : SW_HIDE);
 }
 
-void nez_window_set_fullscreen(nez_b32_t fullscreen)
+void nez_window_set_fullscreen(nez_b32_t fullscreen, nez_b32_t borderless)
 {
     /* TODO: Add Fullscreen Support */
 }

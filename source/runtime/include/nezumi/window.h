@@ -64,7 +64,7 @@ extern NEZUMI_API void nez_window_set_visible(nez_b32_t visible);
  * 
  * @param fullscreen True if the window should be fullscreen; false otherwise.
  */
-extern NEZUMI_API void nez_window_set_fullscreen(nez_b32_t fullscreen);
+extern NEZUMI_API void nez_window_set_fullscreen(nez_b32_t fullscreen, nez_b32_t borderless);
 
 /**
  * Gets the handle of the window.

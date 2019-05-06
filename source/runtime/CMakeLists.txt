@@ -1,3 +1,8 @@
+INCLUDE (ExternalProject)
+
+# Vendor Includes
+INCLUDE_DIRECTORIES ("${CMAKE_BINARY_DIR}/vendor/include")
+
 # Set Runtime Options
 SET (RUNTIME_STATIC ON CACHE BOOL "Whether to build the runtime as a static or shared library.")
 SET (RUNTIME_PARANOID ON CACHE BOOL "Enables speed-sapping runtime error checks and assertions. Despite its name, you should probably ship the game with these enabled.")
@@ -23,6 +28,9 @@ IF (NEZUMI_PLATFORM_WINDOWS)
 
     # Windows - Window
     NEZUMI_MODULE_ENTRY (RUNTIME_MODULE_WINDOW "Win32" SOURCES "source/nezumi/window/win32/window.win32.c")
+
+    # SDL2 - Window
+    NEZUMI_MODULE_ENTRY (RUNTIME_MODULE_WINDOW "SDL2" SOURCES "source/nezumi/window/sdl2/window.sdl2.c" LIBRARIES "SDL2main;SDL2-static;imm32;version;winmm" EXTERNAL "SDL2" PROVIDES "SDL2main;SDL2-static")
 
     # Windows - Timer
     NEZUMI_MODULE_ENTRY (RUNTIME_MODULE_TIMER "Win32" SOURCES "source/nezumi/timer/win32/timer.win32.c")
@@ -72,5 +80,5 @@ IF (RUNTIME_PARANOID)
 ENDIF ()
 
 # Add Target Modules
-NEZUMI_MODULE_TARGET (SOURCE_RUNTIME_MODULE_WINDOW nezumi-runtime)
-NEZUMI_MODULE_TARGET (SOURCE_RUNTIME_MODULE_TIMER nezumi-runtime)
+NEZUMI_MODULE_TARGET (RUNTIME_MODULE_WINDOW nezumi-runtime)
+NEZUMI_MODULE_TARGET (RUNTIME_MODULE_TIMER nezumi-runtime)
