@@ -215,7 +215,7 @@ PND_createwindow(_THIS, SDL_Window * window)
     /* Check if window must support OpenGL ES rendering */
     if ((window->flags & SDL_WINDOW_OPENGL) == SDL_WINDOW_OPENGL) {
 
-        EGLBoolean initstatus;
+        EGLnez_b32_tean initstatus;
 
         /* Mark this window as OpenGL ES compatible */
         wdata->uses_gles = SDL_TRUE;
@@ -287,7 +287,7 @@ PND_restorewindow(_THIS, SDL_Window * window)
 {
 }
 void
-PND_setwindowgrab(_THIS, SDL_Window * window, SDL_bool grabbed)
+PND_setwindowgrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed)
 {
 }
 void
@@ -301,7 +301,7 @@ PND_destroywindow(_THIS, SDL_Window * window)
 /* SDL Window Manager function                                               */
 /*****************************************************************************/
 #if 0
-SDL_bool
+SDL_nez_b32_t
 PND_getwindowwminfo(_THIS, SDL_Window * window, struct SDL_SysWMinfo *info)
 {
     if (info->version.major <= SDL_MAJOR_VERSION) {
@@ -403,7 +403,7 @@ PND_gl_createcontext(_THIS, SDL_Window * window)
 {
     SDL_VideoData *phdata = (SDL_VideoData *) _this->driverdata;
     SDL_WindowData *wdata = (SDL_WindowData *) window->driverdata;
-    EGLBoolean status;
+    EGLnez_b32_tean status;
     EGLint configs;
     uint32_t attr_pos;
     EGLint attr_value;
@@ -708,7 +708,7 @@ PND_gl_makecurrent(_THIS, SDL_Window * window, SDL_GLContext context)
 {
     SDL_VideoData *phdata = (SDL_VideoData *) _this->driverdata;
     SDL_WindowData *wdata;
-    EGLBoolean status;
+    EGLnez_b32_tean status;
 
     if (phdata->egl_initialized != SDL_TRUE) {
         return SDL_SetError("PND: GF initialization failed, no OpenGL ES support");
@@ -751,7 +751,7 @@ int
 PND_gl_setswapinterval(_THIS, int interval)
 {
     SDL_VideoData *phdata = (SDL_VideoData *) _this->driverdata;
-    EGLBoolean status;
+    EGLnez_b32_tean status;
 
     if (phdata->egl_initialized != SDL_TRUE) {
         return SDL_SetError("PND: EGL initialization failed, no OpenGL ES support");
@@ -802,7 +802,7 @@ void
 PND_gl_deletecontext(_THIS, SDL_GLContext context)
 {
     SDL_VideoData *phdata = (SDL_VideoData *) _this->driverdata;
-    EGLBoolean status;
+    EGLnez_b32_tean status;
 
     if (phdata->egl_initialized != SDL_TRUE) {
         SDL_SetError("PND: GLES initialization failed, no OpenGL ES support");

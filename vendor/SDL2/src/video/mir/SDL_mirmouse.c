@@ -259,7 +259,7 @@ MIR_WarpMouseGlobal(int x, int y)
 }
 
 static int
-MIR_SetRelativeMouseMode(SDL_bool enabled)
+MIR_SetRelativeMouseMode(SDL_nez_b32_t enabled)
 {
     return 0;
 }

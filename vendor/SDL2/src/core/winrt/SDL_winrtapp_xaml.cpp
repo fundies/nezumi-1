@@ -39,7 +39,7 @@
 
 
 /* SDL-internal globals: */
-SDL_bool WINRT_XAMLWasEnabled = SDL_FALSE;
+SDL_nez_b32_t WINRT_XAMLWasEnabled = SDL_FALSE;
 
 #if WINAPI_FAMILY == WINAPI_FAMILY_APP
 extern "C"
@@ -141,7 +141,7 @@ SDL_WinRTInitXAMLApp(int (*mainFunction)(int, char **), void * backgroundPanelAs
     SDL_SetMainReady();
 
     // Make sure video-init knows that we're initializing XAML:
-    SDL_bool oldXAMLWasEnabledValue = WINRT_XAMLWasEnabled;
+    SDL_nez_b32_t oldXAMLWasEnabledValue = WINRT_XAMLWasEnabled;
     WINRT_XAMLWasEnabled = SDL_TRUE;
 
     // Make sure video modes are detected now, while we still have access to the WinRT

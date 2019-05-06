@@ -708,7 +708,7 @@ ALSA_OpenDevice(_THIS, void *handle, const char *devname, int iscapture)
 typedef struct ALSA_Device
 {
     char *name;
-    SDL_bool iscapture;
+    SDL_nez_b32_t iscapture;
     struct ALSA_Device *next;
 } ALSA_Device;
 
@@ -847,10 +847,10 @@ ALSA_HotplugThread(void *arg)
                 /* only want physical hardware interfaces */
                 if (!match || (SDL_strncmp(name, match, match_len) == 0)) {
                     char *ioid = ALSA_snd_device_name_get_hint(hints[i], "IOID");
-                    const SDL_bool isoutput = (ioid == NULL) || (SDL_strcmp(ioid, "Output") == 0);
-                    const SDL_bool isinput = (ioid == NULL) || (SDL_strcmp(ioid, "Input") == 0);
-                    SDL_bool have_output = SDL_FALSE;
-                    SDL_bool have_input = SDL_FALSE;
+                    const SDL_nez_b32_t isoutput = (ioid == NULL) || (SDL_strcmp(ioid, "Output") == 0);
+                    const SDL_nez_b32_t isinput = (ioid == NULL) || (SDL_strcmp(ioid, "Input") == 0);
+                    SDL_nez_b32_t have_output = SDL_FALSE;
+                    SDL_nez_b32_t have_input = SDL_FALSE;
 
                     free(ioid);
 

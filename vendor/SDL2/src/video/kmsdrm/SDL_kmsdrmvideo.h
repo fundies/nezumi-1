@@ -63,9 +63,9 @@ typedef struct SDL_WindowData
     struct gbm_bo *current_bo;
     struct gbm_bo *next_bo;
     struct gbm_bo *crtc_bo;
-    SDL_bool waiting_for_flip;
-    SDL_bool crtc_ready;
-    SDL_bool double_buffer;
+    SDL_nez_b32_t waiting_for_flip;
+    SDL_nez_b32_t crtc_ready;
+    SDL_nez_b32_t double_buffer;
 #if SDL_VIDEO_OPENGL_EGL
     EGLSurface egl_surface;
 #endif
@@ -79,7 +79,7 @@ typedef struct KMSDRM_FBInfo
 
 /* Helper functions */
 KMSDRM_FBInfo *KMSDRM_FBFromBO(_THIS, struct gbm_bo *bo);
-SDL_bool KMSDRM_WaitPageFlip(_THIS, SDL_WindowData *wdata, int timeout);
+SDL_nez_b32_t KMSDRM_WaitPageFlip(_THIS, SDL_WindowData *wdata, int timeout);
 
 /****************************************************************************/
 /* SDL_VideoDevice functions declaration                                    */
@@ -102,11 +102,11 @@ void KMSDRM_RaiseWindow(_THIS, SDL_Window * window);
 void KMSDRM_MaximizeWindow(_THIS, SDL_Window * window);
 void KMSDRM_MinimizeWindow(_THIS, SDL_Window * window);
 void KMSDRM_RestoreWindow(_THIS, SDL_Window * window);
-void KMSDRM_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed);
+void KMSDRM_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed);
 void KMSDRM_DestroyWindow(_THIS, SDL_Window * window);
 
 /* Window manager function */
-SDL_bool KMSDRM_GetWindowWMInfo(_THIS, SDL_Window * window,
+SDL_nez_b32_t KMSDRM_GetWindowWMInfo(_THIS, SDL_Window * window,
                              struct SDL_SysWMinfo *info);
 
 /* OpenGL/OpenGL ES functions */

@@ -47,10 +47,10 @@ struct SDL_PrivateAudioData
     SDL_AudioStream *capturestream;
     HANDLE event;
     HANDLE task;
-    SDL_bool coinitialized;
+    SDL_nez_b32_t coinitialized;
     int framesize;
     int default_device_generation;
-    SDL_bool device_lost;
+    SDL_nez_b32_t device_lost;
     void *activation_handler;
     SDL_atomic_t just_activated;
 };
@@ -60,17 +60,17 @@ extern SDL_atomic_t WASAPI_DefaultPlaybackGeneration;
 extern SDL_atomic_t WASAPI_DefaultCaptureGeneration;
 
 /* win32 and winrt implementations call into these. */
-int WASAPI_PrepDevice(_THIS, const SDL_bool updatestream);
+int WASAPI_PrepDevice(_THIS, const SDL_nez_b32_t updatestream);
 void WASAPI_RefDevice(_THIS);
 void WASAPI_UnrefDevice(_THIS);
-void WASAPI_AddDevice(const SDL_bool iscapture, const char *devname, LPCWSTR devid);
-void WASAPI_RemoveDevice(const SDL_bool iscapture, LPCWSTR devid);
+void WASAPI_AddDevice(const SDL_nez_b32_t iscapture, const char *devname, LPCWSTR devid);
+void WASAPI_RemoveDevice(const SDL_nez_b32_t iscapture, LPCWSTR devid);
 
 /* These are functions that are implemented differently for Windows vs WinRT. */
 int WASAPI_PlatformInit(void);
 void WASAPI_PlatformDeinit(void);
 void WASAPI_EnumerateEndpoints(void);
-int WASAPI_ActivateDevice(_THIS, const SDL_bool isrecovery);
+int WASAPI_ActivateDevice(_THIS, const SDL_nez_b32_t isrecovery);
 void WASAPI_PlatformThreadInit(_THIS);
 void WASAPI_PlatformThreadDeinit(_THIS);
 void WASAPI_PlatformDeleteActivationHandler(void *handler);

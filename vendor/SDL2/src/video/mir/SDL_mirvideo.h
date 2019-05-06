@@ -37,7 +37,7 @@ typedef struct
     MirConnection*    connection;
     MirDisplayConfig* display_config;
     MIR_Window*       current_window;
-    SDL_bool          software;
+    SDL_nez_b32_t          software;
     MirPixelFormat    pixel_format;
 } MIR_Data;
 

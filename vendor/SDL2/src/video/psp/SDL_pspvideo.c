@@ -40,7 +40,7 @@
 #include "SDL_pspgl_c.h"
 
 /* unused
-static SDL_bool PSP_initialized = SDL_FALSE;
+static SDL_nez_b32_t PSP_initialized = SDL_FALSE;
 */
 static int
 PSP_Available(void)
@@ -281,7 +281,7 @@ PSP_RestoreWindow(_THIS, SDL_Window * window)
 {
 }
 void
-PSP_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed)
+PSP_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed)
 {
 
 }
@@ -294,7 +294,7 @@ PSP_DestroyWindow(_THIS, SDL_Window * window)
 /* SDL Window Manager function                                               */
 /*****************************************************************************/
 #if 0
-SDL_bool
+SDL_nez_b32_t
 PSP_GetWindowWMInfo(_THIS, SDL_Window * window, struct SDL_SysWMinfo *info)
 {
     if (info->version.major <= SDL_MAJOR_VERSION) {
@@ -312,7 +312,7 @@ PSP_GetWindowWMInfo(_THIS, SDL_Window * window, struct SDL_SysWMinfo *info)
 
 
 /* TO Write Me */
-SDL_bool PSP_HasScreenKeyboardSupport(_THIS)
+SDL_nez_b32_t PSP_HasScreenKeyboardSupport(_THIS)
 {
     return SDL_FALSE;
 }
@@ -322,7 +322,7 @@ void PSP_ShowScreenKeyboard(_THIS, SDL_Window *window)
 void PSP_HideScreenKeyboard(_THIS, SDL_Window *window)
 {
 }
-SDL_bool PSP_IsScreenKeyboardShown(_THIS, SDL_Window *window)
+SDL_nez_b32_t PSP_IsScreenKeyboardShown(_THIS, SDL_Window *window)
 {
     return SDL_FALSE;
 }

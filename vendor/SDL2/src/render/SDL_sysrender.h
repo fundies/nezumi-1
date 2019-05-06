@@ -88,7 +88,7 @@ struct SDL_Renderer
 
     void (*WindowEvent) (SDL_Renderer * renderer, const SDL_WindowEvent *event);
     int (*GetOutputSize) (SDL_Renderer * renderer, int *w, int *h);
-    SDL_bool (*SupportsBlendMode)(SDL_Renderer * renderer, SDL_BlendMode blendMode);
+    SDL_nez_b32_t (*SupportsBlendMode)(SDL_Renderer * renderer, SDL_BlendMode blendMode);
     int (*CreateTexture) (SDL_Renderer * renderer, SDL_Texture * texture);
     int (*SetTextureColorMod) (SDL_Renderer * renderer,
                                SDL_Texture * texture);
@@ -140,7 +140,7 @@ struct SDL_Renderer
 
     /* The window associated with the renderer */
     SDL_Window *window;
-    SDL_bool hidden;
+    SDL_nez_b32_t hidden;
 
     /* The logical resolution for rendering */
     int logical_w;
@@ -149,7 +149,7 @@ struct SDL_Renderer
     int logical_h_backup;
 
     /* Whether or not to force the viewport to even integer intervals */
-    SDL_bool integer_scale;
+    SDL_nez_b32_t integer_scale;
 
     /* The drawable area within the window */
     SDL_Rect viewport;
@@ -160,8 +160,8 @@ struct SDL_Renderer
     SDL_Rect clip_rect_backup;
 
     /* Wether or not the clipping rectangle is used. */
-    SDL_bool clipping_enabled;
-    SDL_bool clipping_enabled_backup;
+    SDL_nez_b32_t clipping_enabled;
+    SDL_nez_b32_t clipping_enabled_backup;
 
     /* The render output coordinate scale */
     SDL_FPoint scale;

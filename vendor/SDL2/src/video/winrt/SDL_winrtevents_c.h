@@ -68,10 +68,10 @@ extern void WINRT_ProcessKeyUpEvent(Windows::UI::Core::KeyEventArgs ^args);
 extern void WINRT_ProcessCharacterReceivedEvent(Windows::UI::Core::CharacterReceivedEventArgs ^args);
 
 #if NTDDI_VERSION >= NTDDI_WIN10
-extern SDL_bool WINRT_HasScreenKeyboardSupport(_THIS);
+extern SDL_nez_b32_t WINRT_HasScreenKeyboardSupport(_THIS);
 extern void WINRT_ShowScreenKeyboard(_THIS, SDL_Window *window);
 extern void WINRT_HideScreenKeyboard(_THIS, SDL_Window *window);
-extern SDL_bool WINRT_IsScreenKeyboardShown(_THIS, SDL_Window *window);
+extern SDL_nez_b32_t WINRT_IsScreenKeyboardShown(_THIS, SDL_Window *window);
 #endif  // NTDDI_VERSION >= ...
 
 /* XAML Thread Management */

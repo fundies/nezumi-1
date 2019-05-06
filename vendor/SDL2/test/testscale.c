@@ -47,7 +47,7 @@ quit(int rc)
 }
 
 SDL_Texture *
-LoadTexture(SDL_Renderer *renderer, char *file, SDL_bool transparent)
+LoadTexture(SDL_Renderer *renderer, char *file, SDL_nez_b32_t transparent)
 {
     SDL_Surface *temp;
     SDL_Texture *texture;

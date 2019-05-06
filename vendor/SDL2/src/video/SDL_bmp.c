@@ -57,7 +57,7 @@
 static void CorrectAlphaChannel(SDL_Surface *surface)
 {
     /* Check to see if there is any alpha channel data */
-    SDL_bool hasAlpha = SDL_FALSE;
+    SDL_nez_b32_t hasAlpha = SDL_FALSE;
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
     int alphaChannelOffset = 0;
 #else
@@ -86,7 +86,7 @@ static void CorrectAlphaChannel(SDL_Surface *surface)
 SDL_Surface *
 SDL_LoadBMP_RW(SDL_RWops * src, int freesrc)
 {
-    SDL_bool was_error;
+    SDL_nez_b32_t was_error;
     Sint64 fp_offset = 0;
     int bmpPitch;
     int i, pad;
@@ -98,11 +98,11 @@ SDL_LoadBMP_RW(SDL_RWops * src, int freesrc)
     SDL_Palette *palette;
     Uint8 *bits;
     Uint8 *top, *end;
-    SDL_bool topDown;
+    SDL_nez_b32_t topDown;
     int ExpandBMP;
-    SDL_bool haveRGBMasks = SDL_FALSE;
-    SDL_bool haveAlphaMask = SDL_FALSE;
-    SDL_bool correctAlpha = SDL_FALSE;
+    SDL_nez_b32_t haveRGBMasks = SDL_FALSE;
+    SDL_nez_b32_t haveAlphaMask = SDL_FALSE;
+    SDL_nez_b32_t correctAlpha = SDL_FALSE;
 
     /* The Win32 BMP file header (14 bytes) */
     char magic[2];
@@ -466,8 +466,8 @@ SDL_SaveBMP_RW(SDL_Surface * saveme, SDL_RWops * dst, int freedst)
     int i, pad;
     SDL_Surface *surface;
     Uint8 *bits;
-    SDL_bool save32bit = SDL_FALSE;
-    SDL_bool saveLegacyBMP = SDL_FALSE;
+    SDL_nez_b32_t save32bit = SDL_FALSE;
+    SDL_nez_b32_t saveLegacyBMP = SDL_FALSE;
 
     /* The Win32 BMP file header (14 bytes) */
     char magic[2] = { 'B', 'M' };
@@ -553,7 +553,7 @@ SDL_SaveBMP_RW(SDL_Surface * saveme, SDL_RWops * dst, int freedst)
     }
 
     if (save32bit) {
-        saveLegacyBMP = SDL_GetHintBoolean(SDL_HINT_BMP_SAVE_LEGACY_FORMAT, SDL_FALSE);
+        saveLegacyBMP = SDL_GetHintnez_b32_tean(SDL_HINT_BMP_SAVE_LEGACY_FORMAT, SDL_FALSE);
     }
 
     if (surface && (SDL_LockSurface(surface) == 0)) {

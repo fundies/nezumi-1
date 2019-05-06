@@ -49,7 +49,7 @@ struct SDL_WindowShaper
     SDL_WindowShapeMode mode;
 
     /* Has this window been assigned a shape? */
-    SDL_bool hasshape;
+    SDL_nez_b32_t hasshape;
 
     void *driverdata;
 };
@@ -95,11 +95,11 @@ struct SDL_Window
     Uint16 *saved_gamma;        /* (just offset into gamma) */
 
     SDL_Surface *surface;
-    SDL_bool surface_valid;
+    SDL_nez_b32_t surface_valid;
 
-    SDL_bool is_hiding;
-    SDL_bool is_destroying;
-    SDL_bool is_dropping;       /* drag/drop in progress, expecting SDL_SendDropComplete(). */
+    SDL_nez_b32_t is_hiding;
+    SDL_nez_b32_t is_destroying;
+    SDL_nez_b32_t is_dropping;       /* drag/drop in progress, expecting SDL_SendDropComplete(). */
 
     SDL_WindowShaper *shaper;
 
@@ -226,12 +226,12 @@ struct SDL_VideoDevice
     void (*MaximizeWindow) (_THIS, SDL_Window * window);
     void (*MinimizeWindow) (_THIS, SDL_Window * window);
     void (*RestoreWindow) (_THIS, SDL_Window * window);
-    void (*SetWindowBordered) (_THIS, SDL_Window * window, SDL_bool bordered);
-    void (*SetWindowResizable) (_THIS, SDL_Window * window, SDL_bool resizable);
-    void (*SetWindowFullscreen) (_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_bool fullscreen);
+    void (*SetWindowBordered) (_THIS, SDL_Window * window, SDL_nez_b32_t bordered);
+    void (*SetWindowResizable) (_THIS, SDL_Window * window, SDL_nez_b32_t resizable);
+    void (*SetWindowFullscreen) (_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_nez_b32_t fullscreen);
     int (*SetWindowGammaRamp) (_THIS, SDL_Window * window, const Uint16 * ramp);
     int (*GetWindowGammaRamp) (_THIS, SDL_Window * window, Uint16 * ramp);
-    void (*SetWindowGrab) (_THIS, SDL_Window * window, SDL_bool grabbed);
+    void (*SetWindowGrab) (_THIS, SDL_Window * window, SDL_nez_b32_t grabbed);
     void (*DestroyWindow) (_THIS, SDL_Window * window);
     int (*CreateWindowFramebuffer) (_THIS, SDL_Window * window, Uint32 * format, void ** pixels, int *pitch);
     int (*UpdateWindowFramebuffer) (_THIS, SDL_Window * window, const SDL_Rect * rects, int numrects);
@@ -245,7 +245,7 @@ struct SDL_VideoDevice
     SDL_ShapeDriver shape_driver;
 
     /* Get some platform dependent window information */
-    SDL_bool(*GetWindowWMInfo) (_THIS, SDL_Window * window,
+    SDL_nez_b32_t(*GetWindowWMInfo) (_THIS, SDL_Window * window,
                                 struct SDL_SysWMinfo * info);
 
     /* * * */
@@ -270,8 +270,8 @@ struct SDL_VideoDevice
      */
     int (*Vulkan_LoadLibrary) (_THIS, const char *path);
     void (*Vulkan_UnloadLibrary) (_THIS);
-    SDL_bool (*Vulkan_GetInstanceExtensions) (_THIS, SDL_Window *window, unsigned *count, const char **names);
-    SDL_bool (*Vulkan_CreateSurface) (_THIS, SDL_Window *window, VkInstance instance, VkSurfaceKHR *surface);
+    SDL_nez_b32_t (*Vulkan_GetInstanceExtensions) (_THIS, SDL_Window *window, unsigned *count, const char **names);
+    SDL_nez_b32_t (*Vulkan_CreateSurface) (_THIS, SDL_Window *window, VkInstance instance, VkSurfaceKHR *surface);
     void (*Vulkan_GetDrawableSize) (_THIS, SDL_Window * window, int *w, int *h);
 
     /* * * */
@@ -289,29 +289,29 @@ struct SDL_VideoDevice
     void (*SetTextInputRect) (_THIS, SDL_Rect *rect);
 
     /* Screen keyboard */
-    SDL_bool (*HasScreenKeyboardSupport) (_THIS);
+    SDL_nez_b32_t (*HasScreenKeyboardSupport) (_THIS);
     void (*ShowScreenKeyboard) (_THIS, SDL_Window *window);
     void (*HideScreenKeyboard) (_THIS, SDL_Window *window);
-    SDL_bool (*IsScreenKeyboardShown) (_THIS, SDL_Window *window);
+    SDL_nez_b32_t (*IsScreenKeyboardShown) (_THIS, SDL_Window *window);
 
     /* Clipboard */
     int (*SetClipboardText) (_THIS, const char *text);
     char * (*GetClipboardText) (_THIS);
-    SDL_bool (*HasClipboardText) (_THIS);
+    SDL_nez_b32_t (*HasClipboardText) (_THIS);
 
     /* MessageBox */
     int (*ShowMessageBox) (_THIS, const SDL_MessageBoxData *messageboxdata, int *buttonid);
 
     /* Hit-testing */
-    int (*SetWindowHitTest)(SDL_Window * window, SDL_bool enabled);
+    int (*SetWindowHitTest)(SDL_Window * window, SDL_nez_b32_t enabled);
 
     /* Tell window that app enabled drag'n'drop events */
-    void (*AcceptDragAndDrop)(SDL_Window * window, SDL_bool accept);
+    void (*AcceptDragAndDrop)(SDL_Window * window, SDL_nez_b32_t accept);
 
     /* * * */
     /* Data common to all drivers */
-    SDL_bool is_dummy;
-    SDL_bool suspend_screensaver;
+    SDL_nez_b32_t is_dummy;
+    SDL_nez_b32_t suspend_screensaver;
     int num_displays;
     SDL_VideoDisplay *displays;
     SDL_Window *windows;
@@ -426,7 +426,7 @@ extern VideoBootStrap QNX_bootstrap;
 extern SDL_VideoDevice *SDL_GetVideoDevice(void);
 extern int SDL_AddBasicVideoDisplay(const SDL_DisplayMode * desktop_mode);
 extern int SDL_AddVideoDisplay(const SDL_VideoDisplay * display);
-extern SDL_bool SDL_AddDisplayMode(SDL_VideoDisplay *display, const SDL_DisplayMode * mode);
+extern SDL_nez_b32_t SDL_AddDisplayMode(SDL_VideoDisplay *display, const SDL_DisplayMode * mode);
 extern int SDL_GetIndexOfDisplay(SDL_VideoDisplay *display);
 extern SDL_VideoDisplay *SDL_GetDisplay(int displayIndex);
 extern SDL_VideoDisplay *SDL_GetDisplayForWindow(SDL_Window *window);
@@ -435,7 +435,7 @@ extern void *SDL_GetDisplayDriverData( int displayIndex );
 extern void SDL_GL_DeduceMaxSupportedESProfile(int* major, int* minor);
 
 extern int SDL_RecreateWindow(SDL_Window * window, Uint32 flags);
-extern SDL_bool SDL_HasWindows(void);
+extern SDL_nez_b32_t SDL_HasWindows(void);
 
 extern void SDL_OnWindowShown(SDL_Window * window);
 extern void SDL_OnWindowHidden(SDL_Window * window);
@@ -449,7 +449,7 @@ extern void SDL_OnWindowFocusLost(SDL_Window * window);
 extern void SDL_UpdateWindowGrab(SDL_Window * window);
 extern SDL_Window * SDL_GetFocusWindow(void);
 
-extern SDL_bool SDL_ShouldAllowTopmost(void);
+extern SDL_nez_b32_t SDL_ShouldAllowTopmost(void);
 
 extern float SDL_ComputeDiagonalDPI(int hpix, int vpix, float hinches, float vinches);
 

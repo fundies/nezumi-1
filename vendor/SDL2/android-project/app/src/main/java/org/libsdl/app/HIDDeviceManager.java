@@ -54,7 +54,7 @@ public class HIDDeviceManager {
     private HashMap<BluetoothDevice, HIDDeviceBLESteamController> mBluetoothDevices = new HashMap<BluetoothDevice, HIDDeviceBLESteamController>();
     private int mNextDeviceId = 0;
     private SharedPreferences mSharedPreferences = null;
-    private boolean mIsChromebook = false;
+    private nez_b32_tean mIsChromebook = false;
     private UsbManager mUsbManager;
     private Handler mHandler;
     private BluetoothManager mBluetoothManager;
@@ -72,7 +72,7 @@ public class HIDDeviceManager {
                 handleUsbDeviceDetached(usbDevice);
             } else if (action.equals(HIDDeviceManager.ACTION_USB_PERMISSION)) {
                 UsbDevice usbDevice = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
-                handleUsbDevicePermission(usbDevice, intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false));
+                handleUsbDevicePermission(usbDevice, intent.getnez_b32_teanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false));
             }
         }
     };
@@ -241,7 +241,7 @@ public class HIDDeviceManager {
         }
     }
 
-    private boolean isHIDDeviceUSB(UsbDevice usbDevice) {
+    private nez_b32_tean isHIDDeviceUSB(UsbDevice usbDevice) {
         for (int interface_number = 0; interface_number < usbDevice.getInterfaceCount(); ++interface_number) {
             if (isHIDDeviceInterface(usbDevice, interface_number)) {
                 return true;
@@ -250,7 +250,7 @@ public class HIDDeviceManager {
         return false;
     }
 
-    private boolean isHIDDeviceInterface(UsbDevice usbDevice, int interface_number) {
+    private nez_b32_tean isHIDDeviceInterface(UsbDevice usbDevice, int interface_number) {
         UsbInterface usbInterface = usbDevice.getInterface(interface_number);
         if (usbInterface.getInterfaceClass() == UsbConstants.USB_CLASS_HID) {
             return true;
@@ -263,7 +263,7 @@ public class HIDDeviceManager {
         return false;
     }
 
-    private boolean isXbox360Controller(UsbDevice usbDevice, UsbInterface usbInterface) {
+    private nez_b32_tean isXbox360Controller(UsbDevice usbDevice, UsbInterface usbInterface) {
         final int XB360_IFACE_SUBCLASS = 93;
         final int XB360_IFACE_PROTOCOL = 1; // Wired only
         final int[] SUPPORTED_VENDORS = {
@@ -302,7 +302,7 @@ public class HIDDeviceManager {
         return false;
     }
 
-    private boolean isXboxOneController(UsbDevice usbDevice, UsbInterface usbInterface) {
+    private nez_b32_tean isXboxOneController(UsbDevice usbDevice, UsbInterface usbInterface) {
         final int XB1_IFACE_SUBCLASS = 71;
         final int XB1_IFACE_PROTOCOL = 208;
         final int[] SUPPORTED_VENDORS = {
@@ -345,12 +345,12 @@ public class HIDDeviceManager {
         HIDDeviceDisconnected(id);
     }
 
-    private void handleUsbDevicePermission(UsbDevice usbDevice, boolean permission_granted) {
+    private void handleUsbDevicePermission(UsbDevice usbDevice, nez_b32_tean permission_granted) {
         HIDDeviceUSB device = mUSBDevices.get(usbDevice);
         if (device == null)
             return;
 
-        boolean opened = false;
+        nez_b32_tean opened = false;
         if (permission_granted) {
             opened = device.open();
         }
@@ -473,7 +473,7 @@ public class HIDDeviceManager {
         }, 10000);
     }
 
-    public boolean connectBluetoothDevice(BluetoothDevice bluetoothDevice) {
+    public nez_b32_tean connectBluetoothDevice(BluetoothDevice bluetoothDevice) {
         Log.v(TAG, "connectBluetoothDevice device=" + bluetoothDevice);
         synchronized (this) {
             if (mBluetoothDevices.containsKey(bluetoothDevice)) {
@@ -508,7 +508,7 @@ public class HIDDeviceManager {
         }
     }
 
-    public boolean isSteamController(BluetoothDevice bluetoothDevice) {
+    public nez_b32_tean isSteamController(BluetoothDevice bluetoothDevice) {
         // Sanity check.  If you pass in a null device, by definition it is never a Steam Controller.
         if (bluetoothDevice == null) {
             return false;
@@ -535,7 +535,7 @@ public class HIDDeviceManager {
         }
     }
 
-    public void setFrozen(boolean frozen) {
+    public void setFrozen(nez_b32_tean frozen) {
         synchronized (this) {
             for (HIDDevice device : mDevicesById.values()) {
                 device.setFrozen(frozen);
@@ -562,7 +562,7 @@ public class HIDDeviceManager {
     ////////// JNI interface functions
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean openDevice(int deviceID) {
+    public nez_b32_tean openDevice(int deviceID) {
         // Look to see if this is a USB device and we have permission to access it
         for (HIDDeviceUSB device : mUSBDevices.values()) {
             if (deviceID == device.getId()) {
@@ -631,7 +631,7 @@ public class HIDDeviceManager {
         return -1;
     }
 
-    public boolean getFeatureReport(int deviceID, byte[] report) {
+    public nez_b32_tean getFeatureReport(int deviceID, byte[] report) {
         try {
             Log.v(TAG, "getFeatureReport deviceID=" + deviceID);
             HIDDevice device;
@@ -674,7 +674,7 @@ public class HIDDeviceManager {
 
     native void HIDDeviceConnected(int deviceID, String identifier, int vendorId, int productId, String serial_number, int release_number, String manufacturer_string, String product_string, int interface_number);
     native void HIDDeviceOpenPending(int deviceID);
-    native void HIDDeviceOpenResult(int deviceID, boolean opened);
+    native void HIDDeviceOpenResult(int deviceID, nez_b32_tean opened);
     native void HIDDeviceDisconnected(int deviceID);
 
     native void HIDDeviceInputReport(int deviceID, byte[] report);

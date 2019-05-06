@@ -50,7 +50,7 @@ struct joystick_hwdata
     FFDeviceObjectReference ffdevice;
     FFEFFECT *ffeffect;
     FFEffectObjectReference ffeffect_ref;
-    SDL_bool ff_initialized;
+    SDL_nez_b32_t ff_initialized;
 
     char product[256];          /* name of product */
     uint32_t usage;                 /* usage page from IOUSBHID Parser.h which defines general usage */
@@ -65,7 +65,7 @@ struct joystick_hwdata
     recElement *firstButton;
     recElement *firstHat;
 
-    SDL_bool removed;
+    SDL_nez_b32_t removed;
 
     int instance_id;
     SDL_JoystickGUID guid;

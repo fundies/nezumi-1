@@ -722,7 +722,7 @@ SDLTest_ExampleHitTestCallback(SDL_Window *win, const SDL_Point *area, void *dat
     return SDL_HITTEST_NORMAL;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDLTest_CommonInit(SDLTest_CommonState * state)
 {
     int i, j, m, n, w, h;
@@ -1497,9 +1497,9 @@ SDLTest_CommonEvent(SDLTest_CommonState * state, SDL_Event * event, int *done)
         }
         break;
     case SDL_KEYDOWN: {
-        SDL_bool withControl = !!(event->key.keysym.mod & KMOD_CTRL);
-        SDL_bool withShift = !!(event->key.keysym.mod & KMOD_SHIFT);
-        SDL_bool withAlt = !!(event->key.keysym.mod & KMOD_ALT);
+        SDL_nez_b32_t withControl = !!(event->key.keysym.mod & KMOD_CTRL);
+        SDL_nez_b32_t withShift = !!(event->key.keysym.mod & KMOD_SHIFT);
+        SDL_nez_b32_t withAlt = !!(event->key.keysym.mod & KMOD_ALT);
 
         switch (event->key.keysym.sym) {
             /* Add hotkeys here */
@@ -1626,7 +1626,7 @@ SDLTest_CommonEvent(SDLTest_CommonState * state, SDL_Event * event, int *done)
             if (withShift) {
                 SDL_Window *current_win = SDL_GetKeyboardFocus();
                 if (current_win) {
-                    const SDL_bool shouldCapture = (SDL_GetWindowFlags(current_win) & SDL_WINDOW_MOUSE_CAPTURE) == 0;
+                    const SDL_nez_b32_t shouldCapture = (SDL_GetWindowFlags(current_win) & SDL_WINDOW_MOUSE_CAPTURE) == 0;
                     const int rc = SDL_CaptureMouse(shouldCapture);
                     SDL_Log("%sapturing mouse %s!\n", shouldCapture ? "C" : "Unc", (rc == 0) ? "succeeded" : "failed");
                 }
@@ -1725,7 +1725,7 @@ SDLTest_CommonEvent(SDLTest_CommonState * state, SDL_Event * event, int *done)
                 SDL_Window *window = SDL_GetWindowFromID(event->key.windowID);
                 if (window) {
                     const Uint32 flags = SDL_GetWindowFlags(window);
-                    const SDL_bool b = ((flags & SDL_WINDOW_BORDERLESS) != 0) ? SDL_TRUE : SDL_FALSE;
+                    const SDL_nez_b32_t b = ((flags & SDL_WINDOW_BORDERLESS) != 0) ? SDL_TRUE : SDL_FALSE;
                     SDL_SetWindowBordered(window, b);
                 }
             }

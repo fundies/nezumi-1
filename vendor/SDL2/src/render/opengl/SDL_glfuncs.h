@@ -27,8 +27,8 @@
 
 SDL_PROC_UNUSED(void, glAccum, (GLenum, GLfloat))
 SDL_PROC_UNUSED(void, glAlphaFunc, (GLenum, GLclampf))
-SDL_PROC_UNUSED(GLboolean, glAreTexturesResident,
-                (GLsizei, const GLuint *, GLboolean *))
+SDL_PROC_UNUSED(GLnez_b32_tean, glAreTexturesResident,
+                (GLsizei, const GLuint *, GLnez_b32_tean *))
 SDL_PROC_UNUSED(void, glArrayElement, (GLint))
 SDL_PROC(void, glBegin, (GLenum))
 SDL_PROC(void, glBindTexture, (GLenum, GLuint))
@@ -83,8 +83,8 @@ SDL_PROC_UNUSED(void, glColor4us,
                 (GLushort red, GLushort green, GLushort blue, GLushort alpha))
 SDL_PROC_UNUSED(void, glColor4usv, (const GLushort * v))
 SDL_PROC_UNUSED(void, glColorMask,
-                (GLboolean red, GLboolean green, GLboolean blue,
-                 GLboolean alpha))
+                (GLnez_b32_tean red, GLnez_b32_tean green, GLnez_b32_tean blue,
+                 GLnez_b32_tean alpha))
 SDL_PROC_UNUSED(void, glColorMaterial, (GLenum face, GLenum mode))
 SDL_PROC_UNUSED(void, glColorPointer,
                 (GLint size, GLenum type, GLsizei stride,
@@ -108,7 +108,7 @@ SDL_PROC_UNUSED(void, glCullFace, (GLenum mode))
 SDL_PROC_UNUSED(void, glDeleteLists, (GLuint list, GLsizei range))
 SDL_PROC(void, glDeleteTextures, (GLsizei n, const GLuint * textures))
 SDL_PROC(void, glDepthFunc, (GLenum func))
-SDL_PROC_UNUSED(void, glDepthMask, (GLboolean flag))
+SDL_PROC_UNUSED(void, glDepthMask, (GLnez_b32_tean flag))
 SDL_PROC_UNUSED(void, glDepthRange, (GLclampd zNear, GLclampd zFar))
 SDL_PROC(void, glDisable, (GLenum cap))
 SDL_PROC_UNUSED(void, glDisableClientState, (GLenum array))
@@ -120,10 +120,10 @@ SDL_PROC_UNUSED(void, glDrawElements,
 SDL_PROC(void, glDrawPixels,
          (GLsizei width, GLsizei height, GLenum format, GLenum type,
           const GLvoid * pixels))
-SDL_PROC_UNUSED(void, glEdgeFlag, (GLboolean flag))
+SDL_PROC_UNUSED(void, glEdgeFlag, (GLnez_b32_tean flag))
 SDL_PROC_UNUSED(void, glEdgeFlagPointer,
                 (GLsizei stride, const GLvoid * pointer))
-SDL_PROC_UNUSED(void, glEdgeFlagv, (const GLboolean * flag))
+SDL_PROC_UNUSED(void, glEdgeFlagv, (const GLnez_b32_tean * flag))
 SDL_PROC(void, glEnable, (GLenum cap))
 SDL_PROC_UNUSED(void, glEnableClientState, (GLenum array))
 SDL_PROC(void, glEnd, (void))
@@ -155,7 +155,7 @@ SDL_PROC_UNUSED(void, glFrustum,
                  GLdouble top, GLdouble zNear, GLdouble zFar))
 SDL_PROC_UNUSED(GLuint, glGenLists, (GLsizei range))
 SDL_PROC(void, glGenTextures, (GLsizei n, GLuint * textures))
-SDL_PROC_UNUSED(void, glGetBooleanv, (GLenum pname, GLboolean * params))
+SDL_PROC_UNUSED(void, glGetnez_b32_teanv, (GLenum pname, GLnez_b32_tean * params))
 SDL_PROC_UNUSED(void, glGetClipPlane, (GLenum plane, GLdouble * equation))
 SDL_PROC_UNUSED(void, glGetDoublev, (GLenum pname, GLdouble * params))
 SDL_PROC(GLenum, glGetError, (void))
@@ -216,9 +216,9 @@ SDL_PROC_UNUSED(void, glIndexubv, (const GLubyte * c))
 SDL_PROC_UNUSED(void, glInitNames, (void))
 SDL_PROC_UNUSED(void, glInterleavedArrays,
                 (GLenum format, GLsizei stride, const GLvoid * pointer))
-SDL_PROC_UNUSED(GLboolean, glIsEnabled, (GLenum cap))
-SDL_PROC_UNUSED(GLboolean, glIsList, (GLuint list))
-SDL_PROC_UNUSED(GLboolean, glIsTexture, (GLuint texture))
+SDL_PROC_UNUSED(GLnez_b32_tean, glIsEnabled, (GLenum cap))
+SDL_PROC_UNUSED(GLnez_b32_tean, glIsList, (GLuint list))
+SDL_PROC_UNUSED(GLnez_b32_tean, glIsTexture, (GLuint texture))
 SDL_PROC_UNUSED(void, glLightModelf, (GLenum pname, GLfloat param))
 SDL_PROC_UNUSED(void, glLightModelfv, (GLenum pname, const GLfloat * params))
 SDL_PROC_UNUSED(void, glLightModeli, (GLenum pname, GLint param))

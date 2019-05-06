@@ -38,13 +38,13 @@
 /*
  * Internal stuff.
  */
-static SDL_bool loaded_xinput = SDL_FALSE;
+static SDL_nez_b32_t loaded_xinput = SDL_FALSE;
 
 
 int
 SDL_XINPUT_HapticInit(void)
 {
-    if (SDL_GetHintBoolean(SDL_HINT_XINPUT_ENABLED, SDL_TRUE)) {
+    if (SDL_GetHintnez_b32_tean(SDL_HINT_XINPUT_ENABLED, SDL_TRUE)) {
         loaded_xinput = (WIN_LoadXInputDLL() == 0);
     }
 

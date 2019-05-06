@@ -28,7 +28,7 @@
 
 #include "../../core/android/SDL_android.h"
 
-SDL_bool
+SDL_nez_b32_t
 SDL_GetPowerInfo_Android(SDL_PowerState * state, int *seconds, int *percent)
 {
     int battery;

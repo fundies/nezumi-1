@@ -211,11 +211,11 @@ SDL_SetMouseFocus(SDL_Window * window)
 }
 
 /* Check to see if we need to synthesize focus events */
-static SDL_bool
+static SDL_nez_b32_t
 SDL_UpdateMouseFocus(SDL_Window * window, int x, int y, Uint32 buttonstate)
 {
     SDL_Mouse *mouse = SDL_GetMouse();
-    SDL_bool inWindow = SDL_TRUE;
+    SDL_nez_b32_t inWindow = SDL_TRUE;
 
     if (window && ((window->flags & SDL_WINDOW_MOUSE_CAPTURE) == 0)) {
         int w, h;
@@ -710,7 +710,7 @@ SDL_WarpMouseGlobal(int x, int y)
     return SDL_Unsupported();
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 ShouldUseRelativeModeWarp(SDL_Mouse *mouse)
 {
     if (!mouse->SetRelativeMouseMode) {
@@ -718,11 +718,11 @@ ShouldUseRelativeModeWarp(SDL_Mouse *mouse)
         return SDL_TRUE;
     }
 
-    return SDL_GetHintBoolean(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, SDL_FALSE);
+    return SDL_GetHintnez_b32_tean(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, SDL_FALSE);
 }
 
 int
-SDL_SetRelativeMouseMode(SDL_bool enabled)
+SDL_SetRelativeMouseMode(SDL_nez_b32_t enabled)
 {
     SDL_Mouse *mouse = SDL_GetMouse();
     SDL_Window *focusWindow = SDL_GetKeyboardFocus();
@@ -775,7 +775,7 @@ SDL_SetRelativeMouseMode(SDL_bool enabled)
     return 0;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_GetRelativeMouseMode()
 {
     SDL_Mouse *mouse = SDL_GetMouse();
@@ -784,11 +784,11 @@ SDL_GetRelativeMouseMode()
 }
 
 int
-SDL_CaptureMouse(SDL_bool enabled)
+SDL_CaptureMouse(SDL_nez_b32_t enabled)
 {
     SDL_Mouse *mouse = SDL_GetMouse();
     SDL_Window *focusWindow;
-    SDL_bool isCaptured;
+    SDL_nez_b32_t isCaptured;
 
     if (!mouse->CaptureMouse) {
         return SDL_Unsupported();
@@ -1034,7 +1034,7 @@ int
 SDL_ShowCursor(int toggle)
 {
     SDL_Mouse *mouse = SDL_GetMouse();
-    SDL_bool shown;
+    SDL_nez_b32_t shown;
 
     if (!mouse) {
         return 0;

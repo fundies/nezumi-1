@@ -141,15 +141,15 @@ void HAIKU_SetWindowSize(_THIS, SDL_Window * window) {
     _ToBeWin(window)->PostMessage(&msg);
 }
 
-void HAIKU_SetWindowBordered(_THIS, SDL_Window * window, SDL_bool bordered) {
+void HAIKU_SetWindowBordered(_THIS, SDL_Window * window, SDL_nez_b32_t bordered) {
     BMessage msg(BWIN_SET_BORDERED);
-    msg.AddBool("window-border", bordered != SDL_FALSE);
+    msg.Addnez_b32_t("window-border", bordered != SDL_FALSE);
     _ToBeWin(window)->PostMessage(&msg);
 }
 
-void HAIKU_SetWindowResizable(_THIS, SDL_Window * window, SDL_bool resizable) {
+void HAIKU_SetWindowResizable(_THIS, SDL_Window * window, SDL_nez_b32_t resizable) {
     BMessage msg(BWIN_SET_RESIZABLE);
-    msg.AddBool("window-resizable", resizable != SDL_FALSE);
+    msg.Addnez_b32_t("window-resizable", resizable != SDL_FALSE);
     _ToBeWin(window)->PostMessage(&msg);
 }
 
@@ -184,10 +184,10 @@ void HAIKU_RestoreWindow(_THIS, SDL_Window * window) {
 }
 
 void HAIKU_SetWindowFullscreen(_THIS, SDL_Window * window,
-        SDL_VideoDisplay * display, SDL_bool fullscreen) {
+        SDL_VideoDisplay * display, SDL_nez_b32_t fullscreen) {
     /* Haiku tracks all video display information */
     BMessage msg(BWIN_FULLSCREEN);
-    msg.AddBool("fullscreen", fullscreen);
+    msg.Addnez_b32_t("fullscreen", fullscreen);
     _ToBeWin(window)->PostMessage(&msg);
     
 }
@@ -203,7 +203,7 @@ int HAIKU_GetWindowGammaRamp(_THIS, SDL_Window * window, Uint16 * ramp) {
 }
 
 
-void HAIKU_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed) {
+void HAIKU_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed) {
     /* TODO: Implement this! */
 }
 
@@ -214,7 +214,7 @@ void HAIKU_DestroyWindow(_THIS, SDL_Window * window) {
     window->driverdata = NULL;
 }
 
-SDL_bool HAIKU_GetWindowWMInfo(_THIS, SDL_Window * window,
+SDL_nez_b32_t HAIKU_GetWindowWMInfo(_THIS, SDL_Window * window,
                                     struct SDL_SysWMinfo *info) {
     /* FIXME: What is the point of this? What information should be included? */
     return SDL_FALSE;

@@ -131,7 +131,7 @@ typedef struct
 
     } value;
 
-    SDL_bool committed;
+    SDL_nez_b32_t committed;
 
 } SDL_GameControllerExtendedBind;
 
@@ -139,7 +139,7 @@ static SDL_GameControllerExtendedBind s_arrBindings[BINDING_COUNT];
 
 typedef struct
 {
-    SDL_bool m_bMoving;
+    SDL_nez_b32_t m_bMoving;
     int m_nStartingValue;
     int m_nFarthestValue;
 } AxisState;
@@ -149,10 +149,10 @@ static AxisState *s_arrAxisState;
     
 static int s_iCurrentBinding;
 static Uint32 s_unPendingAdvanceTime;
-static SDL_bool s_bBindingComplete;
+static SDL_nez_b32_t s_bBindingComplete;
 
 SDL_Texture *
-LoadTexture(SDL_Renderer *renderer, const char *file, SDL_bool transparent)
+LoadTexture(SDL_Renderer *renderer, const char *file, SDL_nez_b32_t transparent)
 {
     SDL_Surface *temp;
     SDL_Texture *texture;
@@ -223,7 +223,7 @@ SetCurrentBinding(int iBinding)
     s_unPendingAdvanceTime = 0;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 BBindingContainsBinding(const SDL_GameControllerExtendedBind *pBindingA, const SDL_GameControllerExtendedBind *pBindingB)
 {
     if (pBindingA->bindType != pBindingB->bindType)
@@ -300,8 +300,8 @@ ConfigureBinding(const SDL_GameControllerExtendedBind *pBinding)
     /* Should the new binding override the existing one? */
     pCurrent = &s_arrBindings[iCurrentElement];
     if (pCurrent->bindType != SDL_CONTROLLER_BINDTYPE_NONE) {
-        SDL_bool bNativeDPad, bCurrentDPad;
-        SDL_bool bNativeAxis, bCurrentAxis;
+        SDL_nez_b32_t bNativeDPad, bCurrentDPad;
+        SDL_nez_b32_t bNativeAxis, bCurrentAxis;
         
         bNativeDPad = (iCurrentElement == SDL_CONTROLLER_BUTTON_DPAD_UP ||
                        iCurrentElement == SDL_CONTROLLER_BUTTON_DPAD_DOWN ||
@@ -332,7 +332,7 @@ ConfigureBinding(const SDL_GameControllerExtendedBind *pBinding)
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 BMergeAxisBindings(int iIndex)
 {
     SDL_GameControllerExtendedBind *pBindingA = &s_arrBindings[iIndex];
@@ -357,7 +357,7 @@ WatchJoystick(SDL_Joystick * joystick)
     SDL_Renderer *screen = NULL;
     SDL_Texture *background, *button, *axis, *marker;
     const char *name = NULL;
-    SDL_bool done = SDL_FALSE;
+    SDL_nez_b32_t done = SDL_FALSE;
     SDL_Event event;
     SDL_Rect dst;
     Uint8 alpha=200, alpha_step = -1;
@@ -485,7 +485,7 @@ WatchJoystick(SDL_Joystick * joystick)
 #endif
                     if (nFarthestDistance >= 16000) {
                         /* If we've gone out far enough and started to come back, let's bind this axis */
-                        SDL_bool bCommitBinding = (nCurrentDistance <= 10000) ? SDL_TRUE : SDL_FALSE;
+                        SDL_nez_b32_t bCommitBinding = (nCurrentDistance <= 10000) ? SDL_TRUE : SDL_FALSE;
                         SDL_GameControllerExtendedBind binding;
                         SDL_zero(binding);
                         binding.bindType = SDL_CONTROLLER_BINDTYPE_AXIS;

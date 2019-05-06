@@ -148,8 +148,8 @@ static SDL_VideoDevice *_this = NULL;
 
 #ifdef __MACOSX__
 /* Support for Mac OS X fullscreen spaces */
-extern SDL_bool Cocoa_IsWindowInFullscreenSpace(SDL_Window * window);
-extern SDL_bool Cocoa_SetWindowFullscreenSpace(SDL_Window * window, SDL_bool state);
+extern SDL_nez_b32_t Cocoa_IsWindowInFullscreenSpace(SDL_Window * window);
+extern SDL_nez_b32_t Cocoa_SetWindowFullscreenSpace(SDL_Window * window, SDL_nez_b32_t state);
 #endif
 
 
@@ -165,7 +165,7 @@ typedef struct {
     int bytes_per_pixel;
 } SDL_WindowTextureData;
 
-static SDL_bool
+static SDL_nez_b32_t
 ShouldUseTextureFramebuffer()
 {
     const char *hint;
@@ -215,7 +215,7 @@ ShouldUseTextureFramebuffer()
     {
         SDL_Window *window;
         SDL_GLContext context;
-        SDL_bool hasAcceleratedOpenGL = SDL_FALSE;
+        SDL_nez_b32_t hasAcceleratedOpenGL = SDL_FALSE;
 
         window = SDL_CreateWindow("OpenGL test", -32, -32, 32, 32, SDL_WINDOW_OPENGL|SDL_WINDOW_HIDDEN);
         if (window) {
@@ -553,7 +553,7 @@ SDL_VideoInit(const char *driver_name)
        joystick, or passively watching a movie. Things that use SDL but
        function more like a normal desktop app should explicitly reenable the
        screensaver. */
-    if (!SDL_GetHintBoolean(SDL_HINT_VIDEO_ALLOW_SCREENSAVER, SDL_FALSE)) {
+    if (!SDL_GetHintnez_b32_tean(SDL_HINT_VIDEO_ALLOW_SCREENSAVER, SDL_FALSE)) {
         SDL_DisableScreenSaver();
     }
 
@@ -750,7 +750,7 @@ SDL_GetDisplayOrientation(int displayIndex)
     return display->orientation;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_AddDisplayMode(SDL_VideoDisplay * display,  const SDL_DisplayMode * mode)
 {
     SDL_DisplayMode *modes;
@@ -1183,7 +1183,7 @@ extern Uint32 WINRT_DetectWindowFlags(SDL_Window * window);
 #endif
 
 static int
-SDL_UpdateFullscreenMode(SDL_Window * window, SDL_bool fullscreen)
+SDL_UpdateFullscreenMode(SDL_Window * window, SDL_nez_b32_t fullscreen)
 {
     SDL_VideoDisplay *display;
     SDL_Window *other;
@@ -1269,7 +1269,7 @@ SDL_UpdateFullscreenMode(SDL_Window * window, SDL_bool fullscreen)
 
     /* See if there are any fullscreen windows */
     for (other = _this->windows; other; other = other->next) {
-        SDL_bool setDisplayMode = SDL_FALSE;
+        SDL_nez_b32_t setDisplayMode = SDL_FALSE;
 
         if (other == window) {
             setDisplayMode = fullscreen;
@@ -1284,7 +1284,7 @@ SDL_UpdateFullscreenMode(SDL_Window * window, SDL_bool fullscreen)
             SDL_zero(fullscreen_mode);
 
             if (SDL_GetWindowDisplayMode(other, &fullscreen_mode) == 0) {
-                SDL_bool resized = SDL_TRUE;
+                SDL_nez_b32_t resized = SDL_TRUE;
 
                 if (other->w == fullscreen_mode.w && other->h == fullscreen_mode.h) {
                     resized = SDL_FALSE;
@@ -1350,7 +1350,7 @@ SDL_UpdateFullscreenMode(SDL_Window * window, SDL_bool fullscreen)
 #define CREATE_FLAGS \
     (SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_ALWAYS_ON_TOP | SDL_WINDOW_SKIP_TASKBAR | SDL_WINDOW_POPUP_MENU | SDL_WINDOW_UTILITY | SDL_WINDOW_TOOLTIP | SDL_WINDOW_VULKAN | SDL_WINDOW_MINIMIZED)
 
-static SDL_INLINE SDL_bool
+static SDL_INLINE SDL_nez_b32_t
 IsAcceptingDragAndDrop(void)
 {
     if ((SDL_GetEventState(SDL_DROPFILE) == SDL_ENABLE) ||
@@ -1374,7 +1374,7 @@ void
 SDL_ToggleDragAndDropSupport(void)
 {
     if (_this && _this->AcceptDragAndDrop) {
-        const SDL_bool enable = IsAcceptingDragAndDrop();
+        const SDL_nez_b32_t enable = IsAcceptingDragAndDrop();
         SDL_Window *window;
         for (window = _this->windows; window; window = window->next) {
             _this->AcceptDragAndDrop(window, enable);
@@ -1473,7 +1473,7 @@ SDL_CreateWindow(const char *title, int x, int y, int w, int h, Uint32 flags)
      * SDL_WINDOW_ALLOW_HIGHDPI flag.
      */
     if (flags & SDL_WINDOW_ALLOW_HIGHDPI) {
-        if (SDL_GetHintBoolean(SDL_HINT_VIDEO_HIGHDPI_DISABLED, SDL_FALSE)) {
+        if (SDL_GetHintnez_b32_tean(SDL_HINT_VIDEO_HIGHDPI_DISABLED, SDL_FALSE)) {
             flags &= ~SDL_WINDOW_ALLOW_HIGHDPI;
         }
     }
@@ -1616,7 +1616,7 @@ SDL_CreateWindowFrom(const void *data)
 int
 SDL_RecreateWindow(SDL_Window * window, Uint32 flags)
 {
-    SDL_bool loaded_opengl = SDL_FALSE;
+    SDL_nez_b32_t loaded_opengl = SDL_FALSE;
 
     if ((flags & SDL_WINDOW_OPENGL) && !_this->GL_CreateContext) {
         return SDL_SetError("OpenGL support is either not configured in SDL "
@@ -1703,7 +1703,7 @@ SDL_RecreateWindow(SDL_Window * window, Uint32 flags)
     return 0;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_HasWindows(void)
 {
     return (_this && _this->windows != NULL);
@@ -1944,7 +1944,7 @@ SDL_GetWindowPosition(SDL_Window * window, int *x, int *y)
 }
 
 void
-SDL_SetWindowBordered(SDL_Window * window, SDL_bool bordered)
+SDL_SetWindowBordered(SDL_Window * window, SDL_nez_b32_t bordered)
 {
     CHECK_WINDOW_MAGIC(window,);
     if (!(window->flags & SDL_WINDOW_FULLSCREEN)) {
@@ -1956,13 +1956,13 @@ SDL_SetWindowBordered(SDL_Window * window, SDL_bool bordered)
             } else {
                 window->flags |= SDL_WINDOW_BORDERLESS;
             }
-            _this->SetWindowBordered(_this, window, (SDL_bool) want);
+            _this->SetWindowBordered(_this, window, (SDL_nez_b32_t) want);
         }
     }
 }
 
 void
-SDL_SetWindowResizable(SDL_Window * window, SDL_bool resizable)
+SDL_SetWindowResizable(SDL_Window * window, SDL_nez_b32_t resizable)
 {
     CHECK_WINDOW_MAGIC(window,);
     if (!(window->flags & SDL_WINDOW_FULLSCREEN)) {
@@ -1974,7 +1974,7 @@ SDL_SetWindowResizable(SDL_Window * window, SDL_bool resizable)
             } else {
                 window->flags &= ~SDL_WINDOW_RESIZABLE;
             }
-            _this->SetWindowResizable(_this, window, (SDL_bool) want);
+            _this->SetWindowResizable(_this, window, (SDL_nez_b32_t) want);
         }
     }
 }
@@ -2504,7 +2504,7 @@ void
 SDL_UpdateWindowGrab(SDL_Window * window)
 {
     SDL_Window *grabbed_window;
-    SDL_bool grabbed;
+    SDL_nez_b32_t grabbed;
     if ((SDL_GetMouse()->relative_mode || (window->flags & SDL_WINDOW_INPUT_GRABBED)) &&
          (window->flags & SDL_WINDOW_INPUT_FOCUS)) {
         grabbed = SDL_TRUE;
@@ -2532,7 +2532,7 @@ SDL_UpdateWindowGrab(SDL_Window * window)
 }
 
 void
-SDL_SetWindowGrab(SDL_Window * window, SDL_bool grabbed)
+SDL_SetWindowGrab(SDL_Window * window, SDL_nez_b32_t grabbed)
 {
     CHECK_WINDOW_MAGIC(window,);
 
@@ -2547,7 +2547,7 @@ SDL_SetWindowGrab(SDL_Window * window, SDL_bool grabbed)
     SDL_UpdateWindowGrab(window);
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_GetWindowGrab(SDL_Window * window)
 {
     CHECK_WINDOW_MAGIC(window, SDL_FALSE);
@@ -2633,7 +2633,7 @@ SDL_OnWindowFocusGained(SDL_Window * window)
     SDL_UpdateWindowGrab(window);
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 ShouldMinimizeOnFocusLoss(SDL_Window * window)
 {
     if (!(window->flags & SDL_WINDOW_FULLSCREEN) || window->is_destroying) {
@@ -2648,7 +2648,7 @@ ShouldMinimizeOnFocusLoss(SDL_Window * window)
     }
 #endif
 
-    return SDL_GetHintBoolean(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, SDL_TRUE);
+    return SDL_GetHintnez_b32_tean(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, SDL_TRUE);
 }
 
 void
@@ -2760,7 +2760,7 @@ SDL_DestroyWindow(SDL_Window * window)
     SDL_free(window);
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IsScreenSaverEnabled()
 {
     if (!_this) {
@@ -2918,14 +2918,14 @@ SDL_GL_UnloadLibrary(void)
 }
 
 #if SDL_VIDEO_OPENGL || SDL_VIDEO_OPENGL_ES || SDL_VIDEO_OPENGL_ES2
-static SDL_INLINE SDL_bool
+static SDL_INLINE SDL_nez_b32_t
 isAtLeastGL3(const char *verstr)
 {
     return (verstr && (SDL_atoi(verstr) >= 3));
 }
 #endif
 
-SDL_bool
+SDL_nez_b32_t
 SDL_GL_ExtensionSupported(const char *extension)
 {
 #if SDL_VIDEO_OPENGL || SDL_VIDEO_OPENGL_ES || SDL_VIDEO_OPENGL_ES2
@@ -3708,7 +3708,7 @@ SDL_WM_SetIcon(SDL_Surface * icon, Uint8 * mask)
 }
 #endif
 
-SDL_bool
+SDL_nez_b32_t
 SDL_GetWindowWMInfo(SDL_Window * window, struct SDL_SysWMinfo *info)
 {
     CHECK_WINDOW_MAGIC(window, SDL_FALSE);
@@ -3747,7 +3747,7 @@ SDL_StartTextInput(void)
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IsTextInputActive(void)
 {
     return (SDL_GetEventState(SDL_TEXTINPUT) == SDL_ENABLE);
@@ -3782,7 +3782,7 @@ SDL_SetTextInputRect(SDL_Rect *rect)
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_HasScreenKeyboardSupport(void)
 {
     if (_this && _this->HasScreenKeyboardSupport) {
@@ -3791,7 +3791,7 @@ SDL_HasScreenKeyboardSupport(void)
     return SDL_FALSE;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IsScreenKeyboardShown(SDL_Window *window)
 {
     if (window && _this && _this->IsScreenKeyboardShown) {
@@ -3821,7 +3821,7 @@ SDL_IsScreenKeyboardShown(SDL_Window *window)
 
 
 #if SDL_VIDEO_DRIVER_WINDOWS || SDL_VIDEO_DRIVER_WINRT || SDL_VIDEO_DRIVER_COCOA || SDL_VIDEO_DRIVER_UIKIT || SDL_VIDEO_DRIVER_X11
-static SDL_bool SDL_MessageboxValidForDriver(const SDL_MessageBoxData *messageboxdata, SDL_SYSWM_TYPE drivertype)
+static SDL_nez_b32_t SDL_MessageboxValidForDriver(const SDL_MessageBoxData *messageboxdata, SDL_SYSWM_TYPE drivertype)
 {
     SDL_SysWMinfo info;
     SDL_Window *window = messageboxdata->window;
@@ -3844,9 +3844,9 @@ SDL_ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid)
 {
     int dummybutton;
     int retval = -1;
-    SDL_bool relative_mode;
+    SDL_nez_b32_t relative_mode;
     int show_cursor_prev;
-    SDL_bool mouse_captured;
+    SDL_nez_b32_t mouse_captured;
     SDL_Window *current_window;
 
     if (!messageboxdata) {
@@ -3963,10 +3963,10 @@ SDL_ShowSimpleMessageBox(Uint32 flags, const char *title, const char *message, S
 #endif
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_ShouldAllowTopmost(void)
 {
-    return SDL_GetHintBoolean(SDL_HINT_ALLOW_TOPMOST, SDL_TRUE);
+    return SDL_GetHintnez_b32_tean(SDL_HINT_ALLOW_TOPMOST, SDL_TRUE);
 }
 
 int
@@ -4103,7 +4103,7 @@ void SDL_Vulkan_UnloadLibrary(void)
     }
 }
 
-SDL_bool SDL_Vulkan_GetInstanceExtensions(SDL_Window *window, unsigned *count, const char **names)
+SDL_nez_b32_t SDL_Vulkan_GetInstanceExtensions(SDL_Window *window, unsigned *count, const char **names)
 {
     if (window) {
         CHECK_WINDOW_MAGIC(window, SDL_FALSE);
@@ -4123,7 +4123,7 @@ SDL_bool SDL_Vulkan_GetInstanceExtensions(SDL_Window *window, unsigned *count, c
     return _this->Vulkan_GetInstanceExtensions(_this, window, count, names);
 }
 
-SDL_bool SDL_Vulkan_CreateSurface(SDL_Window *window,
+SDL_nez_b32_t SDL_Vulkan_CreateSurface(SDL_Window *window,
                                   VkInstance instance,
                                   VkSurfaceKHR *surface)
 {

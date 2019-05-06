@@ -40,7 +40,7 @@ typedef struct SDL_joylist_item
   double timestamp;
   double axis[64];
   double analogButton[64];
-  EM_BOOL digitalButton[64];
+  EM_nez_b32_t digitalButton[64];
 
   struct SDL_joylist_item *next;
 } SDL_joylist_item;

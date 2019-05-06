@@ -254,7 +254,7 @@ WaitForPulseOperation(pa_mainloop *mainloop, pa_operation *o)
 {
     /* This checks for NO errors currently. Either fix that, check results elsewhere, or do things you don't care about. */
     if (mainloop && o) {
-        SDL_bool okay = SDL_TRUE;
+        SDL_nez_b32_t okay = SDL_TRUE;
         while (okay && (PULSEAUDIO_pa_operation_get_state(o) == PA_OPERATION_RUNNING)) {
             okay = (PULSEAUDIO_pa_mainloop_iterate(mainloop, 1, NULL) >= 0);
         }
@@ -482,7 +482,7 @@ SourceDeviceNameCallback(pa_context *c, const pa_source_info *i, int is_last, vo
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 FindDeviceName(struct SDL_PrivateAudioData *h, const int iscapture, void *handle)
 {
     const uint32_t idx = ((uint32_t) ((size_t) handle)) - 1;
@@ -687,12 +687,12 @@ SourceInfoCallback(pa_context *c, const pa_source_info *i, int is_last, void *da
 static void
 HotplugCallback(pa_context *c, pa_subscription_event_type_t t, uint32_t idx, void *data)
 {
-    const SDL_bool added = ((t & PA_SUBSCRIPTION_EVENT_TYPE_MASK) == PA_SUBSCRIPTION_EVENT_NEW);
-    const SDL_bool removed = ((t & PA_SUBSCRIPTION_EVENT_TYPE_MASK) == PA_SUBSCRIPTION_EVENT_REMOVE);
+    const SDL_nez_b32_t added = ((t & PA_SUBSCRIPTION_EVENT_TYPE_MASK) == PA_SUBSCRIPTION_EVENT_NEW);
+    const SDL_nez_b32_t removed = ((t & PA_SUBSCRIPTION_EVENT_TYPE_MASK) == PA_SUBSCRIPTION_EVENT_REMOVE);
 
     if (added || removed) {  /* we only care about add/remove events. */
-        const SDL_bool sink = ((t & PA_SUBSCRIPTION_EVENT_FACILITY_MASK) == PA_SUBSCRIPTION_EVENT_SINK);
-        const SDL_bool source = ((t & PA_SUBSCRIPTION_EVENT_FACILITY_MASK) == PA_SUBSCRIPTION_EVENT_SOURCE);
+        const SDL_nez_b32_t sink = ((t & PA_SUBSCRIPTION_EVENT_FACILITY_MASK) == PA_SUBSCRIPTION_EVENT_SINK);
+        const SDL_nez_b32_t source = ((t & PA_SUBSCRIPTION_EVENT_FACILITY_MASK) == PA_SUBSCRIPTION_EVENT_SOURCE);
 
         /* adds need sink details from the PulseAudio server. Another callback... */
         if (added && sink) {

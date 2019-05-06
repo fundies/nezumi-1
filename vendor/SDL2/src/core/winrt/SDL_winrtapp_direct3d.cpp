@@ -431,7 +431,7 @@ void SDL_WinRTApp::Run()
     }
 }
 
-static bool IsSDLWindowEventPending(SDL_WindowEventID windowEventID)
+static nez_b32_t IsSDLWindowEventPending(SDL_WindowEventID windowEventID)
 {
     SDL_Event events[128];
     const int count = SDL_PeepEvents(events, sizeof(events)/sizeof(SDL_Event), SDL_PEEKEVENT, SDL_WINDOWEVENT, SDL_WINDOWEVENT);
@@ -443,7 +443,7 @@ static bool IsSDLWindowEventPending(SDL_WindowEventID windowEventID)
     return false;
 }
 
-bool SDL_WinRTApp::ShouldWaitForAppResumeEvents()
+nez_b32_t SDL_WinRTApp::ShouldWaitForAppResumeEvents()
 {
     /* Don't wait if the app is visible: */
     if (m_windowVisible) {
@@ -569,7 +569,7 @@ void SDL_WinRTApp::OnVisibilityChanged(CoreWindow^ sender, VisibilityChangedEven
 
     m_windowVisible = args->Visible;
     if (WINRT_GlobalSDLWindow) {
-        SDL_bool wasSDLWindowSurfaceValid = WINRT_GlobalSDLWindow->surface_valid;
+        SDL_nez_b32_t wasSDLWindowSurfaceValid = WINRT_GlobalSDLWindow->surface_valid;
         Uint32 latestWindowFlags = WINRT_DetectWindowFlags(WINRT_GlobalSDLWindow);
         if (args->Visible) {
             SDL_SendWindowEvent(WINRT_GlobalSDLWindow, SDL_WINDOWEVENT_SHOWN, 0, 0);
@@ -822,7 +822,7 @@ static void WINRT_OnBackButtonPressed(BackButtonEventArgs ^ args)
     SDL_SendKeyboardKey(SDL_PRESSED, SDL_SCANCODE_AC_BACK);
     SDL_SendKeyboardKey(SDL_RELEASED, SDL_SCANCODE_AC_BACK);
 
-    if (SDL_GetHintBoolean(SDL_HINT_WINRT_HANDLE_BACK_BUTTON, SDL_FALSE)) {
+    if (SDL_GetHintnez_b32_tean(SDL_HINT_WINRT_HANDLE_BACK_BUTTON, SDL_FALSE)) {
         args->Handled = true;
     }
 }

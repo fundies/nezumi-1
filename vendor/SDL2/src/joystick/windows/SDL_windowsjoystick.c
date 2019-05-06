@@ -59,16 +59,16 @@
 #endif
 
 /* local variables */
-static SDL_bool s_bDeviceAdded = SDL_FALSE;
-static SDL_bool s_bDeviceRemoved = SDL_FALSE;
+static SDL_nez_b32_t s_bDeviceAdded = SDL_FALSE;
+static SDL_nez_b32_t s_bDeviceRemoved = SDL_FALSE;
 static SDL_cond *s_condJoystickThread = NULL;
 static SDL_mutex *s_mutexJoyStickEnum = NULL;
 static SDL_Thread *s_threadJoystick = NULL;
-static SDL_bool s_bJoystickThreadQuit = SDL_FALSE;
+static SDL_nez_b32_t s_bJoystickThreadQuit = SDL_FALSE;
 
 JoyStick_DeviceData *SYS_Joystick;    /* array to hold joystick ID values */
 
-static SDL_bool s_bWindowsDeviceChanged = SDL_FALSE;
+static SDL_nez_b32_t s_bWindowsDeviceChanged = SDL_FALSE;
 
 #ifdef __WINRT__
 
@@ -88,7 +88,7 @@ SDL_CreateDeviceNotification(SDL_DeviceNotificationData *data)
     return 0;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 SDL_WaitForDeviceNotification(SDL_DeviceNotificationData *data, SDL_mutex *mutex)
 {
     return SDL_FALSE;
@@ -191,7 +191,7 @@ SDL_CreateDeviceNotification(SDL_DeviceNotificationData *data)
     return 0;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 SDL_WaitForDeviceNotification(SDL_DeviceNotificationData *data, SDL_mutex *mutex)
 {
     MSG msg;
@@ -222,7 +222,7 @@ SDL_JoystickThread(void *_data)
     SDL_DeviceNotificationData notification_data;
 
 #if SDL_JOYSTICK_XINPUT
-    SDL_bool bOpenedXInputDevices[XUSER_MAX_COUNT];
+    SDL_nez_b32_t bOpenedXInputDevices[XUSER_MAX_COUNT];
     SDL_zero(bOpenedXInputDevices);
 #endif
 
@@ -232,7 +232,7 @@ SDL_JoystickThread(void *_data)
 
     SDL_LockMutex(s_mutexJoyStickEnum);
     while (s_bJoystickThreadQuit == SDL_FALSE) {
-        SDL_bool bXInputChanged = SDL_FALSE;
+        SDL_nez_b32_t bXInputChanged = SDL_FALSE;
 
         if (SDL_WaitForDeviceNotification(&notification_data, s_mutexJoyStickEnum) == SDL_FALSE) {
 #if SDL_JOYSTICK_XINPUT
@@ -244,7 +244,7 @@ SDL_JoystickThread(void *_data)
                 for (userId = 0; userId < XUSER_MAX_COUNT; userId++) {
                     XINPUT_CAPABILITIES capabilities;
                     const DWORD result = XINPUTGETCAPABILITIES(userId, XINPUT_FLAG_GAMEPAD, &capabilities);
-                    const SDL_bool available = (result == ERROR_SUCCESS);
+                    const SDL_nez_b32_t available = (result == ERROR_SUCCESS);
                     if (bOpenedXInputDevices[userId] != available) {
                         bXInputChanged = SDL_TRUE;
                         bOpenedXInputDevices[userId] = available;

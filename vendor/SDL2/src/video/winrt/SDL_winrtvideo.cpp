@@ -80,9 +80,9 @@ static void WINRT_VideoQuit(_THIS);
 /* Window functions */
 static int WINRT_CreateWindow(_THIS, SDL_Window * window);
 static void WINRT_SetWindowSize(_THIS, SDL_Window * window);
-static void WINRT_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_bool fullscreen);
+static void WINRT_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_nez_b32_t fullscreen);
 static void WINRT_DestroyWindow(_THIS, SDL_Window * window);
-static SDL_bool WINRT_GetWindowWMInfo(_THIS, SDL_Window * window, SDL_SysWMinfo * info);
+static SDL_nez_b32_t WINRT_GetWindowWMInfo(_THIS, SDL_Window * window, SDL_SysWMinfo * info);
 
 
 /* Misc functions */
@@ -454,7 +454,7 @@ WINRT_DetectWindowFlags(SDL_Window * window)
 {
     Uint32 latestFlags = 0;
     SDL_WindowData * data = (SDL_WindowData *) window->driverdata;
-    bool is_fullscreen = false;
+    nez_b32_t is_fullscreen = false;
 
 #if SDL_WINRT_USE_APPLICATIONVIEW
     if (data->appView) {
@@ -531,7 +531,7 @@ WINRT_UpdateWindowFlags(SDL_Window * window, Uint32 mask)
     }
 }
 
-static bool
+static nez_b32_t
 WINRT_IsCoreWindowActive(CoreWindow ^ coreWindow)
 {
     /* WinRT does not appear to offer API(s) to determine window-activation state,
@@ -676,7 +676,7 @@ WINRT_CreateWindow(_THIS, SDL_Window * window)
         /* On Windows 10, we occasionally get control over window size.  For windowed
            mode apps, try this.
         */
-        bool didSetSize = false;
+        nez_b32_t didSetSize = false;
         if (!(requestedFlags & SDL_WINDOW_FULLSCREEN)) {
             const Windows::Foundation::Size size(WINRT_PHYSICAL_PIXELS_TO_DIPS(window->w),
                                                  WINRT_PHYSICAL_PIXELS_TO_DIPS(window->h));
@@ -697,7 +697,7 @@ WINRT_CreateWindow(_THIS, SDL_Window * window)
         );
 
         /* Try detecting if the window is active */
-        bool isWindowActive = WINRT_IsCoreWindowActive(data->coreWindow.Get());
+        nez_b32_t isWindowActive = WINRT_IsCoreWindowActive(data->coreWindow.Get());
         if (isWindowActive) {
             SDL_SetKeyboardFocus(window);
         }
@@ -724,11 +724,11 @@ WINRT_SetWindowSize(_THIS, SDL_Window * window)
 }
 
 void
-WINRT_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_bool fullscreen)
+WINRT_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_nez_b32_t fullscreen)
 {
 #if NTDDI_VERSION >= NTDDI_WIN10
     SDL_WindowData * data = (SDL_WindowData *)window->driverdata;
-    bool isWindowActive = WINRT_IsCoreWindowActive(data->coreWindow.Get());
+    nez_b32_t isWindowActive = WINRT_IsCoreWindowActive(data->coreWindow.Get());
     if (isWindowActive) {
         if (fullscreen) {
             if (!data->appView->IsFullScreenMode) {
@@ -761,7 +761,7 @@ WINRT_DestroyWindow(_THIS, SDL_Window * window)
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 WINRT_GetWindowWMInfo(_THIS, SDL_Window * window, SDL_SysWMinfo * info)
 {
     SDL_WindowData * data = (SDL_WindowData *) window->driverdata;

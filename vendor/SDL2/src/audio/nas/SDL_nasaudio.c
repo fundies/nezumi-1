@@ -34,15 +34,15 @@
 #include "SDL_nasaudio.h"
 
 static void (*NAS_AuCloseServer) (AuServer *);
-static void (*NAS_AuNextEvent) (AuServer *, AuBool, AuEvent *);
-static AuBool(*NAS_AuDispatchEvent) (AuServer *, AuEvent *);
+static void (*NAS_AuNextEvent) (AuServer *, Aunez_b32_t, AuEvent *);
+static Aunez_b32_t(*NAS_AuDispatchEvent) (AuServer *, AuEvent *);
 static void (*NAS_AuHandleEvents) (AuServer *);
 static AuFlowID(*NAS_AuCreateFlow) (AuServer *, AuStatus *);
 static void (*NAS_AuStartFlow) (AuServer *, AuFlowID, AuStatus *);
 static void (*NAS_AuSetElements)
-  (AuServer *, AuFlowID, AuBool, int, AuElement *, AuStatus *);
+  (AuServer *, AuFlowID, Aunez_b32_t, int, AuElement *, AuStatus *);
 static void (*NAS_AuWriteElement)
-  (AuServer *, AuFlowID, int, AuUint32, AuPointer, AuBool, AuStatus *);
+  (AuServer *, AuFlowID, int, AuUint32, AuPointer, Aunez_b32_t, AuStatus *);
 static AuUint32 (*NAS_AuReadElement)
   (AuServer *, AuFlowID, int, AuUint32, AuPointer, AuStatus *);
 static AuServer *(*NAS_AuOpenServer)
@@ -257,7 +257,7 @@ sdlformat_to_auformat(unsigned int fmt)
     return AuNone;
 }
 
-static AuBool
+static Aunez_b32_t
 event_handler(AuServer * aud, AuEvent * ev, AuEventHandlerRec * hnd)
 {
     SDL_AudioDevice *this = (SDL_AudioDevice *) hnd->data;

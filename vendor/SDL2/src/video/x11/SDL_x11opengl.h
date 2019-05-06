@@ -31,12 +31,12 @@ struct SDL_GLDriverData
 {
     int errorBase, eventBase;
 
-    SDL_bool HAS_GLX_EXT_visual_rating;
-    SDL_bool HAS_GLX_EXT_visual_info;
-    SDL_bool HAS_GLX_EXT_swap_control_tear;
-    SDL_bool HAS_GLX_ARB_context_flush_control;
-    SDL_bool HAS_GLX_ARB_create_context_robustness;
-    SDL_bool HAS_GLX_ARB_create_context_no_error;
+    SDL_nez_b32_t HAS_GLX_EXT_visual_rating;
+    SDL_nez_b32_t HAS_GLX_EXT_visual_info;
+    SDL_nez_b32_t HAS_GLX_EXT_swap_control_tear;
+    SDL_nez_b32_t HAS_GLX_ARB_context_flush_control;
+    SDL_nez_b32_t HAS_GLX_ARB_create_context_robustness;
+    SDL_nez_b32_t HAS_GLX_ARB_create_context_no_error;
 
     /* Max version of OpenGL ES context that can be created if the
        implementation supports GLX_EXT_create_context_es2_profile.
@@ -47,14 +47,14 @@ struct SDL_GLDriverData
         int minor;
     } es_profile_max_supported_version;
 
-    Bool (*glXQueryExtension) (Display*,int*,int*);
+    nez_b32_t (*glXQueryExtension) (Display*,int*,int*);
     void *(*glXGetProcAddress) (const GLubyte*);
     XVisualInfo *(*glXChooseVisual) (Display*,int,int*);
-    GLXContext (*glXCreateContext) (Display*,XVisualInfo*,GLXContext,Bool);
-    GLXContext (*glXCreateContextAttribsARB) (Display*,GLXFBConfig,GLXContext,Bool,const int *);
+    GLXContext (*glXCreateContext) (Display*,XVisualInfo*,GLXContext,nez_b32_t);
+    GLXContext (*glXCreateContextAttribsARB) (Display*,GLXFBConfig,GLXContext,nez_b32_t,const int *);
     GLXFBConfig *(*glXChooseFBConfig) (Display*,int,const int *,int *);
     void (*glXDestroyContext) (Display*, GLXContext);
-    Bool(*glXMakeCurrent) (Display*,GLXDrawable,GLXContext);
+    nez_b32_t(*glXMakeCurrent) (Display*,GLXDrawable,GLXContext);
     void (*glXSwapBuffers) (Display*, GLXDrawable);
     void (*glXQueryDrawable) (Display*,GLXDrawable,int,unsigned int*);
     void (*glXSwapIntervalEXT) (Display*,GLXDrawable,int);
@@ -67,7 +67,7 @@ struct SDL_GLDriverData
 extern int X11_GL_LoadLibrary(_THIS, const char *path);
 extern void *X11_GL_GetProcAddress(_THIS, const char *proc);
 extern void X11_GL_UnloadLibrary(_THIS);
-extern SDL_bool X11_GL_UseEGL(_THIS);
+extern SDL_nez_b32_t X11_GL_UseEGL(_THIS);
 extern XVisualInfo *X11_GL_GetVisual(_THIS, Display * display, int screen);
 extern SDL_GLContext X11_GL_CreateContext(_THIS, SDL_Window * window);
 extern int X11_GL_MakeCurrent(_THIS, SDL_Window * window,

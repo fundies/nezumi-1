@@ -155,7 +155,7 @@ DSOUND_FreeDeviceHandle(void *handle)
     SDL_free(handle);
 }
 
-static BOOL CALLBACK
+static nez_b32_t CALLBACK
 FindAllDevs(LPGUID guid, LPCWSTR desc, LPCWSTR module, LPVOID data)
 {
     const int iscapture = (int) ((size_t) data);
@@ -473,8 +473,8 @@ DSOUND_OpenDevice(_THIS, void *handle, const char *devname, int iscapture)
 {
     const DWORD numchunks = 8;
     HRESULT result;
-    SDL_bool valid_format = SDL_FALSE;
-    SDL_bool tried_format = SDL_FALSE;
+    SDL_nez_b32_t valid_format = SDL_FALSE;
+    SDL_nez_b32_t tried_format = SDL_FALSE;
     SDL_AudioFormat test_format = SDL_FirstAudioFormat(this->spec.format);
     LPGUID guid = (LPGUID) handle;
     DWORD bufsize;

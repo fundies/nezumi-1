@@ -190,7 +190,7 @@ EMSCRIPTENAUDIO_CloseDevice(_THIS)
 static int
 EMSCRIPTENAUDIO_OpenDevice(_THIS, void *handle, const char *devname, int iscapture)
 {
-    SDL_bool valid_format = SDL_FALSE;
+    SDL_nez_b32_t valid_format = SDL_FALSE;
     SDL_AudioFormat test_format;
     int result;
 

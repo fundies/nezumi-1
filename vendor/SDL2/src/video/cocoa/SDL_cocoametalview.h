@@ -42,12 +42,12 @@
 @interface SDL_cocoametalview : NSView
 
 - (instancetype)initWithFrame:(NSRect)frame
-                      highDPI:(BOOL)highDPI;
+                      highDPI:(nez_b32_t)highDPI;
 
 /* Override superclass tag so this class can set it. */
 @property (assign, readonly) NSInteger tag;
 
-@property (nonatomic) BOOL highDPI;
+@property (nonatomic) nez_b32_t highDPI;
 
 @end
 

@@ -49,7 +49,7 @@ MIR_DestroyWindow(_THIS, SDL_Window* window);
 extern void
 MIR_SetWindowFullscreen(_THIS, SDL_Window* window,
                         SDL_VideoDisplay* display,
-                        SDL_bool fullscreen);
+                        SDL_nez_b32_t fullscreen);
 
 extern void
 MIR_MaximizeWindow(_THIS, SDL_Window* window);
@@ -63,7 +63,7 @@ MIR_RestoreWindow(_THIS, SDL_Window* window);
 extern void
 MIR_HideWindow(_THIS, SDL_Window* window);
 
-extern SDL_bool
+extern SDL_nez_b32_t
 MIR_GetWindowWMInfo(_THIS, SDL_Window* window, SDL_SysWMinfo* info);
 
 extern void
@@ -79,7 +79,7 @@ extern void
 MIR_SetWindowTitle(_THIS, SDL_Window* window);
 
 extern void
-MIR_SetWindowGrab(_THIS, SDL_Window* window, SDL_bool grabbed);
+MIR_SetWindowGrab(_THIS, SDL_Window* window, SDL_nez_b32_t grabbed);
 
 extern int
 MIR_SetWindowGammaRamp(_THIS, SDL_Window* window, Uint16 const* ramp);

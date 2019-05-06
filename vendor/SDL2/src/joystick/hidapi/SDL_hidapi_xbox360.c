@@ -57,11 +57,11 @@ typedef struct {
     Uint8 last_state[USB_PACKET_LENGTH];
     Uint32 rumble_expiration;
 #ifdef SDL_JOYSTICK_HIDAPI_WINDOWS_XINPUT
-    SDL_bool xinput_enabled;
+    SDL_nez_b32_t xinput_enabled;
     Uint8 xinput_slot;
 #endif
 #ifdef SDL_JOYSTICK_HIDAPI_WINDOWS_GAMING_INPUT
-    SDL_bool coinitialized;
+    SDL_nez_b32_t coinitialized;
     __x_ABI_CWindows_CGaming_CInput_CIGamepadStatics *gamepad_statics;
     __x_ABI_CWindows_CGaming_CInput_CIGamepad *gamepad;
     struct __x_ABI_CWindows_CGaming_CInput_CGamepadVibration vibration;
@@ -88,7 +88,7 @@ HIDAPI_DriverXbox360_MarkXInputSlotFree(Uint8 xinput_slot)
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_DriverXbox360_MissingXInputSlot()
 {
     return xinput_slots != 0x0F;
@@ -246,7 +246,7 @@ HIDAPI_DriverXbox360_QuitWindowsGamingInput(SDL_DriverXbox360_Context *ctx)
 
 #endif /* SDL_JOYSTICK_HIDAPI_WINDOWS_GAMING_INPUT */
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_DriverXbox360_IsSupportedDevice(Uint16 vendor_id, Uint16 product_id, Uint16 version, int interface_number)
 {
 #if defined(__MACOSX__) || defined(__WIN32__)
@@ -266,7 +266,7 @@ HIDAPI_DriverXbox360_GetDeviceName(Uint16 vendor_id, Uint16 product_id)
     return HIDAPI_XboxControllerName(vendor_id, product_id);
 }
 
-static SDL_bool SetSlotLED(hid_device *dev, Uint8 slot)
+static SDL_nez_b32_t SetSlotLED(hid_device *dev, Uint8 slot)
 {
     const Uint8 led_packet[] = { 0x01, 0x03, (2 + slot) };
 
@@ -276,7 +276,7 @@ static SDL_bool SetSlotLED(hid_device *dev, Uint8 slot)
     return SDL_TRUE;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_DriverXbox360_Init(SDL_Joystick *joystick, hid_device *dev, Uint16 vendor_id, Uint16 product_id, void **context)
 {
     SDL_DriverXbox360_Context *ctx;
@@ -287,7 +287,7 @@ HIDAPI_DriverXbox360_Init(SDL_Joystick *joystick, hid_device *dev, Uint16 vendor
         return SDL_FALSE;
     }
 #ifdef SDL_JOYSTICK_HIDAPI_WINDOWS_XINPUT
-    ctx->xinput_enabled = SDL_GetHintBoolean(SDL_HINT_XINPUT_ENABLED, SDL_TRUE);
+    ctx->xinput_enabled = SDL_GetHintnez_b32_tean(SDL_HINT_XINPUT_ENABLED, SDL_TRUE);
     if (ctx->xinput_enabled && WIN_LoadXInputDLL() < 0) {
         ctx->xinput_enabled = SDL_FALSE;
     }
@@ -315,7 +315,7 @@ HIDAPI_DriverXbox360_Rumble(SDL_Joystick *joystick, hid_device *dev, void *conte
     SDL_DriverXbox360_Context *ctx = (SDL_DriverXbox360_Context *)context;
 
 #ifdef __WIN32__
-    SDL_bool rumbled = SDL_FALSE;
+    SDL_nez_b32_t rumbled = SDL_FALSE;
 
 #ifdef SDL_JOYSTICK_HIDAPI_WINDOWS_GAMING_INPUT
     if (!rumbled && ctx->gamepad) {
@@ -389,7 +389,7 @@ static void
 HIDAPI_DriverXbox360_HandleStatePacket(SDL_Joystick *joystick, hid_device *dev, SDL_DriverXbox360_Context *ctx, Uint8 *data, int size)
 {
     Sint16 axis;
-    SDL_bool has_trigger_data = SDL_FALSE;
+    SDL_nez_b32_t has_trigger_data = SDL_FALSE;
 
     if (ctx->last_state[10] != data[10]) {
         SDL_PrivateJoystickButton(joystick, SDL_CONTROLLER_BUTTON_A, (data[10] & 0x01) ? SDL_PRESSED : SDL_RELEASED);
@@ -403,10 +403,10 @@ HIDAPI_DriverXbox360_HandleStatePacket(SDL_Joystick *joystick, hid_device *dev, 
     }
 
     if (ctx->last_state[11] != data[11]) {
-        SDL_bool dpad_up = SDL_FALSE;
-        SDL_bool dpad_down = SDL_FALSE;
-        SDL_bool dpad_left = SDL_FALSE;
-        SDL_bool dpad_right = SDL_FALSE;
+        SDL_nez_b32_t dpad_up = SDL_FALSE;
+        SDL_nez_b32_t dpad_down = SDL_FALSE;
+        SDL_nez_b32_t dpad_left = SDL_FALSE;
+        SDL_nez_b32_t dpad_right = SDL_FALSE;
 
         SDL_PrivateJoystickButton(joystick, SDL_CONTROLLER_BUTTON_LEFTSTICK, (data[11] & 0x01) ? SDL_PRESSED : SDL_RELEASED);
         SDL_PrivateJoystickButton(joystick, SDL_CONTROLLER_BUTTON_RIGHTSTICK, (data[11] & 0x02) ? SDL_PRESSED : SDL_RELEASED);
@@ -555,9 +555,9 @@ HIDAPI_DriverXbox360_HandleStatePacket(SDL_Joystick *joystick, hid_device *dev, 
 {
     Sint16 axis;
 #ifdef __MACOSX__
-    const SDL_bool invert_y_axes = SDL_FALSE;
+    const SDL_nez_b32_t invert_y_axes = SDL_FALSE;
 #else
-    const SDL_bool invert_y_axes = SDL_TRUE;
+    const SDL_nez_b32_t invert_y_axes = SDL_TRUE;
 #endif
 
     if (ctx->last_state[2] != data[2]) {
@@ -630,10 +630,10 @@ HIDAPI_DriverXboxOneS_HandleStatePacket(SDL_Joystick *joystick, hid_device *dev,
     }
 
     if (ctx->last_state[13] != data[13]) {
-        SDL_bool dpad_up = SDL_FALSE;
-        SDL_bool dpad_down = SDL_FALSE;
-        SDL_bool dpad_left = SDL_FALSE;
-        SDL_bool dpad_right = SDL_FALSE;
+        SDL_nez_b32_t dpad_up = SDL_FALSE;
+        SDL_nez_b32_t dpad_down = SDL_FALSE;
+        SDL_nez_b32_t dpad_left = SDL_FALSE;
+        SDL_nez_b32_t dpad_right = SDL_FALSE;
 
         switch (data[13]) {
         case 1:
@@ -704,7 +704,7 @@ HIDAPI_DriverXboxOneS_HandleGuidePacket(SDL_Joystick *joystick, hid_device *dev,
 }
 #endif /* __MACOSX__ */
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_DriverXbox360_Update(SDL_Joystick *joystick, hid_device *dev, void *context)
 {
     SDL_DriverXbox360_Context *ctx = (SDL_DriverXbox360_Context *)context;

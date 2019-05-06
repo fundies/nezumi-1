@@ -150,7 +150,7 @@ SDL_GetPrefPath(const char *org, const char *app)
     WCHAR* worg = NULL;
     WCHAR* wapp = NULL;
     size_t new_wpath_len = 0;
-    BOOL api_result = FALSE;
+    nez_b32_t api_result = FALSE;
 
     if (!app) {
         SDL_InvalidParamError("app");

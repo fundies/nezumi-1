@@ -184,7 +184,7 @@ typedef struct
 
 typedef struct {
     hid_device *dev;
-    SDL_bool m_bIsUsingBluetooth;
+    SDL_nez_b32_t m_bIsUsingBluetooth;
     Uint8 m_nCommandNumber;
     SwitchCommonOutputPacket_t m_RumblePacket;
     Uint32 m_nRumbleExpiration;
@@ -209,7 +209,7 @@ typedef struct {
 } SDL_DriverSwitch_Context;
 
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_DriverSwitch_IsSupportedDevice(Uint16 vendor_id, Uint16 product_id, Uint16 version, int interface_number)
 {
     return SDL_IsJoystickNintendoSwitchPro(vendor_id, product_id);
@@ -261,7 +261,7 @@ static SwitchSubcommandInputPacket_t *ReadSubcommandReply(SDL_DriverSwitch_Conte
     return NULL;
 }
 
-static SDL_bool ReadProprietaryReply(SDL_DriverSwitch_Context *ctx, ESwitchProprietaryCommandIDs expectedID)
+static SDL_nez_b32_t ReadProprietaryReply(SDL_DriverSwitch_Context *ctx, ESwitchProprietaryCommandIDs expectedID)
 {
     /* Average response time for messages is ~30ms */
     Uint32 TimeoutMs = 100;
@@ -299,7 +299,7 @@ static void ConstructSubcommand(SDL_DriverSwitch_Context *ctx, ESwitchSubcommand
     ctx->m_nCommandNumber = (ctx->m_nCommandNumber + 1) & 0xF;
 }
 
-static SDL_bool WritePacket(SDL_DriverSwitch_Context *ctx, void *pBuf, Uint8 ucLen)
+static SDL_nez_b32_t WritePacket(SDL_DriverSwitch_Context *ctx, void *pBuf, Uint8 ucLen)
 {
     Uint8 rgucBuf[k_unSwitchMaxOutputPacketLength];
     const size_t unWriteSize = ctx->m_bIsUsingBluetooth ? k_unSwitchBluetoothPacketLength : k_unSwitchUSBPacketLength;
@@ -317,7 +317,7 @@ static SDL_bool WritePacket(SDL_DriverSwitch_Context *ctx, void *pBuf, Uint8 ucL
     return (WriteOutput(ctx, (Uint8 *)pBuf, ucLen) >= 0);
 }
 
-static SDL_bool WriteSubcommand(SDL_DriverSwitch_Context *ctx, ESwitchSubcommandIDs ucCommandID, Uint8 *pBuf, Uint8 ucLen, SwitchSubcommandInputPacket_t **ppReply)
+static SDL_nez_b32_t WriteSubcommand(SDL_DriverSwitch_Context *ctx, ESwitchSubcommandIDs ucCommandID, Uint8 *pBuf, Uint8 ucLen, SwitchSubcommandInputPacket_t **ppReply)
 {
     int nRetries = 5;
     SwitchSubcommandInputPacket_t *reply = NULL;
@@ -339,7 +339,7 @@ static SDL_bool WriteSubcommand(SDL_DriverSwitch_Context *ctx, ESwitchSubcommand
     return reply != NULL;
 }
 
-static SDL_bool WriteProprietary(SDL_DriverSwitch_Context *ctx, ESwitchProprietaryCommandIDs ucCommand, Uint8 *pBuf, Uint8 ucLen, SDL_bool waitForReply)
+static SDL_nez_b32_t WriteProprietary(SDL_DriverSwitch_Context *ctx, ESwitchProprietaryCommandIDs ucCommand, Uint8 *pBuf, Uint8 ucLen, SDL_nez_b32_t waitForReply)
 {
     int nRetries = 5;
 
@@ -394,7 +394,7 @@ static void EncodeRumble(SwitchRumbleData_t *pRumble, Uint16 usHighFreq, Uint8 u
     }
 }
 
-static SDL_bool WriteRumble(SDL_DriverSwitch_Context *ctx)
+static SDL_nez_b32_t WriteRumble(SDL_DriverSwitch_Context *ctx)
 {
     /* Write into m_RumblePacket rather than a temporary buffer to allow the current rumble state
      * to be retained for subsequent rumble or subcommand packets sent to the controller
@@ -406,7 +406,7 @@ static SDL_bool WriteRumble(SDL_DriverSwitch_Context *ctx)
     return WritePacket(ctx, (Uint8 *)&ctx->m_RumblePacket, sizeof(ctx->m_RumblePacket));
 }
 
-static SDL_bool BTrySetupUSB(SDL_DriverSwitch_Context *ctx)
+static SDL_nez_b32_t BTrySetupUSB(SDL_DriverSwitch_Context *ctx)
 {
     /* We have to send a connection handshake to the controller when communicating over USB
      * before we're able to send it other commands. Luckily this command is not supported
@@ -425,17 +425,17 @@ static SDL_bool BTrySetupUSB(SDL_DriverSwitch_Context *ctx)
     return SDL_TRUE;
 }
 
-static SDL_bool SetVibrationEnabled(SDL_DriverSwitch_Context *ctx, Uint8 enabled)
+static SDL_nez_b32_t SetVibrationEnabled(SDL_DriverSwitch_Context *ctx, Uint8 enabled)
 {
     return WriteSubcommand(ctx, k_eSwitchSubcommandIDs_EnableVibration, &enabled, sizeof(enabled), NULL);
 
 }
-static SDL_bool SetInputMode(SDL_DriverSwitch_Context *ctx, Uint8 input_mode)
+static SDL_nez_b32_t SetInputMode(SDL_DriverSwitch_Context *ctx, Uint8 input_mode)
 {
     return WriteSubcommand(ctx, k_eSwitchSubcommandIDs_SetInputReportMode, &input_mode, 1, NULL);
 }
 
-static SDL_bool SetHomeLED(SDL_DriverSwitch_Context *ctx, Uint8 brightness)
+static SDL_nez_b32_t SetHomeLED(SDL_DriverSwitch_Context *ctx, Uint8 brightness)
 {
     Uint8 ucLedIntensity = 0;
     Uint8 rgucBuffer[4];
@@ -456,13 +456,13 @@ static SDL_bool SetHomeLED(SDL_DriverSwitch_Context *ctx, Uint8 brightness)
     return WriteSubcommand(ctx, k_eSwitchSubcommandIDs_SetHomeLight, rgucBuffer, sizeof(rgucBuffer), NULL);
 }
 
-static SDL_bool SetSlotLED(SDL_DriverSwitch_Context *ctx, Uint8 slot)
+static SDL_nez_b32_t SetSlotLED(SDL_DriverSwitch_Context *ctx, Uint8 slot)
 {
     Uint8 led_data = (1 << slot);
     return WriteSubcommand(ctx, k_eSwitchSubcommandIDs_SetPlayerLights, &led_data, sizeof(led_data), NULL);
 }
 
-static SDL_bool LoadStickCalibration(SDL_DriverSwitch_Context *ctx)
+static SDL_nez_b32_t LoadStickCalibration(SDL_DriverSwitch_Context *ctx)
 {
     Uint8 *pStickCal;
     size_t stick, axis;
@@ -569,7 +569,7 @@ static Sint16 ApplyStickCalibration(SDL_DriverSwitch_Context *ctx, int nStick, i
     return ApplyStickCalibrationCentered(ctx, nStick, nAxis, sRawValue, ctx->m_StickCalData[nStick].axis[nAxis].sCenter);
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_DriverSwitch_Init(SDL_Joystick *joystick, hid_device *dev, Uint16 vendor_id, Uint16 product_id, void **context)
 {
     SDL_DriverSwitch_Context *ctx;
@@ -712,10 +712,10 @@ static void HandleSimpleControllerState(SDL_Joystick *joystick, SDL_DriverSwitch
     }
 
     if (packet->ucStickHat != ctx->m_lastSimpleState.ucStickHat) {
-        SDL_bool dpad_up = SDL_FALSE;
-        SDL_bool dpad_down = SDL_FALSE;
-        SDL_bool dpad_left = SDL_FALSE;
-        SDL_bool dpad_right = SDL_FALSE;
+        SDL_nez_b32_t dpad_up = SDL_FALSE;
+        SDL_nez_b32_t dpad_down = SDL_FALSE;
+        SDL_nez_b32_t dpad_left = SDL_FALSE;
+        SDL_nez_b32_t dpad_right = SDL_FALSE;
 
         switch (packet->ucStickHat) {
         case 0:
@@ -846,7 +846,7 @@ static void HandleFullControllerState(SDL_Joystick *joystick, SDL_DriverSwitch_C
     ctx->m_lastFullState = *packet;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_DriverSwitch_Update(SDL_Joystick *joystick, hid_device *dev, void *context)
 {
     SDL_DriverSwitch_Context *ctx = (SDL_DriverSwitch_Context *)context;

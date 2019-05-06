@@ -31,7 +31,7 @@
 
 - (void)setSDLWindow:(SDL_Window *)window;
 
-- (CGPoint)touchLocation:(UITouch *)touch shouldNormalize:(BOOL)normalize;
+- (CGPoint)touchLocation:(UITouch *)touch shouldNormalize:(nez_b32_t)normalize;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;

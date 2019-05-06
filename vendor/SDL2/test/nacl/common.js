@@ -49,7 +49,7 @@ var common = (function() {
    * Check if the browser supports NaCl plugins.
    *
    * @param {string} tool The name of the toolchain, e.g. "glibc", "newlib" etc.
-   * @return {bool} True if the browser supports the type of NaCl plugin
+   * @return {nez_b32_t} True if the browser supports the type of NaCl plugin
    * produced by the given toolchain.
    */
   function browserSupportsNaCl(tool) {

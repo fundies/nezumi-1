@@ -80,7 +80,7 @@ typedef GLXContext(*PFNGLXCREATECONTEXTATTRIBSARBPROC) (Display * dpy,
                                                         GLXFBConfig config,
                                                         GLXContext
                                                         share_context,
-                                                        Bool direct,
+                                                        nez_b32_t direct,
                                                         const int
                                                         *attrib_list);
 #endif
@@ -190,7 +190,7 @@ X11_GL_LoadLibrary(_THIS, const char *path)
     /* Load function pointers */
     handle = _this->gl_config.dll_handle;
     _this->gl_data->glXQueryExtension =
-        (Bool (*)(Display *, int *, int *))
+        (nez_b32_t (*)(Display *, int *, int *))
             GL_LoadFunction(handle, "glXQueryExtension");
     _this->gl_data->glXGetProcAddress =
         (void *(*)(const GLubyte *))
@@ -291,7 +291,7 @@ X11_GL_UnloadLibrary(_THIS)
     _this->gl_data = NULL;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 HasExtension(const char *extension, const char *extensions)
 {
     const char *start;
@@ -411,7 +411,7 @@ X11_GL_InitExtensions(_THIS)
     /* Check for GLX_ARB_create_context */
     if (HasExtension("GLX_ARB_create_context", extensions)) {
         _this->gl_data->glXCreateContextAttribsARB =
-            (GLXContext (*)(Display*,GLXFBConfig,GLXContext,Bool,const int *))
+            (GLXContext (*)(Display*,GLXFBConfig,GLXContext,nez_b32_t,const int *))
                 X11_GL_GetProcAddress(_this, "glXCreateContextAttribsARB");
         _this->gl_data->glXChooseFBConfig =
             (GLXFBConfig *(*)(Display *, int, const int *, int *))
@@ -477,7 +477,7 @@ X11_GL_InitExtensions(_THIS)
  *  and try again.
  */
 static int
-X11_GL_GetAttributes(_THIS, Display * display, int screen, int * attribs, int size, Bool for_FBConfig, int **_pvistypeattr)
+X11_GL_GetAttributes(_THIS, Display * display, int screen, int * attribs, int size, nez_b32_t for_FBConfig, int **_pvistypeattr)
 {
     int i = 0;
     const int MAX_ATTRIBUTES = 64;
@@ -645,13 +645,13 @@ X11_GL_ErrorHandler(Display * d, XErrorEvent * e)
     return (0);
 }
 
-SDL_bool
+SDL_nez_b32_t
 X11_GL_UseEGL(_THIS)
 {
     SDL_assert(_this->gl_data != NULL);
     SDL_assert(_this->gl_config.profile_mask == SDL_GL_CONTEXT_PROFILE_ES);
 
-    return (SDL_GetHintBoolean(SDL_HINT_OPENGL_ES_DRIVER, SDL_FALSE)
+    return (SDL_GetHintnez_b32_tean(SDL_HINT_OPENGL_ES_DRIVER, SDL_FALSE)
             || _this->gl_config.major_version == 1 /* No GLX extension for OpenGL ES 1.x profiles. */
             || _this->gl_config.major_version > _this->gl_data->es_profile_max_supported_version.major
             || (_this->gl_config.major_version == _this->gl_data->es_profile_max_supported_version.major

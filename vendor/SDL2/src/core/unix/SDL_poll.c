@@ -35,7 +35,7 @@
 
 
 int
-SDL_IOReady(int fd, SDL_bool forWrite, int timeoutMS)
+SDL_IOReady(int fd, SDL_nez_b32_t forWrite, int timeoutMS)
 {
     int result;
 

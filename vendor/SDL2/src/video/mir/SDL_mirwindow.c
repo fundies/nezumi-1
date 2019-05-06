@@ -176,7 +176,7 @@ MIR_DestroyWindow(_THIS, SDL_Window* window)
     window->driverdata = NULL;
 }
 
-SDL_bool
+SDL_nez_b32_t
 MIR_GetWindowWMInfo(_THIS, SDL_Window* window, SDL_SysWMinfo* info)
 {
     if (info->version.major == SDL_MAJOR_VERSION &&
@@ -209,7 +209,7 @@ UpdateMirWindowState(MIR_Data* mir_data, MIR_Window* mir_window, MirWindowState 
 void
 MIR_SetWindowFullscreen(_THIS, SDL_Window* window,
                         SDL_VideoDisplay* display,
-                        SDL_bool fullscreen)
+                        SDL_nez_b32_t fullscreen)
 {
     if (IsMirWindowValid(window->driverdata)) {
         MirWindowState state;
@@ -313,7 +313,7 @@ MIR_SetWindowTitle(_THIS, SDL_Window* window)
 }
 
 void
-MIR_SetWindowGrab(_THIS, SDL_Window* window, SDL_bool grabbed)
+MIR_SetWindowGrab(_THIS, SDL_Window* window, SDL_nez_b32_t grabbed)
 {
     MIR_Data*   mir_data   = _this->driverdata;
     MIR_Window* mir_window = window->driverdata;

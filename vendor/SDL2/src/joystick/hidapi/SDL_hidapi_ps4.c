@@ -108,10 +108,10 @@ typedef struct
 } DS4EffectsState_t;
 
 typedef struct {
-    SDL_bool is_dongle;
-    SDL_bool is_bluetooth;
-    SDL_bool audio_supported;
-    SDL_bool rumble_supported;
+    SDL_nez_b32_t is_dongle;
+    SDL_nez_b32_t is_bluetooth;
+    SDL_nez_b32_t audio_supported;
+    SDL_nez_b32_t rumble_supported;
     Uint8 volume;
     Uint32 last_volume_check;
     Uint32 rumble_expiration;
@@ -217,7 +217,7 @@ static uint8_t GetPlaystationVolumeFromFloat(float fVolume)
     return (Uint8)((fVolLog * k_nVolumeFitRatio) + k_nVolumeFitOffset);
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_DriverPS4_IsSupportedDevice(Uint16 vendor_id, Uint16 product_id, Uint16 version, int interface_number)
 {
     return SDL_IsJoystickPS4(vendor_id, product_id);
@@ -232,7 +232,7 @@ HIDAPI_DriverPS4_GetDeviceName(Uint16 vendor_id, Uint16 product_id)
     return NULL;
 }
 
-static SDL_bool ReadFeatureReport(hid_device *dev, Uint8 report_id, Uint8 *data, size_t size)
+static SDL_nez_b32_t ReadFeatureReport(hid_device *dev, Uint8 report_id, Uint8 *data, size_t size)
 {
     Uint8 report[USB_PACKET_LENGTH + 1];
 
@@ -245,7 +245,7 @@ static SDL_bool ReadFeatureReport(hid_device *dev, Uint8 report_id, Uint8 *data,
     return SDL_TRUE;
 }
 
-static SDL_bool CheckUSBConnected(hid_device *dev)
+static SDL_nez_b32_t CheckUSBConnected(hid_device *dev)
 {
     int i;
     Uint8 data[16];
@@ -262,7 +262,7 @@ static SDL_bool CheckUSBConnected(hid_device *dev)
     return SDL_FALSE;
 }
 
-static SDL_bool HIDAPI_DriverPS4_CanRumble(Uint16 vendor_id, Uint16 product_id)
+static SDL_nez_b32_t HIDAPI_DriverPS4_CanRumble(Uint16 vendor_id, Uint16 product_id)
 {
     /* The Razer Panthera fight stick hangs when trying to rumble */
     if (vendor_id == RAZER_USB_VID &&
@@ -274,7 +274,7 @@ static SDL_bool HIDAPI_DriverPS4_CanRumble(Uint16 vendor_id, Uint16 product_id)
 
 static int HIDAPI_DriverPS4_Rumble(SDL_Joystick *joystick, hid_device *dev, void *context, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms);
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_DriverPS4_Init(SDL_Joystick *joystick, hid_device *dev, Uint16 vendor_id, Uint16 product_id, void **context)
 {
     SDL_DriverPS4_Context *ctx;
@@ -308,7 +308,7 @@ HIDAPI_DriverPS4_Init(SDL_Joystick *joystick, hid_device *dev, Uint16 vendor_id,
 
     if (HIDAPI_DriverPS4_CanRumble(vendor_id, product_id)) {
         if (ctx->is_bluetooth) {
-            ctx->rumble_supported = SDL_GetHintBoolean(SDL_HINT_JOYSTICK_HIDAPI_PS4_RUMBLE, SDL_FALSE);
+            ctx->rumble_supported = SDL_GetHintnez_b32_tean(SDL_HINT_JOYSTICK_HIDAPI_PS4_RUMBLE, SDL_FALSE);
         } else {
             ctx->rumble_supported = SDL_TRUE;
         }
@@ -414,10 +414,10 @@ HIDAPI_DriverPS4_HandleStatePacket(SDL_Joystick *joystick, hid_device *dev, SDL_
         }
         {
             Uint8 data = (packet->rgucButtonsHatAndCounter[0] & 0x0F);
-            SDL_bool dpad_up = SDL_FALSE;
-            SDL_bool dpad_down = SDL_FALSE;
-            SDL_bool dpad_left = SDL_FALSE;
-            SDL_bool dpad_right = SDL_FALSE;
+            SDL_nez_b32_t dpad_up = SDL_FALSE;
+            SDL_nez_b32_t dpad_down = SDL_FALSE;
+            SDL_nez_b32_t dpad_left = SDL_FALSE;
+            SDL_nez_b32_t dpad_right = SDL_FALSE;
 
             switch (data) {
             case 0:
@@ -507,7 +507,7 @@ HIDAPI_DriverPS4_HandleStatePacket(SDL_Joystick *joystick, hid_device *dev, SDL_
     SDL_memcpy(&ctx->last_state, packet, sizeof(ctx->last_state));
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_DriverPS4_Update(SDL_Joystick *joystick, hid_device *dev, void *context)
 {
     SDL_DriverPS4_Context *ctx = (SDL_DriverPS4_Context *)context;

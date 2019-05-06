@@ -29,11 +29,11 @@ class HIDDeviceBLESteamController extends BluetoothGattCallback implements HIDDe
     private BluetoothDevice mDevice;
     private int mDeviceId;
     private BluetoothGatt mGatt;
-    private boolean mIsRegistered = false;
-    private boolean mIsConnected = false;
-    private boolean mIsChromebook = false;
-    private boolean mIsReconnecting = false;
-    private boolean mFrozen = false;
+    private nez_b32_tean mIsRegistered = false;
+    private nez_b32_tean mIsConnected = false;
+    private nez_b32_tean mIsChromebook = false;
+    private nez_b32_tean mIsReconnecting = false;
+    private nez_b32_tean mFrozen = false;
     private LinkedList<GattOperation> mOperations;
     GattOperation mCurrentOperation = null;
     private Handler mHandler;
@@ -60,7 +60,7 @@ class HIDDeviceBLESteamController extends BluetoothGattCallback implements HIDDe
         UUID mUuid;
         byte[] mValue;
         BluetoothGatt mGatt;
-        boolean mResult = true;
+        nez_b32_tean mResult = true;
 
         private GattOperation(BluetoothGatt gatt, GattOperation.Operation operation, UUID uuid) {
             mGatt = gatt;
@@ -132,7 +132,7 @@ class HIDDeviceBLESteamController extends BluetoothGattCallback implements HIDDe
             }
         }
 
-        public boolean finish() {
+        public nez_b32_tean finish() {
             return mResult;
         }
 
@@ -185,9 +185,9 @@ class HIDDeviceBLESteamController extends BluetoothGattCallback implements HIDDe
 
     // Because on Chromebooks we show up as a dual-mode device, it will attempt to connect TRANSPORT_AUTO, which will use TRANSPORT_BREDR instead
     // of TRANSPORT_LE.  Let's force ourselves to connect low energy.
-    private BluetoothGatt connectGatt(boolean managed) {
+    private BluetoothGatt connectGatt(nez_b32_tean managed) {
         try {
-            Method m = mDevice.getClass().getDeclaredMethod("connectGatt", Context.class, boolean.class, BluetoothGattCallback.class, int.class);
+            Method m = mDevice.getClass().getDeclaredMethod("connectGatt", Context.class, nez_b32_tean.class, BluetoothGattCallback.class, int.class);
             return (BluetoothGatt) m.invoke(mDevice, mManager.getContext(), managed, this, TRANSPORT_LE);
         } catch (Exception e) {
             return mDevice.connectGatt(mManager.getContext(), managed, this);
@@ -286,7 +286,7 @@ class HIDDeviceBLESteamController extends BluetoothGattCallback implements HIDDe
         }, CHROMEBOOK_CONNECTION_CHECK_INTERVAL);
     }
 
-    private boolean isRegistered() {
+    private nez_b32_tean isRegistered() {
         return mIsRegistered;
     }
 
@@ -294,7 +294,7 @@ class HIDDeviceBLESteamController extends BluetoothGattCallback implements HIDDe
         mIsRegistered = true;
     }
 
-    private boolean probeService(HIDDeviceBLESteamController controller) {
+    private nez_b32_tean probeService(HIDDeviceBLESteamController controller) {
 
         if (isRegistered()) {
             return true;
@@ -348,7 +348,7 @@ class HIDDeviceBLESteamController extends BluetoothGattCallback implements HIDDe
             }
         }
         if (op != null) {
-            boolean result = op.finish(); // TODO: Maybe in main thread as well?
+            nez_b32_tean result = op.finish(); // TODO: Maybe in main thread as well?
 
             // Our operation failed, let's add it back to the beginning of our queue.
             if (!result) {
@@ -493,7 +493,7 @@ class HIDDeviceBLESteamController extends BluetoothGattCallback implements HIDDe
         //Log.v(TAG, "onDescriptorWrite status=" + status + " uuid=" + chr.getUuid() + " descriptor=" + descriptor.getUuid());
 
         if (chr.getUuid().equals(inputCharacteristic)) {
-            boolean hasWrittenInputDescriptor = true;
+            nez_b32_tean hasWrittenInputDescriptor = true;
             BluetoothGattCharacteristic reportChr = chr.getService().getCharacteristic(reportCharacteristic);
             if (reportChr != null) {
                 Log.v(TAG, "Writing report characteristic to enter valve mode");
@@ -562,7 +562,7 @@ class HIDDeviceBLESteamController extends BluetoothGattCallback implements HIDDe
     }
 
     @Override
-    public boolean open() {
+    public nez_b32_tean open() {
         return true;
     }
 
@@ -599,7 +599,7 @@ class HIDDeviceBLESteamController extends BluetoothGattCallback implements HIDDe
     }
 
     @Override
-    public boolean getFeatureReport(byte[] report) {
+    public nez_b32_tean getFeatureReport(byte[] report) {
         if (!isRegistered()) {
             Log.e(TAG, "Attempted getFeatureReport before Steam Controller is registered!");
             if (mIsConnected) {
@@ -618,7 +618,7 @@ class HIDDeviceBLESteamController extends BluetoothGattCallback implements HIDDe
     }
 
     @Override
-    public void setFrozen(boolean frozen) {
+    public void setFrozen(nez_b32_tean frozen) {
         mFrozen = frozen;
     }
 

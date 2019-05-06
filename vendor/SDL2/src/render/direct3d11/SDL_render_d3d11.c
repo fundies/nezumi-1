@@ -83,14 +83,14 @@ typedef struct
     D3D11_FILTER scaleMode;
 
     /* YV12 texture support */
-    SDL_bool yuv;
+    SDL_nez_b32_t yuv;
     ID3D11Texture2D *mainTextureU;
     ID3D11ShaderResourceView *mainTextureResourceViewU;
     ID3D11Texture2D *mainTextureV;
     ID3D11ShaderResourceView *mainTextureResourceViewV;
 
     /* NV12 texture support */
-    SDL_bool nv12;
+    SDL_nez_b32_t nv12;
     ID3D11Texture2D *mainTextureNV;
     ID3D11ShaderResourceView *mainTextureResourceViewNV;
 
@@ -179,7 +179,7 @@ static const GUID SDL_IID_ID3D11Debug = { 0x79cf2233, 0x7536, 0x4948, { 0x9d, 0x
 static SDL_Renderer *D3D11_CreateRenderer(SDL_Window * window, Uint32 flags);
 static void D3D11_WindowEvent(SDL_Renderer * renderer,
                             const SDL_WindowEvent *event);
-static SDL_bool D3D11_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode);
+static SDL_nez_b32_t D3D11_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode);
 static int D3D11_CreateTexture(SDL_Renderer * renderer, SDL_Texture * texture);
 static int D3D11_UpdateTexture(SDL_Renderer * renderer, SDL_Texture * texture,
                              const SDL_Rect * rect, const void *srcPixels,
@@ -477,7 +477,7 @@ static D3D11_BLEND_OP GetBlendEquation(SDL_BlendOperation operation)
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 D3D11_CreateBlendState(SDL_Renderer * renderer, SDL_BlendMode blendMode)
 {
     D3D11_RenderData *data = (D3D11_RenderData *) renderer->driverdata;
@@ -606,7 +606,7 @@ D3D11_CreateDeviceResources(SDL_Renderer * renderer)
     creationFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
 
     /* Make sure Direct3D's debugging feature gets used, if the app requests it. */
-    if (SDL_GetHintBoolean(SDL_HINT_RENDER_DIRECT3D11_DEBUG, SDL_FALSE)) {
+    if (SDL_GetHintnez_b32_tean(SDL_HINT_RENDER_DIRECT3D11_DEBUG, SDL_FALSE)) {
         creationFlags |= D3D11_CREATE_DEVICE_DEBUG;
     }
 
@@ -796,7 +796,7 @@ D3D11_GetCurrentRotation()
 
 #endif /* __WIN32__ */
 
-static BOOL
+static nez_b32_t
 D3D11_IsDisplayRotated90Degrees(DXGI_MODE_ROTATION rotation)
 {
     switch (rotation) {
@@ -820,7 +820,7 @@ D3D11_GetRotationForCurrentRenderTarget(SDL_Renderer * renderer)
 }
 
 static int
-D3D11_GetViewportAlignedD3DRect(SDL_Renderer * renderer, const SDL_Rect * sdlRect, D3D11_RECT * outRect, BOOL includeViewportOffset)
+D3D11_GetViewportAlignedD3DRect(SDL_Renderer * renderer, const SDL_Rect * sdlRect, D3D11_RECT * outRect, nez_b32_t includeViewportOffset)
 {
     const int rotation = D3D11_GetRotationForCurrentRenderTarget(renderer);
     switch (rotation) {
@@ -866,10 +866,10 @@ D3D11_CreateSwapChain(SDL_Renderer * renderer, int w, int h)
     D3D11_RenderData *data = (D3D11_RenderData *)renderer->driverdata;
 #ifdef __WINRT__
     IUnknown *coreWindow = D3D11_GetCoreWindowFromSDLRenderer(renderer);
-    const BOOL usingXAML = (coreWindow == NULL);
+    const nez_b32_t usingXAML = (coreWindow == NULL);
 #else
     IUnknown *coreWindow = NULL;
-    const BOOL usingXAML = FALSE;
+    const nez_b32_t usingXAML = FALSE;
 #endif
     HRESULT result = S_OK;
 
@@ -1142,7 +1142,7 @@ D3D11_WindowEvent(SDL_Renderer * renderer, const SDL_WindowEvent *event)
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 D3D11_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode)
 {
     SDL_BlendFactor srcColorFactor = SDL_GetBlendModeSrcColorFactor(blendMode);
@@ -1699,7 +1699,7 @@ D3D11_UpdateViewport(SDL_Renderer * renderer)
     Float4X4 projection;
     Float4X4 view;
     SDL_FRect orientationAlignedViewport;
-    BOOL swapDimensions;
+    nez_b32_t swapDimensions;
     D3D11_VIEWPORT viewport;
     const int rotation = D3D11_GetRotationForCurrentRenderTarget(renderer);
 

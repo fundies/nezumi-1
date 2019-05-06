@@ -327,6 +327,12 @@ enum
     mb_last,
 };
 
+/** The X position of the mouse relative to the game window. */
+extern int g_nez_mouse_x;
+
+/** The Y position of the mouse relative to the game window. */
+extern int g_nez_mouse_y;
+
 /**
  * Centers the window on the primary display.
  */

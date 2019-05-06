@@ -74,7 +74,7 @@ typedef struct _SDL_HIDAPI_Device
     SDL_HIDAPI_DeviceDriver *driver;
 
     /* Used during scanning for device changes */
-    SDL_bool seen;
+    SDL_nez_b32_t seen;
 
     struct _SDL_HIDAPI_Device *next;
 } SDL_HIDAPI_Device;
@@ -105,8 +105,8 @@ static const SDL_UDEV_Symbols * usyms = NULL;
 
 static struct
 {
-    SDL_bool m_bHaveDevicesChanged;
-    SDL_bool m_bCanGetNotifications;
+    SDL_nez_b32_t m_bHaveDevicesChanged;
+    SDL_nez_b32_t m_bCanGetNotifications;
     Uint32 m_unLastDetect;
 
 #if defined(__WIN32__)
@@ -186,7 +186,7 @@ static void CallbackIOServiceFunc(void *context, io_iterator_t portIterator)
     io_object_t entry;
     while ((entry = IOIteratorNext(portIterator)) != 0) {
         IOObjectRelease(entry);
-        *(SDL_bool*)context = SDL_TRUE;
+        *(SDL_nez_b32_t*)context = SDL_TRUE;
     }
 }
 #endif /* __MACOSX__ */
@@ -561,7 +561,7 @@ HIDAPI_XboxControllerName(Uint16 vendor_id, Uint16 product_id)
     return NULL;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_IsDeviceSupported(Uint16 vendor_id, Uint16 product_id, Uint16 version)
 {
     int i;
@@ -639,12 +639,12 @@ SDL_HIDAPIDriverHintChanged(void *userdata, const char *name, const char *oldVal
 {
     int i;
     SDL_HIDAPI_Device *device = SDL_HIDAPI_devices;
-    SDL_bool enabled = (!hint || !*hint || ((*hint != '0') && (SDL_strcasecmp(hint, "false") != 0)));
+    SDL_nez_b32_t enabled = (!hint || !*hint || ((*hint != '0') && (SDL_strcasecmp(hint, "false") != 0)));
 
     if (SDL_strcmp(name, SDL_HINT_JOYSTICK_HIDAPI) == 0) {
         for (i = 0; i < SDL_arraysize(SDL_HIDAPI_drivers); ++i) {
             SDL_HIDAPI_DeviceDriver *driver = SDL_HIDAPI_drivers[i];
-            driver->enabled = SDL_GetHintBoolean(driver->hint, enabled);
+            driver->enabled = SDL_GetHintnez_b32_tean(driver->hint, enabled);
         }
     } else {
         for (i = 0; i < SDL_arraysize(SDL_HIDAPI_drivers); ++i) {
@@ -829,7 +829,7 @@ HIDAPI_AddDevice(struct hid_device_info *info)
 
 
 static void
-HIDAPI_DelDevice(SDL_HIDAPI_Device *device, SDL_bool send_event)
+HIDAPI_DelDevice(SDL_HIDAPI_Device *device, SDL_nez_b32_t send_event)
 {
     SDL_HIDAPI_Device *curr, *last;
     for (curr = SDL_HIDAPI_devices, last = NULL; curr; last = curr, curr = curr->next) {
@@ -894,7 +894,7 @@ HIDAPI_UpdateDeviceList(void)
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 HIDAPI_IsDevicePresent(Uint16 vendor_id, Uint16 product_id, Uint16 version)
 {
     SDL_HIDAPI_Device *device;
@@ -999,7 +999,7 @@ HIDAPI_JoystickUpdate(SDL_Joystick * joystick)
 {
     struct joystick_hwdata *hwdata = joystick->hwdata;
     SDL_HIDAPI_DeviceDriver *driver = hwdata->driver;
-    SDL_bool succeeded;
+    SDL_nez_b32_t succeeded;
 
     SDL_LockMutex(hwdata->mutex);
     succeeded = driver->Update(joystick, hwdata->dev, hwdata->context);

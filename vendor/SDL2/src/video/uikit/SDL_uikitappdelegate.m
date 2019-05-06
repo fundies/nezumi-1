@@ -72,7 +72,7 @@ int main(int argc, char **argv)
 static void SDLCALL
 SDL_IdleTimerDisabledChanged(void *userdata, const char *name, const char *oldValue, const char *hint)
 {
-    BOOL disable = (hint && *hint != '0');
+    nez_b32_t disable = (hint && *hint != '0');
     [UIApplication sharedApplication].idleTimerDisabled = disable;
 }
 
@@ -140,7 +140,7 @@ SDL_LoadLaunchImageNamed(NSString *name, int screenh)
 
     NSString *screenname = nibNameOrNil;
     NSBundle *bundle = nibBundleOrNil;
-    BOOL atleastiOS8 = UIKit_IsSystemVersionAtLeast(8.0);
+    nez_b32_t atleastiOS8 = UIKit_IsSystemVersionAtLeast(8.0);
 
     /* Launch screens were added in iOS 8. Otherwise we use launch images. */
     if (screenname && atleastiOS8) {
@@ -281,7 +281,7 @@ SDL_LoadLaunchImageNamed(NSString *name, int screenh)
 }
 
 #if !TARGET_OS_TV
-- (BOOL)shouldAutorotate
+- (nez_b32_t)shouldAutorotate
 {
     /* If YES, the launch image will be incorrectly rotated in some cases. */
     return NO;
@@ -331,7 +331,7 @@ SDL_LoadLaunchImageNamed(NSString *name, int screenh)
     /* Do a nice animated fade-out (roughly matches the real launch behavior.) */
     [UIView animateWithDuration:0.2 animations:^{
         window.alpha = 0.0;
-    } completion:^(BOOL finished) {
+    } completion:^(nez_b32_t finished) {
         window.hidden = YES;
     }];
 }
@@ -358,7 +358,7 @@ SDL_LoadLaunchImageNamed(NSString *name, int screenh)
     /* exit(exit_status); */
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (nez_b32_t)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSBundle *bundle = [NSBundle mainBundle];
 
@@ -492,7 +492,7 @@ SDL_LoadLaunchImageNamed(NSString *name, int screenh)
 
 #if TARGET_OS_TV || (defined(__IPHONE_9_0) && __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_9_0)
 
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+- (nez_b32_t)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
     /* TODO: Handle options */
     [self sendDropFileForURL:url];
@@ -501,7 +501,7 @@ SDL_LoadLaunchImageNamed(NSString *name, int screenh)
 
 #else
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+- (nez_b32_t)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     [self sendDropFileForURL:url];
     return YES;

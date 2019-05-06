@@ -80,10 +80,10 @@ RunThread(void *data)
 }
 
 #if defined(__MACOSX__) || defined(__IPHONEOS__)
-static SDL_bool checked_setname = SDL_FALSE;
+static SDL_nez_b32_t checked_setname = SDL_FALSE;
 static int (*ppthread_setname_np)(const char*) = NULL;
 #elif defined(__LINUX__)
-static SDL_bool checked_setname = SDL_FALSE;
+static SDL_nez_b32_t checked_setname = SDL_FALSE;
 static int (*ppthread_setname_np)(pthread_t, const char*) = NULL;
 #endif
 int
@@ -207,7 +207,7 @@ rtkit_initialize()
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 rtkit_setpriority(pid_t thread, int nice_level)
 {
     Uint64 ui64 = (Uint64)thread;
@@ -230,7 +230,7 @@ rtkit_setpriority(pid_t thread, int nice_level)
 
 #else
 
-static SDL_bool
+static SDL_nez_b32_t
 rtkit_setpriority(pid_t thread, int nice_level)
 {
     return SDL_FALSE;

@@ -256,7 +256,7 @@ WIN_SetTextInputRect(_THIS, SDL_Rect *rect)
 #ifdef SDL_DISABLE_WINDOWS_IME
 
 
-SDL_bool
+SDL_nez_b32_t
 IME_HandleMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM *lParam, SDL_VideoData *videodata)
 {
     return SDL_FALSE;
@@ -331,7 +331,7 @@ static DWORD IME_GetId(SDL_VideoData *videodata, UINT uIndex);
 static void IME_SendEditingEvent(SDL_VideoData *videodata);
 static void IME_DestroyTextures(SDL_VideoData *videodata);
 
-static SDL_bool UILess_SetupSinks(SDL_VideoData *videodata);
+static SDL_nez_b32_t UILess_SetupSinks(SDL_VideoData *videodata);
 static void UILess_ReleaseSinks(SDL_VideoData *videodata);
 static void UILess_EnableUIUpdates(SDL_VideoData *videodata);
 static void UILess_DisableUIUpdates(SDL_VideoData *videodata);
@@ -355,9 +355,9 @@ IME_Init(SDL_VideoData *videodata, HWND hwnd)
         return;
     }
     videodata->ImmLockIMC = (LPINPUTCONTEXT2 (WINAPI *)(HIMC))SDL_LoadFunction(videodata->ime_himm32, "ImmLockIMC");
-    videodata->ImmUnlockIMC = (BOOL (WINAPI *)(HIMC))SDL_LoadFunction(videodata->ime_himm32, "ImmUnlockIMC");
+    videodata->ImmUnlockIMC = (nez_b32_t (WINAPI *)(HIMC))SDL_LoadFunction(videodata->ime_himm32, "ImmUnlockIMC");
     videodata->ImmLockIMCC = (LPVOID (WINAPI *)(HIMCC))SDL_LoadFunction(videodata->ime_himm32, "ImmLockIMCC");
-    videodata->ImmUnlockIMCC = (BOOL (WINAPI *)(HIMCC))SDL_LoadFunction(videodata->ime_himm32, "ImmUnlockIMCC");
+    videodata->ImmUnlockIMCC = (nez_b32_t (WINAPI *)(HIMCC))SDL_LoadFunction(videodata->ime_himm32, "ImmUnlockIMCC");
 
     IME_SetWindow(videodata, hwnd);
     videodata->ime_himc = ImmGetContext(hwnd);
@@ -444,7 +444,7 @@ IME_GetReadingString(SDL_VideoData *videodata, HWND hwnd)
     WCHAR *s = buffer;
     DWORD len = 0;
     INT err = 0;
-    BOOL vertical = FALSE;
+    nez_b32_t vertical = FALSE;
     UINT maxuilen = 0;
 
     if (videodata->ime_uiless)
@@ -654,9 +654,9 @@ IME_SetupAPI(SDL_VideoData *videodata)
     if (!hime)
         return;
 
-    videodata->GetReadingString = (UINT (WINAPI *)(HIMC, UINT, LPWSTR, PINT, BOOL*, PUINT))
+    videodata->GetReadingString = (UINT (WINAPI *)(HIMC, UINT, LPWSTR, PINT, nez_b32_t*, PUINT))
         SDL_LoadFunction(hime, "GetReadingString");
-    videodata->ShowReadingWindow = (BOOL (WINAPI *)(HIMC, BOOL))
+    videodata->ShowReadingWindow = (nez_b32_t (WINAPI *)(HIMC, nez_b32_t))
         SDL_LoadFunction(hime, "ShowReadingWindow");
 
     if (videodata->ShowReadingWindow) {
@@ -866,10 +866,10 @@ IME_HideCandidateList(SDL_VideoData *videodata)
     IME_SendEditingEvent(videodata);
 }
 
-SDL_bool
+SDL_nez_b32_t
 IME_HandleMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM *lParam, SDL_VideoData *videodata)
 {
-    SDL_bool trap = SDL_FALSE;
+    SDL_nez_b32_t trap = SDL_FALSE;
     HIMC himc = 0;
     if (!videodata->ime_initialized || !videodata->ime_available || !videodata->ime_enabled)
         return SDL_FALSE;
@@ -1072,7 +1072,7 @@ ITfUIElement *UILess_GetUIElement(SDL_VideoData *videodata, DWORD dwUIElementId)
     return pelem;
 }
 
-STDMETHODIMP UIElementSink_BeginUIElement(TSFSink *sink, DWORD dwUIElementId, BOOL *pbShow)
+STDMETHODIMP UIElementSink_BeginUIElement(TSFSink *sink, DWORD dwUIElementId, nez_b32_t *pbShow)
 {
     ITfUIElement *element = UILess_GetUIElement((SDL_VideoData *)sink->data, dwUIElementId);
     ITfReadingInformationUIElement *preading = 0;
@@ -1220,11 +1220,11 @@ UILess_DisableUIUpdates(SDL_VideoData *videodata)
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 UILess_SetupSinks(SDL_VideoData *videodata)
 {
     TfClientId clientid = 0;
-    SDL_bool result = SDL_FALSE;
+    SDL_nez_b32_t result = SDL_FALSE;
     ITfSource *source = 0;
     if (FAILED(CoCreateInstance(&CLSID_TF_ThreadMgr, NULL, CLSCTX_INPROC_SERVER, &IID_ITfThreadMgrEx, (LPVOID *)&videodata->ime_threadmgrex)))
         return SDL_FALSE;
@@ -1337,7 +1337,7 @@ static void
 IME_PositionCandidateList(SDL_VideoData *videodata, SIZE size)
 {
     int left, top, right, bottom;
-    SDL_bool ok = SDL_FALSE;
+    SDL_nez_b32_t ok = SDL_FALSE;
     int winw = videodata->ime_winwidth;
     int winh = videodata->ime_winheight;
 
@@ -1410,7 +1410,7 @@ IME_RenderCandidateList(SDL_VideoData *videodata, HDC hdc)
     SIZE maxcandsize = {0};
     HBITMAP hbm = NULL;
     const int candcount = SDL_min(SDL_min(MAX_CANDLIST, videodata->ime_candcount), videodata->ime_candpgsize);
-    SDL_bool vertical = videodata->ime_candvertical;
+    SDL_nez_b32_t vertical = videodata->ime_candvertical;
 
     const int listborder = 1;
     const int listpadding = 0;

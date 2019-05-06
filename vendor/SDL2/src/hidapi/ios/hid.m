@@ -96,7 +96,7 @@ static void RingBuffer_init( RingBuffer *this )
     pthread_mutex_init( &this->accessLock, 0 );
 }
 	
-static bool RingBuffer_write( RingBuffer *this, const uint8_t *src )
+static nez_b32_t RingBuffer_write( RingBuffer *this, const uint8_t *src )
 {
     pthread_mutex_lock( &this->accessLock );
     memcpy( &this->_data[ this->_last ], src, RingBuffer_cbElem );
@@ -115,7 +115,7 @@ static bool RingBuffer_write( RingBuffer *this, const uint8_t *src )
     return true;
 }
 
-static bool RingBuffer_read( RingBuffer *this, uint8_t *dst )
+static nez_b32_t RingBuffer_read( RingBuffer *this, uint8_t *dst )
 {
     pthread_mutex_lock( &this->accessLock );
     if ( this->_first == -1 )
@@ -152,8 +152,8 @@ typedef enum
 	BLEDeviceWaitState	_waitStateForWriteFeatureReport;
 }
 
-@property (nonatomic, readwrite) bool connected;
-@property (nonatomic, readwrite) bool ready;
+@property (nonatomic, readwrite) nez_b32_t connected;
+@property (nonatomic, readwrite) nez_b32_t ready;
 
 @property (nonatomic, strong) CBPeripheral     *bleSteamController;
 @property (nonatomic, strong) CBCharacteristic *bleCharacteristicInput;
@@ -175,7 +175,7 @@ typedef enum
 + (instancetype)sharedInstance;
 - (void)startScan:(int)duration;
 - (void)stopScan;
-- (int)updateConnectedSteamControllers:(BOOL) bForce;
+- (int)updateConnectedSteamControllers:(nez_b32_t) bForce;
 - (void)appWillResignActiveNotification:(NSNotification *)note;
 - (void)appDidBecomeActiveNotification:(NSNotification *)note;
 
@@ -245,7 +245,7 @@ typedef enum
 	[self startScan:20];
 }
 
-- (int)updateConnectedSteamControllers:(BOOL) bForce
+- (int)updateConnectedSteamControllers:(nez_b32_t) bForce
 {
 	static uint64_t s_unLastUpdateTick = 0;
 	static mach_timebase_info_data_t s_timebase_info;
@@ -462,7 +462,7 @@ static void process_pending_events()
 	return self;
 }
 
-- (void)setConnected:(bool)connected
+- (void)setConnected:(nez_b32_t)connected
 {
 	_connected = connected;
 	if ( _connected )
@@ -708,7 +708,7 @@ int HID_API_EXPORT HID_API_CALL hid_exit(void)
 	return 0;
 }
 
-void HID_API_EXPORT HID_API_CALL hid_ble_scan( bool bStart )
+void HID_API_EXPORT HID_API_CALL hid_ble_scan( nez_b32_t bStart )
 {
 	HIDBLEManager *bleManager = HIDBLEManager.sharedInstance;
 	if ( bStart )

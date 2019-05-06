@@ -53,14 +53,14 @@ typedef void (*addDevFn)(const char *name, const int iscapture, AudioDeviceID de
 typedef struct AudioDeviceList
 {
     AudioDeviceID devid;
-    SDL_bool alive;
+    SDL_nez_b32_t alive;
     struct AudioDeviceList *next;
 } AudioDeviceList;
 
 static AudioDeviceList *output_devs = NULL;
 static AudioDeviceList *capture_devs = NULL;
 
-static SDL_bool
+static SDL_nez_b32_t
 add_to_internal_dev_list(const int iscapture, AudioDeviceID devId)
 {
     AudioDeviceList *item = (AudioDeviceList *) SDL_malloc(sizeof (AudioDeviceList));
@@ -322,7 +322,7 @@ static void interruption_end(_THIS)
 
 @end
 
-static BOOL update_audio_session(_THIS, SDL_bool open)
+static nez_b32_t update_audio_session(_THIS, SDL_nez_b32_t open)
 {
     @autoreleasepool {
         AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -494,7 +494,7 @@ static OSStatus
 device_unplugged(AudioObjectID devid, UInt32 num_addr, const AudioObjectPropertyAddress *addrs, void *data)
 {
     SDL_AudioDevice *this = (SDL_AudioDevice *) data;
-    SDL_bool dead = SDL_FALSE;
+    SDL_nez_b32_t dead = SDL_FALSE;
     UInt32 isAlive = 1;
     UInt32 size = sizeof (isAlive);
     OSStatus error;
@@ -523,7 +523,7 @@ device_unplugged(AudioObjectID devid, UInt32 num_addr, const AudioObjectProperty
 static void
 COREAUDIO_CloseDevice(_THIS)
 {
-    const SDL_bool iscapture = this->iscapture;
+    const SDL_nez_b32_t iscapture = this->iscapture;
 
 /* !!! FIXME: what does iOS do when a bluetooth audio device vanishes? Headphones unplugged? */
 /* !!! FIXME: (we only do a "default" device on iOS right now...can we do more?) */

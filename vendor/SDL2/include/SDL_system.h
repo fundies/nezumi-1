@@ -71,7 +71,7 @@ extern DECLSPEC IDirect3DDevice9* SDLCALL SDL_RenderGetD3D9Device(SDL_Renderer *
    These can be passed to EnumAdapters and EnumOutputs respectively to get the objects
    required to create a DX10 or DX11 device and swap chain.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_DXGIGetOutputInfo( int displayIndex, int *adapterIndex, int *outputIndex );
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_DXGIGetOutputInfo( int displayIndex, int *adapterIndex, int *outputIndex );
 
 #endif /* __WIN32__ */
 
@@ -95,7 +95,7 @@ extern DECLSPEC int SDLCALL SDL_LinuxSetThreadPriority(Sint64 threadID, int prio
 extern DECLSPEC int SDLCALL SDL_iPhoneSetAnimationCallback(SDL_Window * window, int interval, void (*callback)(void*), void *callbackParam);
 
 #define SDL_iOSSetEventPump(enabled) SDL_iPhoneSetEventPump(enabled)
-extern DECLSPEC void SDLCALL SDL_iPhoneSetEventPump(SDL_bool enabled);
+extern DECLSPEC void SDLCALL SDL_iPhoneSetEventPump(SDL_nez_b32_t enabled);
 
 #endif /* __IPHONEOS__ */
 
@@ -123,17 +123,17 @@ extern DECLSPEC void * SDLCALL SDL_AndroidGetActivity(void);
 /**
    \brief Return true if the application is running on Android TV
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_IsAndroidTV(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_IsAndroidTV(void);
 
 /**
    \brief Return true if the application is running on a Chromebook
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_IsChromebook(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_IsChromebook(void);
 
 /**
   \brief Return true is the application is running on a Samsung DeX docking station
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_IsDeXMode(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_IsDeXMode(void);
 
 /**
  \brief Trigger the Android system back button behavior.
@@ -266,7 +266,7 @@ extern DECLSPEC SDL_WinRT_DeviceFamily SDLCALL SDL_WinRTGetDeviceFamily();
 /**
  \brief Return true if the current device is a tablet.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_IsTablet(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_IsTablet(void);
 
 /* Ends C function definitions when using C++ */
 #ifdef __cplusplus

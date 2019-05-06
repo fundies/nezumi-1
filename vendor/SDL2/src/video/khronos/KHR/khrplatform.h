@@ -68,14 +68,14 @@
  *    khronos_utime_nanoseconds_t unsigned time interval or absolute time in
  *                                         nanoseconds
  *    khronos_stime_nanoseconds_t signed time interval in nanoseconds
- *    khronos_boolean_enum_t      enumerated boolean type. This should
- *      only be used as a base type when a client API's boolean type is
+ *    khronos_nez_b32_tean_enum_t      enumerated nez_b32_tean type. This should
+ *      only be used as a base type when a client API's nez_b32_tean type is
  *      an enum. Client APIs which use an integer or other type for
- *      booleans cannot use this as the base type for their boolean.
+ *      nez_b32_teans cannot use this as the base type for their nez_b32_tean.
  *
  * Tokens defined in khrplatform.h:
  *
- *    KHRONOS_FALSE, KHRONOS_TRUE Enumerated boolean false/true values.
+ *    KHRONOS_FALSE, KHRONOS_TRUE Enumerated nez_b32_tean false/true values.
  *
  *    KHRONOS_SUPPORT_INT64 is 1 if 64 bit integers are supported; otherwise 0.
  *    KHRONOS_SUPPORT_FLOAT is 1 if floats are supported; otherwise 0.
@@ -270,7 +270,7 @@ typedef khronos_int64_t        khronos_stime_nanoseconds_t;
 #endif
 
 /*
- * Enumerated boolean type
+ * Enumerated nez_b32_tean type
  *
  * Values other than zero should be considered to be true.  Therefore
  * comparisons should not be made against KHRONOS_TRUE.
@@ -278,7 +278,7 @@ typedef khronos_int64_t        khronos_stime_nanoseconds_t;
 typedef enum {
     KHRONOS_FALSE = 0,
     KHRONOS_TRUE  = 1,
-    KHRONOS_BOOLEAN_ENUM_FORCE_SIZE = KHRONOS_MAX_ENUM
-} khronos_boolean_enum_t;
+    KHRONOS_nez_b32_tEAN_ENUM_FORCE_SIZE = KHRONOS_MAX_ENUM
+} khronos_nez_b32_tean_enum_t;
 
 #endif /* __khrplatform_h_ */

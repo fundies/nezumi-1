@@ -51,12 +51,12 @@ struct SDL_PrivateAudioData
     void *buffer;
     UInt32 bufferSize;
     AudioStreamBasicDescription strdesc;
-    SDL_bool refill;
+    SDL_nez_b32_t refill;
     SDL_AudioStream *capturestream;
 #if MACOSX_COREAUDIO
     AudioDeviceID deviceID;
 #else
-    SDL_bool interrupted;
+    SDL_nez_b32_t interrupted;
     CFTypeRef interruption_listener;
 #endif
 };

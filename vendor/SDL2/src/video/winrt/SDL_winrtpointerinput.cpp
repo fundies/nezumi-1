@@ -200,7 +200,7 @@ WINRT_GetSDLButtonForPointerPoint(Windows::UI::Input::PointerPoint ^pt)
 //    return "";
 //}
 
-static bool
+static nez_b32_t
 WINRT_IsTouchEvent(Windows::UI::Input::PointerPoint ^pointerPoint)
 {
 #if WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP

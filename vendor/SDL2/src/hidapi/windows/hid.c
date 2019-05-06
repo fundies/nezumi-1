@@ -124,18 +124,18 @@ extern "C" {
 	typedef void* PHIDP_PREPARSED_DATA;
 	#define HIDP_STATUS_SUCCESS 0x110000
 
-	typedef BOOLEAN (__stdcall *HidD_GetAttributes_)(HANDLE device, PHIDD_ATTRIBUTES attrib);
-	typedef BOOLEAN (__stdcall *HidD_GetSerialNumberString_)(HANDLE device, PVOID buffer, ULONG buffer_len);
-	typedef BOOLEAN (__stdcall *HidD_GetManufacturerString_)(HANDLE handle, PVOID buffer, ULONG buffer_len);
-	typedef BOOLEAN (__stdcall *HidD_GetProductString_)(HANDLE handle, PVOID buffer, ULONG buffer_len);
-	typedef BOOLEAN (__stdcall *HidD_SetFeature_)(HANDLE handle, PVOID data, ULONG length);
-	typedef BOOLEAN (__stdcall *HidD_GetFeature_)(HANDLE handle, PVOID data, ULONG length);
-	typedef BOOLEAN (__stdcall *HidD_GetIndexedString_)(HANDLE handle, ULONG string_index, PVOID buffer, ULONG buffer_len);
-	typedef BOOLEAN (__stdcall *HidD_GetPreparsedData_)(HANDLE handle, PHIDP_PREPARSED_DATA *preparsed_data);
-	typedef BOOLEAN (__stdcall *HidD_FreePreparsedData_)(PHIDP_PREPARSED_DATA preparsed_data);
+	typedef nez_b32_tEAN (__stdcall *HidD_GetAttributes_)(HANDLE device, PHIDD_ATTRIBUTES attrib);
+	typedef nez_b32_tEAN (__stdcall *HidD_GetSerialNumberString_)(HANDLE device, PVOID buffer, ULONG buffer_len);
+	typedef nez_b32_tEAN (__stdcall *HidD_GetManufacturerString_)(HANDLE handle, PVOID buffer, ULONG buffer_len);
+	typedef nez_b32_tEAN (__stdcall *HidD_GetProductString_)(HANDLE handle, PVOID buffer, ULONG buffer_len);
+	typedef nez_b32_tEAN (__stdcall *HidD_SetFeature_)(HANDLE handle, PVOID data, ULONG length);
+	typedef nez_b32_tEAN (__stdcall *HidD_GetFeature_)(HANDLE handle, PVOID data, ULONG length);
+	typedef nez_b32_tEAN (__stdcall *HidD_GetIndexedString_)(HANDLE handle, ULONG string_index, PVOID buffer, ULONG buffer_len);
+	typedef nez_b32_tEAN (__stdcall *HidD_GetPreparsedData_)(HANDLE handle, PHIDP_PREPARSED_DATA *preparsed_data);
+	typedef nez_b32_tEAN (__stdcall *HidD_FreePreparsedData_)(PHIDP_PREPARSED_DATA preparsed_data);
 	typedef NTSTATUS (__stdcall *HidP_GetCaps_)(PHIDP_PREPARSED_DATA preparsed_data, HIDP_CAPS *caps);
-	typedef BOOLEAN (__stdcall *HidD_SetNumInputBuffers_)(HANDLE handle, ULONG number_buffers);
-	typedef BOOLEAN(__stdcall *HidD_SetOutputReport_ )(HANDLE handle, PVOID buffer, ULONG buffer_len);
+	typedef nez_b32_tEAN (__stdcall *HidD_SetNumInputBuffers_)(HANDLE handle, ULONG number_buffers);
+	typedef nez_b32_tEAN(__stdcall *HidD_SetOutputReport_ )(HANDLE handle, PVOID buffer, ULONG buffer_len);
 	static HidD_GetAttributes_ HidD_GetAttributes;
 	static HidD_GetSerialNumberString_ HidD_GetSerialNumberString;
 	static HidD_GetManufacturerString_ HidD_GetManufacturerString;
@@ -150,17 +150,17 @@ extern "C" {
 	static HidD_SetOutputReport_ HidD_SetOutputReport;
 
 	static HMODULE lib_handle = NULL;
-	static BOOLEAN initialized = FALSE;
+	static nez_b32_tEAN initialized = FALSE;
 #endif /* HIDAPI_USE_DDK */
 
 struct hid_device_ {
 		HANDLE device_handle;
-		BOOL blocking;
+		nez_b32_t blocking;
 		USHORT output_report_length;
 		size_t input_report_length;
 		void *last_error_str;
 		DWORD last_error_num;
-		BOOL read_pending;
+		nez_b32_t read_pending;
 		char *read_buf;
 		OVERLAPPED ol;
 };
@@ -250,7 +250,7 @@ static int lookup_functions()
 }
 #endif
 
-static HANDLE open_device(const char *path, BOOL enumerate, BOOL bExclusive )
+static HANDLE open_device(const char *path, nez_b32_t enumerate, nez_b32_t bExclusive )
 {
 	HANDLE handle;
 	// Opening with access 0 causes keyboards to stop responding in some system configurations
@@ -298,7 +298,7 @@ int HID_API_EXPORT hid_exit(void)
 
 struct hid_device_info HID_API_EXPORT * HID_API_CALL hid_enumerate(unsigned short vendor_id, unsigned short product_id)
 {
-	BOOL res;
+	nez_b32_t res;
 	struct hid_device_info *root = NULL; /* return object */
 	struct hid_device_info *cur_dev = NULL;
 
@@ -424,7 +424,7 @@ struct hid_device_info HID_API_EXPORT * HID_API_CALL hid_enumerate(unsigned shor
 			struct hid_device_info *tmp;
 			PHIDP_PREPARSED_DATA pp_data = NULL;
 			HIDP_CAPS caps;
-			BOOLEAN hidp_res;
+			nez_b32_tEAN hidp_res;
 			NTSTATUS nt_res;
 			wchar_t wstr[WSTR_LEN]; /* TODO: Determine Size */
 			size_t len;
@@ -585,7 +585,7 @@ HID_API_EXPORT hid_device * HID_API_CALL hid_open_path(const char *path, int bEx
 	hid_device *dev;
 	HIDP_CAPS caps;
 	PHIDP_PREPARSED_DATA pp_data = NULL;
-	BOOLEAN res;
+	nez_b32_tEAN res;
 	NTSTATUS nt_res;
 
 	if (hid_init() < 0) {
@@ -639,7 +639,7 @@ err:
 
 int HID_API_EXPORT HID_API_CALL hid_write_output_report(hid_device *dev, const unsigned char *data, size_t length)
 {
-	BOOL res;
+	nez_b32_t res;
 	res = HidD_SetOutputReport(dev->device_handle, (void *)data, (ULONG)length);
 	if (res)
 		return (int)length;
@@ -650,7 +650,7 @@ int HID_API_EXPORT HID_API_CALL hid_write_output_report(hid_device *dev, const u
 int HID_API_EXPORT HID_API_CALL hid_write(hid_device *dev, const unsigned char *data, size_t length)
 {
 	DWORD bytes_written;
-	BOOL res;
+	nez_b32_t res;
 	size_t stashed_length = length;
 	OVERLAPPED ol;
 	unsigned char *buf;
@@ -711,7 +711,7 @@ int HID_API_EXPORT HID_API_CALL hid_read_timeout(hid_device *dev, unsigned char 
 {
 	DWORD bytes_read = 0;
 	size_t copy_len = 0;
-	BOOL res;
+	nez_b32_t res;
 
 	/* Copy the handle for convenience. */
 	HANDLE ev = dev->ol.hEvent;
@@ -791,7 +791,7 @@ int HID_API_EXPORT HID_API_CALL hid_set_nonblocking(hid_device *dev, int nonbloc
 
 int HID_API_EXPORT HID_API_CALL hid_send_feature_report(hid_device *dev, const unsigned char *data, size_t length)
 {
-	BOOL res = HidD_SetFeature(dev->device_handle, (PVOID)data, (ULONG)length);
+	nez_b32_t res = HidD_SetFeature(dev->device_handle, (PVOID)data, (ULONG)length);
 	if (!res) {
 		register_error(dev, "HidD_SetFeature");
 		return -1;
@@ -803,7 +803,7 @@ int HID_API_EXPORT HID_API_CALL hid_send_feature_report(hid_device *dev, const u
 
 int HID_API_EXPORT HID_API_CALL hid_get_feature_report(hid_device *dev, unsigned char *data, size_t length)
 {
-	BOOL res;
+	nez_b32_t res;
 #if 0
 	res = HidD_GetFeature(dev->device_handle, (PVOID)data, (ULONG)length);
 	if (!res) {
@@ -860,7 +860,7 @@ void HID_API_EXPORT HID_API_CALL hid_close(hid_device *dev)
 
 int HID_API_EXPORT_CALL HID_API_CALL hid_get_manufacturer_string(hid_device *dev, wchar_t *string, size_t maxlen)
 {
-	BOOL res;
+	nez_b32_t res;
 
 	res = HidD_GetManufacturerString(dev->device_handle, string, (ULONG)(sizeof(wchar_t) * MIN(maxlen, MAX_STRING_WCHARS)));
 	if (!res) {
@@ -873,7 +873,7 @@ int HID_API_EXPORT_CALL HID_API_CALL hid_get_manufacturer_string(hid_device *dev
 
 int HID_API_EXPORT_CALL HID_API_CALL hid_get_product_string(hid_device *dev, wchar_t *string, size_t maxlen)
 {
-	BOOL res;
+	nez_b32_t res;
 
 	res = HidD_GetProductString(dev->device_handle, string, (ULONG)(sizeof(wchar_t) * MIN(maxlen, MAX_STRING_WCHARS)));
 	if (!res) {
@@ -886,7 +886,7 @@ int HID_API_EXPORT_CALL HID_API_CALL hid_get_product_string(hid_device *dev, wch
 
 int HID_API_EXPORT_CALL HID_API_CALL hid_get_serial_number_string(hid_device *dev, wchar_t *string, size_t maxlen)
 {
-	BOOL res;
+	nez_b32_t res;
 
 	res = HidD_GetSerialNumberString(dev->device_handle, string, (ULONG)(sizeof(wchar_t) * MIN(maxlen, MAX_STRING_WCHARS)));
 	if (!res) {
@@ -899,7 +899,7 @@ int HID_API_EXPORT_CALL HID_API_CALL hid_get_serial_number_string(hid_device *de
 
 int HID_API_EXPORT_CALL HID_API_CALL hid_get_indexed_string(hid_device *dev, int string_index, wchar_t *string, size_t maxlen)
 {
-	BOOL res;
+	nez_b32_t res;
 
 	res = HidD_GetIndexedString(dev->device_handle, string_index, string, (ULONG)(sizeof(wchar_t) * MIN(maxlen, MAX_STRING_WCHARS)));
 	if (!res) {

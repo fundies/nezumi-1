@@ -28,9 +28,9 @@
 
 /* Display a UIKit message box */
 
-static SDL_bool s_showingMessageBox = SDL_FALSE;
+static SDL_nez_b32_t s_showingMessageBox = SDL_FALSE;
 
-SDL_bool
+SDL_nez_b32_t
 UIKit_ShowingMessageBox(void)
 {
     return s_showingMessageBox;
@@ -52,7 +52,7 @@ UIKit_WaitUntilMessageBoxClosed(const SDL_MessageBoxData *messageboxdata, int *c
     }
 }
 
-static BOOL
+static nez_b32_t
 UIKit_ShowMessageBoxAlertController(const SDL_MessageBoxData *messageboxdata, int *buttonid)
 {
 #ifdef __IPHONE_8_0
@@ -150,7 +150,7 @@ UIKit_ShowMessageBoxAlertController(const SDL_MessageBoxData *messageboxdata, in
 @end
 #endif /* __IPHONE_OS_VERSION_MIN_REQUIRED < 80000 */
 
-static BOOL
+static nez_b32_t
 UIKit_ShowMessageBoxAlertView(const SDL_MessageBoxData *messageboxdata, int *buttonid)
 {
     /* UIAlertView is deprecated in iOS 8+ in favor of UIAlertController. */
@@ -187,7 +187,7 @@ UIKit_ShowMessageBoxAlertView(const SDL_MessageBoxData *messageboxdata, int *but
 int
 UIKit_ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid)
 {
-    BOOL success = NO;
+    nez_b32_t success = NO;
 
     @autoreleasepool {
         success = UIKit_ShowMessageBoxAlertController(messageboxdata, buttonid);

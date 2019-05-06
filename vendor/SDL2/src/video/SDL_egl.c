@@ -134,7 +134,7 @@ typedef enum {
     SDL_EGL_CLIENT_EXTENSION
 } SDL_EGL_ExtensionType;
 
-static SDL_bool SDL_EGL_HasExtension(_THIS, SDL_EGL_ExtensionType type, const char *ext)
+static SDL_nez_b32_t SDL_EGL_HasExtension(_THIS, SDL_EGL_ExtensionType type, const char *ext)
 {
     size_t ext_len;
     const char *ext_override;
@@ -264,7 +264,7 @@ SDL_EGL_LoadLibrary(_THIS, const char *egl_path, NativeDisplayType native_displa
     const char *d3dcompiler;
 #endif
 #if SDL_VIDEO_DRIVER_RPI
-    SDL_bool vc4 = (0 == access("/sys/module/vc4/", F_OK));
+    SDL_nez_b32_t vc4 = (0 == access("/sys/module/vc4/", F_OK));
 #endif
 
     if (_this->egl_data) {
@@ -650,7 +650,7 @@ SDL_EGL_CreateContext(_THIS, EGLSurface egl_surface)
     EGLint profile_mask = _this->gl_config.profile_mask;
     EGLint major_version = _this->gl_config.major_version;
     EGLint minor_version = _this->gl_config.minor_version;
-    SDL_bool profile_es = (profile_mask == SDL_GL_CONTEXT_PROFILE_ES);
+    SDL_nez_b32_t profile_es = (profile_mask == SDL_GL_CONTEXT_PROFILE_ES);
 
     if (!_this->egl_data) {
         /* The EGL library wasn't loaded, SDL_GetError() should have info */
@@ -800,7 +800,7 @@ SDL_EGL_MakeCurrent(_THIS, EGLSurface egl_surface, SDL_GLContext context)
 int
 SDL_EGL_SetSwapInterval(_THIS, int interval)
 {
-    EGLBoolean status;
+    EGLnez_b32_tean status;
     
     if (!_this->egl_data) {
         return SDL_SetError("EGL not initialized");

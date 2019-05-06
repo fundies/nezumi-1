@@ -309,7 +309,7 @@ typedef struct SDL_SysWMinfo SDL_SysWMinfo;
  *  if ( SDL_GetWindowWMInfo(window, &info) ) { ... }
  *  \endcode
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_GetWindowWMInfo(SDL_Window * window,
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_GetWindowWMInfo(SDL_Window * window,
                                                      SDL_SysWMinfo * info);
 
 

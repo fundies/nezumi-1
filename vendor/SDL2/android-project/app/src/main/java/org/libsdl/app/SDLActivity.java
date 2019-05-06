@@ -37,7 +37,7 @@ import android.content.pm.ApplicationInfo;
 public class SDLActivity extends Activity implements View.OnSystemUiVisibilityChangeListener {
     private static final String TAG = "SDL";
 
-    public static boolean mIsResumedCalled, mIsSurfaceReady, mHasFocus;
+    public static nez_b32_tean mIsResumedCalled, mIsSurfaceReady, mHasFocus;
 
     // Cursor types
     private static final int SDL_SYSTEM_CURSOR_NONE = -1;
@@ -70,20 +70,20 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     public static NativeState mNextNativeState;
     public static NativeState mCurrentNativeState;
 
-    public static boolean mExitCalledFromJava;
+    public static nez_b32_tean mExitCalledFromJava;
 
     /** If shared libraries (e.g. SDL or the native application) could not be loaded. */
-    public static boolean mBrokenLibraries;
+    public static nez_b32_tean mBrokenLibraries;
 
     // If we want to separate mouse and touch events.
     //  This is only toggled in native code when a hint is set!
-    public static boolean mSeparateMouseAndTouch;
+    public static nez_b32_tean mSeparateMouseAndTouch;
 
     // Main components
     protected static SDLActivity mSingleton;
     protected static SDLSurface mSurface;
     protected static View mTextEdit;
-    protected static boolean mScreenKeyboardShown;
+    protected static nez_b32_tean mScreenKeyboardShown;
     protected static ViewGroup mLayout;
     protected static SDLClipboardHandler mClipboardHandler;
     protected static Hashtable<Integer, Object> mCursors;
@@ -344,7 +344,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
+    public void onWindowFocusChanged(nez_b32_tean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         Log.v(TAG, "onWindowFocusChanged(): " + hasFocus);
 
@@ -454,7 +454,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     }
 
     @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
+    public nez_b32_tean dispatchKeyEvent(KeyEvent event) {
 
         if (SDLActivity.mBrokenLibraries) {
            return false;
@@ -534,7 +534,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 
     protected static final int COMMAND_USER = 0x8000;
 
-    protected static boolean mFullscreenModeActive;
+    protected static nez_b32_tean mFullscreenModeActive;
 
     /**
      * This method is called by SDL if SDL did not handle a message itself.
@@ -544,7 +544,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
      * @param param the parameter of the message. May be null.
      * @return if the message was handled in overridden method.
      */
-    protected boolean onUnhandledMessage(int command, Object param) {
+    protected nez_b32_tean onUnhandledMessage(int command, Object param) {
         return false;
     }
 
@@ -639,17 +639,17 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     Handler commandHandler = new SDLCommandHandler();
 
     // Send a message from the SDLMain thread
-    boolean sendCommand(int command, Object data) {
+    nez_b32_tean sendCommand(int command, Object data) {
         Message msg = commandHandler.obtainMessage();
         msg.arg1 = command;
         msg.obj = data;
-        boolean result = commandHandler.sendMessage(msg);
+        nez_b32_tean result = commandHandler.sendMessage(msg);
 
         if ((Build.VERSION.SDK_INT >= 19) && (command == COMMAND_CHANGE_WINDOW_STYLE)) {
             // Ensure we don't return until the resize has actually happened,
             // or 500ms have passed.
 
-            boolean bShouldWait = false;
+            nez_b32_tean bShouldWait = false;
             
             if (data instanceof Integer) {
                 // Let's figure out if we're already laid out fullscreen or not.
@@ -657,7 +657,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
                 android.util.DisplayMetrics realMetrics = new android.util.DisplayMetrics();
                 display.getRealMetrics( realMetrics );
         
-                boolean bFullscreenLayout = ((realMetrics.widthPixels == mSurface.getWidth()) && 
+                nez_b32_tean bFullscreenLayout = ((realMetrics.widthPixels == mSurface.getWidth()) && 
                                              (realMetrics.heightPixels == mSurface.getHeight()));
 
                 if (((Integer)data).intValue() == 1) {
@@ -712,7 +712,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     public static native void onNativeKeyDown(int keycode);
     public static native void onNativeKeyUp(int keycode);
     public static native void onNativeKeyboardFocusLost();
-    public static native void onNativeMouse(int button, int action, float x, float y, boolean relative);
+    public static native void onNativeMouse(int button, int action, float x, float y, nez_b32_tean relative);
     public static native void onNativeTouch(int touchDevId, int pointerFingerId,
                                             int action, float x,
                                             float y, float p);
@@ -727,7 +727,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean setActivityTitle(String title) {
+    public static nez_b32_tean setActivityTitle(String title) {
         // Called from SDLMain() thread and can't directly affect the view
         return mSingleton.sendCommand(COMMAND_CHANGE_TITLE, title);
     }
@@ -735,7 +735,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static void setWindowStyle(boolean fullscreen) {
+    public static void setWindowStyle(nez_b32_tean fullscreen) {
         // Called from SDLMain() thread and can't directly affect the view
         mSingleton.sendCommand(COMMAND_CHANGE_WINDOW_STYLE, fullscreen ? 1 : 0);
     }
@@ -745,7 +745,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
      * This is a static method for JNI convenience, it calls a non-static method
      * so that is can be overridden  
      */
-    public static void setOrientation(int w, int h, boolean resizable, String hint)
+    public static void setOrientation(int w, int h, nez_b32_tean resizable, String hint)
     {
         if (mSingleton != null) {
             mSingleton.setOrientationBis(w, h, resizable, hint);
@@ -755,7 +755,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This can be overridden
      */
-    public void setOrientationBis(int w, int h, boolean resizable, String hint) 
+    public void setOrientationBis(int w, int h, nez_b32_tean resizable, String hint) 
     {
         int orientation = -1;
 
@@ -795,7 +795,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean isScreenKeyboardShown() 
+    public static nez_b32_tean isScreenKeyboardShown() 
     {
         if (mTextEdit == null) {
             return false;
@@ -813,7 +813,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean supportsRelativeMouse()
+    public static nez_b32_tean supportsRelativeMouse()
     {
         // ChromeOS doesn't provide relative mouse motion via the Android 7 APIs
         if (isChromebook()) {
@@ -837,7 +837,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean setRelativeMouseEnabled(boolean enabled)
+    public static nez_b32_tean setRelativeMouseEnabled(nez_b32_tean enabled)
     {
         if (enabled && !supportsRelativeMouse()) {
             return false;
@@ -849,7 +849,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean sendMessage(int command, int param) {
+    public static nez_b32_tean sendMessage(int command, int param) {
         if (mSingleton == null) {
             return false;
         }
@@ -866,7 +866,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean isAndroidTV() {
+    public static nez_b32_tean isAndroidTV() {
         UiModeManager uiModeManager = (UiModeManager) getContext().getSystemService(UI_MODE_SERVICE);
         if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
             return true;
@@ -883,7 +883,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean isTablet() {
+    public static nez_b32_tean isTablet() {
         DisplayMetrics metrics = new DisplayMetrics();
         Activity activity = (Activity)getContext();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -900,14 +900,14 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean isChromebook() {
+    public static nez_b32_tean isChromebook() {
         return getContext().getPackageManager().hasSystemFeature("org.chromium.arc.device_management");
     }    
 
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean isDeXMode() {
+    public static nez_b32_tean isDeXMode() {
         if (Build.VERSION.SDK_INT < 24) {
             return false;
         }
@@ -931,7 +931,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean getManifestEnvironmentVariables() {
+    public static nez_b32_tean getManifestEnvironmentVariables() {
         try {
             ApplicationInfo applicationInfo = getContext().getPackageManager().getApplicationInfo(getContext().getPackageName(), PackageManager.GET_META_DATA);
             Bundle bundle = applicationInfo.metaData;
@@ -1005,12 +1005,12 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean showTextInput(int x, int y, int w, int h) {
+    public static nez_b32_tean showTextInput(int x, int y, int w, int h) {
         // Transfer the task to the main thread as a Runnable
         return mSingleton.commandHandler.post(new ShowTextInputTask(x, y, w, h));
     }
 
-    public static boolean isTextInputEvent(KeyEvent event) {
+    public static nez_b32_tean isTextInputEvent(KeyEvent event) {
       
         // Key pressed with Ctrl should be sent as SDL_KEYDOWN/SDL_KEYUP and not SDL_TEXTINPUT
         if (Build.VERSION.SDK_INT >= 11) {
@@ -1311,7 +1311,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
         dialog.setContentView(content);
         dialog.setOnKeyListener(new Dialog.OnKeyListener() {
             @Override
-            public boolean onKey(DialogInterface d, int keyCode, KeyEvent event) {
+            public nez_b32_tean onKey(DialogInterface d, int keyCode, KeyEvent event) {
                 Button button = mapping.get(keyCode);
                 if (button != null) {
                     if (event.getAction() == KeyEvent.ACTION_UP) {
@@ -1355,7 +1355,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean clipboardHasText() {
+    public static nez_b32_tean clipboardHasText() {
         return mClipboardHandler.clipboardHasText();
     }
 
@@ -1394,7 +1394,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean setCustomCursor(int cursorID) {
+    public static nez_b32_tean setCustomCursor(int cursorID) {
         // This requires API 24, so use reflection to implement this
         try {
             Class PointerIconClass = Class.forName("android.view.PointerIcon");
@@ -1409,7 +1409,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean setSystemCursor(int cursorID) {
+    public static nez_b32_tean setSystemCursor(int cursorID) {
         int cursor_type = 0; //PointerIcon.TYPE_NULL;
         switch (cursorID) {
         case SDL_SYSTEM_CURSOR_ARROW:
@@ -1642,7 +1642,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         Log.v("SDL", "Device size: " + nDeviceWidth + "x" + nDeviceHeight);
         SDLActivity.onNativeResize(width, height, nDeviceWidth, nDeviceHeight, sdlFormat, mDisplay.getRefreshRate());
 
-        boolean skip = false;
+        nez_b32_tean skip = false;
         int requestedOrientation = SDLActivity.mSingleton.getRequestedOrientation();
 
         if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
@@ -1688,7 +1688,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
 
     // Key events
     @Override
-    public boolean onKey(View  v, int keyCode, KeyEvent event) {
+    public nez_b32_tean onKey(View  v, int keyCode, KeyEvent event) {
         // Dispatch the different events depending on where they come from
         // Some SOURCE_JOYSTICK, SOURCE_DPAD or SOURCE_GAMEPAD are also SOURCE_KEYBOARD
         // So, we try to process them as JOYSTICK/DPAD/GAMEPAD events first, if that fails we try them as KEYBOARD
@@ -1744,7 +1744,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
 
     // Touch events
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
+    public nez_b32_tean onTouch(View v, MotionEvent event) {
         /* Ref: http://developer.android.com/training/gestures/multi.html */
         final int touchDevId = event.getDeviceId();
         final int pointerCount = event.getPointerCount();
@@ -1838,7 +1838,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
    }
 
     // Sensor events
-    public void enableSensor(int sensortype, boolean enabled) {
+    public void enableSensor(int sensortype, nez_b32_tean enabled) {
         // TODO: This uses getDefaultSensor - what if we have >1 accels?
         if (enabled) {
             mSensorManager.registerListener(this,
@@ -1901,7 +1901,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     }
 
     // Captured pointer events for API 26.
-    public boolean onCapturedPointerEvent(MotionEvent event)
+    public nez_b32_tean onCapturedPointerEvent(MotionEvent event)
     {
         int action = event.getActionMasked();
 
@@ -1958,12 +1958,12 @@ class DummyEdit extends View implements View.OnKeyListener {
     }
 
     @Override
-    public boolean onCheckIsTextEditor() {
+    public nez_b32_tean onCheckIsTextEditor() {
         return true;
     }
 
     @Override
-    public boolean onKey(View v, int keyCode, KeyEvent event) {
+    public nez_b32_tean onKey(View v, int keyCode, KeyEvent event) {
         /* 
          * This handles the hardware keyboard input
          */
@@ -1983,7 +1983,7 @@ class DummyEdit extends View implements View.OnKeyListener {
 
     //
     @Override
-    public boolean onKeyPreIme (int keyCode, KeyEvent event) {
+    public nez_b32_tean onKeyPreIme (int keyCode, KeyEvent event) {
         // As seen on StackOverflow: http://stackoverflow.com/questions/7634346/keyboard-hide-event
         // FIXME: Discussion at http://bugzilla.libsdl.org/show_bug.cgi?id=1639
         // FIXME: This is not a 100% effective solution to the problem of detecting if the keyboard is showing or not
@@ -2012,13 +2012,13 @@ class DummyEdit extends View implements View.OnKeyListener {
 
 class SDLInputConnection extends BaseInputConnection {
 
-    public SDLInputConnection(View targetView, boolean fullEditor) {
+    public SDLInputConnection(View targetView, nez_b32_tean fullEditor) {
         super(targetView, fullEditor);
 
     }
 
     @Override
-    public boolean sendKeyEvent(KeyEvent event) {
+    public nez_b32_tean sendKeyEvent(KeyEvent event) {
         /*
          * This used to handle the keycodes from soft keyboard (and IME-translated input from hardkeyboard)
          * However, as of Ice Cream Sandwich and later, almost all soft keyboard doesn't generate key presses
@@ -2048,7 +2048,7 @@ class SDLInputConnection extends BaseInputConnection {
     }
 
     @Override
-    public boolean commitText(CharSequence text, int newCursorPosition) {
+    public nez_b32_tean commitText(CharSequence text, int newCursorPosition) {
 
         for (int i = 0; i < text.length(); i++) {
             char c = text.charAt(i);
@@ -2061,7 +2061,7 @@ class SDLInputConnection extends BaseInputConnection {
     }
 
     @Override
-    public boolean setComposingText(CharSequence text, int newCursorPosition) {
+    public nez_b32_tean setComposingText(CharSequence text, int newCursorPosition) {
 
         nativeSetComposingText(text.toString(), newCursorPosition);
 
@@ -2075,14 +2075,14 @@ class SDLInputConnection extends BaseInputConnection {
     public native void nativeSetComposingText(String text, int newCursorPosition);
 
     @Override
-    public boolean deleteSurroundingText(int beforeLength, int afterLength) {
+    public nez_b32_tean deleteSurroundingText(int beforeLength, int afterLength) {
         // Workaround to capture backspace key. Ref: http://stackoverflow.com/questions/14560344/android-backspace-in-webview-baseinputconnection
         // and https://bugzilla.libsdl.org/show_bug.cgi?id=2265
         if (beforeLength > 0 && afterLength == 0) {
-            boolean ret = true;
+            nez_b32_tean ret = true;
             // backspace(s)
             while (beforeLength-- > 0) {
-               boolean ret_key = sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL))
+               nez_b32_tean ret_key = sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL))
                               && sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_DEL));
                ret = ret && ret_key; 
             }
@@ -2095,7 +2095,7 @@ class SDLInputConnection extends BaseInputConnection {
 
 interface SDLClipboardHandler {
 
-    public boolean clipboardHasText();
+    public nez_b32_tean clipboardHasText();
     public String clipboardGetText();
     public void clipboardSetText(String string);
 
@@ -2114,7 +2114,7 @@ class SDLClipboardHandler_API11 implements
     }
 
     @Override
-    public boolean clipboardHasText() {
+    public nez_b32_tean clipboardHasText() {
        return mClipMgr.hasText();
     }
 
@@ -2152,7 +2152,7 @@ class SDLClipboardHandler_Old implements
     }
 
     @Override
-    public boolean clipboardHasText() {
+    public nez_b32_tean clipboardHasText() {
        return mClipMgrOld.hasText();
     }
 

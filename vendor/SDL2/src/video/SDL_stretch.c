@@ -213,7 +213,7 @@ SDL_SoftStretch(SDL_Surface * src, const SDL_Rect * srcrect,
     SDL_Rect full_src;
     SDL_Rect full_dst;
 #ifdef USE_ASM_STRETCH
-    SDL_bool use_asm = SDL_TRUE;
+    SDL_nez_b32_t use_asm = SDL_TRUE;
 #ifdef __GNUC__
     int u1, u2;
 #endif

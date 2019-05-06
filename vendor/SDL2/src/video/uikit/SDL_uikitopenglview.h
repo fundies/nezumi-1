@@ -30,14 +30,14 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
                         scale:(CGFloat)scale
-                retainBacking:(BOOL)retained
+                retainBacking:(nez_b32_t)retained
                         rBits:(int)rBits
                         gBits:(int)gBits
                         bBits:(int)bBits
                         aBits:(int)aBits
                     depthBits:(int)depthBits
                   stencilBits:(int)stencilBits
-                         sRGB:(BOOL)sRGB
+                         sRGB:(nez_b32_t)sRGB
                  multisamples:(int)multisamples
                       context:(EAGLContext *)glcontext;
 

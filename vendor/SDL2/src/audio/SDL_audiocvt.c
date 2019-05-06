@@ -821,7 +821,7 @@ SDL_BuildAudioResampleCVT(SDL_AudioCVT * cvt, const int dst_channels,
     return 1;               /* added a converter. */
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 SDL_SupportedAudioFormat(const SDL_AudioFormat fmt)
 {
     switch (fmt) {
@@ -844,7 +844,7 @@ SDL_SupportedAudioFormat(const SDL_AudioFormat fmt)
     return SDL_FALSE;  /* unsupported. */
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 SDL_SupportedChannelCount(const int channels)
 {
     switch (channels) {
@@ -1085,7 +1085,7 @@ struct _SDL_AudioStream
     SDL_AudioCVT cvt_before_resampling;
     SDL_AudioCVT cvt_after_resampling;
     SDL_DataQueue *queue;
-    SDL_bool first_run;
+    SDL_nez_b32_t first_run;
     Uint8 *staging_buffer;
     int staging_buffer_size;
     int staging_buffer_filled;
@@ -1188,7 +1188,7 @@ SDL_CleanupAudioStreamResampler_SRC(SDL_AudioStream *stream)
     stream->cleanup_resampler_func = NULL;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 SetupLibSampleRateResampling(SDL_AudioStream *stream)
 {
     int result = 0;
@@ -1575,7 +1575,7 @@ int SDL_AudioStreamFlush(SDL_AudioStream *stream)
         /* push the staging buffer + silence. We need to flush out not just
            the staging buffer, but the piece that the stream was saving off
            for right-side resampler padding. */
-        const SDL_bool first_run = stream->first_run;
+        const SDL_nez_b32_t first_run = stream->first_run;
         const int filled = stream->staging_buffer_filled;
         int actual_input_frames = filled / stream->src_sample_frame_size;
         if (!first_run)

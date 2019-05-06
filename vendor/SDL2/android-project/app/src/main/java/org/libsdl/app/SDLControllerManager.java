@@ -18,7 +18,7 @@ public class SDLControllerManager
 
     public static native int nativeAddJoystick(int device_id, String name, String desc,
                                                int vendor_id, int product_id,
-                                               boolean is_accelerometer, int button_mask,
+                                               nez_b32_tean is_accelerometer, int button_mask,
                                                int naxes, int nhats, int nballs);
     public static native int nativeRemoveJoystick(int device_id);
     public static native int nativeAddHaptic(int device_id, String name);
@@ -58,7 +58,7 @@ public class SDLControllerManager
     }
 
     // Joystick glue code, just a series of stubs that redirect to the SDLJoystickHandler instance
-    public static boolean handleJoystickMotionEvent(MotionEvent event) {
+    public static nez_b32_tean handleJoystickMotionEvent(MotionEvent event) {
         return mJoystickHandler.handleMotionEvent(event);
     }
 
@@ -92,7 +92,7 @@ public class SDLControllerManager
     }
 
     // Check if a given device is considered a possible SDL joystick
-    public static boolean isDeviceSDLJoystick(int deviceId) {
+    public static nez_b32_tean isDeviceSDLJoystick(int deviceId) {
         InputDevice device = InputDevice.getDevice(deviceId);
         // We cannot use InputDevice.isVirtual before API 16, so let's accept
         // only nonnegative device ids (VIRTUAL_KEYBOARD equals -1)
@@ -130,7 +130,7 @@ class SDLJoystickHandler {
      * @param event the event to be handled.
      * @return if given event was processed.
      */
-    public boolean handleMotionEvent(MotionEvent event) {
+    public nez_b32_tean handleMotionEvent(MotionEvent event) {
         return false;
     }
 
@@ -249,7 +249,7 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
     }
 
     @Override
-    public boolean handleMotionEvent(MotionEvent event) {
+    public nez_b32_tean handleMotionEvent(MotionEvent event) {
         if ((event.getSource() & InputDevice.SOURCE_JOYSTICK) != 0) {
             int actionPointerIndex = event.getActionIndex();
             int action = event.getActionMasked();
@@ -401,7 +401,7 @@ class SDLJoystickHandler_API19 extends SDLJoystickHandler_API16 {
             0xFFFFFFFF,  // 15 -> ??
             0xFFFFFFFF,  // 16 -> ??
         };
-        boolean[] has_keys = joystickDevice.hasKeys(keys);
+        nez_b32_tean[] has_keys = joystickDevice.hasKeys(keys);
         for (int i = 0; i < keys.length; ++i) {
             if (has_keys[i]) {
                 button_mask |= masks[i];
@@ -474,7 +474,7 @@ class SDLHapticHandler {
     public void pollHapticDevices() {
 
         final int deviceId_VIBRATOR_SERVICE = 999999;
-        boolean hasVibratorService = false;
+        nez_b32_tean hasVibratorService = false;
 
         int[] deviceIds = InputDevice.getDeviceIds();
         // It helps processing the device ids in reverse order
@@ -564,7 +564,7 @@ class SDLHapticHandler {
 class SDLGenericMotionListener_API12 implements View.OnGenericMotionListener {
     // Generic Motion (mouse hover, joystick...) events go here
     @Override
-    public boolean onGenericMotion(View v, MotionEvent event) {
+    public nez_b32_tean onGenericMotion(View v, MotionEvent event) {
         float x, y;
         int action;
 
@@ -606,15 +606,15 @@ class SDLGenericMotionListener_API12 implements View.OnGenericMotionListener {
         return false;
     }
 
-    public boolean supportsRelativeMouse() {
+    public nez_b32_tean supportsRelativeMouse() {
         return false;
     }
 
-    public boolean inRelativeMode() {
+    public nez_b32_tean inRelativeMode() {
         return false;
     }
 
-    public boolean setRelativeMouseEnabled(boolean enabled) {
+    public nez_b32_tean setRelativeMouseEnabled(nez_b32_tean enabled) {
         return false;
     }
 
@@ -636,10 +636,10 @@ class SDLGenericMotionListener_API12 implements View.OnGenericMotionListener {
 class SDLGenericMotionListener_API24 extends SDLGenericMotionListener_API12 {
     // Generic Motion (mouse hover, joystick...) events go here
 
-    private boolean mRelativeModeEnabled;
+    private nez_b32_tean mRelativeModeEnabled;
 
     @Override
-    public boolean onGenericMotion(View v, MotionEvent event) {
+    public nez_b32_tean onGenericMotion(View v, MotionEvent event) {
         float x, y;
         int action;
 
@@ -688,17 +688,17 @@ class SDLGenericMotionListener_API24 extends SDLGenericMotionListener_API12 {
     }
 
     @Override
-    public boolean supportsRelativeMouse() {
+    public nez_b32_tean supportsRelativeMouse() {
         return true;
     }
 
     @Override
-    public boolean inRelativeMode() {
+    public nez_b32_tean inRelativeMode() {
         return mRelativeModeEnabled;
     }
 
     @Override
-    public boolean setRelativeMouseEnabled(boolean enabled) {
+    public nez_b32_tean setRelativeMouseEnabled(nez_b32_tean enabled) {
         mRelativeModeEnabled = enabled;
         return true;
     }
@@ -727,10 +727,10 @@ class SDLGenericMotionListener_API24 extends SDLGenericMotionListener_API12 {
 
 class SDLGenericMotionListener_API26 extends SDLGenericMotionListener_API24 {
     // Generic Motion (mouse hover, joystick...) events go here
-    private boolean mRelativeModeEnabled;
+    private nez_b32_tean mRelativeModeEnabled;
 
     @Override
-    public boolean onGenericMotion(View v, MotionEvent event) {
+    public nez_b32_tean onGenericMotion(View v, MotionEvent event) {
         float x, y;
         int action;
 
@@ -797,17 +797,17 @@ class SDLGenericMotionListener_API26 extends SDLGenericMotionListener_API24 {
     }
 
     @Override
-    public boolean supportsRelativeMouse() {
+    public nez_b32_tean supportsRelativeMouse() {
         return (!SDLActivity.isDeXMode() || (Build.VERSION.SDK_INT >= 27));
     }
 
     @Override
-    public boolean inRelativeMode() {
+    public nez_b32_tean inRelativeMode() {
         return mRelativeModeEnabled;
     }
 
     @Override
-    public boolean setRelativeMouseEnabled(boolean enabled) {
+    public nez_b32_tean setRelativeMouseEnabled(nez_b32_tean enabled) {
         if (!SDLActivity.isDeXMode() || (Build.VERSION.SDK_INT >= 27)) {
             if (enabled) {
                 SDLActivity.getContentView().requestPointerCapture();

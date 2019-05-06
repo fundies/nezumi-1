@@ -76,7 +76,7 @@ typedef khronos_ssize_t GLsizeiptr;
 typedef khronos_intptr_t GLintptr;
 typedef unsigned int GLbitfield;
 typedef int GLint;
-typedef unsigned char GLboolean;
+typedef unsigned char GLnez_b32_tean;
 typedef int GLsizei;
 typedef khronos_uint8_t GLubyte;
 #define GL_DEPTH_BUFFER_BIT               0x00000100
@@ -317,10 +317,10 @@ typedef khronos_uint8_t GLubyte;
 #define GL_INT_VEC2                       0x8B53
 #define GL_INT_VEC3                       0x8B54
 #define GL_INT_VEC4                       0x8B55
-#define GL_BOOL                           0x8B56
-#define GL_BOOL_VEC2                      0x8B57
-#define GL_BOOL_VEC3                      0x8B58
-#define GL_BOOL_VEC4                      0x8B59
+#define GL_nez_b32_t                           0x8B56
+#define GL_nez_b32_t_VEC2                      0x8B57
+#define GL_nez_b32_t_VEC3                      0x8B58
+#define GL_nez_b32_t_VEC4                      0x8B59
 #define GL_FLOAT_MAT2                     0x8B5A
 #define GL_FLOAT_MAT3                     0x8B5B
 #define GL_FLOAT_MAT4                     0x8B5C
@@ -399,7 +399,7 @@ typedef void (GL_APIENTRYP PFNGLCLEARPROC) (GLbitfield mask);
 typedef void (GL_APIENTRYP PFNGLCLEARCOLORPROC) (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
 typedef void (GL_APIENTRYP PFNGLCLEARDEPTHFPROC) (GLfloat d);
 typedef void (GL_APIENTRYP PFNGLCLEARSTENCILPROC) (GLint s);
-typedef void (GL_APIENTRYP PFNGLCOLORMASKPROC) (GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
+typedef void (GL_APIENTRYP PFNGLCOLORMASKPROC) (GLnez_b32_tean red, GLnez_b32_tean green, GLnez_b32_tean blue, GLnez_b32_tean alpha);
 typedef void (GL_APIENTRYP PFNGLCOMPILESHADERPROC) (GLuint shader);
 typedef void (GL_APIENTRYP PFNGLCOMPRESSEDTEXIMAGE2DPROC) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data);
 typedef void (GL_APIENTRYP PFNGLCOMPRESSEDTEXSUBIMAGE2DPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data);
@@ -415,7 +415,7 @@ typedef void (GL_APIENTRYP PFNGLDELETERENDERBUFFERSPROC) (GLsizei n, const GLuin
 typedef void (GL_APIENTRYP PFNGLDELETESHADERPROC) (GLuint shader);
 typedef void (GL_APIENTRYP PFNGLDELETETEXTURESPROC) (GLsizei n, const GLuint *textures);
 typedef void (GL_APIENTRYP PFNGLDEPTHFUNCPROC) (GLenum func);
-typedef void (GL_APIENTRYP PFNGLDEPTHMASKPROC) (GLboolean flag);
+typedef void (GL_APIENTRYP PFNGLDEPTHMASKPROC) (GLnez_b32_tean flag);
 typedef void (GL_APIENTRYP PFNGLDEPTHRANGEFPROC) (GLfloat n, GLfloat f);
 typedef void (GL_APIENTRYP PFNGLDETACHSHADERPROC) (GLuint program, GLuint shader);
 typedef void (GL_APIENTRYP PFNGLDISABLEPROC) (GLenum cap);
@@ -438,7 +438,7 @@ typedef void (GL_APIENTRYP PFNGLGETACTIVEATTRIBPROC) (GLuint program, GLuint ind
 typedef void (GL_APIENTRYP PFNGLGETACTIVEUNIFORMPROC) (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name);
 typedef void (GL_APIENTRYP PFNGLGETATTACHEDSHADERSPROC) (GLuint program, GLsizei maxCount, GLsizei *count, GLuint *shaders);
 typedef GLint (GL_APIENTRYP PFNGLGETATTRIBLOCATIONPROC) (GLuint program, const GLchar *name);
-typedef void (GL_APIENTRYP PFNGLGETBOOLEANVPROC) (GLenum pname, GLboolean *data);
+typedef void (GL_APIENTRYP PFNGLGETnez_b32_tEANVPROC) (GLenum pname, GLnez_b32_tean *data);
 typedef void (GL_APIENTRYP PFNGLGETBUFFERPARAMETERIVPROC) (GLenum target, GLenum pname, GLint *params);
 typedef GLenum (GL_APIENTRYP PFNGLGETERRORPROC) (void);
 typedef void (GL_APIENTRYP PFNGLGETFLOATVPROC) (GLenum pname, GLfloat *data);
@@ -461,13 +461,13 @@ typedef void (GL_APIENTRYP PFNGLGETVERTEXATTRIBFVPROC) (GLuint index, GLenum pna
 typedef void (GL_APIENTRYP PFNGLGETVERTEXATTRIBIVPROC) (GLuint index, GLenum pname, GLint *params);
 typedef void (GL_APIENTRYP PFNGLGETVERTEXATTRIBPOINTERVPROC) (GLuint index, GLenum pname, void **pointer);
 typedef void (GL_APIENTRYP PFNGLHINTPROC) (GLenum target, GLenum mode);
-typedef GLboolean (GL_APIENTRYP PFNGLISBUFFERPROC) (GLuint buffer);
-typedef GLboolean (GL_APIENTRYP PFNGLISENABLEDPROC) (GLenum cap);
-typedef GLboolean (GL_APIENTRYP PFNGLISFRAMEBUFFERPROC) (GLuint framebuffer);
-typedef GLboolean (GL_APIENTRYP PFNGLISPROGRAMPROC) (GLuint program);
-typedef GLboolean (GL_APIENTRYP PFNGLISRENDERBUFFERPROC) (GLuint renderbuffer);
-typedef GLboolean (GL_APIENTRYP PFNGLISSHADERPROC) (GLuint shader);
-typedef GLboolean (GL_APIENTRYP PFNGLISTEXTUREPROC) (GLuint texture);
+typedef GLnez_b32_tean (GL_APIENTRYP PFNGLISBUFFERPROC) (GLuint buffer);
+typedef GLnez_b32_tean (GL_APIENTRYP PFNGLISENABLEDPROC) (GLenum cap);
+typedef GLnez_b32_tean (GL_APIENTRYP PFNGLISFRAMEBUFFERPROC) (GLuint framebuffer);
+typedef GLnez_b32_tean (GL_APIENTRYP PFNGLISPROGRAMPROC) (GLuint program);
+typedef GLnez_b32_tean (GL_APIENTRYP PFNGLISRENDERBUFFERPROC) (GLuint renderbuffer);
+typedef GLnez_b32_tean (GL_APIENTRYP PFNGLISSHADERPROC) (GLuint shader);
+typedef GLnez_b32_tean (GL_APIENTRYP PFNGLISTEXTUREPROC) (GLuint texture);
 typedef void (GL_APIENTRYP PFNGLLINEWIDTHPROC) (GLfloat width);
 typedef void (GL_APIENTRYP PFNGLLINKPROGRAMPROC) (GLuint program);
 typedef void (GL_APIENTRYP PFNGLPIXELSTOREIPROC) (GLenum pname, GLint param);
@@ -475,7 +475,7 @@ typedef void (GL_APIENTRYP PFNGLPOLYGONOFFSETPROC) (GLfloat factor, GLfloat unit
 typedef void (GL_APIENTRYP PFNGLREADPIXELSPROC) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void *pixels);
 typedef void (GL_APIENTRYP PFNGLRELEASESHADERCOMPILERPROC) (void);
 typedef void (GL_APIENTRYP PFNGLRENDERBUFFERSTORAGEPROC) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
-typedef void (GL_APIENTRYP PFNGLSAMPLECOVERAGEPROC) (GLfloat value, GLboolean invert);
+typedef void (GL_APIENTRYP PFNGLSAMPLECOVERAGEPROC) (GLfloat value, GLnez_b32_tean invert);
 typedef void (GL_APIENTRYP PFNGLSCISSORPROC) (GLint x, GLint y, GLsizei width, GLsizei height);
 typedef void (GL_APIENTRYP PFNGLSHADERBINARYPROC) (GLsizei count, const GLuint *shaders, GLenum binaryformat, const void *binary, GLsizei length);
 typedef void (GL_APIENTRYP PFNGLSHADERSOURCEPROC) (GLuint shader, GLsizei count, const GLchar *const*string, const GLint *length);
@@ -507,9 +507,9 @@ typedef void (GL_APIENTRYP PFNGLUNIFORM4FPROC) (GLint location, GLfloat v0, GLfl
 typedef void (GL_APIENTRYP PFNGLUNIFORM4FVPROC) (GLint location, GLsizei count, const GLfloat *value);
 typedef void (GL_APIENTRYP PFNGLUNIFORM4IPROC) (GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
 typedef void (GL_APIENTRYP PFNGLUNIFORM4IVPROC) (GLint location, GLsizei count, const GLint *value);
-typedef void (GL_APIENTRYP PFNGLUNIFORMMATRIX2FVPROC) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-typedef void (GL_APIENTRYP PFNGLUNIFORMMATRIX3FVPROC) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-typedef void (GL_APIENTRYP PFNGLUNIFORMMATRIX4FVPROC) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+typedef void (GL_APIENTRYP PFNGLUNIFORMMATRIX2FVPROC) (GLint location, GLsizei count, GLnez_b32_tean transpose, const GLfloat *value);
+typedef void (GL_APIENTRYP PFNGLUNIFORMMATRIX3FVPROC) (GLint location, GLsizei count, GLnez_b32_tean transpose, const GLfloat *value);
+typedef void (GL_APIENTRYP PFNGLUNIFORMMATRIX4FVPROC) (GLint location, GLsizei count, GLnez_b32_tean transpose, const GLfloat *value);
 typedef void (GL_APIENTRYP PFNGLUSEPROGRAMPROC) (GLuint program);
 typedef void (GL_APIENTRYP PFNGLVALIDATEPROGRAMPROC) (GLuint program);
 typedef void (GL_APIENTRYP PFNGLVERTEXATTRIB1FPROC) (GLuint index, GLfloat x);
@@ -520,7 +520,7 @@ typedef void (GL_APIENTRYP PFNGLVERTEXATTRIB3FPROC) (GLuint index, GLfloat x, GL
 typedef void (GL_APIENTRYP PFNGLVERTEXATTRIB3FVPROC) (GLuint index, const GLfloat *v);
 typedef void (GL_APIENTRYP PFNGLVERTEXATTRIB4FPROC) (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
 typedef void (GL_APIENTRYP PFNGLVERTEXATTRIB4FVPROC) (GLuint index, const GLfloat *v);
-typedef void (GL_APIENTRYP PFNGLVERTEXATTRIBPOINTERPROC) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer);
+typedef void (GL_APIENTRYP PFNGLVERTEXATTRIBPOINTERPROC) (GLuint index, GLint size, GLenum type, GLnez_b32_tean normalized, GLsizei stride, const void *pointer);
 typedef void (GL_APIENTRYP PFNGLVIEWPORTPROC) (GLint x, GLint y, GLsizei width, GLsizei height);
 #if GL_GLES_PROTOTYPES
 GL_APICALL void GL_APIENTRY glActiveTexture (GLenum texture);
@@ -542,7 +542,7 @@ GL_APICALL void GL_APIENTRY glClear (GLbitfield mask);
 GL_APICALL void GL_APIENTRY glClearColor (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
 GL_APICALL void GL_APIENTRY glClearDepthf (GLfloat d);
 GL_APICALL void GL_APIENTRY glClearStencil (GLint s);
-GL_APICALL void GL_APIENTRY glColorMask (GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
+GL_APICALL void GL_APIENTRY glColorMask (GLnez_b32_tean red, GLnez_b32_tean green, GLnez_b32_tean blue, GLnez_b32_tean alpha);
 GL_APICALL void GL_APIENTRY glCompileShader (GLuint shader);
 GL_APICALL void GL_APIENTRY glCompressedTexImage2D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data);
 GL_APICALL void GL_APIENTRY glCompressedTexSubImage2D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data);
@@ -558,7 +558,7 @@ GL_APICALL void GL_APIENTRY glDeleteRenderbuffers (GLsizei n, const GLuint *rend
 GL_APICALL void GL_APIENTRY glDeleteShader (GLuint shader);
 GL_APICALL void GL_APIENTRY glDeleteTextures (GLsizei n, const GLuint *textures);
 GL_APICALL void GL_APIENTRY glDepthFunc (GLenum func);
-GL_APICALL void GL_APIENTRY glDepthMask (GLboolean flag);
+GL_APICALL void GL_APIENTRY glDepthMask (GLnez_b32_tean flag);
 GL_APICALL void GL_APIENTRY glDepthRangef (GLfloat n, GLfloat f);
 GL_APICALL void GL_APIENTRY glDetachShader (GLuint program, GLuint shader);
 GL_APICALL void GL_APIENTRY glDisable (GLenum cap);
@@ -581,7 +581,7 @@ GL_APICALL void GL_APIENTRY glGetActiveAttrib (GLuint program, GLuint index, GLs
 GL_APICALL void GL_APIENTRY glGetActiveUniform (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name);
 GL_APICALL void GL_APIENTRY glGetAttachedShaders (GLuint program, GLsizei maxCount, GLsizei *count, GLuint *shaders);
 GL_APICALL GLint GL_APIENTRY glGetAttribLocation (GLuint program, const GLchar *name);
-GL_APICALL void GL_APIENTRY glGetBooleanv (GLenum pname, GLboolean *data);
+GL_APICALL void GL_APIENTRY glGetnez_b32_teanv (GLenum pname, GLnez_b32_tean *data);
 GL_APICALL void GL_APIENTRY glGetBufferParameteriv (GLenum target, GLenum pname, GLint *params);
 GL_APICALL GLenum GL_APIENTRY glGetError (void);
 GL_APICALL void GL_APIENTRY glGetFloatv (GLenum pname, GLfloat *data);
@@ -604,13 +604,13 @@ GL_APICALL void GL_APIENTRY glGetVertexAttribfv (GLuint index, GLenum pname, GLf
 GL_APICALL void GL_APIENTRY glGetVertexAttribiv (GLuint index, GLenum pname, GLint *params);
 GL_APICALL void GL_APIENTRY glGetVertexAttribPointerv (GLuint index, GLenum pname, void **pointer);
 GL_APICALL void GL_APIENTRY glHint (GLenum target, GLenum mode);
-GL_APICALL GLboolean GL_APIENTRY glIsBuffer (GLuint buffer);
-GL_APICALL GLboolean GL_APIENTRY glIsEnabled (GLenum cap);
-GL_APICALL GLboolean GL_APIENTRY glIsFramebuffer (GLuint framebuffer);
-GL_APICALL GLboolean GL_APIENTRY glIsProgram (GLuint program);
-GL_APICALL GLboolean GL_APIENTRY glIsRenderbuffer (GLuint renderbuffer);
-GL_APICALL GLboolean GL_APIENTRY glIsShader (GLuint shader);
-GL_APICALL GLboolean GL_APIENTRY glIsTexture (GLuint texture);
+GL_APICALL GLnez_b32_tean GL_APIENTRY glIsBuffer (GLuint buffer);
+GL_APICALL GLnez_b32_tean GL_APIENTRY glIsEnabled (GLenum cap);
+GL_APICALL GLnez_b32_tean GL_APIENTRY glIsFramebuffer (GLuint framebuffer);
+GL_APICALL GLnez_b32_tean GL_APIENTRY glIsProgram (GLuint program);
+GL_APICALL GLnez_b32_tean GL_APIENTRY glIsRenderbuffer (GLuint renderbuffer);
+GL_APICALL GLnez_b32_tean GL_APIENTRY glIsShader (GLuint shader);
+GL_APICALL GLnez_b32_tean GL_APIENTRY glIsTexture (GLuint texture);
 GL_APICALL void GL_APIENTRY glLineWidth (GLfloat width);
 GL_APICALL void GL_APIENTRY glLinkProgram (GLuint program);
 GL_APICALL void GL_APIENTRY glPixelStorei (GLenum pname, GLint param);
@@ -618,7 +618,7 @@ GL_APICALL void GL_APIENTRY glPolygonOffset (GLfloat factor, GLfloat units);
 GL_APICALL void GL_APIENTRY glReadPixels (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void *pixels);
 GL_APICALL void GL_APIENTRY glReleaseShaderCompiler (void);
 GL_APICALL void GL_APIENTRY glRenderbufferStorage (GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
-GL_APICALL void GL_APIENTRY glSampleCoverage (GLfloat value, GLboolean invert);
+GL_APICALL void GL_APIENTRY glSampleCoverage (GLfloat value, GLnez_b32_tean invert);
 GL_APICALL void GL_APIENTRY glScissor (GLint x, GLint y, GLsizei width, GLsizei height);
 GL_APICALL void GL_APIENTRY glShaderBinary (GLsizei count, const GLuint *shaders, GLenum binaryformat, const void *binary, GLsizei length);
 GL_APICALL void GL_APIENTRY glShaderSource (GLuint shader, GLsizei count, const GLchar *const*string, const GLint *length);
@@ -650,9 +650,9 @@ GL_APICALL void GL_APIENTRY glUniform4f (GLint location, GLfloat v0, GLfloat v1,
 GL_APICALL void GL_APIENTRY glUniform4fv (GLint location, GLsizei count, const GLfloat *value);
 GL_APICALL void GL_APIENTRY glUniform4i (GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
 GL_APICALL void GL_APIENTRY glUniform4iv (GLint location, GLsizei count, const GLint *value);
-GL_APICALL void GL_APIENTRY glUniformMatrix2fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GL_APICALL void GL_APIENTRY glUniformMatrix3fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GL_APICALL void GL_APIENTRY glUniformMatrix4fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+GL_APICALL void GL_APIENTRY glUniformMatrix2fv (GLint location, GLsizei count, GLnez_b32_tean transpose, const GLfloat *value);
+GL_APICALL void GL_APIENTRY glUniformMatrix3fv (GLint location, GLsizei count, GLnez_b32_tean transpose, const GLfloat *value);
+GL_APICALL void GL_APIENTRY glUniformMatrix4fv (GLint location, GLsizei count, GLnez_b32_tean transpose, const GLfloat *value);
 GL_APICALL void GL_APIENTRY glUseProgram (GLuint program);
 GL_APICALL void GL_APIENTRY glValidateProgram (GLuint program);
 GL_APICALL void GL_APIENTRY glVertexAttrib1f (GLuint index, GLfloat x);
@@ -663,7 +663,7 @@ GL_APICALL void GL_APIENTRY glVertexAttrib3f (GLuint index, GLfloat x, GLfloat y
 GL_APICALL void GL_APIENTRY glVertexAttrib3fv (GLuint index, const GLfloat *v);
 GL_APICALL void GL_APIENTRY glVertexAttrib4f (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
 GL_APICALL void GL_APIENTRY glVertexAttrib4fv (GLuint index, const GLfloat *v);
-GL_APICALL void GL_APIENTRY glVertexAttribPointer (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer);
+GL_APICALL void GL_APIENTRY glVertexAttribPointer (GLuint index, GLint size, GLenum type, GLnez_b32_tean normalized, GLsizei stride, const void *pointer);
 GL_APICALL void GL_APIENTRY glViewport (GLint x, GLint y, GLsizei width, GLsizei height);
 #endif
 #endif /* GL_ES_VERSION_2_0 */

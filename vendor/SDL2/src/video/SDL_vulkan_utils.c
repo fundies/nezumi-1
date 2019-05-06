@@ -147,7 +147,7 @@ VkExtensionProperties *SDL_Vulkan_CreateInstanceExtensionsList(
     return retval;
 }
 
-SDL_bool SDL_Vulkan_GetInstanceExtensions_Helper(unsigned *userCount,
+SDL_nez_b32_t SDL_Vulkan_GetInstanceExtensions_Helper(unsigned *userCount,
                                                  const char **userNames,
                                                  unsigned nameCount,
                                                  const char *const *names)

@@ -90,11 +90,11 @@ struct SDL_EVDEV_keyboard_state
     int old_kbd_mode;
     unsigned short **key_maps;
     unsigned char shift_down[NR_SHIFT];        /* shift state counters.. */
-    SDL_bool dead_key_next;
+    SDL_nez_b32_t dead_key_next;
     int npadch;                    /* -1 or number assembled on pad */
     struct kbdiacrs *accents;
     unsigned int diacr;
-    SDL_bool rep;                    /* flag telling character repeat */
+    SDL_nez_b32_t rep;                    /* flag telling character repeat */
     unsigned char lockstate;
     unsigned char slockstate;
     unsigned char ledflagstate;
@@ -396,7 +396,7 @@ SDL_EVDEV_kbd_init(void)
             /* Make sure to restore keyboard if application fails to call
              * SDL_Quit before exit or fatal signal is raised.
              */
-            if (!SDL_GetHintBoolean(SDL_HINT_NO_SIGNAL_HANDLERS, SDL_FALSE)) {
+            if (!SDL_GetHintnez_b32_tean(SDL_HINT_NO_SIGNAL_HANDLERS, SDL_FALSE)) {
                 kbd_register_emerg_cleanup(kbd);
             }
         }

@@ -123,7 +123,7 @@ X11_DeleteDevice(SDL_VideoDevice * device)
 }
 
 /* An error handler to reset the vidmode and then call the default handler. */
-static SDL_bool safety_net_triggered = SDL_FALSE;
+static SDL_nez_b32_t safety_net_triggered = SDL_FALSE;
 static int (*orig_x11_errhandler) (Display *, XErrorEvent *) = NULL;
 static int
 X11_SafetyNetErrHandler(Display * d, XErrorEvent * e)
@@ -486,7 +486,7 @@ X11_VideoQuit(_THIS)
 #endif
 }
 
-SDL_bool
+SDL_nez_b32_t
 X11_UseDirectColorVisuals(void)
 {
     return SDL_getenv("SDL_VIDEO_X11_NODIRECTCOLOR") ? SDL_FALSE : SDL_TRUE;

@@ -346,8 +346,8 @@ dep_option(KMSDRM_SHARED       "Dynamically load KMS DRM support" ON "VIDEO_KMSD
 
 # TODO: We should (should we?) respect cmake's ${BUILD_SHARED_LIBS} flag here
 # The options below are for compatibility to configure's default behaviour.
-set(SDL_SHARED ${SDL_SHARED_ENABLED_BY_DEFAULT} CACHE BOOL "Build a shared version of the library")
-set(SDL_STATIC ON CACHE BOOL "Build a static version of the library")
+set(SDL_SHARED ${SDL_SHARED_ENABLED_BY_DEFAULT} CACHE nez_b32_t "Build a shared version of the library")
+set(SDL_STATIC ON CACHE nez_b32_t "Build a static version of the library")
 
 dep_option(SDL_STATIC_PIC      "Static version of the library should be built with Position Independent Code" OFF "SDL_STATIC" OFF)
 set_option(SDL_TEST            "Build the test directory" OFF)
@@ -421,8 +421,8 @@ if(USE_GCC OR USE_CLANG)
         __sync_lock_test_and_set(&a, 4);
         __sync_lock_test_and_set(&x, y);
         __sync_fetch_and_add(&a, 1);
-        __sync_bool_compare_and_swap(&a, 5, 10);
-        __sync_bool_compare_and_swap(&x, y, z); }" HAVE_GCC_ATOMICS)
+        __sync_nez_b32_t_compare_and_swap(&a, 5, 10);
+        __sync_nez_b32_t_compare_and_swap(&x, y, z); }" HAVE_GCC_ATOMICS)
     if(NOT HAVE_GCC_ATOMICS)
       check_c_source_compiles("int main(int argc, char **argv) {
           int a;
@@ -1695,7 +1695,7 @@ message(STATUS "")
 message(STATUS "Subsystems:")
 foreach(_SUB ${SDL_SUBSYSTEMS})
   string(TOUPPER ${_SUB} _OPT)
-  message_bool_option(${_SUB} SDL_${_OPT})
+  message_nez_b32_t_option(${_SUB} SDL_${_OPT})
 endforeach()
 message(STATUS "")
 message(STATUS "Options:")

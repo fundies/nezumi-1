@@ -30,6 +30,23 @@ nez_b32_t   g_nez_window_visible;
 nez_b32_t   g_nez_window_fullscreen;
 nez_b32_t   g_nez_window_focus;
 
+/* Keyboard State */
+nez_b32_t    g_nez_keyboard_current[vk_last];
+nez_b32_t    g_nez_keyboard_previous[vk_last];
+nez_b32_t    g_nez_keyboard_any_down;
+nez_b32_t    g_nez_keyboard_any_pressed;
+nez_b32_t    g_nez_keyboard_any_released;
+
+/* Mouse State */
+nez_b32_t    g_nez_mouse_current[mb_last];
+nez_b32_t    g_nez_mouse_previous[mb_last];
+nez_b32_t    g_nez_mouse_any_down;
+nez_b32_t    g_nez_mouse_any_pressed;
+nez_b32_t    g_nez_mouse_any_released;
+int          g_nez_mouse_x;
+int          g_nez_mouse_y;
+
+
 void *nez_window_get_handle(void)
 {
     return g_nez_window_handle;

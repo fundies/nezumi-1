@@ -130,7 +130,7 @@ SDL_GetPixelFormatName(Uint32 format)
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_PixelFormatEnumToMasks(Uint32 format, int *bpp, Uint32 * Rmask,
                            Uint32 * Gmask, Uint32 * Bmask, Uint32 * Amask)
 {

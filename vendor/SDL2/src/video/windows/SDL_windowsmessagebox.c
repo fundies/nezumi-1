@@ -109,7 +109,7 @@ typedef struct
     WORD numbuttons;
 } WIN_DialogData;
 
-static SDL_bool GetButtonIndex(const SDL_MessageBoxData *messageboxdata, Uint32 flags, size_t *i)
+static SDL_nez_b32_t GetButtonIndex(const SDL_MessageBoxData *messageboxdata, Uint32 flags, size_t *i)
 {
     for (*i = 0; *i < (size_t)messageboxdata->numbuttons; ++*i) {
         if (messageboxdata->buttons[*i].flags & flags) {
@@ -187,7 +187,7 @@ static INT_PTR MessageBoxDialogProc(HWND hDlg, UINT iMessage, WPARAM wParam, LPA
     return FALSE;
 }
 
-static SDL_bool ExpandDialogSpace(WIN_DialogData *dialog, size_t space)
+static SDL_nez_b32_t ExpandDialogSpace(WIN_DialogData *dialog, size_t space)
 {
     /* Growing memory in 64 KiB steps. */
     const size_t sizestep = 0x10000;
@@ -226,7 +226,7 @@ static SDL_bool ExpandDialogSpace(WIN_DialogData *dialog, size_t space)
     return SDL_TRUE;
 }
 
-static SDL_bool AlignDialogData(WIN_DialogData *dialog, size_t size)
+static SDL_nez_b32_t AlignDialogData(WIN_DialogData *dialog, size_t size)
 {
     size_t padding = (dialog->used % size);
 
@@ -239,7 +239,7 @@ static SDL_bool AlignDialogData(WIN_DialogData *dialog, size_t size)
     return SDL_TRUE;
 }
 
-static SDL_bool AddDialogData(WIN_DialogData *dialog, const void *data, size_t size)
+static SDL_nez_b32_t AddDialogData(WIN_DialogData *dialog, const void *data, size_t size)
 {
     if (!ExpandDialogSpace(dialog, size)) {
         return SDL_FALSE;
@@ -251,12 +251,12 @@ static SDL_bool AddDialogData(WIN_DialogData *dialog, const void *data, size_t s
     return SDL_TRUE;
 }
 
-static SDL_bool AddDialogString(WIN_DialogData *dialog, const char *string)
+static SDL_nez_b32_t AddDialogString(WIN_DialogData *dialog, const char *string)
 {
     WCHAR *wstring;
     WCHAR *p;
     size_t count;
-    SDL_bool status;
+    SDL_nez_b32_t status;
 
     if (!string) {
         string = "";
@@ -290,7 +290,7 @@ static void Vec2ToDLU(short *x, short *y)
 }
 
 
-static SDL_bool AddDialogControl(WIN_DialogData *dialog, WORD type, DWORD style, DWORD exStyle, int x, int y, int w, int h, int id, const char *caption, WORD ordinal)
+static SDL_nez_b32_t AddDialogControl(WIN_DialogData *dialog, WORD type, DWORD style, DWORD exStyle, int x, int y, int w, int h, int id, const char *caption, WORD ordinal)
 {
     DLGITEMTEMPLATEEX item;
     WORD marker = 0xFFFF;
@@ -343,19 +343,19 @@ static SDL_bool AddDialogControl(WIN_DialogData *dialog, WORD type, DWORD style,
     return SDL_TRUE;
 }
 
-static SDL_bool AddDialogStaticText(WIN_DialogData *dialog, int x, int y, int w, int h, const char *text)
+static SDL_nez_b32_t AddDialogStaticText(WIN_DialogData *dialog, int x, int y, int w, int h, const char *text)
 {
     DWORD style = WS_VISIBLE | WS_CHILD | SS_LEFT | SS_NOPREFIX | SS_EDITCONTROL | WS_GROUP;
     return AddDialogControl(dialog, DLGITEMTYPESTATIC, style, 0, x, y, w, h, -1, text, 0);
 }
 
-static SDL_bool AddDialogStaticIcon(WIN_DialogData *dialog, int x, int y, int w, int h, Uint16 ordinal)
+static SDL_nez_b32_t AddDialogStaticIcon(WIN_DialogData *dialog, int x, int y, int w, int h, Uint16 ordinal)
 {
     DWORD style = WS_VISIBLE | WS_CHILD | SS_ICON | WS_GROUP;
     return AddDialogControl(dialog, DLGITEMTYPESTATIC, style, 0, x, y, w, h, -2, NULL, ordinal);
 }
 
-static SDL_bool AddDialogButton(WIN_DialogData *dialog, int x, int y, int w, int h, const char *text, int id, SDL_bool isDefault)
+static SDL_nez_b32_t AddDialogButton(WIN_DialogData *dialog, int x, int y, int w, int h, const char *text, int id, SDL_nez_b32_t isDefault)
 {
     DWORD style = WS_VISIBLE | WS_CHILD | WS_TABSTOP;
     if (isDefault) {
@@ -709,7 +709,7 @@ WIN_ShowOldMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid)
     x = Size.cx - (ButtonWidth + ButtonMargin) * messageboxdata->numbuttons;
     y = Size.cy - ButtonHeight - ButtonMargin;
     for (i = messageboxdata->numbuttons - 1; i >= 0; --i) {
-        SDL_bool isdefault = SDL_FALSE;
+        SDL_nez_b32_t isdefault = SDL_FALSE;
         const char *buttontext;
 
         if (buttons[i].flags & SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT) {
@@ -766,7 +766,7 @@ WIN_ShowOldMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid)
 /* TaskDialogIndirect procedure
  * This is because SDL targets Windows XP (0x501), so this is not defined in the platform SDK.
  */
-typedef HRESULT(FAR WINAPI *TASKDIALOGINDIRECTPROC)(const TASKDIALOGCONFIG *pTaskConfig, int *pnButton, int *pnRadioButton, BOOL *pfVerificationFlagChecked);
+typedef HRESULT(FAR WINAPI *TASKDIALOGINDIRECTPROC)(const TASKDIALOGCONFIG *pTaskConfig, int *pnButton, int *pnRadioButton, nez_b32_t *pfVerificationFlagChecked);
 
 int
 WIN_ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid)

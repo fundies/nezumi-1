@@ -383,7 +383,7 @@ DirectFB_RestoreWindow(_THIS, SDL_Window * window)
 }
 
 void
-DirectFB_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed)
+DirectFB_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed)
 {
     SDL_DFB_DEVICEDATA(_this);
     SDL_DFB_WINDOWDATA(window);
@@ -454,7 +454,7 @@ DirectFB_DestroyWindow(_THIS, SDL_Window * window)
     return;
 }
 
-SDL_bool
+SDL_nez_b32_t
 DirectFB_GetWindowWMInfo(_THIS, SDL_Window * window,
                          struct SDL_SysWMinfo * info)
 {

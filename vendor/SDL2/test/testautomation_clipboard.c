@@ -21,7 +21,7 @@
 int
 clipboard_testHasClipboardText(void *arg)
 {
-    SDL_bool result;
+    SDL_nez_b32_t result;
     result = SDL_HasClipboardText();
     SDLTest_AssertPass("Call to SDL_HasClipboardText succeeded");
 
@@ -87,14 +87,14 @@ clipboard_testClipboardTextFunctions(void *arg)
 {
     char *textRef = SDLTest_RandomAsciiString();
     char *text = SDL_strdup(textRef);
-    SDL_bool boolResult;
+    SDL_nez_b32_t nez_b32_tResult;
     int intResult;
     char *charResult;
 
     /* Clear clipboard text state */
-    boolResult = SDL_HasClipboardText();
+    nez_b32_tResult = SDL_HasClipboardText();
     SDLTest_AssertPass("Call to SDL_HasClipboardText succeeded");
-    if (boolResult == SDL_TRUE) {
+    if (nez_b32_tResult == SDL_TRUE) {
         intResult = SDL_SetClipboardText((const char *)NULL);
         SDLTest_AssertPass("Call to SDL_SetClipboardText(NULL) succeeded");
         SDLTest_AssertCheck(
@@ -104,12 +104,12 @@ clipboard_testClipboardTextFunctions(void *arg)
         charResult = SDL_GetClipboardText();
         SDLTest_AssertPass("Call to SDL_GetClipboardText succeeded");
         SDL_free(charResult);
-        boolResult = SDL_HasClipboardText();
+        nez_b32_tResult = SDL_HasClipboardText();
         SDLTest_AssertPass("Call to SDL_HasClipboardText succeeded");
         SDLTest_AssertCheck(
-            boolResult == SDL_FALSE,
+            nez_b32_tResult == SDL_FALSE,
             "Verify SDL_HasClipboardText returned SDL_FALSE, got %s",
-            (boolResult) ? "SDL_TRUE" : "SDL_FALSE");
+            (nez_b32_tResult) ? "SDL_TRUE" : "SDL_FALSE");
     }
 
     /* Empty clipboard  */
@@ -132,12 +132,12 @@ clipboard_testClipboardTextFunctions(void *arg)
         SDL_strcmp(textRef, text) == 0,
         "Verify SDL_SetClipboardText did not modify input string, expected '%s', got '%s'",
         textRef, text);
-    boolResult = SDL_HasClipboardText();
+    nez_b32_tResult = SDL_HasClipboardText();
     SDLTest_AssertPass("Call to SDL_HasClipboardText succeeded");
     SDLTest_AssertCheck(
-        boolResult == SDL_TRUE,
+        nez_b32_tResult == SDL_TRUE,
         "Verify SDL_HasClipboardText returned SDL_TRUE, got %s",
-        (boolResult) ? "SDL_TRUE" : "SDL_FALSE");
+        (nez_b32_tResult) ? "SDL_TRUE" : "SDL_FALSE");
     SDL_free(charResult);
     charResult = SDL_GetClipboardText();
     SDLTest_AssertPass("Call to SDL_GetClipboardText succeeded");

@@ -71,7 +71,7 @@ extern VkExtensionProperties *SDL_Vulkan_CreateInstanceExtensionsList(
 
 /* Implements functionality of SDL_Vulkan_GetInstanceExtensions for a list of
  * names passed in nameCount and names. */
-extern SDL_bool SDL_Vulkan_GetInstanceExtensions_Helper(unsigned *userCount,
+extern SDL_nez_b32_t SDL_Vulkan_GetInstanceExtensions_Helper(unsigned *userCount,
                                                         const char **userNames,
                                                         unsigned nameCount,
                                                         const char *const *names);

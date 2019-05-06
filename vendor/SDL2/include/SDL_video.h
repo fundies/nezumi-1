@@ -758,7 +758,7 @@ extern DECLSPEC void SDLCALL SDL_GetWindowMaximumSize(SDL_Window * window,
  *  \sa SDL_GetWindowFlags()
  */
 extern DECLSPEC void SDLCALL SDL_SetWindowBordered(SDL_Window * window,
-                                                   SDL_bool bordered);
+                                                   SDL_nez_b32_t bordered);
 
 /**
  *  \brief Set the user-resizable state of a window.
@@ -775,7 +775,7 @@ extern DECLSPEC void SDLCALL SDL_SetWindowBordered(SDL_Window * window,
  *  \sa SDL_GetWindowFlags()
  */
 extern DECLSPEC void SDLCALL SDL_SetWindowResizable(SDL_Window * window,
-                                                    SDL_bool resizable);
+                                                    SDL_nez_b32_t resizable);
 
 /**
  *  \brief Show a window.
@@ -878,7 +878,7 @@ extern DECLSPEC int SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window * window,
  *  \sa SDL_GetWindowGrab()
  */
 extern DECLSPEC void SDLCALL SDL_SetWindowGrab(SDL_Window * window,
-                                               SDL_bool grabbed);
+                                               SDL_nez_b32_t grabbed);
 
 /**
  *  \brief Get a window's input grab mode.
@@ -887,7 +887,7 @@ extern DECLSPEC void SDLCALL SDL_SetWindowGrab(SDL_Window * window,
  *
  *  \sa SDL_SetWindowGrab()
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_GetWindowGrab(SDL_Window * window);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_GetWindowGrab(SDL_Window * window);
 
 /**
  *  \brief Get the window that currently has an input grab enabled.
@@ -1093,7 +1093,7 @@ extern DECLSPEC void SDLCALL SDL_DestroyWindow(SDL_Window * window);
  *  \sa SDL_EnableScreenSaver()
  *  \sa SDL_DisableScreenSaver()
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_IsScreenSaverEnabled(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_IsScreenSaverEnabled(void);
 
 /**
  *  \brief Allow the screen to be blanked by a screensaver
@@ -1153,7 +1153,7 @@ extern DECLSPEC void SDLCALL SDL_GL_UnloadLibrary(void);
  *  \brief Return true if an OpenGL extension is supported for the current
  *         context.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_GL_ExtensionSupported(const char
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_GL_ExtensionSupported(const char
                                                            *extension);
 
 /**

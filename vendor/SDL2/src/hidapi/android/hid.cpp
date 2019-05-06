@@ -102,7 +102,7 @@ public:
 		return m_pObject;
 	}
 
-	operator bool() const
+	operator nez_b32_t() const
 	{
 		return ( m_pObject != nullptr );
 	}
@@ -429,7 +429,7 @@ public:
 		}
 	}
 
-	bool BOpen()
+	nez_b32_t BOpen()
 	{
 		// Make sure thread is attached to JVM/env
 		JNIEnv *env;
@@ -437,7 +437,7 @@ public:
 		pthread_setspecific( g_ThreadKey, (void*)env );
 
 		m_bIsWaitingForOpen = false;
-		m_bOpenResult = env->CallBooleanMethod( g_HIDDeviceManagerCallbackHandler, g_midHIDDeviceManagerOpen, m_nId );
+		m_bOpenResult = env->Callnez_b32_teanMethod( g_HIDDeviceManagerCallbackHandler, g_midHIDDeviceManagerOpen, m_nId );
 		ExceptionCheck( env, "BOpen" );
 
 		if ( m_bIsWaitingForOpen )
@@ -484,7 +484,7 @@ public:
 		m_bIsWaitingForOpen = true;
 	}
 
-	void SetOpenResult( bool bResult )
+	void SetOpenResult( nez_b32_t bResult )
 	{
 		if ( m_bIsWaitingForOpen )
 		{
@@ -598,7 +598,7 @@ public:
 		}
 
 		jbyteArray pBuf = NewByteArray( env, pData, nDataLen );
-		int nRet = env->CallBooleanMethod( g_HIDDeviceManagerCallbackHandler, g_midHIDDeviceManagerGetFeatureReport, m_nId, pBuf ) ? 0 : -1;
+		int nRet = env->Callnez_b32_teanMethod( g_HIDDeviceManagerCallbackHandler, g_midHIDDeviceManagerGetFeatureReport, m_nId, pBuf ) ? 0 : -1;
 		ExceptionCheck( env, "GetFeatureReport" );
 		env->DeleteLocalRef( pBuf );
 		if ( nRet < 0 )
@@ -650,7 +650,7 @@ public:
 		}
 	}
 
-	void Close( bool bDeleteDevice )
+	void Close( nez_b32_t bDeleteDevice )
 	{
 		// Make sure thread is attached to JVM/env
 		JNIEnv *env;
@@ -683,7 +683,7 @@ private:
 	int m_nId = 0;
 	hid_device_info *m_pInfo = nullptr;
 	hid_device *m_pDevice = nullptr;
-	bool m_bIsBLESteamController = false;
+	nez_b32_t m_bIsBLESteamController = false;
 
 	pthread_mutex_t m_dataLock = PTHREAD_MUTEX_INITIALIZER; // This lock has to be held to access m_vecData
 	hid_buffer_pool m_vecData;
@@ -691,9 +691,9 @@ private:
 	// For handling get_feature_report
 	pthread_mutex_t m_cvLock = PTHREAD_MUTEX_INITIALIZER; // This lock has to be held to access any variables below
 	pthread_cond_t m_cv = PTHREAD_COND_INITIALIZER;
-	bool m_bIsWaitingForOpen = false;
-	bool m_bOpenResult = false;
-	bool m_bIsWaitingForFeatureReport = false;
+	nez_b32_t m_bIsWaitingForOpen = false;
+	nez_b32_t m_bOpenResult = false;
+	nez_b32_t m_bIsWaitingForFeatureReport = false;
 	int m_nFeatureReportError = 0;
 	hid_buffer m_featureReport;
 
@@ -745,7 +745,7 @@ extern "C"
 JNIEXPORT void JNICALL HID_DEVICE_MANAGER_JAVA_INTERFACE(HIDDeviceOpenPending)(JNIEnv *env, jobject thiz, int nDeviceID);
 
 extern "C"
-JNIEXPORT void JNICALL HID_DEVICE_MANAGER_JAVA_INTERFACE(HIDDeviceOpenResult)(JNIEnv *env, jobject thiz, int nDeviceID, bool bOpened);
+JNIEXPORT void JNICALL HID_DEVICE_MANAGER_JAVA_INTERFACE(HIDDeviceOpenResult)(JNIEnv *env, jobject thiz, int nDeviceID, nez_b32_t bOpened);
 
 extern "C"
 JNIEXPORT void JNICALL HID_DEVICE_MANAGER_JAVA_INTERFACE(HIDDeviceDisconnected)(JNIEnv *env, jobject thiz, int nDeviceID);
@@ -873,7 +873,7 @@ JNIEXPORT void JNICALL HID_DEVICE_MANAGER_JAVA_INTERFACE(HIDDeviceOpenPending)(J
 }
 
 extern "C"
-JNIEXPORT void JNICALL HID_DEVICE_MANAGER_JAVA_INTERFACE(HIDDeviceOpenResult)(JNIEnv *env, jobject thiz, int nDeviceID, bool bOpened)
+JNIEXPORT void JNICALL HID_DEVICE_MANAGER_JAVA_INTERFACE(HIDDeviceOpenResult)(JNIEnv *env, jobject thiz, int nDeviceID, nez_b32_t bOpened)
 {
 	LOGV( "HIDDeviceOpenResult() id=%d, result=%s\n", nDeviceID, bOpened ? "true" : "false" );
 	hid_device_ref<CHIDDevice> pDevice = FindDevice( nDeviceID );

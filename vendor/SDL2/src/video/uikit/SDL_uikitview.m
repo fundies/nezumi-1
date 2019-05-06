@@ -135,7 +135,7 @@ extern int SDL_AppleTVRemoteOpenedAsJoystick;
     sdlwindow = window;
 }
 
-- (CGPoint)touchLocation:(UITouch *)touch shouldNormalize:(BOOL)normalize
+- (CGPoint)touchLocation:(UITouch *)touch shouldNormalize:(nez_b32_t)normalize
 {
     CGPoint point = [touch locationInView:self];
 

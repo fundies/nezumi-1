@@ -33,7 +33,7 @@ HCURSOR SDL_cursor = NULL;
 static int rawInputEnableCount = 0;
 
 static int 
-ToggleRawInput(SDL_bool enabled)
+ToggleRawInput(SDL_nez_b32_t enabled)
 {
     RAWINPUTDEVICE rawMouse = { 0x01, 0x02, 0, NULL }; /* Mouse: UsagePage = 1, Usage = 2 */
 
@@ -248,7 +248,7 @@ WIN_WarpMouseGlobal(int x, int y)
 }
 
 static int
-WIN_SetRelativeMouseMode(SDL_bool enabled)
+WIN_SetRelativeMouseMode(SDL_nez_b32_t enabled)
 {
     return ToggleRawInput(enabled);
 }

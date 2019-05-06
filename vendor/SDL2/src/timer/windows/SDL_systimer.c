@@ -31,10 +31,10 @@
 
 /* The first (low-resolution) ticks value of the application */
 static DWORD start = 0;
-static BOOL ticks_started = FALSE; 
+static nez_b32_t ticks_started = FALSE; 
 
 /* Store if a high-resolution performance counter exists on the system */
-static BOOL hires_timer_available;
+static nez_b32_t hires_timer_available;
 /* The first high-resolution ticks value of the application */
 static LARGE_INTEGER hires_start_ticks;
 /* The number of ticks per second of the high-resolution performance counter */

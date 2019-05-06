@@ -188,7 +188,7 @@ Fcitx_SetCapabilities(void *data,
     SDL_DBus_CallVoidMethod(client->servicename, client->icname, FCITX_IC_DBUS_INTERFACE, "SetCapacity", DBUS_TYPE_UINT32, &caps, DBUS_TYPE_INVALID);
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 FcitxClientCreateIC(FcitxClient *client)
 {
     char *appname = GetAppName();
@@ -198,7 +198,7 @@ FcitxClientCreateIC(FcitxClient *client)
 
     if (!SDL_DBus_CallMethod(client->servicename, FCITX_IM_DBUS_PATH, FCITX_IM_DBUS_INTERFACE, "CreateICv3",
             DBUS_TYPE_STRING, &appname, DBUS_TYPE_INT32, &pid, DBUS_TYPE_INVALID,
-            DBUS_TYPE_INT32, &id, DBUS_TYPE_BOOLEAN, &enable, DBUS_TYPE_UINT32, &arg1, DBUS_TYPE_UINT32, &arg2, DBUS_TYPE_UINT32, &arg3, DBUS_TYPE_UINT32, &arg4, DBUS_TYPE_INVALID)) {
+            DBUS_TYPE_INT32, &id, DBUS_TYPE_nez_b32_tEAN, &enable, DBUS_TYPE_UINT32, &arg1, DBUS_TYPE_UINT32, &arg2, DBUS_TYPE_UINT32, &arg3, DBUS_TYPE_UINT32, &arg4, DBUS_TYPE_INVALID)) {
         id = -1;  /* just in case. */
     }
 
@@ -243,7 +243,7 @@ Fcitx_ModState(void)
     return fcitx_mods;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_Fcitx_Init()
 {
     fcitx_client.dbus = SDL_DBus_GetContext();
@@ -267,7 +267,7 @@ SDL_Fcitx_Quit()
 }
 
 void
-SDL_Fcitx_SetFocus(SDL_bool focused)
+SDL_Fcitx_SetFocus(SDL_nez_b32_t focused)
 {
     if (focused) {
         FcitxClientICCallMethod(&fcitx_client, "FocusIn");
@@ -283,7 +283,7 @@ SDL_Fcitx_Reset(void)
     FcitxClientICCallMethod(&fcitx_client, "CloseIC");
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_Fcitx_ProcessKeyEvent(Uint32 keysym, Uint32 keycode)
 {
     Uint32 state = Fcitx_ModState();

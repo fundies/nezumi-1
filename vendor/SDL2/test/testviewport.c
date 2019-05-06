@@ -27,7 +27,7 @@ static SDLTest_CommonState *state;
 
 SDL_Rect viewport;
 int done, j;
-SDL_bool use_target = SDL_FALSE;
+SDL_nez_b32_t use_target = SDL_FALSE;
 #ifdef __EMSCRIPTEN__
 Uint32 wait_start;
 #endif

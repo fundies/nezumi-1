@@ -34,8 +34,8 @@ struct joystick_hwdata
     SDL_JoystickGUID guid;
     char *fname;                /* Used in haptic subsystem */
 
-    SDL_bool ff_rumble;
-    SDL_bool ff_sine;
+    SDL_nez_b32_t ff_rumble;
+    SDL_nez_b32_t ff_sine;
     struct ff_effect effect;
 
     /* The current Linux joystick driver maps hats to two axes */
@@ -61,7 +61,7 @@ struct joystick_hwdata
     int fresh;
 
     /* Steam Controller support */
-    SDL_bool m_bSteamController;
+    SDL_nez_b32_t m_bSteamController;
 };
 
 #endif /* SDL_sysjoystick_c_h_ */

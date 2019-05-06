@@ -165,10 +165,10 @@ SDL_DBus_GetContext(void)
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 SDL_DBus_CallMethodInternal(DBusConnection *conn, const char *node, const char *path, const char *interface, const char *method, va_list ap)
 {
-    SDL_bool retval = SDL_FALSE;
+    SDL_nez_b32_t retval = SDL_FALSE;
 
     if (conn) {
         DBusMessage *msg = dbus.message_new_method_call(node, path, interface, method);
@@ -203,10 +203,10 @@ SDL_DBus_CallMethodInternal(DBusConnection *conn, const char *node, const char *
     return retval;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_DBus_CallMethodOnConnection(DBusConnection *conn, const char *node, const char *path, const char *interface, const char *method, ...)
 {
-    SDL_bool retval;
+    SDL_nez_b32_t retval;
     va_list ap;
     va_start(ap, method);
     retval = SDL_DBus_CallMethodInternal(conn, node, path, interface, method, ap);
@@ -214,10 +214,10 @@ SDL_DBus_CallMethodOnConnection(DBusConnection *conn, const char *node, const ch
     return retval;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_DBus_CallMethod(const char *node, const char *path, const char *interface, const char *method, ...)
 {
-    SDL_bool retval;
+    SDL_nez_b32_t retval;
     va_list ap;
     va_start(ap, method);
     retval = SDL_DBus_CallMethodInternal(dbus.session_conn, node, path, interface, method, ap);
@@ -225,10 +225,10 @@ SDL_DBus_CallMethod(const char *node, const char *path, const char *interface, c
     return retval;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 SDL_DBus_CallVoidMethodInternal(DBusConnection *conn, const char *node, const char *path, const char *interface, const char *method, va_list ap)
 {
-    SDL_bool retval = SDL_FALSE;
+    SDL_nez_b32_t retval = SDL_FALSE;
 
     if (conn) {
         DBusMessage *msg = dbus.message_new_method_call(node, path, interface, method);
@@ -248,10 +248,10 @@ SDL_DBus_CallVoidMethodInternal(DBusConnection *conn, const char *node, const ch
     return retval;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_DBus_CallVoidMethodOnConnection(DBusConnection *conn, const char *node, const char *path, const char *interface, const char *method, ...)
 {
-    SDL_bool retval;
+    SDL_nez_b32_t retval;
     va_list ap;
     va_start(ap, method);
     retval = SDL_DBus_CallVoidMethodInternal(conn, node, path, interface, method, ap);
@@ -259,10 +259,10 @@ SDL_DBus_CallVoidMethodOnConnection(DBusConnection *conn, const char *node, cons
     return retval;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_DBus_CallVoidMethod(const char *node, const char *path, const char *interface, const char *method, ...)
 {
-    SDL_bool retval;
+    SDL_nez_b32_t retval;
     va_list ap;
     va_start(ap, method);
     retval = SDL_DBus_CallVoidMethodInternal(dbus.session_conn, node, path, interface, method, ap);
@@ -270,10 +270,10 @@ SDL_DBus_CallVoidMethod(const char *node, const char *path, const char *interfac
     return retval;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_DBus_QueryPropertyOnConnection(DBusConnection *conn, const char *node, const char *path, const char *interface, const char *property, const int expectedtype, void *result)
 {
-    SDL_bool retval = SDL_FALSE;
+    SDL_nez_b32_t retval = SDL_FALSE;
 
     if (conn) {
         DBusMessage *msg = dbus.message_new_method_call(node, path, "org.freedesktop.DBus.Properties", "Get");
@@ -300,7 +300,7 @@ SDL_DBus_QueryPropertyOnConnection(DBusConnection *conn, const char *node, const
     return retval;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_DBus_QueryProperty(const char *node, const char *path, const char *interface, const char *property, const int expectedtype, void *result)
 {
     return SDL_DBus_QueryPropertyOnConnection(dbus.session_conn, node, path, interface, property, expectedtype, result);
@@ -313,8 +313,8 @@ SDL_DBus_ScreensaverTickle(void)
     SDL_DBus_CallVoidMethod("org.gnome.ScreenSaver", "/org/gnome/ScreenSaver", "org.gnome.ScreenSaver", "SimulateUserActivity", DBUS_TYPE_INVALID);
 }
 
-SDL_bool
-SDL_DBus_ScreensaverInhibit(SDL_bool inhibit)
+SDL_nez_b32_t
+SDL_DBus_ScreensaverInhibit(SDL_nez_b32_t inhibit)
 {
     if ( (inhibit && (screensaver_cookie != 0)) || (!inhibit && (screensaver_cookie == 0)) ) {
         return SDL_TRUE;

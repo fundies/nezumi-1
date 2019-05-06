@@ -58,17 +58,17 @@ extern HRESULT WIN_CoInitialize(void);
 extern void WIN_CoUninitialize(void);
 
 /* Returns SDL_TRUE if we're running on Windows Vista and newer */
-extern BOOL WIN_IsWindowsVistaOrGreater(void);
+extern nez_b32_t WIN_IsWindowsVistaOrGreater(void);
 
 /* Returns SDL_TRUE if we're running on Windows 7 and newer */
-extern BOOL WIN_IsWindows7OrGreater(void);
+extern nez_b32_t WIN_IsWindows7OrGreater(void);
 
 /* You need to SDL_free() the result of this call. */
 extern char *WIN_LookupAudioDeviceName(const WCHAR *name, const GUID *guid);
 
 /* Checks to see if two GUID are the same. */
-extern BOOL WIN_IsEqualGUID(const GUID * a, const GUID * b);
-extern BOOL WIN_IsEqualIID(REFIID a, REFIID b);
+extern nez_b32_t WIN_IsEqualGUID(const GUID * a, const GUID * b);
+extern nez_b32_t WIN_IsEqualIID(REFIID a, REFIID b);
 
 #endif /* _INCLUDED_WINDOWS_H */
 

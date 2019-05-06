@@ -54,7 +54,7 @@ SDL_ScanLong(const char *text, int radix, long *valuep)
 {
     const char *textstart = text;
     long value = 0;
-    SDL_bool negative = SDL_FALSE;
+    SDL_nez_b32_t negative = SDL_FALSE;
 
     if (*text == '-') {
         negative = SDL_TRUE;
@@ -159,7 +159,7 @@ SDL_ScanLongLong(const char *text, int radix, Sint64 * valuep)
 {
     const char *textstart = text;
     Sint64 value = 0;
-    SDL_bool negative = SDL_FALSE;
+    SDL_nez_b32_t negative = SDL_FALSE;
 
     if (*text == '-') {
         negative = SDL_TRUE;
@@ -233,7 +233,7 @@ SDL_ScanFloat(const char *text, double *valuep)
     const char *textstart = text;
     unsigned long lvalue = 0;
     double value = 0.0;
-    SDL_bool negative = SDL_FALSE;
+    SDL_nez_b32_t negative = SDL_FALSE;
 
     if (*text == '-') {
         negative = SDL_TRUE;
@@ -1066,7 +1066,7 @@ SDL_vsscanf(const char *text, const char *fmt, va_list ap)
             continue;
         }
         if (*fmt == '%') {
-            SDL_bool done = SDL_FALSE;
+            SDL_nez_b32_t done = SDL_FALSE;
             long count = 0;
             int radix = 10;
             enum
@@ -1077,7 +1077,7 @@ SDL_vsscanf(const char *text, const char *fmt, va_list ap)
                 DO_LONGLONG
             } inttype = DO_INT;
             size_t advance;
-            SDL_bool suppress = SDL_FALSE;
+            SDL_nez_b32_t suppress = SDL_FALSE;
 
             ++fmt;
             if (*fmt == '%') {
@@ -1365,10 +1365,10 @@ typedef enum
 
 typedef struct
 {
-    SDL_bool left_justify; /* for now: ignored. */
-    SDL_bool force_sign;
-    SDL_bool force_type;   /* for now: used only by float printer, ignored otherwise. */
-    SDL_bool pad_zeroes;
+    SDL_nez_b32_t left_justify; /* for now: ignored. */
+    SDL_nez_b32_t force_sign;
+    SDL_nez_b32_t force_type;   /* for now: used only by float printer, ignored otherwise. */
+    SDL_nez_b32_t pad_zeroes;
     SDL_letter_case force_case;
     int width;
     int radix;
@@ -1617,9 +1617,9 @@ SDL_vsnprintf(SDL_OUT_Z_CAP(maxlen) char *text, size_t maxlen, const char *fmt, 
     }
     while (*fmt && left > 1) {
         if (*fmt == '%') {
-            SDL_bool done = SDL_FALSE;
+            SDL_nez_b32_t done = SDL_FALSE;
             size_t len = 0;
-            SDL_bool check_flag;
+            SDL_nez_b32_t check_flag;
             SDL_FormatInfo info;
             enum
             {

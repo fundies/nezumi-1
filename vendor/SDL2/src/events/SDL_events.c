@@ -41,15 +41,15 @@
 typedef struct SDL_EventWatcher {
     SDL_EventFilter callback;
     void *userdata;
-    SDL_bool removed;
+    SDL_nez_b32_t removed;
 } SDL_EventWatcher;
 
 static SDL_mutex *SDL_event_watchers_lock;
 static SDL_EventWatcher SDL_EventOK;
 static SDL_EventWatcher *SDL_event_watchers = NULL;
 static int SDL_event_watchers_count = 0;
-static SDL_bool SDL_event_watchers_dispatching = SDL_FALSE;
-static SDL_bool SDL_event_watchers_removed = SDL_FALSE;
+static SDL_nez_b32_t SDL_event_watchers_dispatching = SDL_FALSE;
+static SDL_nez_b32_t SDL_event_watchers_removed = SDL_FALSE;
 
 typedef struct {
     Uint32 bits[8];
@@ -587,13 +587,13 @@ SDL_PeepEvents(SDL_Event * events, int numevents, SDL_eventaction action,
     return (used);
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_HasEvent(Uint32 type)
 {
     return (SDL_PeepEvents(NULL, 0, SDL_PEEKEVENT, type, type) > 0);
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_HasEvents(Uint32 minType, Uint32 maxType)
 {
     return (SDL_PeepEvents(NULL, 0, SDL_PEEKEVENT, minType, maxType) > 0);
@@ -783,7 +783,7 @@ SDL_SetEventFilter(SDL_EventFilter filter, void *userdata)
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_GetEventFilter(SDL_EventFilter * filter, void **userdata)
 {
     SDL_EventWatcher event_ok;
@@ -878,7 +878,7 @@ SDL_FilterEvents(SDL_EventFilter filter, void *userdata)
 Uint8
 SDL_EventState(Uint32 type, int state)
 {
-    const SDL_bool isdnd = ((state == SDL_DISABLE) || (state == SDL_ENABLE)) &&
+    const SDL_nez_b32_t isdnd = ((state == SDL_DISABLE) || (state == SDL_ENABLE)) &&
                            ((type == SDL_DROPFILE) || (type == SDL_DROPTEXT));
     Uint8 current_state;
     Uint8 hi = ((type >> 8) & 0xff);

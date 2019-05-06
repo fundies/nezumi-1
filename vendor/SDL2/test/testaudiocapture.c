@@ -26,7 +26,7 @@ static SDL_AudioDeviceID devid_out = 0;
 static void
 loop()
 {
-    SDL_bool please_quit = SDL_FALSE;
+    SDL_nez_b32_t please_quit = SDL_FALSE;
     SDL_Event e;
 
     while (SDL_PollEvent(&e)) {

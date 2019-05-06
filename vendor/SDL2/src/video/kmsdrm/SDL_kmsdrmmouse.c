@@ -45,7 +45,7 @@ KMSDRM_CreateDefaultCursor(void)
 }
 
 /* Evaluate if a given cursor size is supported or not. Notably, current Intel gfx only support 64x64 and up. */
-static SDL_bool
+static SDL_nez_b32_t
 KMSDRM_IsCursorSizeSupported (int w, int h, uint32_t bo_format) {
 
     SDL_VideoDevice *dev = SDL_GetVideoDevice();
@@ -87,7 +87,7 @@ KMSDRM_CreateCursor(SDL_Surface * surface, int hot_x, int hot_y)
     SDL_PixelFormat *pixlfmt = surface->format;
     KMSDRM_CursorData *curdata;
     SDL_Cursor *cursor;
-    SDL_bool cursor_supported = SDL_FALSE;
+    SDL_nez_b32_t cursor_supported = SDL_FALSE;
     int i, ret, usable_cursor_w, usable_cursor_h;
     uint32_t bo_format, bo_stride;
     char *buffer = NULL;

@@ -253,7 +253,7 @@ extern DECLSPEC int SDLCALL SDL_SetColorKey(SDL_Surface * surface,
  *
  *  \return SDL_TRUE if the surface has a color key, or SDL_FALSE if the surface is NULL or has no color key
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasColorKey(SDL_Surface * surface);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasColorKey(SDL_Surface * surface);
 
 /**
  *  \brief Gets the color key (transparent pixel) in a blittable surface.
@@ -365,7 +365,7 @@ extern DECLSPEC int SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface * surface,
  *  Note that blits are automatically clipped to the edges of the source
  *  and destination surfaces.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_SetClipRect(SDL_Surface * surface,
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_SetClipRect(SDL_Surface * surface,
                                                  const SDL_Rect * rect);
 
 /**

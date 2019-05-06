@@ -40,7 +40,7 @@ static int colors[7] = {0xFF,0xFF00,0xFF0000,0xFFFF00,0x00FFFF,0xFF00FF,0xFFFFFF
 
 SDL_Surface *screen;
 SDL_Window *window;
-SDL_bool quitting = SDL_FALSE;
+SDL_nez_b32_t quitting = SDL_FALSE;
 
 typedef struct {
   float x,y;

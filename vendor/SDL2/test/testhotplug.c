@@ -26,9 +26,9 @@ main(int argc, char *argv[])
     SDL_Joystick *joystick = NULL;
     SDL_Haptic *haptic = NULL;
     SDL_JoystickID instance = -1;
-    SDL_bool keepGoing = SDL_TRUE;
+    SDL_nez_b32_t keepGoing = SDL_TRUE;
     int i;
-    SDL_bool enable_haptic = SDL_TRUE;
+    SDL_nez_b32_t enable_haptic = SDL_TRUE;
     Uint32 init_subsystems = SDL_INIT_VIDEO | SDL_INIT_JOYSTICK;
     
     for (i = 1; i < argc; ++i) {

@@ -110,7 +110,7 @@ WIN_UpdateDisplayMode(_THIS, LPCTSTR deviceName, DWORD index, SDL_DisplayMode * 
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 WIN_GetDisplayMode(_THIS, LPCTSTR deviceName, DWORD index, SDL_DisplayMode * mode)
 {
     SDL_DisplayModeData *data;
@@ -140,7 +140,7 @@ WIN_GetDisplayMode(_THIS, LPCTSTR deviceName, DWORD index, SDL_DisplayMode * mod
     return SDL_TRUE;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 WIN_AddDisplay(_THIS, HMONITOR hMonitor, const MONITORINFOEX *info)
 {
     SDL_VideoDisplay display;
@@ -179,10 +179,10 @@ WIN_AddDisplay(_THIS, HMONITOR hMonitor, const MONITORINFOEX *info)
 
 typedef struct _WIN_AddDisplaysData {
     SDL_VideoDevice *video_device;
-    SDL_bool want_primary;
+    SDL_nez_b32_t want_primary;
 } WIN_AddDisplaysData;
 
-static BOOL CALLBACK
+static nez_b32_t CALLBACK
 WIN_AddDisplaysCallback(HMONITOR hMonitor,
                         HDC      hdcMonitor,
                         LPRECT   lprcMonitor,
@@ -195,7 +195,7 @@ WIN_AddDisplaysCallback(HMONITOR hMonitor,
     info.cbSize = sizeof(info);
 
     if (GetMonitorInfo(hMonitor, (LPMONITORINFO)&info) != 0) {
-        const SDL_bool is_primary = ((info.dwFlags & MONITORINFOF_PRIMARY) == MONITORINFOF_PRIMARY);
+        const SDL_nez_b32_t is_primary = ((info.dwFlags & MONITORINFOF_PRIMARY) == MONITORINFOF_PRIMARY);
 
         if (is_primary == data->want_primary) {
             WIN_AddDisplay(data->video_device, hMonitor, &info);
@@ -235,7 +235,7 @@ WIN_GetDisplayBounds(_THIS, SDL_VideoDisplay * display, SDL_Rect * rect)
 {
     const SDL_DisplayData *data = (const SDL_DisplayData *)display->driverdata;
     MONITORINFO minfo;
-    BOOL rc;
+    nez_b32_t rc;
 
     SDL_zero(minfo);
     minfo.cbSize = sizeof(MONITORINFO);
@@ -317,7 +317,7 @@ WIN_GetDisplayUsableBounds(_THIS, SDL_VideoDisplay * display, SDL_Rect * rect)
 {
     const SDL_DisplayData *data = (const SDL_DisplayData *)display->driverdata;
     MONITORINFO minfo;
-    BOOL rc;
+    nez_b32_t rc;
 
     SDL_zero(minfo);
     minfo.cbSize = sizeof(MONITORINFO);

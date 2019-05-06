@@ -364,8 +364,8 @@ mouse_getSetRelativeMouseMode(void *arg)
 {
     int result;
         int i;
-    SDL_bool initialState;
-    SDL_bool currentState;
+    SDL_nez_b32_t initialState;
+    SDL_nez_b32_t currentState;
 
     /* Capture original state so we can revert back to it later */
     initialState = SDL_GetRelativeMouseMode();

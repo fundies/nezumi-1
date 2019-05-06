@@ -71,7 +71,7 @@ glGetConfig(EGLConfig *pconf, int *pformat)
     EGLConfig *egl_configs;
     EGLint egl_num_configs;
     EGLint val;
-    EGLBoolean rc;
+    EGLnez_b32_tean rc;
     EGLint i;
 
     // Determine the numbfer of configurations.

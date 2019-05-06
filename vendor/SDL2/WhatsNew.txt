@@ -184,7 +184,7 @@ General:
 * Added events for dragging and dropping multiple items
 * By default the click raising a window will not be delivered to the SDL application. You can set the hint SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH to "1" to allow that click through to the window.
 * Saving a surface with an alpha channel as a BMP will use a newer BMP format that supports alpha information. You can set the hint SDL_HINT_BMP_SAVE_LEGACY_FORMAT to "1" to use the old format.
-* Added SDL_GetHintBoolean() to get the boolean value of a hint
+* Added SDL_GetHintnez_b32_tean() to get the nez_b32_tean value of a hint
 * Added SDL_RenderSetIntegerScale() to set whether to smoothly scale or use integral multiples of the viewport size when scaling the rendering output
 * Added SDL_CreateRGBSurfaceWithFormat() and SDL_CreateRGBSurfaceWithFormatFrom() to create an SDL surface with a specific pixel format
 * Added SDL_GetDisplayUsableBounds() which returns the area usable for windows. For example, on Mac OS X, this subtracts the area occupied by the menu bar and dock.

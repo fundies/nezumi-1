@@ -74,7 +74,7 @@ extern DECLSPEC SDL_Window * SDLCALL SDL_CreateShapedWindow(const char *title,un
  *
  * \sa SDL_CreateShapedWindow
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_IsShapedWindow(const SDL_Window *window);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_IsShapedWindow(const SDL_Window *window);
 
 /** \brief An enum denoting the specific type of contents present in an SDL_WindowShapeParams union. */
 typedef enum {

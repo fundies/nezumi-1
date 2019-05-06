@@ -37,7 +37,7 @@
 
 @end
 
-extern SDL_bool UIKit_IsDisplayLandscape(UIScreen *uiscreen);
+extern SDL_nez_b32_t UIKit_IsDisplayLandscape(UIScreen *uiscreen);
 
 extern int UIKit_InitModes(_THIS);
 extern void UIKit_GetDisplayModes(_THIS, SDL_VideoDisplay * display);

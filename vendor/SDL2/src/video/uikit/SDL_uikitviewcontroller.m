@@ -73,7 +73,7 @@ SDL_HideHomeIndicatorHintChanged(void *userdata, const char *name, const char *o
 
 #if SDL_IPHONE_KEYBOARD
     UITextField *textField;
-    BOOL rotatingOrientation;
+    nez_b32_t rotatingOrientation;
     NSString *changeText;
     NSString *obligateForBackspace;
 #endif
@@ -200,21 +200,21 @@ SDL_HideHomeIndicatorHintChanged(void *userdata, const char *name, const char *o
 }
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orient
+- (nez_b32_t)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orient
 {
     return ([self supportedInterfaceOrientations] & (1 << orient)) != 0;
 }
 #endif
 
-- (BOOL)prefersStatusBarHidden
+- (nez_b32_t)prefersStatusBarHidden
 {
-    BOOL hidden = (window->flags & (SDL_WINDOW_FULLSCREEN|SDL_WINDOW_BORDERLESS)) != 0;
+    nez_b32_t hidden = (window->flags & (SDL_WINDOW_FULLSCREEN|SDL_WINDOW_BORDERLESS)) != 0;
     return hidden;
 }
 
-- (BOOL)prefersHomeIndicatorAutoHidden
+- (nez_b32_t)prefersHomeIndicatorAutoHidden
 {
-    BOOL hidden = NO;
+    nez_b32_t hidden = NO;
     if (self.homeIndicatorHidden == 1) {
         hidden = YES;
     }
@@ -439,7 +439,7 @@ SDL_HideHomeIndicatorHintChanged(void *userdata, const char *name, const char *o
 }
 
 /* UITextFieldDelegate method.  Invoked when user types something. */
-- (BOOL)textField:(UITextField *)_textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (nez_b32_t)textField:(UITextField *)_textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSUInteger len = string.length;
     if (len == 0) {
@@ -459,11 +459,11 @@ SDL_HideHomeIndicatorHintChanged(void *userdata, const char *name, const char *o
 }
 
 /* Terminates the editing session */
-- (BOOL)textFieldShouldReturn:(UITextField*)_textField
+- (nez_b32_t)textFieldShouldReturn:(UITextField*)_textField
 {
     SDL_SendKeyboardKey(SDL_PRESSED, SDL_SCANCODE_RETURN);
     SDL_SendKeyboardKey(SDL_RELEASED, SDL_SCANCODE_RETURN);
-    if (SDL_GetHintBoolean(SDL_HINT_RETURN_KEY_HIDES_IME, SDL_FALSE)) {
+    if (SDL_GetHintnez_b32_tean(SDL_HINT_RETURN_KEY_HIDES_IME, SDL_FALSE)) {
          SDL_StopTextInput();
     }
     return YES;
@@ -489,7 +489,7 @@ GetWindowViewController(SDL_Window * window)
     return data.viewcontroller;
 }
 
-SDL_bool
+SDL_nez_b32_t
 UIKit_HasScreenKeyboardSupport(_THIS)
 {
     return SDL_TRUE;
@@ -513,7 +513,7 @@ UIKit_HideScreenKeyboard(_THIS, SDL_Window *window)
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 UIKit_IsScreenKeyboardShown(_THIS, SDL_Window *window)
 {
     @autoreleasepool {

@@ -249,7 +249,7 @@ extern DECLSPEC SDL_JoystickGUID SDLCALL SDL_JoystickGetGUIDFromString(const cha
 /**
  *  Returns SDL_TRUE if the joystick has been opened and currently connected, or SDL_FALSE if it has not.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_JoystickGetAttached(SDL_Joystick * joystick);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_JoystickGetAttached(SDL_Joystick * joystick);
 
 /**
  *  Get the instance ID of an opened joystick or -1 if the joystick is invalid.
@@ -319,7 +319,7 @@ extern DECLSPEC Sint16 SDLCALL SDL_JoystickGetAxis(SDL_Joystick * joystick,
  *
  *  \return SDL_TRUE if this axis has any initial value, or SDL_FALSE if not.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_JoystickGetAxisInitialState(SDL_Joystick * joystick,
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_JoystickGetAxisInitialState(SDL_Joystick * joystick,
                                                    int axis, Sint16 *state);
 
 /**

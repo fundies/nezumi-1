@@ -50,7 +50,7 @@ static SDL_Renderer *METAL_CreateRenderer(SDL_Window * window, Uint32 flags);
 static void METAL_WindowEvent(SDL_Renderer * renderer,
                            const SDL_WindowEvent *event);
 static int METAL_GetOutputSize(SDL_Renderer * renderer, int *w, int *h);
-static SDL_bool METAL_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode);
+static SDL_nez_b32_t METAL_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode);
 static int METAL_CreateTexture(SDL_Renderer * renderer, SDL_Texture * texture);
 static int METAL_UpdateTexture(SDL_Renderer * renderer, SDL_Texture * texture,
                             const SDL_Rect * rect, const void *pixels,
@@ -207,8 +207,8 @@ typedef struct METAL_ShaderPipelines
     @property (nonatomic, retain) id<MTLTexture> mtltexture_uv;
     @property (nonatomic, retain) id<MTLSamplerState> mtlsampler;
     @property (nonatomic, assign) SDL_MetalFragmentFunction fragmentFunction;
-    @property (nonatomic, assign) BOOL yuv;
-    @property (nonatomic, assign) BOOL nv12;
+    @property (nonatomic, assign) nez_b32_t yuv;
+    @property (nonatomic, assign) nez_b32_t nv12;
     @property (nonatomic, assign) size_t conversionBufferOffset;
 @end
 
@@ -771,7 +771,7 @@ METAL_GetOutputSize(SDL_Renderer * renderer, int *w, int *h)
     return 0;
 }}
 
-static SDL_bool
+static SDL_nez_b32_t
 METAL_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode)
 {
     SDL_BlendFactor srcColorFactor = SDL_GetBlendModeSrcColorFactor(blendMode);
@@ -834,8 +834,8 @@ METAL_CreateTexture(SDL_Renderer * renderer, SDL_Texture * texture)
 
     id<MTLTexture> mtltexture_uv = nil;
 
-    BOOL yuv = (texture->format == SDL_PIXELFORMAT_IYUV) || (texture->format == SDL_PIXELFORMAT_YV12);
-    BOOL nv12 = (texture->format == SDL_PIXELFORMAT_NV12) || (texture->format == SDL_PIXELFORMAT_NV21);
+    nez_b32_t yuv = (texture->format == SDL_PIXELFORMAT_IYUV) || (texture->format == SDL_PIXELFORMAT_YV12);
+    nez_b32_t nv12 = (texture->format == SDL_PIXELFORMAT_NV12) || (texture->format == SDL_PIXELFORMAT_NV21);
 
     if (yuv) {
         mtltexdesc.pixelFormat = MTLPixelFormatR8Unorm;

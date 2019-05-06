@@ -62,12 +62,12 @@ static const struct { int x; int y; double angle; } axis_positions[] = {
 };
 
 SDL_Renderer *screen = NULL;
-SDL_bool retval = SDL_FALSE;
-SDL_bool done = SDL_FALSE;
+SDL_nez_b32_t retval = SDL_FALSE;
+SDL_nez_b32_t done = SDL_FALSE;
 SDL_Texture *background, *button, *axis;
 
 static SDL_Texture *
-LoadTexture(SDL_Renderer *renderer, const char *file, SDL_bool transparent)
+LoadTexture(SDL_Renderer *renderer, const char *file, SDL_nez_b32_t transparent)
 {
     SDL_Surface *temp = NULL;
     SDL_Texture *texture = NULL;
@@ -169,7 +169,7 @@ loop(void *arg)
 #endif
 }
 
-SDL_bool
+SDL_nez_b32_t
 WatchGameController(SDL_GameController * gamecontroller)
 {
     const char *name = SDL_GameControllerName(gamecontroller);
@@ -304,8 +304,8 @@ main(int argc, char *argv[])
     SDL_Log("There are %d game controller(s) attached (%d joystick(s))\n", nController, SDL_NumJoysticks());
 
     if (argv[1]) {
-        SDL_bool reportederror = SDL_FALSE;
-        SDL_bool keepGoing = SDL_TRUE;
+        SDL_nez_b32_t reportederror = SDL_FALSE;
+        SDL_nez_b32_t keepGoing = SDL_TRUE;
         SDL_Event event;
         int device = atoi(argv[1]);
         if (device >= SDL_NumJoysticks()) {

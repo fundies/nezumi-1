@@ -45,7 +45,7 @@
     /* The number of MSAA samples. */
     int samples;
 
-    BOOL retainedBacking;
+    nez_b32_t retainedBacking;
 }
 
 @synthesize context;
@@ -59,20 +59,20 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
                         scale:(CGFloat)scale
-                retainBacking:(BOOL)retained
+                retainBacking:(nez_b32_t)retained
                         rBits:(int)rBits
                         gBits:(int)gBits
                         bBits:(int)bBits
                         aBits:(int)aBits
                     depthBits:(int)depthBits
                   stencilBits:(int)stencilBits
-                         sRGB:(BOOL)sRGB
+                         sRGB:(nez_b32_t)sRGB
                  multisamples:(int)multisamples
                       context:(EAGLContext *)glcontext
 {
     if ((self = [super initWithFrame:frame])) {
-        const BOOL useStencilBuffer = (stencilBits != 0);
-        const BOOL useDepthBuffer = (depthBits != 0);
+        const nez_b32_t useStencilBuffer = (stencilBits != 0);
+        const nez_b32_t useDepthBuffer = (depthBits != 0);
         NSString *colorFormat = nil;
 
         context = glcontext;

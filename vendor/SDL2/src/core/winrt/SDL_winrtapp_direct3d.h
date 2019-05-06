@@ -39,7 +39,7 @@ internal:
     void PumpEvents();
 
 protected:
-    bool ShouldWaitForAppResumeEvents();
+    nez_b32_t ShouldWaitForAppResumeEvents();
 
     // Event Handlers.
 
@@ -85,8 +85,8 @@ protected:
 #endif
 
 private:
-    bool m_windowClosed;
-    bool m_windowVisible;
+    nez_b32_t m_windowClosed;
+    nez_b32_t m_windowVisible;
 };
 
 extern SDL_WinRTApp ^ SDL_WinRTGlobalApp;

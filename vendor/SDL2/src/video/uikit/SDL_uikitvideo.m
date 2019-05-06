@@ -168,7 +168,7 @@ UIKit_SuspendScreenSaver(_THIS)
     @autoreleasepool {
         /* Ignore ScreenSaver API calls if the idle timer hint has been set. */
         /* FIXME: The idle timer hint should be deprecated for SDL 2.1. */
-        if (!SDL_GetHintBoolean(SDL_HINT_IDLE_TIMER_DISABLED, SDL_FALSE)) {
+        if (!SDL_GetHintnez_b32_tean(SDL_HINT_IDLE_TIMER_DISABLED, SDL_FALSE)) {
             UIApplication *app = [UIApplication sharedApplication];
 
             /* Prevent the display from dimming and going to sleep. */
@@ -177,7 +177,7 @@ UIKit_SuspendScreenSaver(_THIS)
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 UIKit_IsSystemVersionAtLeast(double version)
 {
     return [[UIDevice currentDevice].systemVersion doubleValue] >= version;
@@ -189,7 +189,7 @@ UIKit_ComputeViewFrame(SDL_Window *window, UIScreen *screen)
     CGRect frame = screen.bounds;
 
 #if !TARGET_OS_TV && (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
-    BOOL hasiOS7 = UIKit_IsSystemVersionAtLeast(7.0);
+    nez_b32_t hasiOS7 = UIKit_IsSystemVersionAtLeast(7.0);
 
     /* The view should always show behind the status bar in iOS 7+. */
     if (!hasiOS7 && !(window->flags & (SDL_WINDOW_BORDERLESS|SDL_WINDOW_FULLSCREEN))) {
@@ -208,7 +208,7 @@ UIKit_ComputeViewFrame(SDL_Window *window, UIScreen *screen)
      * https://forums.developer.apple.com/thread/65337 */
     if (UIKit_IsSystemVersionAtLeast(8.0)) {
         UIInterfaceOrientation orient = [UIApplication sharedApplication].statusBarOrientation;
-        BOOL isLandscape = UIInterfaceOrientationIsLandscape(orient);
+        nez_b32_t isLandscape = UIInterfaceOrientationIsLandscape(orient);
 
         if (isLandscape != (frame.size.width > frame.size.height)) {
             float height = frame.size.width;
@@ -239,7 +239,7 @@ void SDL_NSLog(const char *text)
  * This doesn't really have aything to do with the interfaces of the SDL video
  * subsystem, but we need to stuff this into an Objective-C source code file.
  */
-SDL_bool SDL_IsIPad(void)
+SDL_nez_b32_t SDL_IsIPad(void)
 {
     return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
 }

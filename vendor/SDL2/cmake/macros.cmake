@@ -28,7 +28,7 @@ macro(MESSAGE_ERROR _TEXT)
   message(FATAL_ERROR "*** ERROR: ${_TEXT}")
 endmacro()
 
-macro(MESSAGE_BOOL_OPTION _NAME _VALUE)
+macro(MESSAGE_nez_b32_t_OPTION _NAME _VALUE)
   if(${_VALUE})
     message(STATUS "  ${_NAME}:\tON")
   else()

@@ -57,7 +57,7 @@ struct GL_ShaderContext
     PFNGLUNIFORM1FARBPROC glUniform1fARB;
     PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 
-    SDL_bool GL_ARB_texture_rectangle_supported;
+    SDL_nez_b32_t GL_ARB_texture_rectangle_supported;
 
     GL_ShaderData shaders[NUM_SHADERS];
 };
@@ -327,7 +327,7 @@ static const char *shader_source[NUM_SHADERS][2] =
     },
 };
 
-static SDL_bool
+static SDL_nez_b32_t
 CompileShader(GL_ShaderContext *ctx, GLhandleARB shader, const char *defines, const char *source)
 {
     GLint status;
@@ -360,7 +360,7 @@ CompileShader(GL_ShaderContext *ctx, GLhandleARB shader, const char *defines, co
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 CompileShaderProgram(GL_ShaderContext *ctx, int index, GL_ShaderData *data)
 {
     const int num_tmus_bound = 4;
@@ -433,7 +433,7 @@ GL_ShaderContext *
 GL_CreateShaderContext(void)
 {
     GL_ShaderContext *ctx;
-    SDL_bool shaders_supported;
+    SDL_nez_b32_t shaders_supported;
     int i;
 
     ctx = (GL_ShaderContext *)SDL_calloc(1, sizeof(*ctx));

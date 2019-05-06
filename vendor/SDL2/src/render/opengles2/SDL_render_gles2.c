@@ -96,8 +96,8 @@ typedef struct GLES2_TextureData
     void *pixel_data;
     int pitch;
     /* YUV texture support */
-    SDL_bool yuv;
-    SDL_bool nv12;
+    SDL_nez_b32_t yuv;
+    SDL_nez_b32_t nv12;
     GLenum texture_v;
     GLenum texture_u;
     GLES2_FBOList *fbo;
@@ -175,11 +175,11 @@ typedef struct GLES2_DriverContext
 {
     SDL_GLContext *context;
 
-    SDL_bool debug_enabled;
+    SDL_nez_b32_t debug_enabled;
 
     struct {
         SDL_BlendMode blendMode;
-        SDL_bool tex_coords;
+        SDL_nez_b32_t tex_coords;
     } current;
 
 #define SDL_PROC(ret,func,params) ret (APIENTRY *func) params;
@@ -413,7 +413,7 @@ static GLenum GetBlendEquation(SDL_BlendOperation operation)
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 GLES2_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode)
 {
     SDL_BlendFactor srcColorFactor = SDL_GetBlendModeSrcColorFactor(blendMode);
@@ -1391,7 +1391,7 @@ static int GLES2_RenderReadPixels(SDL_Renderer * renderer, const SDL_Rect * rect
                     Uint32 pixel_format, void * pixels, int pitch);
 static void GLES2_RenderPresent(SDL_Renderer *renderer);
 
-static SDL_bool
+static SDL_nez_b32_t
 CompareColors(Uint8 r1, Uint8 g1, Uint8 b1, Uint8 a1,
               Uint8 r2, Uint8 g2, Uint8 b2, Uint8 a2)
 {
@@ -1470,7 +1470,7 @@ GLES2_SetBlendMode(GLES2_DriverContext *data, SDL_BlendMode blendMode)
 }
 
 static void
-GLES2_SetTexCoords(GLES2_DriverContext * data, SDL_bool enabled)
+GLES2_SetTexCoords(GLES2_DriverContext * data, SDL_nez_b32_t enabled)
 {
     if (enabled != data->current.tex_coords) {
         if (enabled) {
@@ -2080,13 +2080,13 @@ GLES2_CreateRenderer(SDL_Window *window, Uint32 flags)
     GLES2_DriverContext *data;
     GLint nFormats;
 #ifndef ZUNE_HD
-    GLboolean hasCompiler;
+    GLnez_b32_tean hasCompiler;
 #endif
     Uint32 window_flags = 0; /* -Wconditional-uninitialized */
     GLint window_framebuffer;
     GLint value;
     int profile_mask = 0, major = 0, minor = 0;
-    SDL_bool changed_window = SDL_FALSE;
+    SDL_nez_b32_t changed_window = SDL_FALSE;
 
     if (SDL_GL_GetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, &profile_mask) < 0) {
         goto error;
@@ -2183,7 +2183,7 @@ GLES2_CreateRenderer(SDL_Window *window, Uint32 flags)
     nFormats = 1;
 #else /* !ZUNE_HD */
     data->glGetIntegerv(GL_NUM_SHADER_BINARY_FORMATS, &nFormats);
-    data->glGetBooleanv(GL_SHADER_COMPILER, &hasCompiler);
+    data->glGetnez_b32_teanv(GL_SHADER_COMPILER, &hasCompiler);
     if (hasCompiler) {
         ++nFormats;
     }

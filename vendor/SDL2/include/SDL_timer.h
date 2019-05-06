@@ -97,11 +97,11 @@ extern DECLSPEC SDL_TimerID SDLCALL SDL_AddTimer(Uint32 interval,
 /**
  * \brief Remove a timer knowing its ID.
  *
- * \return A boolean value indicating success or failure.
+ * \return A nez_b32_tean value indicating success or failure.
  *
  * \warning It is not safe to remove a timer multiple times.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_RemoveTimer(SDL_TimerID id);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_RemoveTimer(SDL_TimerID id);
 
 
 /* Ends C function definitions when using C++ */

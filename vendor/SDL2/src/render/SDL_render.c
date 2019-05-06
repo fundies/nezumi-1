@@ -319,7 +319,7 @@ SDL_CreateRenderer(SDL_Window * window, int index, Uint32 flags)
     }
 
     if (SDL_GetHint(SDL_HINT_RENDER_VSYNC)) {
-        if (SDL_GetHintBoolean(SDL_HINT_RENDER_VSYNC, SDL_TRUE)) {
+        if (SDL_GetHintnez_b32_tean(SDL_HINT_RENDER_VSYNC, SDL_TRUE)) {
             flags |= SDL_RENDERER_PRESENTVSYNC;
         } else {
             flags &= ~SDL_RENDERER_PRESENTVSYNC;
@@ -465,7 +465,7 @@ SDL_GetRendererOutputSize(SDL_Renderer * renderer, int *w, int *h)
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 IsSupportedBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode)
 {
     switch (blendMode)
@@ -482,7 +482,7 @@ IsSupportedBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode)
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 IsSupportedFormat(SDL_Renderer * renderer, Uint32 format)
 {
     Uint32 i;
@@ -508,7 +508,7 @@ GetClosestSupportedFormat(SDL_Renderer * renderer, Uint32 format)
             }
         }
     } else {
-        SDL_bool hasAlpha = SDL_ISPIXELFORMAT_ALPHA(format);
+        SDL_nez_b32_t hasAlpha = SDL_ISPIXELFORMAT_ALPHA(format);
 
         /* We just want to match the first format that has the same channels */
         for (i = 0; i < renderer->info.num_texture_formats; ++i) {
@@ -636,7 +636,7 @@ SDL_Texture *
 SDL_CreateTextureFromSurface(SDL_Renderer * renderer, SDL_Surface * surface)
 {
     const SDL_PixelFormat *fmt;
-    SDL_bool needAlpha;
+    SDL_nez_b32_t needAlpha;
     Uint32 i;
     Uint32 format;
     SDL_Texture *texture;
@@ -1197,7 +1197,7 @@ SDL_UnlockTexture(SDL_Texture * texture)
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_RenderTargetSupported(SDL_Renderer *renderer)
 {
     if (!renderer || !renderer->SetRenderTarget) {
@@ -1311,7 +1311,7 @@ UpdateLogicalSize(SDL_Renderer *renderer)
     hint = SDL_GetHint(SDL_HINT_RENDER_LOGICAL_SIZE_MODE);
     if (hint && (*hint == '1' || SDL_strcasecmp(hint, "overscan") == 0))  {
 #if SDL_VIDEO_RENDER_D3D
-        SDL_bool overscan_supported = SDL_TRUE;
+        SDL_nez_b32_t overscan_supported = SDL_TRUE;
         /* Unfortunately, Direct3D 9 doesn't support negative viewport numbers
            which the overscan implementation relies on.
         */
@@ -1432,7 +1432,7 @@ SDL_RenderGetLogicalSize(SDL_Renderer * renderer, int *w, int *h)
 }
 
 int
-SDL_RenderSetIntegerScale(SDL_Renderer * renderer, SDL_bool enable)
+SDL_RenderSetIntegerScale(SDL_Renderer * renderer, SDL_nez_b32_t enable)
 {
     CHECK_RENDERER_MAGIC(renderer, -1);
 
@@ -1441,7 +1441,7 @@ SDL_RenderSetIntegerScale(SDL_Renderer * renderer, SDL_bool enable)
     return UpdateLogicalSize(renderer);
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDLCALL SDL_RenderGetIntegerScale(SDL_Renderer * renderer)
 {
     CHECK_RENDERER_MAGIC(renderer, SDL_FALSE);
@@ -1513,7 +1513,7 @@ SDL_RenderGetClipRect(SDL_Renderer * renderer, SDL_Rect * rect)
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_RenderIsClipEnabled(SDL_Renderer * renderer)
 {
     CHECK_RENDERER_MAGIC(renderer, SDL_FALSE)

@@ -47,7 +47,7 @@
 static SDL_Renderer *D3D_CreateRenderer(SDL_Window * window, Uint32 flags);
 static void D3D_WindowEvent(SDL_Renderer * renderer,
                             const SDL_WindowEvent *event);
-static SDL_bool D3D_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode);
+static SDL_nez_b32_t D3D_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode);
 static int D3D_CreateTexture(SDL_Renderer * renderer, SDL_Texture * texture);
 static int D3D_RecreateTexture(SDL_Renderer * renderer, SDL_Texture * texture);
 static int D3D_UpdateTexture(SDL_Renderer * renderer, SDL_Texture * texture,
@@ -103,9 +103,9 @@ typedef struct
     IDirect3DDevice9 *device;
     UINT adapter;
     D3DPRESENT_PARAMETERS pparams;
-    SDL_bool updateSize;
-    SDL_bool beginScene;
-    SDL_bool enableSeparateAlphaBlend;
+    SDL_nez_b32_t updateSize;
+    SDL_nez_b32_t beginScene;
+    SDL_nez_b32_t enableSeparateAlphaBlend;
     D3DTEXTUREFILTERTYPE scaleMode[8];
     IDirect3DSurface9 *defaultRenderTarget;
     IDirect3DSurface9 *currentRenderTarget;
@@ -115,7 +115,7 @@ typedef struct
 
 typedef struct
 {
-    SDL_bool dirty;
+    SDL_nez_b32_t dirty;
     int w, h;
     DWORD usage;
     Uint32 format;
@@ -130,7 +130,7 @@ typedef struct
     D3DTEXTUREFILTERTYPE scaleMode;
 
     /* YV12 texture support */
-    SDL_bool yuv;
+    SDL_nez_b32_t yuv;
     D3D_TextureRep utexture;
     D3D_TextureRep vtexture;
     Uint8 *pixels;
@@ -533,7 +533,7 @@ D3D_CreateRenderer(SDL_Window * window, Uint32 flags)
         device_flags |= D3DCREATE_SOFTWARE_VERTEXPROCESSING;
     }
 
-    if (SDL_GetHintBoolean(SDL_HINT_RENDER_DIRECT3D_THREADSAFE, SDL_FALSE)) {
+    if (SDL_GetHintnez_b32_tean(SDL_HINT_RENDER_DIRECT3D_THREADSAFE, SDL_FALSE)) {
         device_flags |= D3DCREATE_MULTITHREADED;
     }
 
@@ -640,7 +640,7 @@ static D3DBLEND GetBlendFunc(SDL_BlendFactor factor)
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 D3D_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode)
 {
     D3D_RenderData *data = (D3D_RenderData *) renderer->driverdata;

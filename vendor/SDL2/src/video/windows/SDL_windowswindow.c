@@ -84,7 +84,7 @@ GetWindowStyle(SDL_Window * window)
                If you want a borderless window the size of the desktop that looks like a fullscreen
                window, then you should use the SDL_WINDOW_FULLSCREEN_DESKTOP flag.
              */
-            if (SDL_GetHintBoolean("SDL_BORDERLESS_WINDOWED_STYLE", SDL_FALSE)) {
+            if (SDL_GetHintnez_b32_tean("SDL_BORDERLESS_WINDOWED_STYLE", SDL_FALSE)) {
                 style |= STYLE_BORDERLESS_WINDOWED;
             } else {
                 style |= STYLE_BORDERLESS;
@@ -107,7 +107,7 @@ GetWindowStyle(SDL_Window * window)
 }
 
 static void
-WIN_AdjustWindowRectWithStyle(SDL_Window *window, DWORD style, BOOL menu, int *x, int *y, int *width, int *height, SDL_bool use_current)
+WIN_AdjustWindowRectWithStyle(SDL_Window *window, DWORD style, nez_b32_t menu, int *x, int *y, int *width, int *height, SDL_nez_b32_t use_current)
 {
     RECT rect;
 
@@ -129,12 +129,12 @@ WIN_AdjustWindowRectWithStyle(SDL_Window *window, DWORD style, BOOL menu, int *x
 }
 
 static void
-WIN_AdjustWindowRect(SDL_Window *window, int *x, int *y, int *width, int *height, SDL_bool use_current)
+WIN_AdjustWindowRect(SDL_Window *window, int *x, int *y, int *width, int *height, SDL_nez_b32_t use_current)
 {
     SDL_WindowData *data = (SDL_WindowData *)window->driverdata;
     HWND hwnd = data->hwnd;
     DWORD style;
-    BOOL menu;
+    nez_b32_t menu;
 
     style = GetWindowLong(hwnd, GWL_STYLE);
     menu = (style & WS_CHILDWINDOW) ? FALSE : (GetMenu(hwnd) != NULL);
@@ -165,7 +165,7 @@ WIN_SetWindowPositionInternal(_THIS, SDL_Window * window, UINT flags)
 }
 
 static int
-SetupWindowData(_THIS, SDL_Window * window, HWND hwnd, HWND parent, SDL_bool created)
+SetupWindowData(_THIS, SDL_Window * window, HWND hwnd, HWND parent, SDL_nez_b32_t created)
 {
     SDL_VideoData *videodata = (SDL_VideoData *) _this->driverdata;
     SDL_WindowData *data;
@@ -593,7 +593,7 @@ WIN_MinimizeWindow(_THIS, SDL_Window * window)
 }
 
 void
-WIN_SetWindowBordered(_THIS, SDL_Window * window, SDL_bool bordered)
+WIN_SetWindowBordered(_THIS, SDL_Window * window, SDL_nez_b32_t bordered)
 {
     SDL_WindowData *data = (SDL_WindowData *)window->driverdata;
     HWND hwnd = data->hwnd;
@@ -610,7 +610,7 @@ WIN_SetWindowBordered(_THIS, SDL_Window * window, SDL_bool bordered)
 }
 
 void
-WIN_SetWindowResizable(_THIS, SDL_Window * window, SDL_bool resizable)
+WIN_SetWindowResizable(_THIS, SDL_Window * window, SDL_nez_b32_t resizable)
 {
     SDL_WindowData *data = (SDL_WindowData *)window->driverdata;
     HWND hwnd = data->hwnd;
@@ -634,7 +634,7 @@ WIN_RestoreWindow(_THIS, SDL_Window * window)
 }
 
 void
-WIN_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_bool fullscreen)
+WIN_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_nez_b32_t fullscreen)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
     HWND hwnd = data->hwnd;
@@ -670,7 +670,7 @@ WIN_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, 
             style &= ~WS_MAXIMIZE;
         }
     } else {
-        BOOL menu;
+        nez_b32_t menu;
 
         /* Restore window-maximization state, as applicable.
            Special care is taken to *not* do this if and when we're
@@ -698,7 +698,7 @@ WIN_SetWindowGammaRamp(_THIS, SDL_Window * window, const Uint16 * ramp)
     SDL_VideoDisplay *display = SDL_GetDisplayForWindow(window);
     SDL_DisplayData *data = (SDL_DisplayData *) display->driverdata;
     HDC hdc;
-    BOOL succeeded = FALSE;
+    nez_b32_t succeeded = FALSE;
 
     hdc = CreateDC(data->DeviceName, NULL, NULL, NULL);
     if (hdc) {
@@ -717,7 +717,7 @@ WIN_GetWindowGammaRamp(_THIS, SDL_Window * window, Uint16 * ramp)
     SDL_VideoDisplay *display = SDL_GetDisplayForWindow(window);
     SDL_DisplayData *data = (SDL_DisplayData *) display->driverdata;
     HDC hdc;
-    BOOL succeeded = FALSE;
+    nez_b32_t succeeded = FALSE;
 
     hdc = CreateDC(data->DeviceName, NULL, NULL, NULL);
     if (hdc) {
@@ -731,7 +731,7 @@ WIN_GetWindowGammaRamp(_THIS, SDL_Window * window, Uint16 * ramp)
 }
 
 void
-WIN_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed)
+WIN_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed)
 {
     WIN_UpdateClipCursor(window);
 
@@ -775,7 +775,7 @@ WIN_DestroyWindow(_THIS, SDL_Window * window)
     window->driverdata = NULL;
 }
 
-SDL_bool
+SDL_nez_b32_t
 WIN_GetWindowWMInfo(_THIS, SDL_Window * window, SDL_SysWMinfo * info)
 {
     const SDL_WindowData *data = (const SDL_WindowData *) window->driverdata;
@@ -946,7 +946,7 @@ WIN_UpdateClipCursor(SDL_Window *window)
 }
 
 int
-WIN_SetWindowHitTest(SDL_Window *window, SDL_bool enabled)
+WIN_SetWindowHitTest(SDL_Window *window, SDL_nez_b32_t enabled)
 {
     return 0;  /* just succeed, the real work is done elsewhere. */
 }
@@ -985,7 +985,7 @@ WIN_SetWindowOpacity(_THIS, SDL_Window * window, float opacity)
 }
 
 void
-WIN_AcceptDragAndDrop(SDL_Window * window, SDL_bool accept)
+WIN_AcceptDragAndDrop(SDL_Window * window, SDL_nez_b32_t accept)
 {
     const SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
     DragAcceptFiles(data->hwnd, accept ? TRUE : FALSE);

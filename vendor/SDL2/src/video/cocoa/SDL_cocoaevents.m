@@ -50,7 +50,7 @@
     SDL_SendQuit();
 }
 
-static SDL_bool s_bShouldHandleEventsInSDLApplication = SDL_FALSE;
+static SDL_nez_b32_t s_bShouldHandleEventsInSDLApplication = SDL_FALSE;
 
 static void Cocoa_DispatchEvent(NSEvent *theEvent)
 {
@@ -95,9 +95,9 @@ static void Cocoa_DispatchEvent(NSEvent *theEvent)
 + (void)registerUserDefaults
 {
     NSDictionary *appDefaults = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 [NSNumber numberWithBool:NO], @"AppleMomentumScrollSupported",
-                                 [NSNumber numberWithBool:NO], @"ApplePressAndHoldEnabled",
-                                 [NSNumber numberWithBool:YES], @"ApplePersistenceIgnoreState",
+                                 [NSNumber numberWithnez_b32_t:NO], @"AppleMomentumScrollSupported",
+                                 [NSNumber numberWithnez_b32_t:NO], @"ApplePressAndHoldEnabled",
+                                 [NSNumber numberWithnez_b32_t:YES], @"ApplePersistenceIgnoreState",
                                  nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     [appDefaults release];
@@ -112,7 +112,7 @@ static void Cocoa_DispatchEvent(NSEvent *theEvent)
 
 @interface SDLAppDelegate : NSObject <NSApplicationDelegate> {
 @public
-    BOOL seenFirstActivate;
+    nez_b32_t seenFirstActivate;
 }
 
 - (id)init;
@@ -225,9 +225,9 @@ static void Cocoa_DispatchEvent(NSEvent *theEvent)
     }
 }
 
-- (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
+- (nez_b32_t)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
-    return (BOOL)SDL_SendDropFile(NULL, [filename UTF8String]) && SDL_SendDropComplete(NULL);
+    return (nez_b32_t)SDL_SendDropFile(NULL, [filename UTF8String]) && SDL_SendDropComplete(NULL);
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
@@ -237,7 +237,7 @@ static void Cocoa_DispatchEvent(NSEvent *theEvent)
      * de-focused and re-focused), if this call is in Cocoa_RegisterApp instead
      * of here. https://bugzilla.libsdl.org/show_bug.cgi?id=3051
      */
-    if (!SDL_GetHintBoolean(SDL_HINT_MAC_BACKGROUND_APP, SDL_FALSE)) {
+    if (!SDL_GetHintnez_b32_tean(SDL_HINT_MAC_BACKGROUND_APP, SDL_FALSE)) {
         [NSApp activateIgnoringOtherApps:YES];
     }
 
@@ -388,7 +388,7 @@ Cocoa_RegisterApp(void)
 
         s_bShouldHandleEventsInSDLApplication = SDL_TRUE;
 
-        if (!SDL_GetHintBoolean(SDL_HINT_MAC_BACKGROUND_APP, SDL_FALSE)) {
+        if (!SDL_GetHintnez_b32_tean(SDL_HINT_MAC_BACKGROUND_APP, SDL_FALSE)) {
             [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
         }
 

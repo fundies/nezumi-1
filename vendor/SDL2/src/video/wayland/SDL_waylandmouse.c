@@ -359,7 +359,7 @@ Wayland_WarpMouseGlobal(int x, int y)
 }
 
 static int
-Wayland_SetRelativeMouseMode(SDL_bool enabled)
+Wayland_SetRelativeMouseMode(SDL_nez_b32_t enabled)
 {
     SDL_VideoDevice *vd = SDL_GetVideoDevice();
     SDL_VideoData *data = (SDL_VideoData *) vd->driverdata;

@@ -47,6 +47,39 @@ extern nez_b32_t g_nez_window_fullscreen;
 /** Whether the window is focused. */
 extern nez_b32_t g_nez_window_focus;
 
+/** The keyboard state for the current frame. */
+extern nez_b32_t g_nez_window_focus;
+
+/** The keyboard state for the current frame. */
+extern nez_b32_t g_nez_keyboard_current[];
+
+/** The keyboard state for the previous frame. */
+extern nez_b32_t g_nez_keyboard_previous[];
+
+/** Whether any key is currently down. */
+extern nez_b32_t g_nez_keyboard_any_down;
+
+/** Whether any key was pressed within the last frame. */
+extern nez_b32_t g_nez_keyboard_any_pressed;
+
+/** Whether any key was released within the last frame. */
+extern nez_b32_t g_nez_keyboard_any_released;
+
+/** The mouse state for the current frame. */
+extern nez_b32_t g_nez_mouse_current[];
+
+/** The mouse state for the previous frame. */
+extern nez_b32_t g_nez_mouse_previous[];
+
+/** Whether any mouse button is currently down. */
+extern nez_b32_t g_nez_mouse_any_down;
+
+/** Whether any mouse button was pressed within the last frame. */
+extern nez_b32_t g_nez_mouse_any_pressed;
+
+/** Whether any mouse button was released within the last frame. */
+extern nez_b32_t g_nez_mouse_any_released;
+
 /**
  * Initializes the window module.
  * 

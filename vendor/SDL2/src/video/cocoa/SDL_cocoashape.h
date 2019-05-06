@@ -31,7 +31,7 @@
 
 typedef struct {
     NSGraphicsContext* context;
-    SDL_bool saved;
+    SDL_nez_b32_t saved;
 
     SDL_ShapeTree* shape;
 } SDL_ShapeData;

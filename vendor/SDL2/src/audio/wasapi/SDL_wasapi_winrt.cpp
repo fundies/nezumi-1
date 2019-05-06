@@ -58,7 +58,7 @@ using namespace Microsoft::WRL;
 class SDL_WasapiDeviceEventHandler
 {
 public:
-    SDL_WasapiDeviceEventHandler(const SDL_bool _iscapture);
+    SDL_WasapiDeviceEventHandler(const SDL_nez_b32_t _iscapture);
     ~SDL_WasapiDeviceEventHandler();
     void OnDeviceAdded(DeviceWatcher^ sender, DeviceInformation^ args);
     void OnDeviceRemoved(DeviceWatcher^ sender, DeviceInformationUpdate^ args);
@@ -67,7 +67,7 @@ public:
     void OnDefaultCaptureDeviceChanged(Platform::Object^ sender, DefaultAudioCaptureDeviceChangedEventArgs^ args);
 
 private:
-    const SDL_bool iscapture;
+    const SDL_nez_b32_t iscapture;
     DeviceWatcher^ watcher;
     Windows::Foundation::EventRegistrationToken added_handler;
     Windows::Foundation::EventRegistrationToken removed_handler;
@@ -75,7 +75,7 @@ private:
     Windows::Foundation::EventRegistrationToken default_changed_handler;
 };
 
-SDL_WasapiDeviceEventHandler::SDL_WasapiDeviceEventHandler(const SDL_bool _iscapture)
+SDL_WasapiDeviceEventHandler::SDL_WasapiDeviceEventHandler(const SDL_nez_b32_t _iscapture)
     : iscapture(_iscapture)
     , watcher(DeviceInformation::CreateWatcher(_iscapture ? DeviceClass::AudioCapture : DeviceClass::AudioRender))
 {
@@ -198,7 +198,7 @@ WASAPI_PlatformDeleteActivationHandler(void *handler)
 }
 
 int
-WASAPI_ActivateDevice(_THIS, const SDL_bool isrecovery)
+WASAPI_ActivateDevice(_THIS, const SDL_nez_b32_t isrecovery)
 {
     LPCWSTR devid = _this->hidden->devid;
     Platform::String^ defdevid;

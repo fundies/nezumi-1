@@ -640,8 +640,8 @@ extern DECLSPEC int SDLCALL SDL_PeepEvents(SDL_Event * events, int numevents,
 /**
  *  Checks to see if certain event types are in the event queue.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasEvent(Uint32 type);
-extern DECLSPEC SDL_bool SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasEvent(Uint32 type);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType);
 
 /**
  *  This function clears events from the event queue
@@ -727,7 +727,7 @@ extern DECLSPEC void SDLCALL SDL_SetEventFilter(SDL_EventFilter filter,
  *  Return the current event filter - can be used to "chain" filters.
  *  If there is no event filter set, this function returns SDL_FALSE.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_GetEventFilter(SDL_EventFilter * filter,
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_GetEventFilter(SDL_EventFilter * filter,
                                                     void **userdata);
 
 /**

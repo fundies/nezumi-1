@@ -129,12 +129,12 @@ typedef struct
 {
     void*           frontbuffer ;
     void*           backbuffer ;
-    SDL_bool        initialized ;
-    SDL_bool        displayListAvail ;
+    SDL_nez_b32_t        initialized ;
+    SDL_nez_b32_t        displayListAvail ;
     unsigned int    psm ;
     unsigned int    bpp ;
 
-    SDL_bool        vsync;
+    SDL_nez_b32_t        vsync;
     unsigned int    currentColor;
     int             currentBlendMode;
 
@@ -152,7 +152,7 @@ typedef struct
     unsigned int        bits;                               /**< Image bits per pixel. */
     unsigned int        format;                             /**< Image format - one of ::pgePixelFormat. */
     unsigned int        pitch;
-    SDL_bool            swizzled;                           /**< Is image swizzled. */
+    SDL_nez_b32_t            swizzled;                           /**< Is image swizzled. */
 
 } PSP_TextureData;
 

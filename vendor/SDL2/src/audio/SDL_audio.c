@@ -115,7 +115,7 @@ static const AudioBootStrap *const bootstrap[] = {
 #ifdef SDL_LIBSAMPLERATE_DYNAMIC
 static void *SRC_lib = NULL;
 #endif
-SDL_bool SRC_available = SDL_FALSE;
+SDL_nez_b32_t SRC_available = SDL_FALSE;
 int SRC_converter = 0;
 SRC_STATE* (*SRC_src_new)(int converter_type, int channels, int *error) = NULL;
 int (*SRC_src_process)(SRC_STATE *state, SRC_DATA *data) = NULL;
@@ -123,7 +123,7 @@ int (*SRC_src_reset)(SRC_STATE *state) = NULL;
 SRC_STATE* (*SRC_src_delete)(SRC_STATE *state) = NULL;
 const char* (*SRC_src_strerror)(int error) = NULL;
 
-static SDL_bool
+static SDL_nez_b32_t
 LoadLibSampleRate(void)
 {
     const char *hint = SDL_GetHint(SDL_HINT_AUDIO_RESAMPLING_MODE);
@@ -295,7 +295,7 @@ SDL_AudioOpenDevice_Default(_THIS, void *handle, const char *devname, int iscapt
     return SDL_Unsupported();
 }
 
-static SDL_INLINE SDL_bool
+static SDL_INLINE SDL_nez_b32_t
 is_in_audio_device_thread(SDL_AudioDevice * device)
 {
     /* The device thread locks the same mutex, but not through the public API.
@@ -517,7 +517,7 @@ void SDL_OpenedAudioDeviceDisconnected(SDL_AudioDevice *device)
 }
 
 static void
-mark_device_removed(void *handle, SDL_AudioDeviceItem *devices, SDL_bool *removedFlag)
+mark_device_removed(void *handle, SDL_AudioDeviceItem *devices, SDL_nez_b32_t *removedFlag)
 {
     SDL_AudioDeviceItem *item;
     SDL_assert(handle != NULL);
@@ -1001,7 +1001,7 @@ SDL_GetCurrentAudioDriver()
 
 /* Clean out devices that we've removed but had to keep around for stability. */
 static void
-clean_out_device_list(SDL_AudioDeviceItem **devices, int *devCount, SDL_bool *removedFlag)
+clean_out_device_list(SDL_AudioDeviceItem **devices, int *devCount, SDL_nez_b32_t *removedFlag)
 {
     SDL_AudioDeviceItem *item = *devices;
     SDL_AudioDeviceItem *prev = NULL;
@@ -1209,11 +1209,11 @@ open_audio_device(const char *devname, int iscapture,
                   const SDL_AudioSpec * desired, SDL_AudioSpec * obtained,
                   int allowed_changes, int min_id)
 {
-    const SDL_bool is_internal_thread = (desired->callback == NULL);
+    const SDL_nez_b32_t is_internal_thread = (desired->callback == NULL);
     SDL_AudioDeviceID id = 0;
     SDL_AudioSpec _obtained;
     SDL_AudioDevice *device;
-    SDL_bool build_stream;
+    SDL_nez_b32_t build_stream;
     void *handle = NULL;
     int i = 0;
 

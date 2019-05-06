@@ -29,7 +29,7 @@
 
 typedef struct SDL_VideoData
 {
-    SDL_bool egl_initialized;   /* OpenGL ES device initialization status */
+    SDL_nez_b32_t egl_initialized;   /* OpenGL ES device initialization status */
     uint32_t egl_refcount;      /* OpenGL ES reference count              */
 
 
@@ -45,7 +45,7 @@ typedef struct SDL_DisplayData
 
 typedef struct SDL_WindowData
 {
-    SDL_bool uses_gles;         /* if true window must support OpenGL ES */
+    SDL_nez_b32_t uses_gles;         /* if true window must support OpenGL ES */
 
 } SDL_WindowData;
 
@@ -73,11 +73,11 @@ void PSP_RaiseWindow(_THIS, SDL_Window * window);
 void PSP_MaximizeWindow(_THIS, SDL_Window * window);
 void PSP_MinimizeWindow(_THIS, SDL_Window * window);
 void PSP_RestoreWindow(_THIS, SDL_Window * window);
-void PSP_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed);
+void PSP_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed);
 void PSP_DestroyWindow(_THIS, SDL_Window * window);
 
 /* Window manager function */
-SDL_bool PSP_GetWindowWMInfo(_THIS, SDL_Window * window,
+SDL_nez_b32_t PSP_GetWindowWMInfo(_THIS, SDL_Window * window,
                              struct SDL_SysWMinfo *info);
 
 /* OpenGL/OpenGL ES functions */
@@ -92,10 +92,10 @@ int PSP_GL_SwapWindow(_THIS, SDL_Window * window);
 void PSP_GL_DeleteContext(_THIS, SDL_GLContext context);
 
 /* PSP on screen keyboard */
-SDL_bool PSP_HasScreenKeyboardSupport(_THIS);
+SDL_nez_b32_t PSP_HasScreenKeyboardSupport(_THIS);
 void PSP_ShowScreenKeyboard(_THIS, SDL_Window *window);
 void PSP_HideScreenKeyboard(_THIS, SDL_Window *window);
-SDL_bool PSP_IsScreenKeyboardShown(_THIS, SDL_Window *window);
+SDL_nez_b32_t PSP_IsScreenKeyboardShown(_THIS, SDL_Window *window);
 
 #endif /* SDL_pspvideo_h_ */
 

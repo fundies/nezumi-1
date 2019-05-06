@@ -66,7 +66,7 @@ SDL_GetClipboardText(void)
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_HasClipboardText(void)
 {
     SDL_VideoDevice *_this = SDL_GetVideoDevice();

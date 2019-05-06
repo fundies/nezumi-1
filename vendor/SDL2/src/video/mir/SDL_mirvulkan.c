@@ -40,8 +40,8 @@ int MIR_Vulkan_LoadLibrary(_THIS, const char *path)
 {
     VkExtensionProperties *extensions = NULL;
     Uint32 extensionCount = 0;
-    SDL_bool hasSurfaceExtension = SDL_FALSE;
-    SDL_bool hasMIRSurfaceExtension = SDL_FALSE;
+    SDL_nez_b32_t hasSurfaceExtension = SDL_FALSE;
+    SDL_nez_b32_t hasMIRSurfaceExtension = SDL_FALSE;
     PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr = NULL;
     if(_this->vulkan_config.loader_handle)
         return SDL_SetError("Vulkan already loaded");
@@ -109,7 +109,7 @@ void MIR_Vulkan_UnloadLibrary(_THIS)
     }
 }
 
-SDL_bool MIR_Vulkan_GetInstanceExtensions(_THIS,
+SDL_nez_b32_t MIR_Vulkan_GetInstanceExtensions(_THIS,
                                           SDL_Window *window,
                                           unsigned *count,
                                           const char **names)
@@ -127,7 +127,7 @@ SDL_bool MIR_Vulkan_GetInstanceExtensions(_THIS,
             extensionsForMir);
 }
 
-SDL_bool MIR_Vulkan_CreateSurface(_THIS,
+SDL_nez_b32_t MIR_Vulkan_CreateSurface(_THIS,
                                   SDL_Window *window,
                                   VkInstance instance,
                                   VkSurfaceKHR *surface)

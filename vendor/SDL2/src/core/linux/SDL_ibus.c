@@ -174,7 +174,7 @@ static char *
 IBus_ReadAddressFromFile(const char *file_path)
 {
     char addr_buf[1024];
-    SDL_bool success = SDL_FALSE;
+    SDL_nez_b32_t success = SDL_FALSE;
     FILE *addr_file;
 
     addr_file = fopen(file_path, "r");
@@ -285,7 +285,7 @@ IBus_GetDBusAddressFilename(void)
     return SDL_strdup(file_path);
 }
 
-static SDL_bool IBus_CheckConnection(SDL_DBusContext *dbus);
+static SDL_nez_b32_t IBus_CheckConnection(SDL_DBusContext *dbus);
 
 static void SDLCALL
 IBus_SetCapabilities(void *data, const char *name, const char *old_val,
@@ -305,12 +305,12 @@ IBus_SetCapabilities(void *data, const char *name, const char *old_val,
 }
 
 
-static SDL_bool
+static SDL_nez_b32_t
 IBus_SetupConnection(SDL_DBusContext *dbus, const char* addr)
 {
     const char *client_name = "SDL2_Application";
     const char *path = NULL;
-    SDL_bool result = SDL_FALSE;
+    SDL_nez_b32_t result = SDL_FALSE;
     DBusObjectPathVTable ibus_vtable;
 
     SDL_zero(ibus_vtable);
@@ -350,7 +350,7 @@ IBus_SetupConnection(SDL_DBusContext *dbus, const char* addr)
     return result;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 IBus_CheckConnection(SDL_DBusContext *dbus)
 {
     if (!dbus) return SDL_FALSE;
@@ -365,7 +365,7 @@ IBus_CheckConnection(SDL_DBusContext *dbus)
         if (readsize > 0) {
         
             char *p;
-            SDL_bool file_updated = SDL_FALSE;
+            SDL_nez_b32_t file_updated = SDL_FALSE;
             
             for (p = buf; p < buf + readsize; /**/) {
                 struct inotify_event *event = (struct inotify_event*) p;
@@ -385,7 +385,7 @@ IBus_CheckConnection(SDL_DBusContext *dbus)
             if (file_updated) {
                 char *addr = IBus_ReadAddressFromFile(ibus_addr_file);
                 if (addr) {
-                    SDL_bool result = IBus_SetupConnection(dbus, addr);
+                    SDL_nez_b32_t result = IBus_SetupConnection(dbus, addr);
                     SDL_free(addr);
                     return result;
                 }
@@ -396,10 +396,10 @@ IBus_CheckConnection(SDL_DBusContext *dbus)
     return SDL_FALSE;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IBus_Init(void)
 {
-    SDL_bool result = SDL_FALSE;
+    SDL_nez_b32_t result = SDL_FALSE;
     SDL_DBusContext *dbus = SDL_DBus_GetContext();
     
     if (dbus) {
@@ -485,7 +485,7 @@ IBus_SimpleMessage(const char *method)
 }
 
 void
-SDL_IBus_SetFocus(SDL_bool focused)
+SDL_IBus_SetFocus(SDL_nez_b32_t focused)
 { 
     const char *method = focused ? "FocusIn" : "FocusOut";
     IBus_SimpleMessage(method);
@@ -497,7 +497,7 @@ SDL_IBus_Reset(void)
     IBus_SimpleMessage("Reset");
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IBus_ProcessKeyEvent(Uint32 keysym, Uint32 keycode)
 { 
     Uint32 result = 0;
@@ -507,7 +507,7 @@ SDL_IBus_ProcessKeyEvent(Uint32 keysym, Uint32 keycode)
         Uint32 mods = IBus_ModState();
         if (!SDL_DBus_CallMethodOnConnection(ibus_conn, IBUS_SERVICE, input_ctx_path, IBUS_INPUT_INTERFACE, "ProcessKeyEvent",
                 DBUS_TYPE_UINT32, &keysym, DBUS_TYPE_UINT32, &keycode, DBUS_TYPE_UINT32, &mods, DBUS_TYPE_INVALID,
-                DBUS_TYPE_BOOLEAN, &result, DBUS_TYPE_INVALID)) {
+                DBUS_TYPE_nez_b32_tEAN, &result, DBUS_TYPE_INVALID)) {
             result = 0;
         }
     }

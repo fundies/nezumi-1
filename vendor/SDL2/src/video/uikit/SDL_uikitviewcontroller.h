@@ -57,8 +57,8 @@
 
 #if !TARGET_OS_TV
 - (NSUInteger)supportedInterfaceOrientations;
-- (BOOL)prefersStatusBarHidden;
-- (BOOL)prefersHomeIndicatorAutoHidden;
+- (nez_b32_t)prefersStatusBarHidden;
+- (nez_b32_t)prefersHomeIndicatorAutoHidden;
 - (UIRectEdge)preferredScreenEdgesDeferringSystemGestures;
 
 @property (nonatomic, assign) int homeIndicatorHidden;
@@ -75,7 +75,7 @@
 
 - (void)updateKeyboard;
 
-@property (nonatomic, assign, getter=isKeyboardVisible) BOOL keyboardVisible;
+@property (nonatomic, assign, getter=isKeyboardVisible) nez_b32_t keyboardVisible;
 @property (nonatomic, assign) SDL_Rect textInputRect;
 @property (nonatomic, assign) int keyboardHeight;
 #endif
@@ -83,9 +83,9 @@
 @end
 
 #if SDL_IPHONE_KEYBOARD
-SDL_bool UIKit_HasScreenKeyboardSupport(_THIS);
+SDL_nez_b32_t UIKit_HasScreenKeyboardSupport(_THIS);
 void UIKit_ShowScreenKeyboard(_THIS, SDL_Window *window);
 void UIKit_HideScreenKeyboard(_THIS, SDL_Window *window);
-SDL_bool UIKit_IsScreenKeyboardShown(_THIS, SDL_Window *window);
+SDL_nez_b32_t UIKit_IsScreenKeyboardShown(_THIS, SDL_Window *window);
 void UIKit_SetTextInputRect(_THIS, SDL_Rect *rect);
 #endif

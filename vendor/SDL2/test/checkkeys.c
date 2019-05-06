@@ -103,7 +103,7 @@ PrintModifierState()
 }
 
 static void
-PrintKey(SDL_Keysym * sym, SDL_bool pressed, SDL_bool repeat)
+PrintKey(SDL_Keysym * sym, SDL_nez_b32_t pressed, SDL_nez_b32_t repeat)
 {
     char message[512];
     char *spot;

@@ -52,7 +52,7 @@ typedef struct SDL_WindowData
     /* Vsync callback cond and mutex */
     SDL_cond  *vsync_cond;
     SDL_mutex *vsync_cond_mutex;
-    SDL_bool double_buffer;
+    SDL_nez_b32_t double_buffer;
 
 } SDL_WindowData;
 
@@ -81,11 +81,11 @@ void RPI_RaiseWindow(_THIS, SDL_Window * window);
 void RPI_MaximizeWindow(_THIS, SDL_Window * window);
 void RPI_MinimizeWindow(_THIS, SDL_Window * window);
 void RPI_RestoreWindow(_THIS, SDL_Window * window);
-void RPI_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed);
+void RPI_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed);
 void RPI_DestroyWindow(_THIS, SDL_Window * window);
 
 /* Window manager function */
-SDL_bool RPI_GetWindowWMInfo(_THIS, SDL_Window * window,
+SDL_nez_b32_t RPI_GetWindowWMInfo(_THIS, SDL_Window * window,
                              struct SDL_SysWMinfo *info);
 
 /* OpenGL/OpenGL ES functions */

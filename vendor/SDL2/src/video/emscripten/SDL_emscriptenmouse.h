@@ -28,7 +28,7 @@
 typedef struct _Emscripten_CursorData
 {
     const char *system_cursor;
-    SDL_bool is_custom;
+    SDL_nez_b32_t is_custom;
 } Emscripten_CursorData;
 
 extern void

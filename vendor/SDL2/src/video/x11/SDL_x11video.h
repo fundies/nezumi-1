@@ -86,7 +86,7 @@ typedef struct SDL_VideoData
     Window clipboard_window;
 
     /* This is true for ICCCM2.0-compliant window managers */
-    SDL_bool net_wm;
+    SDL_nez_b32_t net_wm;
 
     /* Useful atoms */
     Atom WM_PROTOCOLS;
@@ -124,13 +124,13 @@ typedef struct SDL_VideoData
     Atom XKLAVIER_STATE;
 
     SDL_Scancode key_layout[256];
-    SDL_bool selection_waiting;
+    SDL_nez_b32_t selection_waiting;
 
-    SDL_bool broken_pointer_grab;  /* true if XGrabPointer seems unreliable. */
+    SDL_nez_b32_t broken_pointer_grab;  /* true if XGrabPointer seems unreliable. */
 
     Uint32 last_mode_change_deadline;
 
-    SDL_bool global_mouse_changed;
+    SDL_nez_b32_t global_mouse_changed;
     SDL_Point global_mouse_position;
     Uint32 global_mouse_buttons;
 
@@ -149,7 +149,7 @@ typedef struct SDL_VideoData
 
 } SDL_VideoData;
 
-extern SDL_bool X11_UseDirectColorVisuals(void);
+extern SDL_nez_b32_t X11_UseDirectColorVisuals(void);
 
 #endif /* SDL_x11video_h_ */
 

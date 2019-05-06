@@ -26,14 +26,14 @@
  * Returns SDL_TRUE if we have a definitive answer.
  * SDL_FALSE to try next implementation.
  */
-typedef SDL_bool
+typedef SDL_nez_b32_t
     (*SDL_GetPowerInfo_Impl) (SDL_PowerState * state, int *seconds,
                               int *percent);
 
 #ifndef SDL_POWER_DISABLED
 #ifdef SDL_POWER_HARDWIRED
 /* This is for things that _never_ have a battery */
-static SDL_bool
+static SDL_nez_b32_t
 SDL_GetPowerInfo_Hardwired(SDL_PowerState * state, int *seconds, int *percent)
 {
     *seconds = -1;

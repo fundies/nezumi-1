@@ -65,9 +65,9 @@ static struct timespec start_ts;
 static uint64_t start_mach;
 mach_timebase_info_data_t mach_base_info;
 #endif
-static SDL_bool has_monotonic_time = SDL_FALSE;
+static SDL_nez_b32_t has_monotonic_time = SDL_FALSE;
 static struct timeval start_tv;
-static SDL_bool ticks_started = SDL_FALSE;
+static SDL_nez_b32_t ticks_started = SDL_FALSE;
 
 void
 SDL_TicksInit(void)

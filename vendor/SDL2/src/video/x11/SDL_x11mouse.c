@@ -333,7 +333,7 @@ X11_WarpMouseGlobal(int x, int y)
 }
 
 static int
-X11_SetRelativeMouseMode(SDL_bool enabled)
+X11_SetRelativeMouseMode(SDL_nez_b32_t enabled)
 {
 #if SDL_VIDEO_DRIVER_X11_XINPUT2
     if(X11_Xinput2IsInitialized())

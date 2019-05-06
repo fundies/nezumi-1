@@ -259,7 +259,7 @@ Cocoa_WarpMouse(SDL_Window * window, int x, int y)
 }
 
 static int
-Cocoa_SetRelativeMouseMode(SDL_bool enabled)
+Cocoa_SetRelativeMouseMode(SDL_nez_b32_t enabled)
 {
     /* We will re-apply the relative mode when the window gets focus, if it
      * doesn't have focus right now.
@@ -381,7 +381,7 @@ Cocoa_HandleMouseEvent(_THIS, NSEvent *event)
         return;  /* can happen when returning from fullscreen Space on shutdown */
     }
 
-    const SDL_bool seenWarp = driverdata->seenWarp;
+    const SDL_nez_b32_t seenWarp = driverdata->seenWarp;
     driverdata->seenWarp = NO;
 
     const NSPoint location =  [NSEvent mouseLocation];

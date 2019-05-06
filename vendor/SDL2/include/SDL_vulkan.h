@@ -204,7 +204,7 @@ extern DECLSPEC void SDLCALL SDL_Vulkan_UnloadLibrary(void);
  *
  *  \sa SDL_Vulkan_CreateSurface()
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_Vulkan_GetInstanceExtensions(
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_Vulkan_GetInstanceExtensions(
 														SDL_Window *window,
 														unsigned int *pCount,
 														const char **pNames);
@@ -238,7 +238,7 @@ extern DECLSPEC SDL_bool SDLCALL SDL_Vulkan_GetInstanceExtensions(
  *
  *  \sa SDL_Vulkan_GetInstanceExtensions()
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_Vulkan_CreateSurface(
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_Vulkan_CreateSurface(
 												SDL_Window *window,
 												VkInstance instance,
 												VkSurfaceKHR* surface);

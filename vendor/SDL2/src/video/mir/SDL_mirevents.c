@@ -129,7 +129,7 @@ HandleMouseMotion(SDL_Window* sdl_window, int x, int y)
 }
 
 static void
-HandleTouchPress(int device_id, int source_id, SDL_bool down, float x, float y, float pressure)
+HandleTouchPress(int device_id, int source_id, SDL_nez_b32_t down, float x, float y, float pressure)
 {
     SDL_SendTouch(device_id, source_id, down, x, y, pressure);
 }

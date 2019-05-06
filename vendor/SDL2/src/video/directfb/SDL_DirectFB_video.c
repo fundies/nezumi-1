@@ -196,7 +196,7 @@ DirectFB_DeviceInformation(IDirectFB * dfb)
 
 }
 
-static int readBoolEnv(const char *env_name, int def_val)
+static int readnez_b32_tEnv(const char *env_name, int def_val)
 {
     char *stemp;
 
@@ -220,7 +220,7 @@ DirectFB_VideoInit(_THIS)
 
     /* avoid switching to the framebuffer when we
      * are running X11 */
-    ret = readBoolEnv(DFBENV_USE_X11_CHECK , 1);
+    ret = readnez_b32_tEnv(DFBENV_USE_X11_CHECK , 1);
     if (ret) {
         if (SDL_getenv("DISPLAY"))
             DirectFBSetOption("system", "x11");
@@ -228,7 +228,7 @@ DirectFB_VideoInit(_THIS)
             DirectFBSetOption("disable-module", "x11input");
     }
 
-    devdata->use_linux_input = readBoolEnv(DFBENV_USE_LINUX_INPUT, 1);       /* default: on */
+    devdata->use_linux_input = readnez_b32_tEnv(DFBENV_USE_LINUX_INPUT, 1);       /* default: on */
 
     if (!devdata->use_linux_input)
     {
@@ -240,8 +240,8 @@ DirectFB_VideoInit(_THIS)
 
     DirectFB_DeviceInformation(dfb);
 
-    devdata->use_yuv_underlays = readBoolEnv(DFBENV_USE_YUV_UNDERLAY, 0);     /* default: off */
-    devdata->use_yuv_direct = readBoolEnv(DFBENV_USE_YUV_DIRECT, 0);      /* default is off! */
+    devdata->use_yuv_underlays = readnez_b32_tEnv(DFBENV_USE_YUV_UNDERLAY, 0);     /* default: off */
+    devdata->use_yuv_direct = readnez_b32_tEnv(DFBENV_USE_YUV_DIRECT, 0);      /* default is off! */
 
     /* Create global Eventbuffer for axis events */
     if (devdata->use_linux_input) {
@@ -256,7 +256,7 @@ DirectFB_VideoInit(_THIS)
     }
 
     /* simple window manager support */
-    devdata->has_own_wm = readBoolEnv(DFBENV_USE_WM, 0);
+    devdata->has_own_wm = readnez_b32_tEnv(DFBENV_USE_WM, 0);
 
     devdata->initialized = 1;
 

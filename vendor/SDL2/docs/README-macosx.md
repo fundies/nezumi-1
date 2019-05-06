@@ -64,7 +64,7 @@ Some things you have to be aware of when using SDL on Mac OS X:
         return NSTerminateCancel;
     }
     
-    - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
+    - (nez_b32_t)application:(NSApplication *)theApplication openFile:(NSString *)filename
     {
         if (SDL_GetEventState(SDL_DROPFILE) == SDL_ENABLE) {
             SDL_Event event;

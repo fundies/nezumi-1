@@ -364,7 +364,7 @@ SDL_iconv(SDL_iconv_t cd,
             {
                 Uint8 *p = (Uint8 *) src;
                 size_t left = 0;
-                SDL_bool overlong = SDL_FALSE;
+                SDL_nez_b32_t overlong = SDL_FALSE;
                 if (p[0] >= 0xFC) {
                     if ((p[0] & 0xFE) != 0xFC) {
                         /* Skip illegal sequences

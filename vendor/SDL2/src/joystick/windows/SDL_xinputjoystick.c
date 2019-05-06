@@ -34,11 +34,11 @@
 /*
  * Internal stuff.
  */
-static SDL_bool s_bXInputEnabled = SDL_TRUE;
+static SDL_nez_b32_t s_bXInputEnabled = SDL_TRUE;
 static char *s_arrXInputDevicePath[XUSER_MAX_COUNT];
 
 
-static SDL_bool
+static SDL_nez_b32_t
 SDL_XInputUseOldJoystickMapping()
 {
 #ifdef __WINRT__
@@ -48,13 +48,13 @@ SDL_XInputUseOldJoystickMapping()
 #else
     static int s_XInputUseOldJoystickMapping = -1;
     if (s_XInputUseOldJoystickMapping < 0) {
-        s_XInputUseOldJoystickMapping = SDL_GetHintBoolean(SDL_HINT_XINPUT_USE_OLD_JOYSTICK_MAPPING, SDL_FALSE);
+        s_XInputUseOldJoystickMapping = SDL_GetHintnez_b32_tean(SDL_HINT_XINPUT_USE_OLD_JOYSTICK_MAPPING, SDL_FALSE);
     }
     return (s_XInputUseOldJoystickMapping > 0);
 #endif
 }
 
-SDL_bool SDL_XINPUT_Enabled(void)
+SDL_nez_b32_t SDL_XINPUT_Enabled(void)
 {
     return s_bXInputEnabled;
 }
@@ -62,7 +62,7 @@ SDL_bool SDL_XINPUT_Enabled(void)
 int
 SDL_XINPUT_JoystickInit(void)
 {
-    s_bXInputEnabled = SDL_GetHintBoolean(SDL_HINT_XINPUT_ENABLED, SDL_TRUE);
+    s_bXInputEnabled = SDL_GetHintnez_b32_tean(SDL_HINT_XINPUT_ENABLED, SDL_TRUE);
 
     if (s_bXInputEnabled && WIN_LoadXInputDLL() < 0) {
         s_bXInputEnabled = SDL_FALSE;  /* oh well. */
@@ -149,7 +149,7 @@ GuessXInputDevice(Uint8 userid, Uint16 *pVID, Uint16 *pPID, Uint16 *pVersion)
             (GetRawInputDeviceInfoA(devices[i].hDevice, RIDI_DEVICEINFO, &rdi, &rdiSize) != ((UINT)-1)) &&
             (GetRawInputDeviceInfoA(devices[i].hDevice, RIDI_DEVICENAME, devName, &nameSize) != ((UINT)-1)) &&
             (SDL_strstr(devName, "IG_") != NULL)) {
-            SDL_bool found = SDL_FALSE;
+            SDL_nez_b32_t found = SDL_FALSE;
             for (j = 0; j < SDL_arraysize(s_arrXInputDevicePath); ++j) {
                 if (j == userid) {
                     continue;
@@ -512,7 +512,7 @@ SDL_XINPUT_JoystickQuit(void)
 
 typedef struct JoyStick_DeviceData JoyStick_DeviceData;
 
-SDL_bool SDL_XINPUT_Enabled(void)
+SDL_nez_b32_t SDL_XINPUT_Enabled(void)
 {
     return SDL_FALSE;
 }

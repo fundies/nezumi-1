@@ -127,7 +127,7 @@ IOS_AddMFIJoystickDevice(SDL_JoystickDeviceItem *device, GCController *controlle
         device->nhats = 0; /* apparently the touch surface-as-dpad is buggy */
         device->nbuttons = 3; /* AX, pause button */
 
-        controller.microGamepad.allowsRotation = SDL_GetHintBoolean(SDL_HINT_APPLE_TV_REMOTE_ALLOW_ROTATION, SDL_FALSE);
+        controller.microGamepad.allowsRotation = SDL_GetHintnez_b32_tean(SDL_HINT_APPLE_TV_REMOTE_ALLOW_ROTATION, SDL_FALSE);
     }
 #endif /* TARGET_OS_TV */
 
@@ -154,12 +154,12 @@ IOS_AddMFIJoystickDevice(SDL_JoystickDeviceItem *device, GCController *controlle
 }
 
 static void
-IOS_AddJoystickDevice(GCController *controller, SDL_bool accelerometer)
+IOS_AddJoystickDevice(GCController *controller, SDL_nez_b32_t accelerometer)
 {
     SDL_JoystickDeviceItem *device = deviceList;
 
 #if TARGET_OS_TV
-    if (!SDL_GetHintBoolean(SDL_HINT_TV_REMOTE_AS_JOYSTICK, SDL_TRUE)) {
+    if (!SDL_GetHintnez_b32_tean(SDL_HINT_TV_REMOTE_AS_JOYSTICK, SDL_TRUE)) {
         /* Ignore devices that aren't actually controllers (e.g. remotes), they'll be handled as keyboard input */
         if (controller && !controller.extendedGamepad && !controller.gamepad && controller.microGamepad) {
             return;
@@ -272,7 +272,7 @@ IOS_RemoveJoystickDevice(SDL_JoystickDeviceItem *device)
 static void SDLCALL
 SDL_AppleTVRemoteRotationHintChanged(void *udata, const char *name, const char *oldValue, const char *newValue)
 {
-    BOOL allowRotation = newValue != NULL && *newValue != '0';
+    nez_b32_t allowRotation = newValue != NULL && *newValue != '0';
 
     @autoreleasepool {
         for (GCController *controller in [GCController controllers]) {
@@ -291,7 +291,7 @@ IOS_JoystickInit(void)
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 
 #if !TARGET_OS_TV
-        if (SDL_GetHintBoolean(SDL_HINT_ACCELEROMETER_AS_JOYSTICK, SDL_TRUE)) {
+        if (SDL_GetHintnez_b32_tean(SDL_HINT_ACCELEROMETER_AS_JOYSTICK, SDL_TRUE)) {
             /* Default behavior, accelerometer as joystick */
             IOS_AddJoystickDevice(nil, SDL_TRUE);
         }
@@ -606,7 +606,7 @@ IOS_MFIJoystickUpdate(SDL_Joystick * joystick)
         joystick->hwdata->num_pause_presses = 0;
 
         if (updateplayerindex && controller.playerIndex == -1) {
-            BOOL usedPlayerIndexSlots[4] = {NO, NO, NO, NO};
+            nez_b32_t usedPlayerIndexSlots[4] = {NO, NO, NO, NO};
 
             /* Find the player index of all other connected controllers. */
             for (GCController *c in [GCController controllers]) {

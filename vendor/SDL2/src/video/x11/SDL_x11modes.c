@@ -149,7 +149,7 @@ X11_GetPixelFormatFromVisualInfo(Display * display, XVisualInfo * vinfo)
 }
 
 #if SDL_VIDEO_DRIVER_X11_XINERAMA
-static SDL_bool
+static SDL_nez_b32_t
 CheckXinerama(Display * display, int *major, int *minor)
 {
     int event_base = 0;
@@ -159,7 +159,7 @@ CheckXinerama(Display * display, int *major, int *minor)
     *major = *minor = 0;
 
     /* Allow environment override */
-    if (!SDL_GetHintBoolean(SDL_HINT_VIDEO_X11_XINERAMA, SDL_TRUE)) {
+    if (!SDL_GetHintnez_b32_tean(SDL_HINT_VIDEO_X11_XINERAMA, SDL_TRUE)) {
 #ifdef X11MODES_DEBUG
         printf("Xinerama disabled due to hint\n");
 #endif
@@ -191,7 +191,7 @@ CheckXinerama(Display * display, int *major, int *minor)
 /* !!! FIXME: remove this later. */
 /* we have a weird bug where XineramaQueryScreens() throws an X error, so this
    is here to help track it down (and not crash, too!). */
-static SDL_bool xinerama_triggered_error = SDL_FALSE;
+static SDL_nez_b32_t xinerama_triggered_error = SDL_FALSE;
 static int
 X11_XineramaFailed(Display * d, XErrorEvent * e)
 {
@@ -205,7 +205,7 @@ X11_XineramaFailed(Display * d, XErrorEvent * e)
 #endif /* SDL_VIDEO_DRIVER_X11_XINERAMA */
 
 #if SDL_VIDEO_DRIVER_X11_XRANDR
-static SDL_bool
+static SDL_nez_b32_t
 CheckXRandR(Display * display, int *major, int *minor)
 {
     /* Default the extension not available */
@@ -213,14 +213,14 @@ CheckXRandR(Display * display, int *major, int *minor)
 
     /* Allow environment override */
 #ifdef XRANDR_DISABLED_BY_DEFAULT
-    if (!SDL_GetHintBoolean(SDL_HINT_VIDEO_X11_XRANDR, SDL_FALSE)) {
+    if (!SDL_GetHintnez_b32_tean(SDL_HINT_VIDEO_X11_XRANDR, SDL_FALSE)) {
 #ifdef X11MODES_DEBUG
         printf("XRandR disabled by default due to window manager issues\n");
 #endif
         return SDL_FALSE;
     }
 #else
-    if (!SDL_GetHintBoolean(SDL_HINT_VIDEO_X11_XRANDR, SDL_TRUE)) {
+    if (!SDL_GetHintnez_b32_tean(SDL_HINT_VIDEO_X11_XRANDR, SDL_TRUE)) {
 #ifdef X11MODES_DEBUG
         printf("XRandR disabled due to hint\n");
 #endif
@@ -260,7 +260,7 @@ CalculateXRandRRefreshRate(const XRRModeInfo *info)
         round(((double)info->dotClock / (double)(info->hTotal * info->vTotal))) : 0;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 SetXRandRModeInfo(Display *display, XRRScreenResources *res, RRCrtc crtc,
                   RRMode modeID, SDL_DisplayMode *mode)
 {
@@ -503,7 +503,7 @@ X11_InitModes_XRandR(_THIS)
 #endif /* SDL_VIDEO_DRIVER_X11_XRANDR */
 
 #if SDL_VIDEO_DRIVER_X11_XVIDMODE
-static SDL_bool
+static SDL_nez_b32_t
 CheckVidMode(Display * display, int *major, int *minor)
 {
     int vm_event, vm_error = -1;
@@ -511,7 +511,7 @@ CheckVidMode(Display * display, int *major, int *minor)
     *major = *minor = 0;
 
     /* Allow environment override */
-    if (!SDL_GetHintBoolean(SDL_HINT_VIDEO_X11_XVIDMODE, SDL_TRUE)) {
+    if (!SDL_GetHintnez_b32_tean(SDL_HINT_VIDEO_X11_XVIDMODE, SDL_TRUE)) {
 #ifdef X11MODES_DEBUG
         printf("XVidMode disabled due to hint\n");
 #endif
@@ -540,10 +540,10 @@ CheckVidMode(Display * display, int *major, int *minor)
 }
 
 static
-Bool XF86VidModeGetModeInfo(Display * dpy, int scr,
+nez_b32_t XF86VidModeGetModeInfo(Display * dpy, int scr,
                                        XF86VidModeModeInfo* info)
 {
-    Bool retval;
+    nez_b32_t retval;
     int dotclock;
     XF86VidModeModeLine l;
     SDL_zerop(info);
@@ -573,7 +573,7 @@ CalculateXVidModeRefreshRate(const XF86VidModeModeInfo * info)
                                                          info->vtotal)) : 0;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 SetXVidModeModeInfo(const XF86VidModeModeInfo *info, SDL_DisplayMode *mode)
 {
     mode->w = info->hdisplay;
@@ -619,7 +619,7 @@ X11_InitModes(_THIS)
        we sort out the ramifications of removing XVidMode support outright.
        This block should be removed with the XVidMode support. */
     {
-        if (SDL_GetHintBoolean("SDL_VIDEO_X11_REQUIRE_XRANDR", SDL_FALSE)) {
+        if (SDL_GetHintnez_b32_tean("SDL_VIDEO_X11_REQUIRE_XRANDR", SDL_FALSE)) {
             #if SDL_VIDEO_DRIVER_X11_XRANDR
             return SDL_SetError("XRandR support is required but not available");
             #else

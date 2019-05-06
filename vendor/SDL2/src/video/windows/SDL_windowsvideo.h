@@ -87,7 +87,7 @@ typedef enum MONITOR_DPI_TYPE {
 
 #endif /* WINVER < 0x0603 */
 
-typedef BOOL  (*PFNSHFullScreen)(HWND, DWORD);
+typedef nez_b32_t  (*PFNSHFullScreen)(HWND, DWORD);
 typedef void  (*PFCoordTransform)(SDL_Window*, POINT*);
 
 typedef struct
@@ -100,7 +100,7 @@ typedef struct
 /* Definition from Win98DDK version of IMM.H */
 typedef struct tagINPUTCONTEXT2 {
     HWND hWnd;
-    BOOL fOpen;
+    nez_b32_t fOpen;
     POINT ptStatusWndPos;
     POINT ptSoftKbdPos;
     DWORD fdwConversion;
@@ -131,9 +131,9 @@ typedef struct SDL_VideoData
 
     /* Touch input functions */
     void* userDLL;
-    BOOL (WINAPI *CloseTouchInputHandle)( HTOUCHINPUT );
-    BOOL (WINAPI *GetTouchInputInfo)( HTOUCHINPUT, UINT, PTOUCHINPUT, int );
-    BOOL (WINAPI *RegisterTouchWindow)( HWND, ULONG );
+    nez_b32_t (WINAPI *CloseTouchInputHandle)( HTOUCHINPUT );
+    nez_b32_t (WINAPI *GetTouchInputInfo)( HTOUCHINPUT, UINT, PTOUCHINPUT, int );
+    nez_b32_t (WINAPI *RegisterTouchWindow)( HWND, ULONG );
 
     void* shcoreDLL;
     HRESULT (WINAPI *GetDpiForMonitor)( HMONITOR         hmonitor,
@@ -141,11 +141,11 @@ typedef struct SDL_VideoData
                                         UINT             *dpiX,
                                         UINT             *dpiY );
     
-    SDL_bool ime_com_initialized;
+    SDL_nez_b32_t ime_com_initialized;
     struct ITfThreadMgr *ime_threadmgr;
-    SDL_bool ime_initialized;
-    SDL_bool ime_enabled;
-    SDL_bool ime_available;
+    SDL_nez_b32_t ime_initialized;
+    SDL_nez_b32_t ime_enabled;
+    SDL_nez_b32_t ime_available;
     HWND ime_hwnd_main;
     HWND ime_hwnd_current;
     HIMC ime_himc;
@@ -154,16 +154,16 @@ typedef struct SDL_VideoData
     WCHAR ime_readingstring[16];
     int ime_cursor;
 
-    SDL_bool ime_candlist;
+    SDL_nez_b32_t ime_candlist;
     WCHAR ime_candidates[MAX_CANDLIST][MAX_CANDLENGTH];
     DWORD ime_candcount;
     DWORD ime_candref;
     DWORD ime_candsel;
     UINT ime_candpgsize;
     int ime_candlistindexbase;
-    SDL_bool ime_candvertical;
+    SDL_nez_b32_t ime_candvertical;
 
-    SDL_bool ime_dirty;
+    SDL_nez_b32_t ime_dirty;
     SDL_Rect ime_rect;
     SDL_Rect ime_candlistrect;
     int ime_winwidth;
@@ -171,14 +171,14 @@ typedef struct SDL_VideoData
 
     HKL ime_hkl;
     void* ime_himm32;
-    UINT (WINAPI *GetReadingString)(HIMC himc, UINT uReadingBufLen, LPWSTR lpwReadingBuf, PINT pnErrorIndex, BOOL *pfIsVertical, PUINT puMaxReadingLen);
-    BOOL (WINAPI *ShowReadingWindow)(HIMC himc, BOOL bShow);
+    UINT (WINAPI *GetReadingString)(HIMC himc, UINT uReadingBufLen, LPWSTR lpwReadingBuf, PINT pnErrorIndex, nez_b32_t *pfIsVertical, PUINT puMaxReadingLen);
+    nez_b32_t (WINAPI *ShowReadingWindow)(HIMC himc, nez_b32_t bShow);
     LPINPUTCONTEXT2 (WINAPI *ImmLockIMC)(HIMC himc);
-    BOOL (WINAPI *ImmUnlockIMC)(HIMC himc);
+    nez_b32_t (WINAPI *ImmUnlockIMC)(HIMC himc);
     LPVOID (WINAPI *ImmLockIMCC)(HIMCC himcc);
-    BOOL (WINAPI *ImmUnlockIMCC)(HIMCC himcc);
+    nez_b32_t (WINAPI *ImmUnlockIMCC)(HIMCC himcc);
 
-    SDL_bool ime_uiless;
+    SDL_nez_b32_t ime_uiless;
     struct ITfThreadMgrEx *ime_threadmgrex;
     DWORD ime_uielemsinkcookie;
     DWORD ime_alpnsinkcookie;
@@ -188,11 +188,11 @@ typedef struct SDL_VideoData
     TSFSink *ime_ippasink;
 } SDL_VideoData;
 
-extern SDL_bool g_WindowsEnableMessageLoop;
-extern SDL_bool g_WindowFrameUsableWhileCursorHidden;
+extern SDL_nez_b32_t g_WindowsEnableMessageLoop;
+extern SDL_nez_b32_t g_WindowFrameUsableWhileCursorHidden;
 
 typedef struct IDirect3D9 IDirect3D9;
-extern SDL_bool D3D_LoadDLL( void **pD3DDLL, IDirect3D9 **pDirect3D9Interface );
+extern SDL_nez_b32_t D3D_LoadDLL( void **pD3DDLL, IDirect3D9 **pDirect3D9Interface );
 
 #endif /* SDL_windowsvideo_h_ */
 

@@ -295,10 +295,10 @@ private:
     void _HandleMouseFocus(BMessage *msg) {
         SDL_Window *win;
         int32 winID;
-        bool bSetFocus; /* If false, lose focus */
+        nez_b32_t bSetFocus; /* If false, lose focus */
         if(
             !_GetWinID(msg, &winID) ||
-            msg->FindBool("focusGained", &bSetFocus) != B_OK
+            msg->Findnez_b32_t("focusGained", &bSetFocus) != B_OK
         ) {
             return;
         }
@@ -314,10 +314,10 @@ private:
     void _HandleKeyboardFocus(BMessage *msg) {
         SDL_Window *win;
         int32 winID;
-        bool bSetFocus; /* If false, lose focus */
+        nez_b32_t bSetFocus; /* If false, lose focus */
         if(
             !_GetWinID(msg, &winID) ||
-            msg->FindBool("focusGained", &bSetFocus) != B_OK
+            msg->Findnez_b32_t("focusGained", &bSetFocus) != B_OK
         ) {
             return;
         }
@@ -362,7 +362,7 @@ private:
         SDL_SendWindowEvent(win, SDL_WINDOWEVENT_RESIZED, w, h);
     }
 
-    bool _GetWinID(BMessage *msg, int32 *winID) {
+    nez_b32_t _GetWinID(BMessage *msg, int32 *winID) {
         return msg->FindInt32("window-id", winID) == B_OK;
     }
 

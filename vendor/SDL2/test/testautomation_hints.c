@@ -103,7 +103,7 @@ hints_setHint(void *arg)
   char *originalValue;
   char *value;
   char *testValue;
-  SDL_bool result;
+  SDL_nez_b32_t result;
   int i, j;
 
   /* Create random values to set */                    

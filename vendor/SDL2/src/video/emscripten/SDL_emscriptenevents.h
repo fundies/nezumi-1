@@ -31,7 +31,7 @@ Emscripten_RegisterEventHandlers(SDL_WindowData *data);
 extern void
 Emscripten_UnregisterEventHandlers(SDL_WindowData *data);
 
-extern EM_BOOL
+extern EM_nez_b32_t
 Emscripten_HandleCanvasResize(int eventType, const void *reserved, void *userData);
 
 #endif /* SDL_emscriptenevents_h_ */

@@ -153,16 +153,16 @@ char *alloca();
 /* @{ */
 
 #ifdef __CC_ARM
-/* ARM's compiler throws warnings if we use an enum: like "SDL_bool x = a < b;" */
+/* ARM's compiler throws warnings if we use an enum: like "SDL_nez_b32_t x = a < b;" */
 #define SDL_FALSE 0
 #define SDL_TRUE 1
-typedef int SDL_bool;
+typedef int SDL_nez_b32_t;
 #else
 typedef enum
 {
     SDL_FALSE = 0,
     SDL_TRUE = 1
-} SDL_bool;
+} SDL_nez_b32_t;
 #endif
 
 /**

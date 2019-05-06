@@ -155,7 +155,7 @@ Cocoa_GL_CreateContext(_THIS, SDL_Window * window)
 {
     SDL_VideoDisplay *display = SDL_GetDisplayForWindow(window);
     SDL_DisplayData *displaydata = (SDL_DisplayData *)display->driverdata;
-    SDL_bool lion_or_later = floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_6;
+    SDL_nez_b32_t lion_or_later = floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_6;
     NSOpenGLPixelFormatAttribute attr[32];
     NSOpenGLPixelFormat *fmt;
     SDLOpenGLContext *context;

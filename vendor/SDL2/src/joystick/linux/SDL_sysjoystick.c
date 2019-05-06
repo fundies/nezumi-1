@@ -72,7 +72,7 @@ typedef struct SDL_joylist_item
     struct SDL_joylist_item *next;
 
     /* Steam Controller support */
-    SDL_bool m_bSteamController;
+    SDL_nez_b32_t m_bSteamController;
 } SDL_joylist_item;
 
 static SDL_joylist_item *SDL_joylist = NULL;
@@ -441,7 +441,7 @@ JoystickInitWithUdev(void)
 }
 #endif
 
-static SDL_bool SteamControllerConnectedCallback(const char *name, SDL_JoystickGUID guid, int *device_instance)
+static SDL_nez_b32_t SteamControllerConnectedCallback(const char *name, SDL_JoystickGUID guid, int *device_instance)
 {
     SDL_joylist_item *item;
 

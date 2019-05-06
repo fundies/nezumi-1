@@ -47,11 +47,11 @@ extern int SDL_HelperWindowDestroy(void);
 
 /* The initialized subsystems */
 #ifdef SDL_MAIN_NEEDED
-static SDL_bool SDL_MainIsReady = SDL_FALSE;
+static SDL_nez_b32_t SDL_MainIsReady = SDL_FALSE;
 #else
-static SDL_bool SDL_MainIsReady = SDL_TRUE;
+static SDL_nez_b32_t SDL_MainIsReady = SDL_TRUE;
 #endif
-static SDL_bool SDL_bInMainQuit = SDL_FALSE;
+static SDL_nez_b32_t SDL_bInMainQuit = SDL_FALSE;
 static Uint8 SDL_SubsystemRefCount[ 32 ];
 
 /* Private helper to increment a subsystem's ref counter. */
@@ -74,7 +74,7 @@ SDL_PrivateSubsystemRefCountDecr(Uint32 subsystem)
 }
 
 /* Private helper to check if a system needs init. */
-static SDL_bool
+static SDL_nez_b32_t
 SDL_PrivateShouldInitSubsystem(Uint32 subsystem)
 {
     int subsystem_index = SDL_MostSignificantBitIndex32(subsystem);
@@ -83,7 +83,7 @@ SDL_PrivateShouldInitSubsystem(Uint32 subsystem)
 }
 
 /* Private helper to check if a system needs to be quit. */
-static SDL_bool
+static SDL_nez_b32_t
 SDL_PrivateShouldQuitSubsystem(Uint32 subsystem) {
     int subsystem_index = SDL_MostSignificantBitIndex32(subsystem);
     if (SDL_SubsystemRefCount[subsystem_index] == 0) {
@@ -475,14 +475,14 @@ SDL_GetPlatform()
 #endif
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IsTablet()
 {
 #if __ANDROID__
-    extern SDL_bool SDL_IsAndroidTablet(void);
+    extern SDL_nez_b32_t SDL_IsAndroidTablet(void);
     return SDL_IsAndroidTablet();
 #elif __IPHONEOS__
-    extern SDL_bool SDL_IsIPad(void);
+    extern SDL_nez_b32_t SDL_IsIPad(void);
     return SDL_IsIPad();
 #else
     return SDL_FALSE;
@@ -494,7 +494,7 @@ SDL_IsTablet()
 #if (!defined(HAVE_LIBC) || defined(__WATCOMC__)) && !defined(SDL_STATIC_LIB)
 /* Need to include DllMain() on Watcom C for some reason.. */
 
-BOOL APIENTRY
+nez_b32_t APIENTRY
 _DllMainCRTStartup(HANDLE hModule,
                    DWORD ul_reason_for_call, LPVOID lpReserved)
 {

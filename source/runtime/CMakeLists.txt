@@ -4,8 +4,8 @@ INCLUDE (ExternalProject)
 INCLUDE_DIRECTORIES ("${CMAKE_BINARY_DIR}/vendor/include")
 
 # Set Runtime Options
-SET (RUNTIME_STATIC ON CACHE BOOL "Whether to build the runtime as a static or shared library.")
-SET (RUNTIME_PARANOID ON CACHE BOOL "Enables speed-sapping runtime error checks and assertions. Despite its name, you should probably ship the game with these enabled.")
+SET (RUNTIME_STATIC ON CACHE nez_b32_t "Whether to build the runtime as a static or shared library.")
+SET (RUNTIME_PARANOID ON CACHE nez_b32_t "Enables speed-sapping runtime error checks and assertions. Despite its name, you should probably ship the game with these enabled.")
 
 # Get Runtime Sources
 SET (

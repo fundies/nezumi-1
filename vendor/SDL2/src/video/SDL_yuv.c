@@ -74,7 +74,7 @@ static int GetYUVConversionType(int width, int height, YCbCrType *yuv_type)
     return 0;
 }
 
-static SDL_bool IsPlanar2x2Format(Uint32 format)
+static SDL_nez_b32_t IsPlanar2x2Format(Uint32 format)
 {
     return (format == SDL_PIXELFORMAT_YV12 ||
             format == SDL_PIXELFORMAT_IYUV ||
@@ -82,7 +82,7 @@ static SDL_bool IsPlanar2x2Format(Uint32 format)
             format == SDL_PIXELFORMAT_NV21);
 }
 
-static SDL_bool IsPacked4Format(Uint32 format)
+static SDL_nez_b32_t IsPacked4Format(Uint32 format)
 {
     return (format == SDL_PIXELFORMAT_YUY2 ||
             format == SDL_PIXELFORMAT_UYVY ||
@@ -179,7 +179,7 @@ static int GetYUVPlanes(int width, int height, Uint32 format, const void *yuv, i
     return 0;
 }
 
-static SDL_bool yuv_rgb_sse(
+static SDL_nez_b32_t yuv_rgb_sse(
     Uint32 src_format, Uint32 dst_format,
     Uint32 width, Uint32 height, 
     const Uint8 *y, const Uint8 *u, const Uint8 *v, Uint32 y_stride, Uint32 uv_stride, 
@@ -288,7 +288,7 @@ static SDL_bool yuv_rgb_sse(
     return SDL_FALSE;
 }
 
-static SDL_bool yuv_rgb_std(
+static SDL_nez_b32_t yuv_rgb_std(
     Uint32 src_format, Uint32 dst_format,
     Uint32 width, Uint32 height, 
     const Uint8 *y, const Uint8 *u, const Uint8 *v, Uint32 y_stride, Uint32 uv_stride, 
@@ -949,7 +949,7 @@ SDL_ConvertPixels_SwapUVPlanes(int width, int height, const void *src, int src_p
 }
 
 static int
-SDL_ConvertPixels_PackUVPlanes_to_NV(int width, int height, const void *src, int src_pitch, void *dst, int dst_pitch, SDL_bool reverseUV)
+SDL_ConvertPixels_PackUVPlanes_to_NV(int width, int height, const void *src, int src_pitch, void *dst, int dst_pitch, SDL_nez_b32_t reverseUV)
 {
     int x, y;
     const int UVwidth = (width + 1)/2;
@@ -962,7 +962,7 @@ SDL_ConvertPixels_PackUVPlanes_to_NV(int width, int height, const void *src, int
     Uint8 *dstUV;
     Uint8 *tmp = NULL;
 #ifdef __SSE2__
-    const SDL_bool use_SSE2 = SDL_HasSSE2();
+    const SDL_nez_b32_t use_SSE2 = SDL_HasSSE2();
 #endif
 
     /* Skip the Y plane */
@@ -1023,7 +1023,7 @@ SDL_ConvertPixels_PackUVPlanes_to_NV(int width, int height, const void *src, int
 }
 
 static int
-SDL_ConvertPixels_SplitNV_to_UVPlanes(int width, int height, const void *src, int src_pitch, void *dst, int dst_pitch, SDL_bool reverseUV)
+SDL_ConvertPixels_SplitNV_to_UVPlanes(int width, int height, const void *src, int src_pitch, void *dst, int dst_pitch, SDL_nez_b32_t reverseUV)
 {
     int x, y;
     const int UVwidth = (width + 1)/2;
@@ -1036,7 +1036,7 @@ SDL_ConvertPixels_SplitNV_to_UVPlanes(int width, int height, const void *src, in
     Uint8 *dst1, *dst2;
     Uint8 *tmp = NULL;
 #ifdef __SSE2__
-    const SDL_bool use_SSE2 = SDL_HasSSE2();
+    const SDL_nez_b32_t use_SSE2 = SDL_HasSSE2();
 #endif
 
     /* Skip the Y plane */
@@ -1114,7 +1114,7 @@ SDL_ConvertPixels_SwapNV(int width, int height, const void *src, int src_pitch, 
     const Uint16 *srcUV;
     Uint16 *dstUV;
 #ifdef __SSE2__
-    const SDL_bool use_SSE2 = SDL_HasSSE2();
+    const SDL_nez_b32_t use_SSE2 = SDL_HasSSE2();
 #endif
 
     /* Skip the Y plane */
@@ -1247,7 +1247,7 @@ SDL_ConvertPixels_YUY2_to_UYVY(int width, int height, const void *src, int src_p
     const Uint8 *srcYUV = (const Uint8 *)src;
     Uint8 *dstYUV = (Uint8 *)dst;
 #ifdef __SSE2__
-    const SDL_bool use_SSE2 = SDL_HasSSE2();
+    const SDL_nez_b32_t use_SSE2 = SDL_HasSSE2();
 #endif
 
     y = height;
@@ -1289,7 +1289,7 @@ SDL_ConvertPixels_YUY2_to_YVYU(int width, int height, const void *src, int src_p
     const Uint8 *srcYUV = (const Uint8 *)src;
     Uint8 *dstYUV = (Uint8 *)dst;
 #ifdef __SSE2__
-    const SDL_bool use_SSE2 = SDL_HasSSE2();
+    const SDL_nez_b32_t use_SSE2 = SDL_HasSSE2();
 #endif
 
     y = height;
@@ -1331,7 +1331,7 @@ SDL_ConvertPixels_UYVY_to_YUY2(int width, int height, const void *src, int src_p
     const Uint8 *srcYUV = (const Uint8 *)src;
     Uint8 *dstYUV = (Uint8 *)dst;
 #ifdef __SSE2__
-    const SDL_bool use_SSE2 = SDL_HasSSE2();
+    const SDL_nez_b32_t use_SSE2 = SDL_HasSSE2();
 #endif
 
     y = height;
@@ -1373,7 +1373,7 @@ SDL_ConvertPixels_UYVY_to_YVYU(int width, int height, const void *src, int src_p
     const Uint8 *srcYUV = (const Uint8 *)src;
     Uint8 *dstYUV = (Uint8 *)dst;
 #ifdef __SSE2__
-    const SDL_bool use_SSE2 = SDL_HasSSE2();
+    const SDL_nez_b32_t use_SSE2 = SDL_HasSSE2();
 #endif
 
     y = height;
@@ -1415,7 +1415,7 @@ SDL_ConvertPixels_YVYU_to_YUY2(int width, int height, const void *src, int src_p
     const Uint8 *srcYUV = (const Uint8 *)src;
     Uint8 *dstYUV = (Uint8 *)dst;
 #ifdef __SSE2__
-    const SDL_bool use_SSE2 = SDL_HasSSE2();
+    const SDL_nez_b32_t use_SSE2 = SDL_HasSSE2();
 #endif
 
     y = height;
@@ -1457,7 +1457,7 @@ SDL_ConvertPixels_YVYU_to_UYVY(int width, int height, const void *src, int src_p
     const Uint8 *srcYUV = (const Uint8 *)src;
     Uint8 *dstYUV = (Uint8 *)dst;
 #ifdef __SSE2__
-    const SDL_bool use_SSE2 = SDL_HasSSE2();
+    const SDL_nez_b32_t use_SSE2 = SDL_HasSSE2();
 #endif
 
     y = height;

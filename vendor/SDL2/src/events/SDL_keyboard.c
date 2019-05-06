@@ -862,7 +862,7 @@ SDL_SetModState(SDL_Keymod modstate)
 
 /* Note that SDL_ToggleModState() is not a public API. SDL_SetModState() is. */
 void
-SDL_ToggleModState(const SDL_Keymod modstate, const SDL_bool toggle)
+SDL_ToggleModState(const SDL_Keymod modstate, const SDL_nez_b32_t toggle)
 {
     SDL_Keyboard *keyboard = &SDL_keyboard;
     if (toggle) {

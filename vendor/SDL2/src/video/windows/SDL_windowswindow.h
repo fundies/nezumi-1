@@ -37,16 +37,16 @@ typedef struct
     HINSTANCE hinstance;
     HBITMAP hbm;
     WNDPROC wndproc;
-    SDL_bool created;
+    SDL_nez_b32_t created;
     WPARAM mouse_button_flags;
-    SDL_bool initializing;
-    SDL_bool expected_resize;
-    SDL_bool in_border_change;
-    SDL_bool in_title_click;
+    SDL_nez_b32_t initializing;
+    SDL_nez_b32_t expected_resize;
+    SDL_nez_b32_t in_border_change;
+    SDL_nez_b32_t in_title_click;
     Uint8 focus_click_pending;
-    SDL_bool skip_update_clipcursor;
-    SDL_bool windowed_mode_was_maximized;
-    SDL_bool in_window_deactivation;
+    SDL_nez_b32_t skip_update_clipcursor;
+    SDL_nez_b32_t windowed_mode_was_maximized;
+    SDL_nez_b32_t in_window_deactivation;
     RECT cursor_clipped_rect;
     struct SDL_VideoData *videodata;
 #if SDL_VIDEO_OPENGL_EGL  
@@ -68,19 +68,19 @@ extern void WIN_RaiseWindow(_THIS, SDL_Window * window);
 extern void WIN_MaximizeWindow(_THIS, SDL_Window * window);
 extern void WIN_MinimizeWindow(_THIS, SDL_Window * window);
 extern void WIN_RestoreWindow(_THIS, SDL_Window * window);
-extern void WIN_SetWindowBordered(_THIS, SDL_Window * window, SDL_bool bordered);
-extern void WIN_SetWindowResizable(_THIS, SDL_Window * window, SDL_bool resizable);
-extern void WIN_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_bool fullscreen);
+extern void WIN_SetWindowBordered(_THIS, SDL_Window * window, SDL_nez_b32_t bordered);
+extern void WIN_SetWindowResizable(_THIS, SDL_Window * window, SDL_nez_b32_t resizable);
+extern void WIN_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_nez_b32_t fullscreen);
 extern int WIN_SetWindowGammaRamp(_THIS, SDL_Window * window, const Uint16 * ramp);
 extern int WIN_GetWindowGammaRamp(_THIS, SDL_Window * window, Uint16 * ramp);
-extern void WIN_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed);
+extern void WIN_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed);
 extern void WIN_DestroyWindow(_THIS, SDL_Window * window);
-extern SDL_bool WIN_GetWindowWMInfo(_THIS, SDL_Window * window,
+extern SDL_nez_b32_t WIN_GetWindowWMInfo(_THIS, SDL_Window * window,
                                     struct SDL_SysWMinfo *info);
 extern void WIN_OnWindowEnter(_THIS, SDL_Window * window);
 extern void WIN_UpdateClipCursor(SDL_Window *window);
-extern int WIN_SetWindowHitTest(SDL_Window *window, SDL_bool enabled);
-extern void WIN_AcceptDragAndDrop(SDL_Window * window, SDL_bool accept);
+extern int WIN_SetWindowHitTest(SDL_Window *window, SDL_nez_b32_t enabled);
+extern void WIN_AcceptDragAndDrop(SDL_Window * window, SDL_nez_b32_t accept);
 
 #endif /* SDL_windowswindow_h_ */
 

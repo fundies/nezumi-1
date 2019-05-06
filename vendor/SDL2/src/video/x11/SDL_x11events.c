@@ -143,10 +143,10 @@ static Atom X11_PickTargetFromAtoms(Display *disp, Atom a0, Atom a1, Atom a2)
 struct KeyRepeatCheckData
 {
     XEvent *event;
-    SDL_bool found;
+    SDL_nez_b32_t found;
 };
 
-static Bool X11_KeyRepeatCheckIfEvent(Display *display, XEvent *chkev,
+static nez_b32_t X11_KeyRepeatCheckIfEvent(Display *display, XEvent *chkev,
     XPointer arg)
 {
     struct KeyRepeatCheckData *d = (struct KeyRepeatCheckData *) arg;
@@ -160,7 +160,7 @@ static Bool X11_KeyRepeatCheckIfEvent(Display *display, XEvent *chkev,
 /* Check to see if this is a repeated key.
    (idea shamelessly lifted from GII -- thanks guys! :)
  */
-static SDL_bool X11_KeyRepeat(Display *display, XEvent *event)
+static SDL_nez_b32_t X11_KeyRepeat(Display *display, XEvent *event)
 {
     XEvent dummyev;
     struct KeyRepeatCheckData d;
@@ -172,7 +172,7 @@ static SDL_bool X11_KeyRepeat(Display *display, XEvent *event)
     return d.found;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 X11_IsWheelEvent(Display * display,XEvent * event,int * xticks,int * yticks)
 {
     /* according to the xlib docs, no specific mouse wheel events exist.
@@ -268,7 +268,7 @@ static int X11_URIDecode(char *buf, int len) {
 */
 static char* X11_URIToLocal(char* uri) {
     char *file = NULL;
-    SDL_bool local;
+    SDL_nez_b32_t local;
 
     if (memcmp(uri,"file:/",6) == 0) uri += 6;      /* local file? */
     else if (strstr(uri,":/") != NULL) return file; /* wrong scheme */
@@ -363,8 +363,8 @@ X11_ReconcileKeyboardState(_THIS)
     keyboardState = SDL_GetKeyboardState(0);
     for (keycode = 0; keycode < 256; ++keycode) {
         SDL_Scancode scancode = viddata->key_layout[keycode];
-        SDL_bool x11KeyPressed = (keys[keycode / 8] & (1 << (keycode % 8))) != 0;
-        SDL_bool sdlKeyPressed = keyboardState[scancode] == SDL_PRESSED;
+        SDL_nez_b32_t x11KeyPressed = (keys[keycode / 8] & (1 << (keycode % 8))) != 0;
+        SDL_nez_b32_t sdlKeyPressed = keyboardState[scancode] == SDL_PRESSED;
 
         if (x11KeyPressed && !sdlKeyPressed) {
             SDL_SendKeyboardKey(SDL_PRESSED, scancode);
@@ -485,7 +485,7 @@ InitiateWindowResize(_THIS, const SDL_WindowData *data, const SDL_Point *point, 
     X11_XSync(display, 0);
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 ProcessHitTest(_THIS, const SDL_WindowData *data, const XEvent *xev)
 {
     SDL_Window *window = data->window;
@@ -867,7 +867,7 @@ X11_DispatchEvent(_THIS)
             KeySym keysym = NoSymbol;
             char text[SDL_TEXTINPUTEVENT_TEXT_SIZE];
             Status status = 0;
-            SDL_bool handled_by_ime = SDL_FALSE;
+            SDL_nez_b32_t handled_by_ime = SDL_FALSE;
 
 #ifdef DEBUG_XEVENTS
             printf("window %p: KeyPress (X11 keycode = 0x%X)\n", data, xevent.xkey.keycode);
@@ -997,7 +997,7 @@ X11_DispatchEvent(_THIS)
 
             if (xevent.xclient.message_type == videodata->XdndEnter) {
 
-                SDL_bool use_list = xevent.xclient.data.l[1] & 1;
+                SDL_nez_b32_t use_list = xevent.xclient.data.l[1] & 1;
                 data->xdnd_source = xevent.xclient.data.l[0];
                 xdnd_version = (xevent.xclient.data.l[1] >> 24);
 #ifdef DEBUG_XEVENTS
@@ -1132,7 +1132,7 @@ X11_DispatchEvent(_THIS)
             if (X11_IsWheelEvent(display,&xevent,&xticks, &yticks)) {
                 SDL_SendMouseWheel(data->window, 0, (float) xticks, (float) yticks, SDL_MOUSEWHEEL_NORMAL);
             } else {
-                SDL_bool ignore_click = SDL_FALSE;
+                SDL_nez_b32_t ignore_click = SDL_FALSE;
                 int button = xevent.xbutton.button;
                 if(button == Button1) {
                     if (ProcessHitTest(_this, data, &xevent)) {
@@ -1148,7 +1148,7 @@ X11_DispatchEvent(_THIS)
                 if (data->last_focus_event_time) {
                     const int X11_FOCUS_CLICK_TIMEOUT = 10;
                     if (!SDL_TICKS_PASSED(SDL_GetTicks(), data->last_focus_event_time + X11_FOCUS_CLICK_TIMEOUT)) {
-                        ignore_click = !SDL_GetHintBoolean(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, SDL_FALSE);
+                        ignore_click = !SDL_GetHintnez_b32_tean(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, SDL_FALSE);
                     }
                     data->last_focus_event_time = 0;
                 }

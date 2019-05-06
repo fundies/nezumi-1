@@ -36,11 +36,11 @@
 
 int MIR_Vulkan_LoadLibrary(_THIS, const char *path);
 void MIR_Vulkan_UnloadLibrary(_THIS);
-SDL_bool MIR_Vulkan_GetInstanceExtensions(_THIS,
+SDL_nez_b32_t MIR_Vulkan_GetInstanceExtensions(_THIS,
                                           SDL_Window *window,
                                           unsigned *count,
                                           const char **names);
-SDL_bool MIR_Vulkan_CreateSurface(_THIS,
+SDL_nez_b32_t MIR_Vulkan_CreateSurface(_THIS,
                                   SDL_Window *window,
                                   VkInstance instance,
                                   VkSurfaceKHR *surface);

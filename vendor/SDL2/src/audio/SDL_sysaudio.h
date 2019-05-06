@@ -85,7 +85,7 @@ typedef struct SDL_AudioDriverImpl
     /* !!! FIXME: add pause(), so we can optimize instead of mixing silence. */
 
     /* Some flags to push duplicate code into the core and reduce #ifdefs. */
-    /* !!! FIXME: these should be SDL_bool */
+    /* !!! FIXME: these should be SDL_nez_b32_t */
     int ProvidesOwnCallbackThread;
     int SkipMixerLock;
     int HasCaptureSupport;
@@ -119,8 +119,8 @@ typedef struct SDL_AudioDriver
 
     /* A mutex for device detection */
     SDL_mutex *detectionLock;
-    SDL_bool captureDevicesRemoved;
-    SDL_bool outputDevicesRemoved;
+    SDL_nez_b32_t captureDevicesRemoved;
+    SDL_nez_b32_t outputDevicesRemoved;
     int outputDeviceCount;
     int inputDeviceCount;
     SDL_AudioDeviceItem *outputDevices;
@@ -148,7 +148,7 @@ struct SDL_AudioDevice
     SDL_atomic_t shutdown; /* true if we are signaling the play thread to end. */
     SDL_atomic_t enabled;  /* true if device is functioning and connected. */
     SDL_atomic_t paused;
-    SDL_bool iscapture;
+    SDL_nez_b32_t iscapture;
 
     /* Scratch buffer used in the bridge between SDL and the user callback. */
     Uint8 *work_buffer;

@@ -369,7 +369,7 @@ static void findPhysicalDevice(void)
         uint32_t queueFamiliesCount = 0;
 		uint32_t queueFamilyIndex;
         uint32_t deviceExtensionCount = 0;
-		SDL_bool hasSwapchainExtension = SDL_FALSE;
+		SDL_nez_b32_t hasSwapchainExtension = SDL_FALSE;
 		uint32_t i;
 
 
@@ -402,7 +402,7 @@ static void findPhysicalDevice(void)
         for(queueFamilyIndex = 0; queueFamilyIndex < queueFamiliesCount;
             queueFamilyIndex++)
         {
-            VkBool32 supported = 0;
+            Vknez_b32_t32 supported = 0;
 
 			if(queueFamiliesProperties[queueFamilyIndex].queueCount == 0)
                 continue;
@@ -684,7 +684,7 @@ static void getSwapchainImages(void)
     }
 }
 
-static SDL_bool createSwapchain(void)
+static SDL_nez_b32_t createSwapchain(void)
 {
 	uint32_t i;
 	int w, h;
@@ -963,7 +963,7 @@ static void rerecordCommandBuffer(uint32_t frameIndex, const VkClearColorValue *
     }
 }
 
-static void destroySwapchainAndSwapchainSpecificStuff(SDL_bool doDestroySwapchain)
+static void destroySwapchainAndSwapchainSpecificStuff(SDL_nez_b32_t doDestroySwapchain)
 {
     destroyFences();
     destroyCommandBuffers();
@@ -972,7 +972,7 @@ static void destroySwapchainAndSwapchainSpecificStuff(SDL_bool doDestroySwapchai
         destroySwapchain();
 }
 
-static SDL_bool createNewSwapchainAndSwapchainSpecificStuff(void)
+static SDL_nez_b32_t createNewSwapchainAndSwapchainSpecificStuff(void)
 {
     destroySwapchainAndSwapchainSpecificStuff(SDL_FALSE);
     getSurfaceCaps();
@@ -1020,7 +1020,7 @@ static void shutdownVulkan(void)
     SDL_Vulkan_UnloadLibrary();
 }
 
-static SDL_bool render(void)
+static SDL_nez_b32_t render(void)
 {
     uint32_t frameIndex;
     VkResult result;
@@ -1033,7 +1033,7 @@ static SDL_bool render(void)
 
     if(!vulkanContext.swapchain)
     {
-        SDL_bool retval = createNewSwapchainAndSwapchainSpecificStuff();
+        SDL_nez_b32_t retval = createNewSwapchainAndSwapchainSpecificStuff();
         if(!retval)
             SDL_Delay(100);
         return retval;

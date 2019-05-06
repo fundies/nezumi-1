@@ -57,23 +57,23 @@
 
 @interface SDLWindow : NSWindow <NSDraggingDestination>
 /* These are needed for borderless/fullscreen windows */
-- (BOOL)canBecomeKeyWindow;
-- (BOOL)canBecomeMainWindow;
+- (nez_b32_t)canBecomeKeyWindow;
+- (nez_b32_t)canBecomeMainWindow;
 - (void)sendEvent:(NSEvent *)event;
 - (void)doCommandBySelector:(SEL)aSelector;
 
 /* Handle drag-and-drop of files onto the SDL window. */
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender;
-- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender;
-- (BOOL)wantsPeriodicDraggingUpdates;
-- (BOOL)validateMenuItem:(NSMenuItem *)menuItem;
+- (nez_b32_t)performDragOperation:(id <NSDraggingInfo>)sender;
+- (nez_b32_t)wantsPeriodicDraggingUpdates;
+- (nez_b32_t)validateMenuItem:(NSMenuItem *)menuItem;
 
 - (SDL_Window*)findSDLWindow;
 @end
 
 @implementation SDLWindow
 
-- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+- (nez_b32_t)validateMenuItem:(NSMenuItem *)menuItem
 {
     /* Only allow using the macOS native fullscreen toggle menubar item if the
      * window is resizable and not in a SDL fullscreen mode.
@@ -91,12 +91,12 @@
     return [super validateMenuItem:menuItem];
 }
 
-- (BOOL)canBecomeKeyWindow
+- (nez_b32_t)canBecomeKeyWindow
 {
     return YES;
 }
 
-- (BOOL)canBecomeMainWindow
+- (nez_b32_t)canBecomeMainWindow
 {
     return YES;
 }
@@ -136,7 +136,7 @@
     return NSDragOperationNone; /* no idea what to do with this, reject it. */
 }
 
-- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
+- (nez_b32_t)performDragOperation:(id <NSDraggingInfo>)sender
 { @autoreleasepool
 {
     NSPasteboard *pasteboard = [sender draggingPasteboard];
@@ -163,7 +163,7 @@
         [fileURL getResourceValue:&isAlias forKey:NSURLIsAliasFileKey error:nil];
 
         /* If the URL is an alias, resolve it. */
-        if ([isAlias boolValue]) {
+        if ([isAlias nez_b32_tValue]) {
             NSURLBookmarkResolutionOptions opts = NSURLBookmarkResolutionWithoutMounting | NSURLBookmarkResolutionWithoutUI;
             NSData *bookmark = [NSURL bookmarkDataWithContentsOfURL:fileURL error:nil];
             if (bookmark != nil) {
@@ -188,7 +188,7 @@
     return YES;
 }}
 
-- (BOOL)wantsPeriodicDraggingUpdates
+- (nez_b32_t)wantsPeriodicDraggingUpdates
 {
     return NO;
 }
@@ -216,7 +216,7 @@
 
 static Uint32 s_moveHack;
 
-static void ConvertNSRect(NSScreen *screen, BOOL fullscreen, NSRect *r)
+static void ConvertNSRect(NSScreen *screen, nez_b32_t fullscreen, NSRect *r)
 {
     r->origin.y = CGDisplayPixelsHigh(kCGDirectMainDisplay) - r->origin.y - r->size.height;
 }
@@ -241,7 +241,7 @@ ScheduleContextUpdates(SDL_WindowData *data)
 static int
 GetHintCtrlClickEmulateRightClick()
 {
-    return SDL_GetHintBoolean(SDL_HINT_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK, SDL_FALSE);
+    return SDL_GetHintnez_b32_tean(SDL_HINT_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK, SDL_FALSE);
 }
 
 static NSUInteger
@@ -264,7 +264,7 @@ GetWindowStyle(SDL_Window * window)
     return style;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 SetWindowStyle(SDL_Window * window, NSUInteger style)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
@@ -369,7 +369,7 @@ SetWindowStyle(SDL_Window * window, NSUInteger style)
 
 -(void) resumeVisibleObservation
 {
-    BOOL isVisible = [_data->nswindow isVisible];
+    nez_b32_t isVisible = [_data->nswindow isVisible];
     observingVisible = YES;
     if (wasVisible != isVisible) {
         if (isVisible) {
@@ -382,7 +382,7 @@ SetWindowStyle(SDL_Window * window, NSUInteger style)
     }
 }
 
--(BOOL) setFullscreenSpace:(BOOL) state
+-(nez_b32_t) setFullscreenSpace:(nez_b32_t) state
 {
     SDL_Window *window = _data->window;
     NSWindow *nswindow = _data->nswindow;
@@ -414,12 +414,12 @@ SetWindowStyle(SDL_Window * window, NSUInteger style)
     return YES;
 }
 
--(BOOL) isInFullscreenSpace
+-(nez_b32_t) isInFullscreenSpace
 {
     return isFullscreenSpace;
 }
 
--(BOOL) isInFullscreenSpaceTransition
+-(nez_b32_t) isInFullscreenSpaceTransition
 {
     return inFullscreenTransition;
 }
@@ -466,7 +466,7 @@ SetWindowStyle(SDL_Window * window, NSUInteger style)
     }
 }
 
-- (BOOL)isMoving
+- (nez_b32_t)isMoving
 {
     return isMoving;
 }
@@ -493,7 +493,7 @@ SetWindowStyle(SDL_Window * window, NSUInteger style)
     }
 }
 
-- (BOOL)windowShouldClose:(id)sender
+- (nez_b32_t)windowShouldClose:(id)sender
 {
     SDL_SendWindowEvent(_data->window, SDL_WINDOWEVENT_CLOSE, 0, 0);
     return NO;
@@ -517,7 +517,7 @@ SetWindowStyle(SDL_Window * window, NSUInteger style)
     int x, y;
     SDL_Window *window = _data->window;
     NSWindow *nswindow = _data->nswindow;
-    BOOL fullscreen = window->flags & FULLSCREEN_MASK;
+    nez_b32_t fullscreen = window->flags & FULLSCREEN_MASK;
     NSRect rect = [nswindow contentRectForFrameRect:[nswindow frame]];
     ConvertNSRect([nswindow screen], fullscreen, &rect);
 
@@ -527,7 +527,7 @@ SetWindowStyle(SDL_Window * window, NSUInteger style)
     }
 
     if (s_moveHack) {
-        SDL_bool blockMove = ((SDL_GetTicks() - s_moveHack) < 500);
+        SDL_nez_b32_t blockMove = ((SDL_GetTicks() - s_moveHack) < 500);
 
         s_moveHack = 0;
 
@@ -577,7 +577,7 @@ SetWindowStyle(SDL_Window * window, NSUInteger style)
     SDL_SendWindowEvent(window, SDL_WINDOWEVENT_MOVED, x, y);
     SDL_SendWindowEvent(window, SDL_WINDOWEVENT_RESIZED, w, h);
 
-    const BOOL zoomed = [nswindow isZoomed];
+    const nez_b32_t zoomed = [nswindow isZoomed];
     if (!zoomed) {
         SDL_SendWindowEvent(window, SDL_WINDOWEVENT_RESTORED, 0, 0);
     } else if (zoomed) {
@@ -861,7 +861,7 @@ SetWindowStyle(SDL_Window * window, NSUInteger style)
     /*NSLog(@"doCommandBySelector: %@\n", NSStringFromSelector(aSelector));*/
 }
 
-- (BOOL)processHitTest:(NSEvent *)theEvent
+- (nez_b32_t)processHitTest:(NSEvent *)theEvent
 {
     SDL_assert(isDragAreaRunning == [_data->nswindow isMovableByWindowBackground]);
 
@@ -1140,10 +1140,10 @@ SetWindowStyle(SDL_Window * window, NSUInteger style)
 
 /* The default implementation doesn't pass rightMouseDown to responder chain */
 - (void)rightMouseDown:(NSEvent *)theEvent;
-- (BOOL)mouseDownCanMoveWindow;
+- (nez_b32_t)mouseDownCanMoveWindow;
 - (void)drawRect:(NSRect)dirtyRect;
-- (BOOL)acceptsFirstMouse:(NSEvent *)theEvent;
-- (BOOL)wantsUpdateLayer;
+- (nez_b32_t)acceptsFirstMouse:(NSEvent *)theEvent;
+- (nez_b32_t)wantsUpdateLayer;
 - (void)updateLayer;
 @end
 
@@ -1165,7 +1165,7 @@ SetWindowStyle(SDL_Window * window, NSUInteger style)
     SDL_SendWindowEvent(_sdlWindow, SDL_WINDOWEVENT_EXPOSED, 0, 0);
 }
 
--(BOOL) wantsUpdateLayer
+-(nez_b32_t) wantsUpdateLayer
 {
     return YES;
 }
@@ -1185,7 +1185,7 @@ SetWindowStyle(SDL_Window * window, NSUInteger style)
     [[self nextResponder] rightMouseDown:theEvent];
 }
 
-- (BOOL)mouseDownCanMoveWindow
+- (nez_b32_t)mouseDownCanMoveWindow
 {
     /* Always say YES, but this doesn't do anything until we call
        -[NSWindow setMovableByWindowBackground:YES], which we ninja-toggle
@@ -1207,18 +1207,18 @@ SetWindowStyle(SDL_Window * window, NSUInteger style)
     }
 }
 
-- (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
+- (nez_b32_t)acceptsFirstMouse:(NSEvent *)theEvent
 {
     if (SDL_GetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH)) {
-        return SDL_GetHintBoolean(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, SDL_FALSE);
+        return SDL_GetHintnez_b32_tean(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, SDL_FALSE);
     } else {
-        return SDL_GetHintBoolean("SDL_MAC_MOUSE_FOCUS_CLICKTHROUGH", SDL_FALSE);
+        return SDL_GetHintnez_b32_tean("SDL_MAC_MOUSE_FOCUS_CLICKTHROUGH", SDL_FALSE);
     }
 }
 @end
 
 static int
-SetupWindowData(_THIS, SDL_Window * window, NSWindow *nswindow, SDL_bool created)
+SetupWindowData(_THIS, SDL_Window * window, NSWindow *nswindow, SDL_nez_b32_t created)
 { @autoreleasepool
 {
     SDL_VideoData *videodata = (SDL_VideoData *) _this->driverdata;
@@ -1595,7 +1595,7 @@ Cocoa_RestoreWindow(_THIS, SDL_Window * window)
 }}
 
 void
-Cocoa_SetWindowBordered(_THIS, SDL_Window * window, SDL_bool bordered)
+Cocoa_SetWindowBordered(_THIS, SDL_Window * window, SDL_nez_b32_t bordered)
 { @autoreleasepool
 {
     if (SetWindowStyle(window, GetWindowStyle(window))) {
@@ -1606,7 +1606,7 @@ Cocoa_SetWindowBordered(_THIS, SDL_Window * window, SDL_bool bordered)
 }}
 
 void
-Cocoa_SetWindowResizable(_THIS, SDL_Window * window, SDL_bool resizable)
+Cocoa_SetWindowResizable(_THIS, SDL_Window * window, SDL_nez_b32_t resizable)
 { @autoreleasepool
 {
     /* Don't set this if we're in a space!
@@ -1621,7 +1621,7 @@ Cocoa_SetWindowResizable(_THIS, SDL_Window * window, SDL_bool resizable)
 }}
 
 void
-Cocoa_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_bool fullscreen)
+Cocoa_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_nez_b32_t fullscreen)
 { @autoreleasepool
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
@@ -1747,7 +1747,7 @@ Cocoa_GetWindowGammaRamp(_THIS, SDL_Window * window, Uint16 * ramp)
 }
 
 void
-Cocoa_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed)
+Cocoa_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed)
 {
     SDL_Mouse *mouse = SDL_GetMouse();
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
@@ -1810,7 +1810,7 @@ Cocoa_DestroyWindow(_THIS, SDL_Window * window)
     window->driverdata = NULL;
 }}
 
-SDL_bool
+SDL_nez_b32_t
 Cocoa_GetWindowWMInfo(_THIS, SDL_Window * window, SDL_SysWMinfo * info)
 {
     NSWindow *nswindow = ((SDL_WindowData *) window->driverdata)->nswindow;
@@ -1826,7 +1826,7 @@ Cocoa_GetWindowWMInfo(_THIS, SDL_Window * window, SDL_SysWMinfo * info)
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 Cocoa_IsWindowInFullscreenSpace(SDL_Window * window)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
@@ -1838,11 +1838,11 @@ Cocoa_IsWindowInFullscreenSpace(SDL_Window * window)
     }
 }
 
-SDL_bool
-Cocoa_SetWindowFullscreenSpace(SDL_Window * window, SDL_bool state)
+SDL_nez_b32_t
+Cocoa_SetWindowFullscreenSpace(SDL_Window * window, SDL_nez_b32_t state)
 { @autoreleasepool
 {
-    SDL_bool succeeded = SDL_FALSE;
+    SDL_nez_b32_t succeeded = SDL_FALSE;
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
 
     if ([data->listener setFullscreenSpace:(state ? YES : NO)]) {
@@ -1876,13 +1876,13 @@ Cocoa_SetWindowFullscreenSpace(SDL_Window * window, SDL_bool state)
 }}
 
 int
-Cocoa_SetWindowHitTest(SDL_Window * window, SDL_bool enabled)
+Cocoa_SetWindowHitTest(SDL_Window * window, SDL_nez_b32_t enabled)
 {
     return 0;  /* just succeed, the real work is done elsewhere. */
 }
 
 void
-Cocoa_AcceptDragAndDrop(SDL_Window * window, SDL_bool accept)
+Cocoa_AcceptDragAndDrop(SDL_Window * window, SDL_nez_b32_t accept)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
     if (accept) {

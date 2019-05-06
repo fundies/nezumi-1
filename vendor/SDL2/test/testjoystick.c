@@ -33,8 +33,8 @@
 #endif
 
 SDL_Renderer *screen = NULL;
-SDL_bool retval = SDL_FALSE;
-SDL_bool done = SDL_FALSE;
+SDL_nez_b32_t retval = SDL_FALSE;
+SDL_nez_b32_t done = SDL_FALSE;
 
 static void
 DrawRect(SDL_Renderer *r, const int x, const int y, const int w, const int h)
@@ -187,7 +187,7 @@ loop(void *arg)
 #endif
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 WatchJoystick(SDL_Joystick * joystick)
 {
     SDL_Window *window = NULL;
@@ -321,8 +321,8 @@ main(int argc, char *argv[])
 #else
     if (argv[1]) {
 #endif
-        SDL_bool reportederror = SDL_FALSE;
-        SDL_bool keepGoing = SDL_TRUE;
+        SDL_nez_b32_t reportederror = SDL_FALSE;
+        SDL_nez_b32_t keepGoing = SDL_TRUE;
         SDL_Event event;
         int device;
 #if defined(__ANDROID__) || defined(__IPHONEOS__)

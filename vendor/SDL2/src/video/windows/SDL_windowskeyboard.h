@@ -33,7 +33,7 @@ extern void WIN_StartTextInput(_THIS);
 extern void WIN_StopTextInput(_THIS);
 extern void WIN_SetTextInputRect(_THIS, SDL_Rect *rect);
 
-extern SDL_bool IME_HandleMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM *lParam, struct SDL_VideoData *videodata);
+extern SDL_nez_b32_t IME_HandleMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM *lParam, struct SDL_VideoData *videodata);
 
 #endif /* SDL_windowskeyboard_h_ */
 

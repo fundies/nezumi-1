@@ -40,7 +40,7 @@ static int shm_errhandler(Display *d, XErrorEvent *e)
         return(X_handler(d,e));
 }
 
-static SDL_bool have_mitshm(void)
+static SDL_nez_b32_t have_mitshm(void)
 {
     /* Only use shared memory on local X servers */
     if ( (SDL_strncmp(X11_XDisplayName(NULL), ":", 1) == 0) ||

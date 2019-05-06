@@ -43,7 +43,7 @@ typedef struct SDL_Hint {
 
 static SDL_Hint *SDL_hints;
 
-SDL_bool
+SDL_nez_b32_t
 SDL_SetHintWithPriority(const char *name, const char *value,
                         SDL_HintPriority priority)
 {
@@ -94,7 +94,7 @@ SDL_SetHintWithPriority(const char *name, const char *value,
     return SDL_TRUE;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_SetHint(const char *name, const char *value)
 {
     return SDL_SetHintWithPriority(name, value, SDL_HINT_NORMAL);
@@ -118,8 +118,8 @@ SDL_GetHint(const char *name)
     return env;
 }
 
-SDL_bool
-SDL_GetHintBoolean(const char *name, SDL_bool default_value)
+SDL_nez_b32_t
+SDL_GetHintnez_b32_tean(const char *name, SDL_nez_b32_t default_value)
 {
     const char *hint = SDL_GetHint(name);
     if (!hint || !*hint) {

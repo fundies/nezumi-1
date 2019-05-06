@@ -64,7 +64,7 @@ typedef struct
     int (*WarpMouseGlobal) (int x, int y);
 
     /* Set relative mode */
-    int (*SetRelativeMouseMode) (SDL_bool enabled);
+    int (*SetRelativeMouseMode) (SDL_nez_b32_t enabled);
 
     /* Set mouse capture */
     int (*CaptureMouse) (SDL_Window * window);
@@ -83,16 +83,16 @@ typedef struct
     float accumulated_wheel_x;
     float accumulated_wheel_y;
     Uint32 buttonstate;
-    SDL_bool has_position;
-    SDL_bool relative_mode;
-    SDL_bool relative_mode_warp;
+    SDL_nez_b32_t has_position;
+    SDL_nez_b32_t relative_mode;
+    SDL_nez_b32_t relative_mode_warp;
     float normal_speed_scale;
     float relative_speed_scale;
     float scale_accum_x;
     float scale_accum_y;
     Uint32 double_click_time;
     int double_click_radius;
-    SDL_bool touch_mouse_events;
+    SDL_nez_b32_t touch_mouse_events;
 
     /* Data for double-click tracking */
     int num_clickstates;
@@ -101,7 +101,7 @@ typedef struct
     SDL_Cursor *cursors;
     SDL_Cursor *def_cursor;
     SDL_Cursor *cur_cursor;
-    SDL_bool cursor_shown;
+    SDL_nez_b32_t cursor_shown;
 
     /* Driver-dependent data. */
     void *driverdata;

@@ -306,7 +306,7 @@ MIR_InitDisplays(_THIS)
 
     for (d = 0; d < num_outputs; d++) {
         MirOutput* output = MIR_mir_display_config_get_mutable_output(mir_data->display_config, d);
-        SDL_bool enabled  = MIR_mir_output_is_enabled(output);
+        SDL_nez_b32_t enabled  = MIR_mir_output_is_enabled(output);
         MirOutputConnectionState state = MIR_mir_output_get_connection_state(output);
 
         if (enabled && state == mir_output_connection_state_connected) {

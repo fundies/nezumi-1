@@ -45,22 +45,22 @@
 #define _NET_WM_STATE_REMOVE    0l
 #define _NET_WM_STATE_ADD       1l
 
-static Bool isMapNotify(Display *dpy, XEvent *ev, XPointer win)
+static nez_b32_t isMapNotify(Display *dpy, XEvent *ev, XPointer win)
 {
     return ev->type == MapNotify && ev->xmap.window == *((Window*)win);
 }
-static Bool isUnmapNotify(Display *dpy, XEvent *ev, XPointer win)
+static nez_b32_t isUnmapNotify(Display *dpy, XEvent *ev, XPointer win)
 {
     return ev->type == UnmapNotify && ev->xunmap.window == *((Window*)win);
 }
 
 /*
-static Bool isConfigureNotify(Display *dpy, XEvent *ev, XPointer win)
+static nez_b32_t isConfigureNotify(Display *dpy, XEvent *ev, XPointer win)
 {
     return ev->type == ConfigureNotify && ev->xconfigure.window == *((Window*)win);
 }
-static Bool
-X11_XIfEventTimeout(Display *display, XEvent *event_return, Bool (*predicate)(), XPointer arg, int timeoutMS)
+static nez_b32_t
+X11_XIfEventTimeout(Display *display, XEvent *event_return, nez_b32_t (*predicate)(), XPointer arg, int timeoutMS)
 {
     Uint32 start = SDL_GetTicks();
 
@@ -73,14 +73,14 @@ X11_XIfEventTimeout(Display *display, XEvent *event_return, Bool (*predicate)(),
 }
 */
 
-static SDL_bool
+static SDL_nez_b32_t
 X11_IsWindowLegacyFullscreen(_THIS, SDL_Window * window)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
     return (data->fswindow != 0);
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 X11_IsWindowMapped(_THIS, SDL_Window * window)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
@@ -96,7 +96,7 @@ X11_IsWindowMapped(_THIS, SDL_Window * window)
 }
 
 #if 0
-static SDL_bool
+static SDL_nez_b32_t
 X11_IsActionAllowed(SDL_Window *window, Atom action)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
@@ -107,7 +107,7 @@ X11_IsActionAllowed(SDL_Window *window, Atom action)
     unsigned long remain;
     unsigned long len, i;
     Atom *list;
-    SDL_bool ret = SDL_FALSE;
+    SDL_nez_b32_t ret = SDL_FALSE;
 
     if (X11_XGetWindowProperty(display, data->xwindow, _NET_WM_ALLOWED_ACTIONS, 0, 1024, False, XA_ATOM, &type, &form, &len, &remain, (unsigned char **)&list) == Success)
     {
@@ -248,7 +248,7 @@ X11_GetNetWMState(_THIS, Window xwindow)
 }
 
 static int
-SetupWindowData(_THIS, SDL_Window * window, Window w, BOOL created)
+SetupWindowData(_THIS, SDL_Window * window, Window w, nez_b32_t created)
 {
     SDL_VideoData *videodata = (SDL_VideoData *) _this->driverdata;
     SDL_WindowData *data;
@@ -338,7 +338,7 @@ SetupWindowData(_THIS, SDL_Window * window, Window w, BOOL created)
 }
 
 static void
-SetWindowBordered(Display *display, int screen, Window window, SDL_bool border)
+SetWindowBordered(Display *display, int screen, Window window, SDL_nez_b32_t border)
 {
     /*
      * this code used to check for KWM_WIN_DECORATION, but KDE hasn't
@@ -578,7 +578,7 @@ X11_CreateWindow(_THIS, SDL_Window * window)
     wintype = X11_XInternAtom(display, wintype_name, False);
     X11_XChangeProperty(display, w, _NET_WM_WINDOW_TYPE, XA_ATOM, 32,
                     PropModeReplace, (unsigned char *)&wintype, 1);
-    if (SDL_GetHintBoolean(SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR, SDL_TRUE)) {
+    if (SDL_GetHintnez_b32_tean(SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR, SDL_TRUE)) {
         _NET_WM_BYPASS_COMPOSITOR = X11_XInternAtom(display, "_NET_WM_BYPASS_COMPOSITOR", False);
         X11_XChangeProperty(display, w, _NET_WM_BYPASS_COMPOSITOR, XA_CARDINAL, 32,
                         PropModeReplace,
@@ -593,7 +593,7 @@ X11_CreateWindow(_THIS, SDL_Window * window)
         protocols[proto_count++] = data->WM_TAKE_FOCUS; /* Since we will want to set input focus explicitly */
 
         /* Default to using ping if there is no hint */
-        if (SDL_GetHintBoolean(SDL_HINT_VIDEO_X11_NET_WM_PING, SDL_TRUE)) {
+        if (SDL_GetHintnez_b32_tean(SDL_HINT_VIDEO_X11_NET_WM_PING, SDL_TRUE)) {
             protocols[proto_count++] = data->_NET_WM_PING; /* Respond so WM knows we're alive */
         }
 
@@ -955,10 +955,10 @@ X11_SetWindowInputFocus(_THIS, SDL_Window * window)
 }
 
 void
-X11_SetWindowBordered(_THIS, SDL_Window * window, SDL_bool bordered)
+X11_SetWindowBordered(_THIS, SDL_Window * window, SDL_nez_b32_t bordered)
 {
-    const SDL_bool focused = ((window->flags & SDL_WINDOW_INPUT_FOCUS) != 0);
-    const SDL_bool visible = ((window->flags & SDL_WINDOW_HIDDEN) == 0);
+    const SDL_nez_b32_t focused = ((window->flags & SDL_WINDOW_INPUT_FOCUS) != 0);
+    const SDL_nez_b32_t visible = ((window->flags & SDL_WINDOW_HIDDEN) == 0);
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
     SDL_DisplayData *displaydata =
         (SDL_DisplayData *) SDL_GetDisplayForWindow(window)->driverdata;
@@ -987,7 +987,7 @@ X11_SetWindowBordered(_THIS, SDL_Window * window, SDL_bool bordered)
 }
 
 void
-X11_SetWindowResizable(_THIS, SDL_Window * window, SDL_bool resizable)
+X11_SetWindowResizable(_THIS, SDL_Window * window, SDL_nez_b32_t resizable)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
     Display *display = data->videodata->display;
@@ -1107,7 +1107,7 @@ X11_RaiseWindow(_THIS, SDL_Window * window)
 }
 
 static void
-SetWindowMaximized(_THIS, SDL_Window * window, SDL_bool maximized)
+SetWindowMaximized(_THIS, SDL_Window * window, SDL_nez_b32_t maximized)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
     SDL_DisplayData *displaydata =
@@ -1173,7 +1173,7 @@ X11_RestoreWindow(_THIS, SDL_Window * window)
 
 /* This asks the Window Manager to handle fullscreen for us. This is the modern way. */
 static void
-X11_SetWindowFullscreenViaWM(_THIS, SDL_Window * window, SDL_VideoDisplay * _display, SDL_bool fullscreen)
+X11_SetWindowFullscreenViaWM(_THIS, SDL_Window * window, SDL_VideoDisplay * _display, SDL_nez_b32_t fullscreen)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
     SDL_DisplayData *displaydata = (SDL_DisplayData *) _display->driverdata;
@@ -1377,10 +1377,10 @@ X11_EndWindowFullscreenLegacy(_THIS, SDL_Window * window, SDL_VideoDisplay * _di
 
 
 void
-X11_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * _display, SDL_bool fullscreen)
+X11_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * _display, SDL_nez_b32_t fullscreen)
 {
     /* !!! FIXME: SDL_Hint? */
-    SDL_bool legacy = SDL_FALSE;
+    SDL_nez_b32_t legacy = SDL_FALSE;
     const char *env = SDL_getenv("SDL_VIDEO_X11_LEGACY_FULLSCREEN");
     if (env) {
         legacy = SDL_atoi(env);
@@ -1478,12 +1478,12 @@ X11_SetWindowGammaRamp(_THIS, SDL_Window * window, const Uint16 * ramp)
 }
 
 void
-X11_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed)
+X11_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
     Display *display = data->videodata->display;
-    SDL_bool oldstyle_fullscreen;
-    SDL_bool grab_keyboard;
+    SDL_nez_b32_t oldstyle_fullscreen;
+    SDL_nez_b32_t grab_keyboard;
 
     /* ICCCM2.0-compliant window managers can handle fullscreen windows
        If we're using XVidMode to change resolution we need to confine
@@ -1518,7 +1518,7 @@ X11_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed)
         X11_XRaiseWindow(display, data->xwindow);
 
         /* Now grab the keyboard */
-        if (SDL_GetHintBoolean(SDL_HINT_GRAB_KEYBOARD, SDL_FALSE)) {
+        if (SDL_GetHintnez_b32_tean(SDL_HINT_GRAB_KEYBOARD, SDL_FALSE)) {
             grab_keyboard = SDL_TRUE;
         } else {
             /* We need to do this with the old style override_redirect
@@ -1573,7 +1573,7 @@ X11_DestroyWindow(_THIS, SDL_Window * window)
     window->driverdata = NULL;
 }
 
-SDL_bool
+SDL_nez_b32_t
 X11_GetWindowWMInfo(_THIS, SDL_Window * window, SDL_SysWMinfo * info)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
@@ -1593,13 +1593,13 @@ X11_GetWindowWMInfo(_THIS, SDL_Window * window, SDL_SysWMinfo * info)
 }
 
 int
-X11_SetWindowHitTest(SDL_Window *window, SDL_bool enabled)
+X11_SetWindowHitTest(SDL_Window *window, SDL_nez_b32_t enabled)
 {
     return 0;  /* just succeed, the real work is done elsewhere. */
 }
 
 void
-X11_AcceptDragAndDrop(SDL_Window * window, SDL_bool accept)
+X11_AcceptDragAndDrop(SDL_Window * window, SDL_nez_b32_t accept)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
     Display *display = data->videodata->display;

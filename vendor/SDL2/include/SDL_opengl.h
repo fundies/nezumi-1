@@ -174,7 +174,7 @@ extern "C" {
  * Datatypes
  */
 typedef unsigned int	GLenum;
-typedef unsigned char	GLboolean;
+typedef unsigned char	GLnez_b32_tean;
 typedef unsigned int	GLbitfield;
 typedef void		GLvoid;
 typedef signed char	GLbyte;		/* 1-byte signed */
@@ -195,7 +195,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
  * Constants
  */
 
-/* Boolean values */
+/* nez_b32_tean values */
 #define GL_FALSE				0
 #define GL_TRUE					1
 
@@ -808,7 +808,7 @@ GLAPI void GLAPIENTRY glClear( GLbitfield mask );
 
 GLAPI void GLAPIENTRY glIndexMask( GLuint mask );
 
-GLAPI void GLAPIENTRY glColorMask( GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha );
+GLAPI void GLAPIENTRY glColorMask( GLnez_b32_tean red, GLnez_b32_tean green, GLnez_b32_tean blue, GLnez_b32_tean alpha );
 
 GLAPI void GLAPIENTRY glAlphaFunc( GLenum func, GLclampf ref );
 
@@ -834,9 +834,9 @@ GLAPI void GLAPIENTRY glPolygonStipple( const GLubyte *mask );
 
 GLAPI void GLAPIENTRY glGetPolygonStipple( GLubyte *mask );
 
-GLAPI void GLAPIENTRY glEdgeFlag( GLboolean flag );
+GLAPI void GLAPIENTRY glEdgeFlag( GLnez_b32_tean flag );
 
-GLAPI void GLAPIENTRY glEdgeFlagv( const GLboolean *flag );
+GLAPI void GLAPIENTRY glEdgeFlagv( const GLnez_b32_tean *flag );
 
 GLAPI void GLAPIENTRY glScissor( GLint x, GLint y, GLsizei width, GLsizei height);
 
@@ -852,7 +852,7 @@ GLAPI void GLAPIENTRY glEnable( GLenum cap );
 
 GLAPI void GLAPIENTRY glDisable( GLenum cap );
 
-GLAPI GLboolean GLAPIENTRY glIsEnabled( GLenum cap );
+GLAPI GLnez_b32_tean GLAPIENTRY glIsEnabled( GLenum cap );
 
 
 GLAPI void GLAPIENTRY glEnableClientState( GLenum cap );  /* 1.1 */
@@ -860,7 +860,7 @@ GLAPI void GLAPIENTRY glEnableClientState( GLenum cap );  /* 1.1 */
 GLAPI void GLAPIENTRY glDisableClientState( GLenum cap );  /* 1.1 */
 
 
-GLAPI void GLAPIENTRY glGetBooleanv( GLenum pname, GLboolean *params );
+GLAPI void GLAPIENTRY glGetnez_b32_teanv( GLenum pname, GLnez_b32_tean *params );
 
 GLAPI void GLAPIENTRY glGetDoublev( GLenum pname, GLdouble *params );
 
@@ -900,7 +900,7 @@ GLAPI void GLAPIENTRY glClearDepth( GLclampd depth );
 
 GLAPI void GLAPIENTRY glDepthFunc( GLenum func );
 
-GLAPI void GLAPIENTRY glDepthMask( GLboolean flag );
+GLAPI void GLAPIENTRY glDepthMask( GLnez_b32_tean flag );
 
 GLAPI void GLAPIENTRY glDepthRange( GLclampd near_val, GLclampd far_val );
 
@@ -959,7 +959,7 @@ GLAPI void GLAPIENTRY glTranslatef( GLfloat x, GLfloat y, GLfloat z );
  * Display Lists
  */
 
-GLAPI GLboolean GLAPIENTRY glIsList( GLuint list );
+GLAPI GLnez_b32_tean GLAPIENTRY glIsList( GLuint list );
 
 GLAPI void GLAPIENTRY glDeleteLists( GLuint list, GLsizei range );
 
@@ -1369,11 +1369,11 @@ GLAPI void GLAPIENTRY glPrioritizeTextures( GLsizei n,
                                             const GLuint *textures,
                                             const GLclampf *priorities );
 
-GLAPI GLboolean GLAPIENTRY glAreTexturesResident( GLsizei n,
+GLAPI GLnez_b32_tean GLAPIENTRY glAreTexturesResident( GLsizei n,
                                                   const GLuint *textures,
-                                                  GLboolean *residences );
+                                                  GLnez_b32_tean *residences );
 
-GLAPI GLboolean GLAPIENTRY glIsTexture( GLuint texture );
+GLAPI GLnez_b32_tean GLAPIENTRY glIsTexture( GLuint texture );
 
 
 GLAPI void GLAPIENTRY glTexSubImage1D( GLenum target, GLint level,
@@ -1691,11 +1691,11 @@ GLAPI void GLAPIENTRY glBlendColor( GLclampf red, GLclampf green,
                                     GLclampf blue, GLclampf alpha );
 
 GLAPI void GLAPIENTRY glHistogram( GLenum target, GLsizei width,
-				   GLenum internalformat, GLboolean sink );
+				   GLenum internalformat, GLnez_b32_tean sink );
 
 GLAPI void GLAPIENTRY glResetHistogram( GLenum target );
 
-GLAPI void GLAPIENTRY glGetHistogram( GLenum target, GLboolean reset,
+GLAPI void GLAPIENTRY glGetHistogram( GLenum target, GLnez_b32_tean reset,
 				      GLenum format, GLenum type,
 				      GLvoid *values );
 
@@ -1706,11 +1706,11 @@ GLAPI void GLAPIENTRY glGetHistogramParameteriv( GLenum target, GLenum pname,
 						 GLint *params );
 
 GLAPI void GLAPIENTRY glMinmax( GLenum target, GLenum internalformat,
-				GLboolean sink );
+				GLnez_b32_tean sink );
 
 GLAPI void GLAPIENTRY glResetMinmax( GLenum target );
 
-GLAPI void GLAPIENTRY glGetMinmax( GLenum target, GLboolean reset,
+GLAPI void GLAPIENTRY glGetMinmax( GLenum target, GLnez_b32_tean reset,
                                    GLenum format, GLenum types,
                                    GLvoid *values );
 
@@ -1966,11 +1966,11 @@ GLAPI void GLAPIENTRY glMultTransposeMatrixd( const GLdouble m[16] );
 
 GLAPI void GLAPIENTRY glMultTransposeMatrixf( const GLfloat m[16] );
 
-GLAPI void GLAPIENTRY glSampleCoverage( GLclampf value, GLboolean invert );
+GLAPI void GLAPIENTRY glSampleCoverage( GLclampf value, GLnez_b32_tean invert );
 
 
 typedef void (APIENTRYP PFNGLACTIVETEXTUREPROC) (GLenum texture);
-typedef void (APIENTRYP PFNGLSAMPLECOVERAGEPROC) (GLclampf value, GLboolean invert);
+typedef void (APIENTRYP PFNGLSAMPLECOVERAGEPROC) (GLclampf value, GLnez_b32_tean invert);
 typedef void (APIENTRYP PFNGLCOMPRESSEDTEXIMAGE3DPROC) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data);
 typedef void (APIENTRYP PFNGLCOMPRESSEDTEXIMAGE2DPROC) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data);
 typedef void (APIENTRYP PFNGLCOMPRESSEDTEXIMAGE1DPROC) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data);

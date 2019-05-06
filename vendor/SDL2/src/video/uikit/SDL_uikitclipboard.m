@@ -59,7 +59,7 @@ UIKit_GetClipboardText(_THIS)
 #endif
 }
 
-SDL_bool
+SDL_nez_b32_t
 UIKit_HasClipboardText(_THIS)
 {
     @autoreleasepool {

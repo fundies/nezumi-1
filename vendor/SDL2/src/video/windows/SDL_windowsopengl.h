@@ -27,11 +27,11 @@
 
 struct SDL_GLDriverData
 {
-    SDL_bool HAS_WGL_ARB_pixel_format;
-    SDL_bool HAS_WGL_EXT_swap_control_tear;
-    SDL_bool HAS_WGL_ARB_context_flush_control;
-    SDL_bool HAS_WGL_ARB_create_context_robustness;
-    SDL_bool HAS_WGL_ARB_create_context_no_error;
+    SDL_nez_b32_t HAS_WGL_ARB_pixel_format;
+    SDL_nez_b32_t HAS_WGL_EXT_swap_control_tear;
+    SDL_nez_b32_t HAS_WGL_ARB_context_flush_control;
+    SDL_nez_b32_t HAS_WGL_ARB_create_context_robustness;
+    SDL_nez_b32_t HAS_WGL_ARB_create_context_no_error;
 
     /* Max version of OpenGL ES context that can be created if the
        implementation supports WGL_EXT_create_context_es2_profile.
@@ -44,21 +44,21 @@ struct SDL_GLDriverData
 
     void *(WINAPI * wglGetProcAddress) (const char *proc);
     HGLRC(WINAPI * wglCreateContext) (HDC hdc);
-    BOOL(WINAPI * wglDeleteContext) (HGLRC hglrc);
-    BOOL(WINAPI * wglMakeCurrent) (HDC hdc, HGLRC hglrc);
-    BOOL(WINAPI * wglShareLists) (HGLRC hglrc1, HGLRC hglrc2);
-    BOOL(WINAPI * wglChoosePixelFormatARB) (HDC hdc,
+    nez_b32_t(WINAPI * wglDeleteContext) (HGLRC hglrc);
+    nez_b32_t(WINAPI * wglMakeCurrent) (HDC hdc, HGLRC hglrc);
+    nez_b32_t(WINAPI * wglShareLists) (HGLRC hglrc1, HGLRC hglrc2);
+    nez_b32_t(WINAPI * wglChoosePixelFormatARB) (HDC hdc,
                                             const int *piAttribIList,
                                             const FLOAT * pfAttribFList,
                                             UINT nMaxFormats,
                                             int *piFormats,
                                             UINT * nNumFormats);
-    BOOL(WINAPI * wglGetPixelFormatAttribivARB) (HDC hdc, int iPixelFormat,
+    nez_b32_t(WINAPI * wglGetPixelFormatAttribivARB) (HDC hdc, int iPixelFormat,
                                                  int iLayerPlane,
                                                  UINT nAttributes,
                                                  const int *piAttributes,
                                                  int *piValues);
-    BOOL (WINAPI * wglSwapIntervalEXT) (int interval);
+    nez_b32_t (WINAPI * wglSwapIntervalEXT) (int interval);
     int (WINAPI * wglGetSwapIntervalEXT) (void);
 };
 
@@ -66,7 +66,7 @@ struct SDL_GLDriverData
 extern int WIN_GL_LoadLibrary(_THIS, const char *path);
 extern void *WIN_GL_GetProcAddress(_THIS, const char *proc);
 extern void WIN_GL_UnloadLibrary(_THIS);
-extern SDL_bool WIN_GL_UseEGL(_THIS);
+extern SDL_nez_b32_t WIN_GL_UseEGL(_THIS);
 extern int WIN_GL_SetupWindow(_THIS, SDL_Window * window);
 extern SDL_GLContext WIN_GL_CreateContext(_THIS, SDL_Window * window);
 extern int WIN_GL_MakeCurrent(_THIS, SDL_Window * window,
@@ -76,7 +76,7 @@ extern int WIN_GL_GetSwapInterval(_THIS);
 extern int WIN_GL_SwapWindow(_THIS, SDL_Window * window);
 extern void WIN_GL_DeleteContext(_THIS, SDL_GLContext context);
 extern void WIN_GL_InitExtensions(_THIS);
-extern SDL_bool WIN_GL_SetPixelFormatFrom(_THIS, SDL_Window * fromWindow, SDL_Window * toWindow);
+extern SDL_nez_b32_t WIN_GL_SetPixelFormatFrom(_THIS, SDL_Window * fromWindow, SDL_Window * toWindow);
 
 #ifndef WGL_ARB_pixel_format
 #define WGL_NUMBER_PIXEL_FORMATS_ARB   0x2000

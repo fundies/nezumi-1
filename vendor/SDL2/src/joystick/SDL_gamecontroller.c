@@ -222,7 +222,7 @@ static void UpdateEventsForDeviceRemoval()
     SDL_stack_free(events);
 }
 
-static SDL_bool HasSameOutput(SDL_ExtendedGameControllerBind *a, SDL_ExtendedGameControllerBind *b)
+static SDL_nez_b32_t HasSameOutput(SDL_ExtendedGameControllerBind *a, SDL_ExtendedGameControllerBind *b)
 {
     if (a->outputType != b->outputType) {
         return SDL_FALSE;
@@ -421,7 +421,7 @@ static int SDLCALL SDL_GameControllerEventWatcher(void *userdata, SDL_Event * ev
 /*
  * Helper function to scan the mappings database for a controller with the specified GUID
  */
-static ControllerMapping_t *SDL_PrivateGetControllerMappingForGUID(SDL_JoystickGUID *guid, SDL_bool exact_match)
+static ControllerMapping_t *SDL_PrivateGetControllerMappingForGUID(SDL_JoystickGUID *guid, SDL_nez_b32_t exact_match)
 {
     ControllerMapping_t *pSupportedController = s_pSupportedControllers;
     while (pSupportedController) {
@@ -542,7 +542,7 @@ static void SDL_PrivateGameControllerParseElement(SDL_GameController *gamecontro
     SDL_ExtendedGameControllerBind bind;
     SDL_GameControllerButton button;
     SDL_GameControllerAxis axis;
-    SDL_bool invert_input = SDL_FALSE;
+    SDL_nez_b32_t invert_input = SDL_FALSE;
     char half_axis_input = 0;
     char half_axis_output = 0;
 
@@ -637,7 +637,7 @@ SDL_PrivateGameControllerParseControllerConfigString(SDL_GameController *gamecon
 {
     char szGameButton[20];
     char szJoystickButton[20];
-    SDL_bool bGameButton = SDL_TRUE;
+    SDL_nez_b32_t bGameButton = SDL_TRUE;
     int i = 0;
     const char *pchPos = pchString;
 
@@ -819,7 +819,7 @@ static void SDL_PrivateGameControllerRefreshMapping(ControllerMapping_t *pContro
  * Helper function to add a mapping for a guid
  */
 static ControllerMapping_t *
-SDL_PrivateAddMappingForGUID(SDL_JoystickGUID jGUID, const char *mappingString, SDL_bool *existing, SDL_ControllerMappingPriority priority)
+SDL_PrivateAddMappingForGUID(SDL_JoystickGUID jGUID, const char *mappingString, SDL_nez_b32_t *existing, SDL_ControllerMappingPriority priority)
 {
     char *pchName;
     char *pchMapping;
@@ -893,7 +893,7 @@ SDL_PrivateAddMappingForGUID(SDL_JoystickGUID jGUID, const char *mappingString, 
  */
 static ControllerMapping_t *SDL_CreateMappingForAndroidController(const char *name, SDL_JoystickGUID guid)
 {
-    SDL_bool existing;
+    SDL_nez_b32_t existing;
     char name_string[128];
     char mapping_string[1024];
     int button_mask;
@@ -1012,7 +1012,7 @@ static ControllerMapping_t *SDL_PrivateGetControllerMappingForNameAndGUID(const 
     if (!mapping && name) {
         if (SDL_strstr(name, "Xbox 360 Wireless Receiver")) {
             /* The Linux driver xpad.c maps the wireless dpad to buttons */
-            SDL_bool existing;
+            SDL_nez_b32_t existing;
             mapping = SDL_PrivateAddMappingForGUID(guid,
 "none,X360 Wireless Controller,a:b0,b:b1,back:b6,dpdown:b14,dpleft:b11,dpright:b12,dpup:b13,guide:b8,leftshoulder:b4,leftstick:b9,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b10,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,",
                           &existing, SDL_CONTROLLER_MAPPING_PRIORITY_DEFAULT);
@@ -1136,10 +1136,10 @@ SDL_PrivateGameControllerAddMapping(const char *mappingString, SDL_ControllerMap
 {
     char *pchGUID;
     SDL_JoystickGUID jGUID;
-    SDL_bool is_default_mapping = SDL_FALSE;
-    SDL_bool is_hidapi_mapping = SDL_FALSE;
-    SDL_bool is_xinput_mapping = SDL_FALSE;
-    SDL_bool existing = SDL_FALSE;
+    SDL_nez_b32_t is_default_mapping = SDL_FALSE;
+    SDL_nez_b32_t is_hidapi_mapping = SDL_FALSE;
+    SDL_nez_b32_t is_xinput_mapping = SDL_FALSE;
+    SDL_nez_b32_t existing = SDL_FALSE;
     ControllerMapping_t *pControllerMapping;
 
     if (!mappingString) {
@@ -1310,7 +1310,7 @@ SDL_GameControllerLoadHints()
  * Usually this will just be CONTROLLER_MAPPING_FILE, but for Android,
  * we want to get the internal storage path.
  */
-static SDL_bool SDL_GetControllerMappingFilePath(char *path, size_t size)
+static SDL_nez_b32_t SDL_GetControllerMappingFilePath(char *path, size_t size)
 {
 #ifdef CONTROLLER_MAPPING_FILE
 #define STRING(X) SDL_STRINGIFY_ARG(X)
@@ -1431,7 +1431,7 @@ SDL_GameControllerMappingForDeviceIndex(int joystick_index)
 /*
  * Return 1 if the joystick with this name and GUID is a supported controller
  */
-SDL_bool
+SDL_nez_b32_t
 SDL_IsGameControllerNameAndGUID(const char *name, SDL_JoystickGUID guid)
 {
     ControllerMapping_t *pSupportedController = SDL_PrivateGetControllerMappingForNameAndGUID(name, guid);
@@ -1444,7 +1444,7 @@ SDL_IsGameControllerNameAndGUID(const char *name, SDL_JoystickGUID guid)
 /*
  * Return 1 if the joystick at this device index is a supported controller
  */
-SDL_bool
+SDL_nez_b32_t
 SDL_IsGameController(int device_index)
 {
     ControllerMapping_t *pSupportedController = SDL_PrivateGetControllerMapping(device_index);
@@ -1457,7 +1457,7 @@ SDL_IsGameController(int device_index)
 /*
  * Return 1 if the game controller should be ignored by SDL
  */
-SDL_bool SDL_ShouldIgnoreGameController(const char *name, SDL_JoystickGUID guid)
+SDL_nez_b32_t SDL_ShouldIgnoreGameController(const char *name, SDL_JoystickGUID guid)
 {
     int i;
     Uint16 vendor;
@@ -1472,9 +1472,9 @@ SDL_bool SDL_ShouldIgnoreGameController(const char *name, SDL_JoystickGUID guid)
 
     SDL_GetJoystickGUIDInfo(guid, &vendor, &product, &version);
 
-    if (SDL_GetHintBoolean("SDL_GAMECONTROLLER_ALLOW_STEAM_VIRTUAL_GAMEPAD", SDL_FALSE)) {
+    if (SDL_GetHintnez_b32_tean("SDL_GAMECONTROLLER_ALLOW_STEAM_VIRTUAL_GAMEPAD", SDL_FALSE)) {
         /* We shouldn't ignore Steam's virtual gamepad since it's using the hints to filter out the real controllers so it can remap input for the virtual controller */
-        SDL_bool bSteamVirtualGamepad = SDL_FALSE;
+        SDL_nez_b32_t bSteamVirtualGamepad = SDL_FALSE;
 #if defined(__LINUX__)
         bSteamVirtualGamepad = (vendor == 0x28DE && product == 0x11FF);
 #elif defined(__MACOSX__)
@@ -1620,8 +1620,8 @@ SDL_GameControllerGetAxis(SDL_GameController * gamecontroller, SDL_GameControlle
         SDL_ExtendedGameControllerBind *binding = &gamecontroller->bindings[i];
         if (binding->outputType == SDL_CONTROLLER_BINDTYPE_AXIS && binding->output.axis.axis == axis) {
             int value = 0;
-            SDL_bool valid_input_range;
-            SDL_bool valid_output_range;
+            SDL_nez_b32_t valid_input_range;
+            SDL_nez_b32_t valid_output_range;
 
             if (binding->inputType == SDL_CONTROLLER_BINDTYPE_AXIS) {
                 value = SDL_JoystickGetAxis(gamecontroller->joystick, binding->input.axis.axis);
@@ -1677,7 +1677,7 @@ SDL_GameControllerGetButton(SDL_GameController * gamecontroller, SDL_GameControl
         SDL_ExtendedGameControllerBind *binding = &gamecontroller->bindings[i];
         if (binding->outputType == SDL_CONTROLLER_BINDTYPE_BUTTON && binding->output.button == button) {
             if (binding->inputType == SDL_CONTROLLER_BINDTYPE_AXIS) {
-                SDL_bool valid_input_range;
+                SDL_nez_b32_t valid_input_range;
 
                 int value = SDL_JoystickGetAxis(gamecontroller->joystick, binding->input.axis.axis);
                 int threshold = binding->input.axis.axis_min + (binding->input.axis.axis_max - binding->input.axis.axis_min) / 2;
@@ -1744,7 +1744,7 @@ SDL_GameControllerGetProductVersion(SDL_GameController * gamecontroller)
  * Return if the controller in question is currently attached to the system,
  *  \return 0 if not plugged in, 1 if still present.
  */
-SDL_bool
+SDL_nez_b32_t
 SDL_GameControllerGetAttached(SDL_GameController * gamecontroller)
 {
     if (!gamecontroller)

@@ -130,7 +130,7 @@ typedef struct {
 } SDL_DriverXboxOne_Context;
 
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_DriverXboxOne_IsSupportedDevice(Uint16 vendor_id, Uint16 product_id, Uint16 version, int interface_number)
 {
     return SDL_IsJoystickXboxOne(vendor_id, product_id);
@@ -142,7 +142,7 @@ HIDAPI_DriverXboxOne_GetDeviceName(Uint16 vendor_id, Uint16 product_id)
     return HIDAPI_XboxControllerName(vendor_id, product_id);
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_DriverXboxOne_Init(SDL_Joystick *joystick, hid_device *dev, Uint16 vendor_id, Uint16 product_id, void **context)
 {
     SDL_DriverXboxOne_Context *ctx;
@@ -266,7 +266,7 @@ HIDAPI_DriverXboxOne_HandleModePacket(SDL_Joystick *joystick, hid_device *dev, S
     SDL_PrivateJoystickButton(joystick, SDL_CONTROLLER_BUTTON_GUIDE, (data[4] & 0x01) ? SDL_PRESSED : SDL_RELEASED);
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 HIDAPI_DriverXboxOne_Update(SDL_Joystick *joystick, hid_device *dev, void *context)
 {
     SDL_DriverXboxOne_Context *ctx = (SDL_DriverXboxOne_Context *)context;

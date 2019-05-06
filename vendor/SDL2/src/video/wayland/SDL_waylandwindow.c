@@ -287,7 +287,7 @@ static const struct qt_extended_surface_listener extended_surface_listener = {
 };
 #endif /* SDL_VIDEO_DRIVER_WAYLAND_QT_TOUCH */
 
-SDL_bool
+SDL_nez_b32_t
 Wayland_GetWindowWMInfo(_THIS, SDL_Window * window, SDL_SysWMinfo * info)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
@@ -320,7 +320,7 @@ Wayland_GetWindowWMInfo(_THIS, SDL_Window * window, SDL_SysWMinfo * info)
 }
 
 int
-Wayland_SetWindowHitTest(SDL_Window *window, SDL_bool enabled)
+Wayland_SetWindowHitTest(SDL_Window *window, SDL_nez_b32_t enabled)
 {
     return 0;  /* just succeed, the real work is done elsewhere. */
 }
@@ -430,7 +430,7 @@ static void QtExtendedSurface_Unsubscribe(struct qt_extended_surface *surface, c
 
 void
 Wayland_SetWindowFullscreen(_THIS, SDL_Window * window,
-                            SDL_VideoDisplay * _display, SDL_bool fullscreen)
+                            SDL_VideoDisplay * _display, SDL_nez_b32_t fullscreen)
 {
     struct wl_output *output = (struct wl_output *) _display->driverdata;
     SetFullscreen(_this, window, fullscreen ? output : NULL);

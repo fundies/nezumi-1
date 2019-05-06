@@ -29,7 +29,7 @@
 #include "../SDL_thread_c.h"
 
 static DWORD thread_local_storage = TLS_OUT_OF_INDEXES;
-static SDL_bool generic_local_storage = SDL_FALSE;
+static SDL_nez_b32_t generic_local_storage = SDL_FALSE;
 
 SDL_TLSData *
 SDL_SYS_GetTLSData(void)

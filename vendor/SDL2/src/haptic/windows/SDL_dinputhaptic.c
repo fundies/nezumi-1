@@ -41,7 +41,7 @@ extern HWND SDL_HelperWindow;
 /*
  * Internal stuff.
  */
-static SDL_bool coinitialized = SDL_FALSE;
+static SDL_nez_b32_t coinitialized = SDL_FALSE;
 static LPDIRECTINPUT8 dinput = NULL;
 
 
@@ -61,7 +61,7 @@ DI_SetError(const char *str, HRESULT err)
 /*
  * Callback to find the haptic devices.
  */
-static BOOL CALLBACK
+static nez_b32_t CALLBACK
 EnumHapticsCallback(const DIDEVICEINSTANCE * pdidInstance, VOID * pContext)
 {
     (void) pContext;
@@ -202,7 +202,7 @@ SDL_DINPUT_MaybeRemoveDevice(const DIDEVICEINSTANCE * pdidInstance)
 /*
  * Callback to get supported axes.
  */
-static BOOL CALLBACK
+static nez_b32_t CALLBACK
 DI_DeviceObjectCallback(LPCDIDEVICEOBJECTINSTANCE dev, LPVOID pvRef)
 {
     SDL_Haptic *haptic = (SDL_Haptic *) pvRef;
@@ -244,7 +244,7 @@ DI_DeviceObjectCallback(LPCDIDEVICEOBJECTINSTANCE dev, LPVOID pvRef)
 #define EFFECT_TEST(e,s)               \
 if (WIN_IsEqualGUID(&pei->guid, &(e)))   \
    haptic->supported |= (s)
-static BOOL CALLBACK
+static nez_b32_t CALLBACK
 DI_EffectCallback(LPCDIEFFECTINFO pei, LPVOID pv)
 {
     /* Prepare the haptic device. */
@@ -280,7 +280,7 @@ DI_EffectCallback(LPCDIEFFECTINFO pei, LPVOID pv)
  *       - Get supported features.
  */
 static int
-SDL_DINPUT_HapticOpenFromDevice(SDL_Haptic * haptic, LPDIRECTINPUTDEVICE8 device8, SDL_bool is_joystick)
+SDL_DINPUT_HapticOpenFromDevice(SDL_Haptic * haptic, LPDIRECTINPUTDEVICE8 device8, SDL_nez_b32_t is_joystick)
 {
     HRESULT ret;
     DIPROPDWORD dipdw;

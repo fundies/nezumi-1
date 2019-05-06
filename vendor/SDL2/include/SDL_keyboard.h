@@ -165,7 +165,7 @@ extern DECLSPEC void SDLCALL SDL_StartTextInput(void);
  *  \sa SDL_StartTextInput()
  *  \sa SDL_StopTextInput()
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_IsTextInputActive(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_IsTextInputActive(void);
 
 /**
  *  \brief Stop receiving any text input events.
@@ -193,7 +193,7 @@ extern DECLSPEC void SDLCALL SDL_SetTextInputRect(SDL_Rect *rect);
  *
  *  \sa SDL_IsScreenKeyboardShown()
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasScreenKeyboardSupport(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasScreenKeyboardSupport(void);
 
 /**
  *  \brief Returns whether the screen keyboard is shown for given window.
@@ -204,7 +204,7 @@ extern DECLSPEC SDL_bool SDLCALL SDL_HasScreenKeyboardSupport(void);
  *
  *  \sa SDL_HasScreenKeyboardSupport()
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_IsScreenKeyboardShown(SDL_Window *window);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_IsScreenKeyboardShown(SDL_Window *window);
 
 /* Ends C function definitions when using C++ */
 #ifdef __cplusplus

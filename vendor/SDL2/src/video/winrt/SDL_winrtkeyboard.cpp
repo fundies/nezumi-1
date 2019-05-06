@@ -386,7 +386,7 @@ WINRT_ProcessCharacterReceivedEvent(Windows::UI::Core::CharacterReceivedEventArg
 
 #if NTDDI_VERSION >= NTDDI_WIN10
 
-SDL_bool WINRT_HasScreenKeyboardSupport(_THIS)
+SDL_nez_b32_t WINRT_HasScreenKeyboardSupport(_THIS)
 {
     return SDL_TRUE;
 }
@@ -409,7 +409,7 @@ void WINRT_HideScreenKeyboard(_THIS, SDL_Window *window)
     }
 }
 
-SDL_bool WINRT_IsScreenKeyboardShown(_THIS, SDL_Window *window)
+SDL_nez_b32_t WINRT_IsScreenKeyboardShown(_THIS, SDL_Window *window)
 {
     using namespace Windows::UI::ViewManagement;
     InputPane ^ inputPane = InputPane::GetForCurrentView();

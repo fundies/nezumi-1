@@ -17,8 +17,8 @@ class HIDDeviceUSB implements HIDDevice {
     protected UsbEndpoint mInputEndpoint;
     protected UsbEndpoint mOutputEndpoint;
     protected InputThread mInputThread;
-    protected boolean mRunning;
-    protected boolean mFrozen;
+    protected nez_b32_tean mRunning;
+    protected nez_b32_tean mFrozen;
 
     public HIDDeviceUSB(HIDDeviceManager manager, UsbDevice usbDevice, int interface_number) {
         mManager = manager;
@@ -97,7 +97,7 @@ class HIDDeviceUSB implements HIDDevice {
     }
 
     @Override
-    public boolean open() {
+    public nez_b32_tean open() {
         mConnection = mManager.getUSBManager().openDevice(mDevice);
         if (mConnection == null) {
             Log.w(TAG, "Unable to open USB device " + getDeviceName());
@@ -153,7 +153,7 @@ class HIDDeviceUSB implements HIDDevice {
         int res = -1;
         int offset = 0;
         int length = report.length;
-        boolean skipped_report_id = false;
+        nez_b32_tean skipped_report_id = false;
         byte report_number = report[0];
 
         if (report_number == 0x0) {
@@ -191,11 +191,11 @@ class HIDDeviceUSB implements HIDDevice {
     }
 
     @Override
-    public boolean getFeatureReport(byte[] report) {
+    public nez_b32_tean getFeatureReport(byte[] report) {
         int res = -1;
         int offset = 0;
         int length = report.length;
-        boolean skipped_report_id = false;
+        nez_b32_tean skipped_report_id = false;
         byte report_number = report[0];
 
         if (report_number == 0x0) {
@@ -266,7 +266,7 @@ class HIDDeviceUSB implements HIDDevice {
     }
 
     @Override
-    public void setFrozen(boolean frozen) {
+    public void setFrozen(nez_b32_tean frozen) {
         mFrozen = frozen;
     }
 

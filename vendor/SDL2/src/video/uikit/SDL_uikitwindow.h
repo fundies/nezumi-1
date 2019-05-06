@@ -31,10 +31,10 @@ extern void UIKit_SetWindowTitle(_THIS, SDL_Window * window);
 extern void UIKit_ShowWindow(_THIS, SDL_Window * window);
 extern void UIKit_HideWindow(_THIS, SDL_Window * window);
 extern void UIKit_RaiseWindow(_THIS, SDL_Window * window);
-extern void UIKit_SetWindowBordered(_THIS, SDL_Window * window, SDL_bool bordered);
-extern void UIKit_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_bool fullscreen);
+extern void UIKit_SetWindowBordered(_THIS, SDL_Window * window, SDL_nez_b32_t bordered);
+extern void UIKit_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_nez_b32_t fullscreen);
 extern void UIKit_DestroyWindow(_THIS, SDL_Window * window);
-extern SDL_bool UIKit_GetWindowWMInfo(_THIS, SDL_Window * window,
+extern SDL_nez_b32_t UIKit_GetWindowWMInfo(_THIS, SDL_Window * window,
                                       struct SDL_SysWMinfo * info);
 
 extern NSUInteger UIKit_GetSupportedOrientations(SDL_Window * window);

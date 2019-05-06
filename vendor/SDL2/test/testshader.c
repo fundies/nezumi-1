@@ -18,7 +18,7 @@
 #include "SDL_opengl.h"
 
 
-static SDL_bool shaders_supported;
+static SDL_nez_b32_t shaders_supported;
 static int      current_shader = 0;
 
 enum {
@@ -124,7 +124,7 @@ static PFNGLSHADERSOURCEARBPROC glShaderSourceARB;
 static PFNGLUNIFORM1IARBPROC glUniform1iARB;
 static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 
-static SDL_bool CompileShader(GLhandleARB shader, const char *source)
+static SDL_nez_b32_t CompileShader(GLhandleARB shader, const char *source)
 {
     GLint status;
 
@@ -147,7 +147,7 @@ static SDL_bool CompileShader(GLhandleARB shader, const char *source)
     }
 }
 
-static SDL_bool CompileShaderProgram(ShaderData *data)
+static SDL_nez_b32_t CompileShaderProgram(ShaderData *data)
 {
     const int num_tmus_bound = 4;
     int i;
@@ -199,7 +199,7 @@ static void DestroyShaderProgram(ShaderData *data)
     }
 }
 
-static SDL_bool InitShaders()
+static SDL_nez_b32_t InitShaders()
 {
     int i;
 

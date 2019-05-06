@@ -323,7 +323,7 @@ Android_OnHat(int device_id, int hat_id, int x, int y)
 
 
 int
-Android_AddJoystick(int device_id, const char *name, const char *desc, int vendor_id, int product_id, SDL_bool is_accelerometer, int button_mask, int naxes, int nhats, int nballs)
+Android_AddJoystick(int device_id, const char *name, const char *desc, int vendor_id, int product_id, SDL_nez_b32_t is_accelerometer, int button_mask, int naxes, int nhats, int nballs)
 {
     SDL_joylist_item *item;
     SDL_JoystickGUID guid;
@@ -332,7 +332,7 @@ Android_AddJoystick(int device_id, const char *name, const char *desc, int vendo
     int axis_mask;
 
 
-    if (!SDL_GetHintBoolean(SDL_HINT_TV_REMOTE_AS_JOYSTICK, SDL_TRUE)) {
+    if (!SDL_GetHintnez_b32_tean(SDL_HINT_TV_REMOTE_AS_JOYSTICK, SDL_TRUE)) {
         /* Ignore devices that aren't actually controllers (e.g. remotes), they'll be handled as keyboard input */
         if (naxes < 2 && nhats < 1) {
             return -1;
@@ -504,7 +504,7 @@ ANDROID_JoystickInit(void)
 {
     ANDROID_JoystickDetect();
     
-    if (SDL_GetHintBoolean(SDL_HINT_ACCELEROMETER_AS_JOYSTICK, SDL_TRUE)) {
+    if (SDL_GetHintnez_b32_tean(SDL_HINT_ACCELEROMETER_AS_JOYSTICK, SDL_TRUE)) {
         /* Default behavior, accelerometer as joystick */
         Android_AddJoystick(ANDROID_ACCELEROMETER_DEVICE_ID, ANDROID_ACCELEROMETER_NAME, ANDROID_ACCELEROMETER_NAME, 0, 0, SDL_TRUE, 0, 3, 0, 0);
     }

@@ -155,7 +155,7 @@ FreeDevice(recDevice *removeDevice)
     return pDeviceNext;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 GetHIDElementState(recDevice *pDevice, recElement *pElement, SInt32 *pValue)
 {
     SInt32 value = 0;
@@ -181,7 +181,7 @@ GetHIDElementState(recDevice *pDevice, recElement *pElement, SInt32 *pValue)
     return returnValue;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 GetHIDScaledCalibratedState(recDevice * pDevice, recElement * pElement, SInt32 min, SInt32 max, SInt32 *pValue)
 {
     const float deviceScale = max - min;
@@ -238,7 +238,7 @@ AddHIDElements(CFArrayRef array, recDevice *pDevice)
     CFArrayApplyFunction(array, range, AddHIDElement, pDevice);
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 ElementAlreadyAdded(const IOHIDElementCookie cookie, const recElement *listitem) {
     while (listitem) {
         if (listitem->cookie == cookie) {
@@ -393,7 +393,7 @@ AddHIDElement(const void *value, void *parameter)
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 GetDeviceInfo(IOHIDDeviceRef hidDevice, recDevice *pDevice)
 {
     Sint32 vendor = 0;
@@ -483,7 +483,7 @@ GetDeviceInfo(IOHIDDeviceRef hidDevice, recDevice *pDevice)
     return SDL_TRUE;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 JoystickAlreadyKnown(IOHIDDeviceRef ioHIDDeviceObject)
 {
     recDevice *i;
@@ -561,7 +561,7 @@ JoystickDeviceWasAddedCallback(void *ctx, IOReturn res, void *sender, IOHIDDevic
     SDL_PrivateJoystickAdded(device->instance_id);
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 ConfigHIDManager(CFArrayRef matchingArray)
 {
     CFRunLoopRef runloop = CFRunLoopGetCurrent();
@@ -611,10 +611,10 @@ CreateHIDDeviceMatchDictionary(const UInt32 page, const UInt32 usage, int *okay)
     return retval;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 CreateHIDManager(void)
 {
-    SDL_bool retval = SDL_FALSE;
+    SDL_nez_b32_t retval = SDL_FALSE;
     int okay = 1;
     const void *vals[] = {
         (void *) CreateHIDDeviceMatchDictionary(kHIDPage_GenericDesktop, kHIDUsage_GD_Joystick, &okay),

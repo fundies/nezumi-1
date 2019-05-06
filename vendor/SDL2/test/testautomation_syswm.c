@@ -16,7 +16,7 @@
 int
 syswm_getWindowWMInfo(void *arg)
 {
-  SDL_bool result;
+  SDL_nez_b32_t result;
   SDL_Window *window;
   SDL_SysWMinfo info;
 

@@ -77,9 +77,9 @@ static SDL_JoystickDriver *SDL_joystick_drivers[] = {
     &SDL_DUMMY_JoystickDriver
 #endif
 };
-static SDL_bool SDL_joystick_allows_background_events = SDL_FALSE;
+static SDL_nez_b32_t SDL_joystick_allows_background_events = SDL_FALSE;
 static SDL_Joystick *SDL_joysticks = NULL;
-static SDL_bool SDL_updating_joystick = SDL_FALSE;
+static SDL_nez_b32_t SDL_updating_joystick = SDL_FALSE;
 static SDL_mutex *SDL_joystick_lock = NULL; /* This needs to support recursive locks */
 static SDL_atomic_t SDL_next_joystick_instance_id;
 
@@ -169,7 +169,7 @@ SDL_JoystickID SDL_GetNextJoystickInstanceID()
  * Get the driver and device index for an API device index
  * This should be called while the joystick lock is held, to prevent another thread from updating the list
  */
-SDL_bool
+SDL_nez_b32_t
 SDL_GetDriverAndJoystickIndex(int device_index, SDL_JoystickDriver **driver, int *driver_index)
 {
     int i, num_joysticks, total_joysticks = 0;
@@ -247,7 +247,7 @@ SDL_JoystickGetDevicePlayerIndex(int device_index)
  * This isn't generally needed unless the joystick never generates an initial axis value near zero,
  * e.g. it's emulating axes with digital buttons
  */
-static SDL_bool
+static SDL_nez_b32_t
 SDL_JoystickAxesCenteredAtZero(SDL_Joystick *joystick)
 {
     static Uint32 zero_centered_joysticks[] = {
@@ -476,7 +476,7 @@ SDL_JoystickGetAxis(SDL_Joystick * joystick, int axis)
 /*
  * Get the initial state of an axis control on a joystick
  */
-SDL_bool
+SDL_nez_b32_t
 SDL_JoystickGetAxisInitialState(SDL_Joystick * joystick, int axis, Sint16 *state)
 {
     if (!SDL_PrivateJoystickValid(joystick)) {
@@ -564,7 +564,7 @@ SDL_JoystickGetButton(SDL_Joystick * joystick, int button)
  * Return if the joystick in question is currently attached to the system,
  *  \return SDL_FALSE if not plugged in, SDL_TRUE if still present.
  */
-SDL_bool
+SDL_nez_b32_t
 SDL_JoystickGetAttached(SDL_Joystick * joystick)
 {
     if (!SDL_PrivateJoystickValid(joystick)) {
@@ -732,7 +732,7 @@ SDL_JoystickQuit(void)
 }
 
 
-static SDL_bool
+static SDL_nez_b32_t
 SDL_PrivateJoystickShouldIgnoreEvent()
 {
     if (SDL_joystick_allows_background_events) {
@@ -1145,25 +1145,25 @@ void SDL_GetJoystickGUIDInfo(SDL_JoystickGUID guid, Uint16 *vendor, Uint16 *prod
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IsJoystickPS4(Uint16 vendor, Uint16 product)
 {
     return (GuessControllerType(vendor, product) == k_eControllerType_PS4Controller);
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IsJoystickNintendoSwitchPro(Uint16 vendor, Uint16 product)
 {
     return (GuessControllerType(vendor, product) == k_eControllerType_SwitchProController);
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IsJoystickSteamController(Uint16 vendor, Uint16 product)
 {
     return BIsSteamController(GuessControllerType(vendor, product));
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IsJoystickXbox360(Uint16 vendor, Uint16 product)
 {
     /* Filter out some bogus values here */
@@ -1176,25 +1176,25 @@ SDL_IsJoystickXbox360(Uint16 vendor, Uint16 product)
     return (GuessControllerType(vendor, product) == k_eControllerType_XBox360Controller);
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IsJoystickXboxOne(Uint16 vendor, Uint16 product)
 {
     return (GuessControllerType(vendor, product) == k_eControllerType_XBoxOneController);
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IsJoystickXInput(SDL_JoystickGUID guid)
 {
     return (guid.data[14] == 'x') ? SDL_TRUE : SDL_FALSE;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IsJoystickHIDAPI(SDL_JoystickGUID guid)
 {
     return (guid.data[14] == 'h') ? SDL_TRUE : SDL_FALSE;
 }
 
-static SDL_bool SDL_IsJoystickProductWheel(Uint32 vidpid)
+static SDL_nez_b32_t SDL_IsJoystickProductWheel(Uint32 vidpid)
 {
     static Uint32 wheel_joysticks[] = {
         MAKE_VIDPID(0x046d, 0xc294),    /* Logitech generic wheel */
@@ -1221,7 +1221,7 @@ static SDL_bool SDL_IsJoystickProductWheel(Uint32 vidpid)
     return SDL_FALSE;
 }
 
-static SDL_bool SDL_IsJoystickProductFlightStick(Uint32 vidpid)
+static SDL_nez_b32_t SDL_IsJoystickProductFlightStick(Uint32 vidpid)
 {
     static Uint32 flightstick_joysticks[] = {
         MAKE_VIDPID(0x044f, 0x0402),    /* HOTAS Warthog Joystick */
@@ -1237,7 +1237,7 @@ static SDL_bool SDL_IsJoystickProductFlightStick(Uint32 vidpid)
     return SDL_FALSE;
 }
 
-static SDL_bool SDL_IsJoystickProductThrottle(Uint32 vidpid)
+static SDL_nez_b32_t SDL_IsJoystickProductThrottle(Uint32 vidpid)
 {
     static Uint32 throttle_joysticks[] = {
         MAKE_VIDPID(0x044f, 0x0404),    /* HOTAS Warthog Throttle */
@@ -1307,7 +1307,7 @@ static SDL_JoystickType SDL_GetJoystickGUIDType(SDL_JoystickGUID guid)
     return SDL_JOYSTICK_TYPE_UNKNOWN;
 }
 
-static SDL_bool SDL_IsPS4RemapperRunning(void)
+static SDL_nez_b32_t SDL_IsPS4RemapperRunning(void)
 {
 #ifdef __WIN32__
     const char *mapper_processes[] = {
@@ -1316,7 +1316,7 @@ static SDL_bool SDL_IsPS4RemapperRunning(void)
     };
     int i;
     PROCESSENTRY32 pe32;
-    SDL_bool found = SDL_FALSE;
+    SDL_nez_b32_t found = SDL_FALSE;
 
     /* Take a snapshot of all processes in the system */
     HANDLE hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
@@ -1340,7 +1340,7 @@ static SDL_bool SDL_IsPS4RemapperRunning(void)
 #endif
 }
 
-SDL_bool SDL_ShouldIgnoreJoystick(const char *name, SDL_JoystickGUID guid)
+SDL_nez_b32_t SDL_ShouldIgnoreJoystick(const char *name, SDL_JoystickGUID guid)
 {
     Uint16 vendor;
     Uint16 product;

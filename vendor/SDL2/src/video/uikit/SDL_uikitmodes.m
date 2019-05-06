@@ -107,7 +107,7 @@ UIKit_AddSingleDisplayMode(SDL_VideoDisplay * display, int w, int h,
 
 static int
 UIKit_AddDisplayMode(SDL_VideoDisplay * display, int w, int h, UIScreen * uiscreen,
-                     UIScreenMode * uiscreenmode, SDL_bool addRotation)
+                     UIScreenMode * uiscreenmode, SDL_nez_b32_t addRotation)
 {
     if (UIKit_AddSingleDisplayMode(display, w, h, uiscreen, uiscreenmode) < 0) {
         return -1;
@@ -167,7 +167,7 @@ UIKit_AddDisplay(UIScreen *uiscreen)
     return 0;
 }
 
-SDL_bool
+SDL_nez_b32_t
 UIKit_IsDisplayLandscape(UIScreen *uiscreen)
 {
 #if !TARGET_OS_TV
@@ -204,8 +204,8 @@ UIKit_GetDisplayModes(_THIS, SDL_VideoDisplay * display)
     @autoreleasepool {
         SDL_DisplayData *data = (__bridge SDL_DisplayData *) display->driverdata;
 
-        SDL_bool isLandscape = UIKit_IsDisplayLandscape(data.uiscreen);
-        SDL_bool addRotation = (data.uiscreen == [UIScreen mainScreen]);
+        SDL_nez_b32_t isLandscape = UIKit_IsDisplayLandscape(data.uiscreen);
+        SDL_nez_b32_t addRotation = (data.uiscreen == [UIScreen mainScreen]);
         CGFloat scale = data.uiscreen.scale;
         NSArray *availableModes = nil;
 
@@ -327,7 +327,7 @@ UIKit_QuitModes(_THIS)
 #if !TARGET_OS_TV
 void SDL_OnApplicationDidChangeStatusBarOrientation()
 {
-    BOOL isLandscape = UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation);
+    nez_b32_t isLandscape = UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation);
     SDL_VideoDisplay *display = SDL_GetDisplay(0);
 
     if (display) {

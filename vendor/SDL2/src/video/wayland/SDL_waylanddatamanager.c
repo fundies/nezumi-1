@@ -76,7 +76,7 @@ write_pipe(int fd, const void* buffer, size_t total_length, size_t *pos)
 }
 
 static ssize_t
-read_pipe(int fd, void** buffer, size_t* total_length, SDL_bool null_terminate)
+read_pipe(int fd, void** buffer, size_t* total_length, SDL_nez_b32_t null_terminate)
 {
     int ready = 0;
     void* output_buffer = NULL;
@@ -269,11 +269,11 @@ int Wayland_data_source_add_data(SDL_WaylandDataSource *source,
     return status;
 }
 
-SDL_bool 
+SDL_nez_b32_t 
 Wayland_data_source_has_mime(SDL_WaylandDataSource *source,
                              const char *mime_type)
 {
-    SDL_bool found = SDL_FALSE;
+    SDL_nez_b32_t found = SDL_FALSE;
 
     if (source != NULL) {
         found = mime_data_list_find(&source->mimes, mime_type) != NULL;
@@ -284,7 +284,7 @@ Wayland_data_source_has_mime(SDL_WaylandDataSource *source,
 void* 
 Wayland_data_source_get_data(SDL_WaylandDataSource *source,
                              size_t *length, const char* mime_type,
-                             SDL_bool null_terminate)
+                             SDL_nez_b32_t null_terminate)
 {
     SDL_MimeDataList *mime_data = NULL;
     void *buffer = NULL;
@@ -321,7 +321,7 @@ Wayland_data_source_destroy(SDL_WaylandDataSource *source)
 void* 
 Wayland_data_offer_receive(SDL_WaylandDataOffer *offer,
                            size_t *length, const char* mime_type,
-                           SDL_bool null_terminate)
+                           SDL_nez_b32_t null_terminate)
 {
     SDL_WaylandDataDevice *data_device = NULL;
  
@@ -357,11 +357,11 @@ Wayland_data_offer_add_mime(SDL_WaylandDataOffer *offer,
 }
 
 
-SDL_bool 
+SDL_nez_b32_t 
 Wayland_data_offer_has_mime(SDL_WaylandDataOffer *offer,
                             const char *mime_type)
 {
-    SDL_bool found = SDL_FALSE;
+    SDL_nez_b32_t found = SDL_FALSE;
 
     if (offer != NULL) {
         found = mime_data_list_find(&offer->mimes, mime_type) != NULL;

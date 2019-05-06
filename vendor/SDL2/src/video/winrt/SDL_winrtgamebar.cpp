@@ -67,10 +67,10 @@ public:
         Windows::Foundation::EventRegistrationToken token) = 0;
     
     virtual HRESULT STDMETHODCALLTYPE get_Visible( 
-        boolean *value) = 0;
+        nez_b32_tean *value) = 0;
     
     virtual HRESULT STDMETHODCALLTYPE get_IsInputRedirected( 
-        boolean *value) = 0;
+        nez_b32_tean *value) = 0;
 };
 
 /* Declare the game bar's COM GUID */
@@ -115,7 +115,7 @@ static void
 WINRT_HandleGameBarIsInputRedirected_MainThread()
 {
     IGameBarStatics_ *gameBar;
-    boolean isInputRedirected = 0;
+    nez_b32_tean isInputRedirected = 0;
     if (!WINRT_MainThreadDispatcher) {
         /* The game bar event handler has been deregistered! */
         return;

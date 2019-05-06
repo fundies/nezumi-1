@@ -44,7 +44,7 @@ extern SDL_Touch *SDL_GetTouch(SDL_TouchID id);
 
 /* Send a touch down/up event for a touch */
 extern int SDL_SendTouch(SDL_TouchID id, SDL_FingerID fingerid,
-                         SDL_bool down, float x, float y, float pressure);
+                         SDL_nez_b32_t down, float x, float y, float pressure);
 
 /* Send a touch motion event for a touch */
 extern int SDL_SendTouchMotion(SDL_TouchID id, SDL_FingerID fingerid,

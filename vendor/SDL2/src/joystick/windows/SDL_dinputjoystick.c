@@ -42,7 +42,7 @@
 extern HWND SDL_HelperWindow;
 
 /* local variables */
-static SDL_bool coinitialized = SDL_FALSE;
+static SDL_nez_b32_t coinitialized = SDL_FALSE;
 static LPDIRECTINPUT8 dinput = NULL;
 static PRAWINPUTDEVICELIST SDL_RawDevList = NULL;
 static UINT SDL_RawDevListCount = 0;
@@ -235,7 +235,7 @@ SetDIerror(const char *function, HRESULT code)
     return SDL_SetError("%s() DirectX error 0x%8.8lx", function, code);
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 SDL_IsXInputDevice(const GUID* pGuidProductFromDirectInput)
 {
     static GUID IID_ValveStreamingGamepad = { MAKELONG(0x28DE, 0x11FF), 0x0000, 0x0000, { 0x00, 0x00, 0x50, 0x49, 0x44, 0x56, 0x49, 0x44 } };
@@ -403,7 +403,7 @@ SDL_DINPUT_JoystickInit(void)
 }
 
 /* helper function for direct input, gets called for each connected joystick */
-static BOOL CALLBACK
+static nez_b32_t CALLBACK
 EnumJoysticksCallback(const DIDEVICEINSTANCE * pdidInstance, VOID * pContext)
 {
     JoyStick_DeviceData *pNewJoystick;
@@ -559,7 +559,7 @@ SDL_DINPUT_JoystickDetect(JoyStick_DeviceData **pContext)
     SDL_RawDevListCount = 0;
 }
 
-static BOOL CALLBACK
+static nez_b32_t CALLBACK
 EnumDevObjectsCallback(LPCDIDEVICEOBJECTINSTANCE dev, LPVOID pvRef)
 {
     SDL_Joystick *joystick = (SDL_Joystick *)pvRef;

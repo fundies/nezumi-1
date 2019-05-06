@@ -170,7 +170,7 @@ struct hid_device_ {
 	int serial_index;
 
 	/* Whether blocking reads are used */
-	int blocking; /* boolean */
+	int blocking; /* nez_b32_tean */
 
 	/* Read thread objects */
 	pthread_t thread;

@@ -220,7 +220,7 @@ SDL_DelFinger(SDL_Touch* touch, SDL_FingerID fingerid)
 
 int
 SDL_SendTouch(SDL_TouchID id, SDL_FingerID fingerid,
-              SDL_bool down, float x, float y, float pressure)
+              SDL_nez_b32_t down, float x, float y, float pressure)
 {
     int posted;
     SDL_Finger *finger;

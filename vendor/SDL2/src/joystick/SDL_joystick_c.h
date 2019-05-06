@@ -43,7 +43,7 @@ extern int SDL_GameControllerInit(void);
 extern void SDL_GameControllerQuit(void);
 
 /* Function to get the joystick driver and device index for an API device index */
-extern SDL_bool SDL_GetDriverAndJoystickIndex(int device_index, struct _SDL_JoystickDriver **driver, int *driver_index);
+extern SDL_nez_b32_t SDL_GetDriverAndJoystickIndex(int device_index, struct _SDL_JoystickDriver **driver, int *driver_index);
 
 /* Function to return the device index for a joystick ID, or -1 if not found */
 extern int SDL_JoystickGetDeviceIndexFromInstanceID(SDL_JoystickID instance_id);
@@ -52,34 +52,34 @@ extern int SDL_JoystickGetDeviceIndexFromInstanceID(SDL_JoystickID instance_id);
 extern void SDL_GetJoystickGUIDInfo(SDL_JoystickGUID guid, Uint16 *vendor, Uint16 *product, Uint16 *version);
 
 /* Function to return whether a joystick is a PS4 controller */
-extern SDL_bool SDL_IsJoystickPS4(Uint16 vendor_id, Uint16 product_id);
+extern SDL_nez_b32_t SDL_IsJoystickPS4(Uint16 vendor_id, Uint16 product_id);
 
 /* Function to return whether a joystick is a Nintendo Switch Pro controller */
-extern SDL_bool SDL_IsJoystickNintendoSwitchPro(Uint16 vendor_id, Uint16 product_id);
+extern SDL_nez_b32_t SDL_IsJoystickNintendoSwitchPro(Uint16 vendor_id, Uint16 product_id);
 
 /* Function to return whether a joystick is a Steam Controller */
-extern SDL_bool SDL_IsJoystickSteamController(Uint16 vendor_id, Uint16 product_id);
+extern SDL_nez_b32_t SDL_IsJoystickSteamController(Uint16 vendor_id, Uint16 product_id);
 
 /* Function to return whether a joystick is an Xbox 360 controller */
-extern SDL_bool SDL_IsJoystickXbox360(Uint16 vendor_id, Uint16 product_id);
+extern SDL_nez_b32_t SDL_IsJoystickXbox360(Uint16 vendor_id, Uint16 product_id);
 
 /* Function to return whether a joystick is an Xbox One controller */
-extern SDL_bool SDL_IsJoystickXboxOne(Uint16 vendor_id, Uint16 product_id);
+extern SDL_nez_b32_t SDL_IsJoystickXboxOne(Uint16 vendor_id, Uint16 product_id);
 
 /* Function to return whether a joystick guid comes from the XInput driver */
-extern SDL_bool SDL_IsJoystickXInput(SDL_JoystickGUID guid);
+extern SDL_nez_b32_t SDL_IsJoystickXInput(SDL_JoystickGUID guid);
 
 /* Function to return whether a joystick guid comes from the HIDAPI driver */
-extern SDL_bool SDL_IsJoystickHIDAPI(SDL_JoystickGUID guid);
+extern SDL_nez_b32_t SDL_IsJoystickHIDAPI(SDL_JoystickGUID guid);
 
 /* Function to return whether a joystick should be ignored */
-extern SDL_bool SDL_ShouldIgnoreJoystick(const char *name, SDL_JoystickGUID guid);
+extern SDL_nez_b32_t SDL_ShouldIgnoreJoystick(const char *name, SDL_JoystickGUID guid);
 
 /* Function to return whether a joystick name and GUID is a game controller  */
-extern SDL_bool SDL_IsGameControllerNameAndGUID(const char *name, SDL_JoystickGUID guid);
+extern SDL_nez_b32_t SDL_IsGameControllerNameAndGUID(const char *name, SDL_JoystickGUID guid);
 
 /* Function to return whether a game controller should be ignored */
-extern SDL_bool SDL_ShouldIgnoreGameController(const char *name, SDL_JoystickGUID guid);
+extern SDL_nez_b32_t SDL_ShouldIgnoreGameController(const char *name, SDL_JoystickGUID guid);
 
 /* Handle delayed guide button on a game controller */
 extern void SDL_GameControllerHandleDelayedGuideButton(SDL_Joystick *joystick);

@@ -31,8 +31,8 @@
 #include "SDL_events.h"
 #include "SDL_events_c.h"
 
-static SDL_bool disable_signals = SDL_FALSE;
-static SDL_bool send_quit_pending = SDL_FALSE;
+static SDL_nez_b32_t disable_signals = SDL_FALSE;
+static SDL_nez_b32_t send_quit_pending = SDL_FALSE;
 
 #ifdef HAVE_SIGNAL_H
 static void
@@ -91,7 +91,7 @@ SDL_QuitInit_Internal(void)
 int
 SDL_QuitInit(void)
 {
-    if (!SDL_GetHintBoolean(SDL_HINT_NO_SIGNAL_HANDLERS, SDL_FALSE)) {
+    if (!SDL_GetHintnez_b32_tean(SDL_HINT_NO_SIGNAL_HANDLERS, SDL_FALSE)) {
         return SDL_QuitInit_Internal();
     }
     return 0;

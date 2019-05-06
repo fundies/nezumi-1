@@ -36,13 +36,13 @@ extern "C" {
 
 /* Interface from the SDL library into the Android Java activity */
 extern void Android_JNI_SetActivityTitle(const char *title);
-extern void Android_JNI_SetWindowStyle(SDL_bool fullscreen);
+extern void Android_JNI_SetWindowStyle(SDL_nez_b32_t fullscreen);
 extern void Android_JNI_SetOrientation(int w, int h, int resizable, const char *hint);
 
-extern SDL_bool Android_JNI_GetAccelerometerValues(float values[3]);
+extern SDL_nez_b32_t Android_JNI_GetAccelerometerValues(float values[3]);
 extern void Android_JNI_ShowTextInput(SDL_Rect *inputRect);
 extern void Android_JNI_HideTextInput(void);
-extern SDL_bool Android_JNI_IsScreenKeyboardShown(void);
+extern SDL_nez_b32_t Android_JNI_IsScreenKeyboardShown(void);
 extern ANativeWindow* Android_JNI_GetNativeWindow(void);
 
 extern int Android_JNI_GetDisplayDPI(float *ddpi, float *xdpi, float *ydpi);
@@ -56,8 +56,8 @@ extern void Android_JNI_FlushCapturedAudio(void);
 extern void Android_JNI_CloseAudioDevice(const int iscapture);
 
 /* Detecting device type */
-extern SDL_bool Android_IsDeXMode();
-extern SDL_bool Android_IsChromebook();
+extern SDL_nez_b32_t Android_IsDeXMode();
+extern SDL_nez_b32_t Android_IsChromebook();
 
 #include "SDL_rwops.h"
 
@@ -74,7 +74,7 @@ void Android_JNI_GetManifestEnvironmentVariables(void);
 /* Clipboard support */
 int Android_JNI_SetClipboardText(const char* text);
 char* Android_JNI_GetClipboardText(void);
-SDL_bool Android_JNI_HasClipboardText(void);
+SDL_nez_b32_t Android_JNI_HasClipboardText(void);
 
 /* Power support */
 int Android_JNI_GetPowerInfo(int* plugged, int* charged, int* battery, int* seconds, int* percent);
@@ -88,11 +88,11 @@ void Android_JNI_HapticRun(int device_id, float intensity, int length);
 void Android_JNI_HapticStop(int device_id);
 
 /* Video */
-void Android_JNI_SuspendScreenSaver(SDL_bool suspend);
+void Android_JNI_SuspendScreenSaver(SDL_nez_b32_t suspend);
 
 /* Touch support */
 int Android_JNI_InitTouch(void);
-void Android_JNI_SetSeparateMouseAndTouch(SDL_bool new_value);
+void Android_JNI_SetSeparateMouseAndTouch(SDL_nez_b32_t new_value);
 int Android_JNI_GetTouchDeviceIds(int **ids);
 
 /* Threads */
@@ -112,18 +112,18 @@ int Android_JNI_ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *bu
 
 /* Cursor support */
 int Android_JNI_CreateCustomCursor(SDL_Surface *surface, int hot_x, int hot_y);
-SDL_bool Android_JNI_SetCustomCursor(int cursorID);
-SDL_bool Android_JNI_SetSystemCursor(int cursorID);
+SDL_nez_b32_t Android_JNI_SetCustomCursor(int cursorID);
+SDL_nez_b32_t Android_JNI_SetSystemCursor(int cursorID);
 
 /* Relative mouse support */
-SDL_bool Android_JNI_SupportsRelativeMouse(void);
-SDL_bool Android_JNI_SetRelativeMouseEnabled(SDL_bool enabled);
+SDL_nez_b32_t Android_JNI_SupportsRelativeMouse(void);
+SDL_nez_b32_t Android_JNI_SetRelativeMouseEnabled(SDL_nez_b32_t enabled);
 
 
-SDL_bool SDL_IsAndroidTablet(void);
-SDL_bool SDL_IsAndroidTV(void);
-SDL_bool SDL_IsChromebook(void);
-SDL_bool SDL_IsDeXMode(void);
+SDL_nez_b32_t SDL_IsAndroidTablet(void);
+SDL_nez_b32_t SDL_IsAndroidTV(void);
+SDL_nez_b32_t SDL_IsChromebook(void);
+SDL_nez_b32_t SDL_IsDeXMode(void);
 
 /* Ends C function definitions when using C++ */
 #ifdef __cplusplus

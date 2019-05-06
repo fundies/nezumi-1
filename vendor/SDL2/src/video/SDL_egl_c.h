@@ -45,13 +45,13 @@ typedef struct SDL_EGL_VideoData
     EGLDisplay(EGLAPIENTRY *eglGetPlatformDisplayEXT) (EGLenum platform,
                                 void *native_display,
                                 const EGLint *attrib_list);
-    EGLBoolean(EGLAPIENTRY *eglInitialize) (EGLDisplay dpy, EGLint * major,
+    EGLnez_b32_tean(EGLAPIENTRY *eglInitialize) (EGLDisplay dpy, EGLint * major,
                                 EGLint * minor);
-    EGLBoolean(EGLAPIENTRY  *eglTerminate) (EGLDisplay dpy);
+    EGLnez_b32_tean(EGLAPIENTRY  *eglTerminate) (EGLDisplay dpy);
     
     void *(EGLAPIENTRY *eglGetProcAddress) (const char * procName);
     
-    EGLBoolean(EGLAPIENTRY *eglChooseConfig) (EGLDisplay dpy,
+    EGLnez_b32_tean(EGLAPIENTRY *eglChooseConfig) (EGLDisplay dpy,
                                   const EGLint * attrib_list,
                                   EGLConfig * configs,
                                   EGLint config_size, EGLint * num_config);
@@ -61,7 +61,7 @@ typedef struct SDL_EGL_VideoData
                                    EGLContext share_list,
                                    const EGLint * attrib_list);
     
-    EGLBoolean(EGLAPIENTRY *eglDestroyContext) (EGLDisplay dpy, EGLContext ctx);
+    EGLnez_b32_tean(EGLAPIENTRY *eglDestroyContext) (EGLDisplay dpy, EGLContext ctx);
     
     EGLSurface(EGLAPIENTRY *eglCreatePbufferSurface)(EGLDisplay dpy, EGLConfig config,
                                                      EGLint const* attrib_list);
@@ -70,25 +70,25 @@ typedef struct SDL_EGL_VideoData
                                          EGLConfig config,
                                          NativeWindowType window,
                                          const EGLint * attrib_list);
-    EGLBoolean(EGLAPIENTRY *eglDestroySurface) (EGLDisplay dpy, EGLSurface surface);
+    EGLnez_b32_tean(EGLAPIENTRY *eglDestroySurface) (EGLDisplay dpy, EGLSurface surface);
     
-    EGLBoolean(EGLAPIENTRY *eglMakeCurrent) (EGLDisplay dpy, EGLSurface draw,
+    EGLnez_b32_tean(EGLAPIENTRY *eglMakeCurrent) (EGLDisplay dpy, EGLSurface draw,
                                  EGLSurface read, EGLContext ctx);
     
-    EGLBoolean(EGLAPIENTRY *eglSwapBuffers) (EGLDisplay dpy, EGLSurface draw);
+    EGLnez_b32_tean(EGLAPIENTRY *eglSwapBuffers) (EGLDisplay dpy, EGLSurface draw);
     
-    EGLBoolean(EGLAPIENTRY *eglSwapInterval) (EGLDisplay dpy, EGLint interval);
+    EGLnez_b32_tean(EGLAPIENTRY *eglSwapInterval) (EGLDisplay dpy, EGLint interval);
     
     const char *(EGLAPIENTRY *eglQueryString) (EGLDisplay dpy, EGLint name);
     
-    EGLBoolean(EGLAPIENTRY  *eglGetConfigAttrib) (EGLDisplay dpy, EGLConfig config,
+    EGLnez_b32_tean(EGLAPIENTRY  *eglGetConfigAttrib) (EGLDisplay dpy, EGLConfig config,
                                      EGLint attribute, EGLint * value);
     
-    EGLBoolean(EGLAPIENTRY *eglWaitNative) (EGLint  engine);
+    EGLnez_b32_tean(EGLAPIENTRY *eglWaitNative) (EGLint  engine);
 
-    EGLBoolean(EGLAPIENTRY *eglWaitGL)(void);
+    EGLnez_b32_tean(EGLAPIENTRY *eglWaitGL)(void);
     
-    EGLBoolean(EGLAPIENTRY *eglBindAPI)(EGLenum);
+    EGLnez_b32_tean(EGLAPIENTRY *eglBindAPI)(EGLenum);
 
     EGLint(EGLAPIENTRY *eglGetError)(void);
 

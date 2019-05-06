@@ -56,7 +56,7 @@ static SDL_Renderer *GLES_CreateRenderer(SDL_Window * window, Uint32 flags);
 static void GLES_WindowEvent(SDL_Renderer * renderer,
                              const SDL_WindowEvent *event);
 static int GLES_GetOutputSize(SDL_Renderer * renderer, int *w, int *h);
-static SDL_bool GLES_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode);
+static SDL_nez_b32_t GLES_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode);
 static int GLES_CreateTexture(SDL_Renderer * renderer, SDL_Texture * texture);
 static int GLES_UpdateTexture(SDL_Renderer * renderer, SDL_Texture * texture,
                               const SDL_Rect * rect, const void *pixels,
@@ -118,7 +118,7 @@ typedef struct
     struct {
         Uint32 color;
         SDL_BlendMode blendMode;
-        SDL_bool tex_coords;
+        SDL_nez_b32_t tex_coords;
     } current;
 
 #define SDL_PROC(ret,func,params) ret (APIENTRY *func) params;
@@ -126,13 +126,13 @@ typedef struct
 #include "SDL_glesfuncs.h"
 #undef SDL_PROC
 #undef SDL_PROC_OES
-    SDL_bool GL_OES_framebuffer_object_supported;
+    SDL_nez_b32_t GL_OES_framebuffer_object_supported;
     GLES_FBOList *framebuffers;
     GLuint window_framebuffer;
 
-    SDL_bool GL_OES_blend_func_separate_supported;
-    SDL_bool GL_OES_blend_equation_separate_supported;
-    SDL_bool GL_OES_blend_subtract_supported;
+    SDL_nez_b32_t GL_OES_blend_func_separate_supported;
+    SDL_nez_b32_t GL_OES_blend_equation_separate_supported;
+    SDL_nez_b32_t GL_OES_blend_subtract_supported;
 } GLES_RenderData;
 
 typedef struct
@@ -287,7 +287,7 @@ GLES_CreateRenderer(SDL_Window * window, Uint32 flags)
     GLint value;
     Uint32 window_flags;
     int profile_mask = 0, major = 0, minor = 0;
-    SDL_bool changed_window = SDL_FALSE;
+    SDL_nez_b32_t changed_window = SDL_FALSE;
 
     SDL_GL_GetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, &profile_mask);
     SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &major);
@@ -482,7 +482,7 @@ static GLenum GetBlendEquation(SDL_BlendOperation operation)
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 GLES_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode)
 {
     GLES_RenderData *data = (GLES_RenderData *) renderer->driverdata;
@@ -838,7 +838,7 @@ GLES_SetBlendMode(GLES_RenderData * data, SDL_BlendMode blendMode)
 }
 
 static void
-GLES_SetTexCoords(GLES_RenderData * data, SDL_bool enabled)
+GLES_SetTexCoords(GLES_RenderData * data, SDL_nez_b32_t enabled)
 {
     if (enabled != data->current.tex_coords) {
         if (enabled) {

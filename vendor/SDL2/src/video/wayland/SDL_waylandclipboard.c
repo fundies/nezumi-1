@@ -95,13 +95,13 @@ Wayland_GetClipboardText(_THIS)
     return text;
 }
 
-SDL_bool
+SDL_nez_b32_t
 Wayland_HasClipboardText(_THIS)
 {
     SDL_VideoData *video_data = NULL;
     SDL_WaylandDataDevice *data_device = NULL;
 
-    SDL_bool result = SDL_FALSE;    
+    SDL_nez_b32_t result = SDL_FALSE;    
     if (_this == NULL || _this->driverdata == NULL) {
         SDL_SetError("Video driver uninitialized");
     } else {

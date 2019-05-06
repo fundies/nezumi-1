@@ -50,7 +50,7 @@
 static int
 check_modestting(int devindex)
 {
-    SDL_bool available = SDL_FALSE;
+    SDL_nez_b32_t available = SDL_FALSE;
     char device[512];
     int drm_fd;
 
@@ -291,7 +291,7 @@ KMSDRM_FBFromBO(_THIS, struct gbm_bo *bo)
     return fb_info;
 }
 
-SDL_bool
+SDL_nez_b32_t
 KMSDRM_WaitPageFlip(_THIS, SDL_WindowData *wdata, int timeout) {
     SDL_VideoData *vdata = ((SDL_VideoData *)_this->driverdata);
 
@@ -322,7 +322,7 @@ KMSDRM_WaitPageFlip(_THIS, SDL_WindowData *wdata, int timeout) {
 static void
 KMSDRM_FlipHandler(int fd, unsigned int frame, unsigned int sec, unsigned int usec, void *data)
 {
-    *((SDL_bool *) data) = SDL_FALSE;
+    *((SDL_nez_b32_t *) data) = SDL_FALSE;
 }
 
 
@@ -597,7 +597,7 @@ KMSDRM_CreateWindow(_THIS, SDL_Window * window)
 
     /* In case we want low-latency, double-buffer video, we take note here */
     wdata->double_buffer = SDL_FALSE;
-    if (SDL_GetHintBoolean(SDL_HINT_VIDEO_DOUBLE_BUFFER, SDL_FALSE)) {
+    if (SDL_GetHintnez_b32_tean(SDL_HINT_VIDEO_DOUBLE_BUFFER, SDL_FALSE)) {
         wdata->double_buffer = SDL_TRUE;
     }
 
@@ -711,7 +711,7 @@ KMSDRM_RestoreWindow(_THIS, SDL_Window * window)
 {
 }
 void
-KMSDRM_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed)
+KMSDRM_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed)
 {
 
 }
@@ -719,7 +719,7 @@ KMSDRM_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed)
 /*****************************************************************************/
 /* SDL Window Manager function                                               */
 /*****************************************************************************/
-SDL_bool
+SDL_nez_b32_t
 KMSDRM_GetWindowWMInfo(_THIS, SDL_Window * window, struct SDL_SysWMinfo *info)
 {
     if (info->version.major <= SDL_MAJOR_VERSION) {

@@ -145,7 +145,7 @@ WindowsScanCodeToSDLScanCode(LPARAM lParam, WPARAM wParam)
 {
     SDL_Scancode code;
     int nScanCode = (lParam >> 16) & 0xFF;
-    SDL_bool bIsExtended = (lParam & (1 << 24)) != 0;
+    SDL_nez_b32_t bIsExtended = (lParam & (1 << 24)) != 0;
 
     code = VKeytoScancode(wParam);
 
@@ -215,14 +215,14 @@ WindowsScanCodeToSDLScanCode(LPARAM lParam, WPARAM wParam)
     return code;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 WIN_ShouldIgnoreFocusClick()
 {
-    return !SDL_GetHintBoolean(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, SDL_FALSE);
+    return !SDL_GetHintnez_b32_tean(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, SDL_FALSE);
 }
 
 static void
-WIN_CheckWParamMouseButton(SDL_bool bwParamMousePressed, SDL_bool bSDLMousePressed, SDL_WindowData *data, Uint8 button, SDL_MouseID mouseID)
+WIN_CheckWParamMouseButton(SDL_nez_b32_t bwParamMousePressed, SDL_nez_b32_t bSDLMousePressed, SDL_WindowData *data, Uint8 button, SDL_MouseID mouseID)
 {
     if (data->focus_click_pending & SDL_BUTTON(button)) {
         /* Ignore the button click for activation */
@@ -324,7 +324,7 @@ WIN_CheckAsyncMouseRelease(SDL_WindowData *data)
     data->mouse_button_flags = 0;
 }
 
-static BOOL
+static nez_b32_t
 WIN_ConvertUTF32toUTF8(UINT32 codepoint, char * text)
 {
     if (codepoint <= 0x7F) {
@@ -351,16 +351,16 @@ WIN_ConvertUTF32toUTF8(UINT32 codepoint, char * text)
     return SDL_TRUE;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 ShouldGenerateWindowCloseOnAltF4(void)
 {
-    return !SDL_GetHintBoolean(SDL_HINT_WINDOWS_NO_CLOSE_ON_ALT_F4, SDL_FALSE);
+    return !SDL_GetHintnez_b32_tean(SDL_HINT_WINDOWS_NO_CLOSE_ON_ALT_F4, SDL_FALSE);
 }
 
 /* Win10 "Fall Creators Update" introduced the bug that SetCursorPos() (as used by SDL_WarpMouseInWindow())
    doesn't reliably generate WM_MOUSEMOVE events anymore (see #3931) which breaks relative mouse mode via warping.
    This is used to implement a workaround.. */
-static SDL_bool isWin10FCUorNewer = SDL_FALSE;
+static SDL_nez_b32_t isWin10FCUorNewer = SDL_FALSE;
 
 LRESULT CALLBACK
 WIN_WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -424,7 +424,7 @@ WIN_WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     case WM_ACTIVATE:
         {
             POINT cursorPos;
-            BOOL minimized;
+            nez_b32_t minimized;
 
             /* Don't mark the window as shown if it's activated before being shown */
             if (!IsWindowVisible(hwnd)) {
@@ -537,8 +537,8 @@ WIN_WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             HRAWINPUT hRawInput = (HRAWINPUT)lParam;
             RAWINPUT inp;
             UINT size = sizeof(inp);
-            const SDL_bool isRelative = mouse->relative_mode || mouse->relative_mode_warp;
-            const SDL_bool isCapture = ((data->window->flags & SDL_WINDOW_MOUSE_CAPTURE) != 0);
+            const SDL_nez_b32_t isRelative = mouse->relative_mode || mouse->relative_mode_warp;
+            const SDL_nez_b32_t isCapture = ((data->window->flags & SDL_WINDOW_MOUSE_CAPTURE) != 0);
 
             if (!isRelative || mouse->focus != data->window) {
                 if (!isCapture) {
@@ -712,7 +712,7 @@ WIN_WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             int w, h;
             int min_w, min_h;
             int max_w, max_h;
-            BOOL constrain_max_size;
+            nez_b32_t constrain_max_size;
 
             if (SDL_IsShapedWindow(data->window))
                 Win32_ResizeWindowShape(data->window);
@@ -751,7 +751,7 @@ WIN_WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                    Apparently it's too difficult for MS to check
                    inside their function, so I have to do it here.
                  */
-                BOOL menu = (style & WS_CHILDWINDOW) ? FALSE : (GetMenu(hwnd) != NULL);
+                nez_b32_t menu = (style & WS_CHILDWINDOW) ? FALSE : (GetMenu(hwnd) != NULL);
                 size.top = 0;
                 size.left = 0;
                 size.bottom = h;
@@ -1114,7 +1114,7 @@ struct SDL_WIN_OSVERSIONINFOW {
     WCHAR szCSDVersion[128];
 };
 
-static SDL_bool
+static SDL_nez_b32_t
 IsWin10FCUorNewer(void)
 {
     HMODULE handle = GetModuleHandleW(L"ntdll.dll");

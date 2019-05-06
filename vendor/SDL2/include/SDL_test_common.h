@@ -80,7 +80,7 @@ typedef struct
     /* Renderer info */
     const char *renderdriver;
     Uint32 render_flags;
-    SDL_bool skip_renderer;
+    SDL_nez_b32_t skip_renderer;
     SDL_Renderer **renderers;
     SDL_Texture **targets;
 
@@ -156,7 +156,7 @@ const char *SDLTest_CommonUsage(SDLTest_CommonState * state);
  *
  * \returns True if initialization succeeded, false otherwise
  */
-SDL_bool SDLTest_CommonInit(SDLTest_CommonState * state);
+SDL_nez_b32_t SDLTest_CommonInit(SDLTest_CommonState * state);
 
 /**
  * \brief Common event handler for test windows.

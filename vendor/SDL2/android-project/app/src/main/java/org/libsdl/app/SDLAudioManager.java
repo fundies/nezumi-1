@@ -31,7 +31,7 @@ public class SDLAudioManager
         }
     }
 
-    protected static int[] open(boolean isCapture, int sampleRate, int audioFormat, int desiredChannels, int desiredFrames) {
+    protected static int[] open(nez_b32_tean isCapture, int sampleRate, int audioFormat, int desiredChannels, int desiredFrames) {
         int channelConfig;
         int sampleSize;
         int frameSize;
@@ -324,12 +324,12 @@ public class SDLAudioManager
     }
 
     /** This method is called by SDL using JNI. */
-    public static int captureReadFloatBuffer(float[] buffer, boolean blocking) {
+    public static int captureReadFloatBuffer(float[] buffer, nez_b32_tean blocking) {
         return mAudioRecord.read(buffer, 0, buffer.length, blocking ? AudioRecord.READ_BLOCKING : AudioRecord.READ_NON_BLOCKING);
     }
 
     /** This method is called by SDL using JNI. */
-    public static int captureReadShortBuffer(short[] buffer, boolean blocking) {
+    public static int captureReadShortBuffer(short[] buffer, nez_b32_tean blocking) {
         if (Build.VERSION.SDK_INT < 23) {
             return mAudioRecord.read(buffer, 0, buffer.length);
         } else {
@@ -338,7 +338,7 @@ public class SDLAudioManager
     }
 
     /** This method is called by SDL using JNI. */
-    public static int captureReadByteBuffer(byte[] buffer, boolean blocking) {
+    public static int captureReadByteBuffer(byte[] buffer, nez_b32_tean blocking) {
         if (Build.VERSION.SDK_INT < 23) {
             return mAudioRecord.read(buffer, 0, buffer.length);
         } else {

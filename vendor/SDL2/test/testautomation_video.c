@@ -63,8 +63,8 @@ void _destroyVideoSuiteTestWindow(SDL_Window *window)
 int
 video_enableDisableScreensaver(void *arg)
 {
-    SDL_bool initialResult;
-    SDL_bool result;
+    SDL_nez_b32_t initialResult;
+    SDL_nez_b32_t result;
 
     /* Get current state and proceed according to current state */
     initialResult = SDL_IsScreenSaverEnabled();
@@ -746,9 +746,9 @@ video_getWindowGammaRampNegative(void *arg)
 
 /* Helper for setting and checking the window grab state */
 void
-_setAndCheckWindowGrabState(SDL_Window* window, SDL_bool desiredState)
+_setAndCheckWindowGrabState(SDL_Window* window, SDL_nez_b32_t desiredState)
 {
-  SDL_bool currentState;
+  SDL_nez_b32_t currentState;
 
   /* Set state */
   SDL_SetWindowGrab(window, desiredState);
@@ -775,7 +775,7 @@ video_getSetWindowGrab(void *arg)
 {
   const char* title = "video_getSetWindowGrab Test Window";
   SDL_Window* window;
-  SDL_bool originalState, dummyState, currentState, desiredState;
+  SDL_nez_b32_t originalState, dummyState, currentState, desiredState;
 
   /* Call against new test window */
   window = _createVideoSuiteTestWindow(title);

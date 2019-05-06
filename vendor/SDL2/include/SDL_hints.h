@@ -1063,7 +1063,7 @@ typedef enum
  *
  *  \return SDL_TRUE if the hint was set, SDL_FALSE otherwise
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_SetHintWithPriority(const char *name,
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_SetHintWithPriority(const char *name,
                                                          const char *value,
                                                          SDL_HintPriority priority);
 
@@ -1072,7 +1072,7 @@ extern DECLSPEC SDL_bool SDLCALL SDL_SetHintWithPriority(const char *name,
  *
  *  \return SDL_TRUE if the hint was set, SDL_FALSE otherwise
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_SetHint(const char *name,
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_SetHint(const char *name,
                                              const char *value);
 
 /**
@@ -1085,9 +1085,9 @@ extern DECLSPEC const char * SDLCALL SDL_GetHint(const char *name);
 /**
  *  \brief Get a hint
  *
- *  \return The boolean value of a hint variable.
+ *  \return The nez_b32_tean value of a hint variable.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_GetHintBoolean(const char *name, SDL_bool default_value);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_GetHintnez_b32_tean(const char *name, SDL_nez_b32_t default_value);
 
 /**
  * \brief type definition of the hint callback function.

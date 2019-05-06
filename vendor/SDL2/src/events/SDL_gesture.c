@@ -68,12 +68,12 @@ typedef struct {
     int numDollarTemplates;
     SDL_DollarTemplate *dollarTemplate;
 
-    SDL_bool recording;
+    SDL_nez_b32_t recording;
 } SDL_GestureTouch;
 
 static SDL_GestureTouch *SDL_gestureTouch;
 static int SDL_numGestureTouches = 0;
-static SDL_bool recordAll;
+static SDL_nez_b32_t recordAll;
 
 #if 0
 static void PrintPath(SDL_FloatPoint *path)

@@ -72,20 +72,20 @@ extern int Wayland_data_source_add_data(SDL_WaylandDataSource *source,
                                         const char *mime_type, 
                                         const void *buffer, 
                                         size_t length);
-extern SDL_bool Wayland_data_source_has_mime(SDL_WaylandDataSource *source,
+extern SDL_nez_b32_t Wayland_data_source_has_mime(SDL_WaylandDataSource *source,
                                              const char *mime_type);
 extern void* Wayland_data_source_get_data(SDL_WaylandDataSource *source,
                                           size_t *length,
                                           const char *mime_type,
-                                          SDL_bool null_terminate);
+                                          SDL_nez_b32_t null_terminate);
 extern void Wayland_data_source_destroy(SDL_WaylandDataSource *source);
 
 /* Wayland Data Offer - (Receiving) */
 extern void* Wayland_data_offer_receive(SDL_WaylandDataOffer *offer,
                                         size_t *length,
                                         const char *mime_type,
-                                        SDL_bool null_terminate);
-extern SDL_bool Wayland_data_offer_has_mime(SDL_WaylandDataOffer *offer,
+                                        SDL_nez_b32_t null_terminate);
+extern SDL_nez_b32_t Wayland_data_offer_has_mime(SDL_WaylandDataOffer *offer,
                                             const char *mime_type);
 extern int Wayland_data_offer_add_mime(SDL_WaylandDataOffer *offer,
                                        const char *mime_type);

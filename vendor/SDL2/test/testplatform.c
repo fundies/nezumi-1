@@ -26,7 +26,7 @@ badsize(size_t sizeoftype, size_t hardcodetype)
 }
 
 int
-TestTypes(SDL_bool verbose)
+TestTypes(SDL_nez_b32_t verbose)
 {
     int error = 0;
 
@@ -81,7 +81,7 @@ TestTypes(SDL_bool verbose)
 }
 
 int
-TestEndian(SDL_bool verbose)
+TestEndian(SDL_nez_b32_t verbose)
 {
     int error = 0;
     Uint16 value = 0x1234;
@@ -339,7 +339,7 @@ static LL_Test LL_Tests[] =
 };
 
 int
-Test64Bit (SDL_bool verbose)
+Test64Bit (SDL_nez_b32_t verbose)
 {
     LL_Test *t;
     int failed = 0;
@@ -364,7 +364,7 @@ Test64Bit (SDL_bool verbose)
 }
 
 int
-TestCPUInfo(SDL_bool verbose)
+TestCPUInfo(SDL_nez_b32_t verbose)
 {
     if (verbose) {
         SDL_Log("CPU count: %d\n", SDL_GetCPUCount());
@@ -388,7 +388,7 @@ TestCPUInfo(SDL_bool verbose)
 }
 
 int
-TestAssertions(SDL_bool verbose)
+TestAssertions(SDL_nez_b32_t verbose)
 {
     SDL_assert(1);
     SDL_assert_release(1);
@@ -419,7 +419,7 @@ TestAssertions(SDL_bool verbose)
 int
 main(int argc, char *argv[])
 {
-    SDL_bool verbose = SDL_TRUE;
+    SDL_nez_b32_t verbose = SDL_TRUE;
     int status = 0;
 
     /* Enable standard application logging */

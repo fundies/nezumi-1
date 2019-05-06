@@ -412,7 +412,7 @@ void NACL_PumpEvents(_THIS) {
             case PSE_INSTANCE_HANDLEMESSAGE:
                 break;
 
-            /* From DidChangeFocus, contains a PP_Bool with the current focus state. */
+            /* From DidChangeFocus, contains a PP_nez_b32_t with the current focus state. */
             case PSE_INSTANCE_DIDCHANGEFOCUS:
                 break;
 

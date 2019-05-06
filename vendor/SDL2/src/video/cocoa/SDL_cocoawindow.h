@@ -41,32 +41,32 @@ typedef enum
 
 @interface Cocoa_WindowListener : NSResponder <NSWindowDelegate> {
     SDL_WindowData *_data;
-    BOOL observingVisible;
-    BOOL wasCtrlLeft;
-    BOOL wasVisible;
-    BOOL isFullscreenSpace;
-    BOOL inFullscreenTransition;
+    nez_b32_t observingVisible;
+    nez_b32_t wasCtrlLeft;
+    nez_b32_t wasVisible;
+    nez_b32_t isFullscreenSpace;
+    nez_b32_t inFullscreenTransition;
     PendingWindowOperation pendingWindowOperation;
-    BOOL isMoving;
+    nez_b32_t isMoving;
     int pendingWindowWarpX, pendingWindowWarpY;
-    BOOL isDragAreaRunning;
+    nez_b32_t isDragAreaRunning;
 }
 
 -(void) listen:(SDL_WindowData *) data;
 -(void) pauseVisibleObservation;
 -(void) resumeVisibleObservation;
--(BOOL) setFullscreenSpace:(BOOL) state;
--(BOOL) isInFullscreenSpace;
--(BOOL) isInFullscreenSpaceTransition;
+-(nez_b32_t) setFullscreenSpace:(nez_b32_t) state;
+-(nez_b32_t) isInFullscreenSpace;
+-(nez_b32_t) isInFullscreenSpaceTransition;
 -(void) addPendingWindowOperation:(PendingWindowOperation) operation;
 -(void) close;
 
--(BOOL) isMoving;
+-(nez_b32_t) isMoving;
 -(void) setPendingMoveX:(int)x Y:(int)y;
 -(void) windowDidFinishMoving;
 
 /* Window delegate functionality */
--(BOOL) windowShouldClose:(id) sender;
+-(nez_b32_t) windowShouldClose:(id) sender;
 -(void) windowDidExpose:(NSNotification *) aNotification;
 -(void) windowDidMove:(NSNotification *) aNotification;
 -(void) windowDidResize:(NSNotification *) aNotification;
@@ -82,7 +82,7 @@ typedef enum
 -(NSApplicationPresentationOptions)window:(NSWindow *)window willUseFullScreenPresentationOptions:(NSApplicationPresentationOptions)proposedOptions;
 
 /* See if event is in a drag area, toggle on window dragging. */
--(BOOL) processHitTest:(NSEvent *)theEvent;
+-(nez_b32_t) processHitTest:(NSEvent *)theEvent;
 
 /* Window event handling */
 -(void) mouseDown:(NSEvent *) theEvent;
@@ -114,8 +114,8 @@ struct SDL_WindowData
     SDL_Window *window;
     NSWindow *nswindow;
     NSMutableArray *nscontexts;
-    SDL_bool created;
-    SDL_bool inWindowMove;
+    SDL_nez_b32_t created;
+    SDL_nez_b32_t inWindowMove;
     Cocoa_WindowListener *listener;
     struct SDL_VideoData *videodata;
 #if SDL_VIDEO_OPENGL_EGL
@@ -139,16 +139,16 @@ extern void Cocoa_RaiseWindow(_THIS, SDL_Window * window);
 extern void Cocoa_MaximizeWindow(_THIS, SDL_Window * window);
 extern void Cocoa_MinimizeWindow(_THIS, SDL_Window * window);
 extern void Cocoa_RestoreWindow(_THIS, SDL_Window * window);
-extern void Cocoa_SetWindowBordered(_THIS, SDL_Window * window, SDL_bool bordered);
-extern void Cocoa_SetWindowResizable(_THIS, SDL_Window * window, SDL_bool resizable);
-extern void Cocoa_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_bool fullscreen);
+extern void Cocoa_SetWindowBordered(_THIS, SDL_Window * window, SDL_nez_b32_t bordered);
+extern void Cocoa_SetWindowResizable(_THIS, SDL_Window * window, SDL_nez_b32_t resizable);
+extern void Cocoa_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_nez_b32_t fullscreen);
 extern int Cocoa_SetWindowGammaRamp(_THIS, SDL_Window * window, const Uint16 * ramp);
 extern int Cocoa_GetWindowGammaRamp(_THIS, SDL_Window * window, Uint16 * ramp);
-extern void Cocoa_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed);
+extern void Cocoa_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed);
 extern void Cocoa_DestroyWindow(_THIS, SDL_Window * window);
-extern SDL_bool Cocoa_GetWindowWMInfo(_THIS, SDL_Window * window, struct SDL_SysWMinfo *info);
-extern int Cocoa_SetWindowHitTest(SDL_Window *window, SDL_bool enabled);
-extern void Cocoa_AcceptDragAndDrop(SDL_Window * window, SDL_bool accept);
+extern SDL_nez_b32_t Cocoa_GetWindowWMInfo(_THIS, SDL_Window * window, struct SDL_SysWMinfo *info);
+extern int Cocoa_SetWindowHitTest(SDL_Window *window, SDL_nez_b32_t enabled);
+extern void Cocoa_AcceptDragAndDrop(SDL_Window * window, SDL_nez_b32_t accept);
 
 #endif /* SDL_cocoawindow_h_ */
 

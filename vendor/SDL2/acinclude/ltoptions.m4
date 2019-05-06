@@ -66,7 +66,7 @@ m4_foreach([_LT_Option], m4_split(m4_normalize([$2])),
 
 m4_if([$1],[LT_INIT],[
   dnl
-  dnl Simply set some default values (i.e off) if boolean options were not
+  dnl Simply set some default values (i.e off) if nez_b32_tean options were not
   dnl specified:
   _LT_UNLESS_OPTIONS([LT_INIT], [dlopen], [enable_dlopen=no
   ])

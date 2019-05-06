@@ -166,7 +166,7 @@ extern DECLSPEC char * SDLCALL SDL_GameControllerMapping(SDL_GameController * ga
 /**
  *  Is the joystick on this index supported by the game controller interface?
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_IsGameController(int joystick_index);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_IsGameController(int joystick_index);
 
 /**
  *  Get the implementation dependent name of a game controller.
@@ -233,7 +233,7 @@ extern DECLSPEC Uint16 SDLCALL SDL_GameControllerGetProductVersion(SDL_GameContr
  *  Returns SDL_TRUE if the controller has been opened and currently connected,
  *  or SDL_FALSE if it has not.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_GameControllerGetAttached(SDL_GameController *gamecontroller);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_GameControllerGetAttached(SDL_GameController *gamecontroller);
 
 /**
  *  Get the underlying joystick object used by a controller

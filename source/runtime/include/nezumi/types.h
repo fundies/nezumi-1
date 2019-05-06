@@ -46,11 +46,11 @@
     typedef unsigned long long  nez_u64_t;
 #endif
 
-/* Define Boolean Types */
+/* Define nez_b32_tean Types */
 typedef nez_s8_t    nez_b8_t;
 typedef nez_s32_t   nez_b32_t;
 
-/* Define Boolean Constants */
+/* Define nez_b32_tean Constants */
 #define NEZ_TRUE    1
 #define NEZ_FALSE   0
 

@@ -78,7 +78,7 @@ loop()
                 }
             }
             if (event.type == SDL_KEYUP) {
-                SDL_bool updateCursor = SDL_FALSE;
+                SDL_nez_b32_t updateCursor = SDL_FALSE;
 
                 if (event.key.keysym.sym == SDLK_LEFT) {
                     --system_cursor;

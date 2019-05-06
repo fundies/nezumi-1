@@ -125,7 +125,7 @@ int
 timer_addRemoveTimer(void *arg)
 {
   SDL_TimerID id;
-  SDL_bool result;
+  SDL_nez_b32_t result;
   int param;
 
   /* Reset state */

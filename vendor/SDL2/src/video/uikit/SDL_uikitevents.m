@@ -30,10 +30,10 @@
 
 #import <Foundation/Foundation.h>
 
-static BOOL UIKit_EventPumpEnabled = YES;
+static nez_b32_t UIKit_EventPumpEnabled = YES;
 
 void
-SDL_iPhoneSetEventPump(SDL_bool enabled)
+SDL_iPhoneSetEventPump(SDL_nez_b32_t enabled)
 {
     UIKit_EventPumpEnabled = enabled;
 }

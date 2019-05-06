@@ -32,7 +32,7 @@
 #include <pspthreadman.h>
 
 static struct timeval start;
-static SDL_bool ticks_started = SDL_FALSE;
+static SDL_nez_b32_t ticks_started = SDL_FALSE;
 
 void
 SDL_TicksInit(void)

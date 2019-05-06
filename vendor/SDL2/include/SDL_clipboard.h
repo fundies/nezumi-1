@@ -57,7 +57,7 @@ extern DECLSPEC char * SDLCALL SDL_GetClipboardText(void);
  *
  * \sa SDL_GetClipboardText()
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasClipboardText(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasClipboardText(void);
 
 
 /* Ends C function definitions when using C++ */

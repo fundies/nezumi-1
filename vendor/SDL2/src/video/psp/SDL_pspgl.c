@@ -153,7 +153,7 @@ PSP_GL_MakeCurrent(_THIS, SDL_Window * window, SDL_GLContext context)
 int
 PSP_GL_SetSwapInterval(_THIS, int interval)
 {
-    EGLBoolean status;
+    EGLnez_b32_tean status;
     status = eglSwapInterval(_this->gl_data->display, interval);
     if (status == EGL_TRUE) {
         /* Return success to upper level */
@@ -183,7 +183,7 @@ void
 PSP_GL_DeleteContext(_THIS, SDL_GLContext context)
 {
     SDL_VideoData *phdata = (SDL_VideoData *) _this->driverdata;
-    EGLBoolean status;
+    EGLnez_b32_tean status;
 
     if (phdata->egl_initialized != SDL_TRUE) {
         SDL_SetError("PSP: GLES initialization failed, no OpenGL ES support");

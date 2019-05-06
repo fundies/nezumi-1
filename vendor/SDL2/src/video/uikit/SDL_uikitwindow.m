@@ -77,7 +77,7 @@
 @end
 
 
-static int SetupWindowData(_THIS, SDL_Window *window, UIWindow *uiwindow, SDL_bool created)
+static int SetupWindowData(_THIS, SDL_Window *window, UIWindow *uiwindow, SDL_nez_b32_t created)
 {
     SDL_VideoDisplay *display = SDL_GetDisplayForWindow(window);
     SDL_DisplayData *displaydata = (__bridge SDL_DisplayData *) display->driverdata;
@@ -116,8 +116,8 @@ static int SetupWindowData(_THIS, SDL_Window *window, UIWindow *uiwindow, SDL_bo
         window->h = window->windowed.h;
 
         NSUInteger orients = UIKit_GetSupportedOrientations(window);
-        BOOL supportsLandscape = (orients & UIInterfaceOrientationMaskLandscape) != 0;
-        BOOL supportsPortrait = (orients & (UIInterfaceOrientationMaskPortrait|UIInterfaceOrientationMaskPortraitUpsideDown)) != 0;
+        nez_b32_t supportsLandscape = (orients & UIInterfaceOrientationMaskLandscape) != 0;
+        nez_b32_t supportsPortrait = (orients & (UIInterfaceOrientationMaskPortrait|UIInterfaceOrientationMaskPortraitUpsideDown)) != 0;
 
         /* Make sure the width/height are oriented correctly */
         if ((width > height && !supportsLandscape) || (height > width && !supportsPortrait)) {
@@ -296,7 +296,7 @@ UIKit_UpdateWindowBorder(_THIS, SDL_Window * window)
 }
 
 void
-UIKit_SetWindowBordered(_THIS, SDL_Window * window, SDL_bool bordered)
+UIKit_SetWindowBordered(_THIS, SDL_Window * window, SDL_nez_b32_t bordered)
 {
     @autoreleasepool {
         UIKit_UpdateWindowBorder(_this, window);
@@ -304,7 +304,7 @@ UIKit_SetWindowBordered(_THIS, SDL_Window * window, SDL_bool bordered)
 }
 
 void
-UIKit_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_bool fullscreen)
+UIKit_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_nez_b32_t fullscreen)
 {
     @autoreleasepool {
         UIKit_UpdateWindowBorder(_this, window);
@@ -340,7 +340,7 @@ UIKit_DestroyWindow(_THIS, SDL_Window * window)
     window->driverdata = NULL;
 }
 
-SDL_bool
+SDL_nez_b32_t
 UIKit_GetWindowWMInfo(_THIS, SDL_Window * window, SDL_SysWMinfo * info)
 {
     @autoreleasepool {

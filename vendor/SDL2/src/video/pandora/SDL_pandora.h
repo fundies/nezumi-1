@@ -29,7 +29,7 @@
 
 typedef struct SDL_VideoData
 {
-    SDL_bool egl_initialized;   /* OpenGL ES device initialization status */
+    SDL_nez_b32_t egl_initialized;   /* OpenGL ES device initialization status */
     EGLDisplay egl_display;     /* OpenGL ES display connection           */
     uint32_t egl_refcount;      /* OpenGL ES reference count              */
     uint32_t swapinterval;      /* OpenGL ES default swap interval        */
@@ -45,7 +45,7 @@ typedef struct SDL_DisplayData
 
 typedef struct SDL_WindowData
 {
-    SDL_bool uses_gles;         /* if true window must support OpenGL ES */
+    SDL_nez_b32_t uses_gles;         /* if true window must support OpenGL ES */
 
     EGLConfig gles_configs[32];
     EGLint gles_config;         /* OpenGL ES configuration index      */
@@ -77,11 +77,11 @@ void PND_raisewindow(_THIS, SDL_Window * window);
 void PND_maximizewindow(_THIS, SDL_Window * window);
 void PND_minimizewindow(_THIS, SDL_Window * window);
 void PND_restorewindow(_THIS, SDL_Window * window);
-void PND_setwindowgrab(_THIS, SDL_Window * window, SDL_bool grabbed);
+void PND_setwindowgrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed);
 void PND_destroywindow(_THIS, SDL_Window * window);
 
 /* Window manager function */
-SDL_bool PND_getwindowwminfo(_THIS, SDL_Window * window,
+SDL_nez_b32_t PND_getwindowwminfo(_THIS, SDL_Window * window,
                              struct SDL_SysWMinfo *info);
 
 /* OpenGL/OpenGL ES functions */

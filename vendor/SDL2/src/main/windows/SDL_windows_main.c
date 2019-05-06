@@ -101,7 +101,7 @@ ParseCommandLine(char *cmdline, char **argv)
 }
 
 /* Pop up an out of memory message, returns to Windows */
-static BOOL
+static nez_b32_t
 OutOfMemory(void)
 {
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Fatal Error", "Out of memory - aborting", NULL);

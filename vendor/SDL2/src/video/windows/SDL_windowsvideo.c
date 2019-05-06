@@ -40,8 +40,8 @@ static int WIN_VideoInit(_THIS);
 static void WIN_VideoQuit(_THIS);
 
 /* Hints */
-SDL_bool g_WindowsEnableMessageLoop = SDL_TRUE;
-SDL_bool g_WindowFrameUsableWhileCursorHidden = SDL_TRUE;
+SDL_nez_b32_t g_WindowsEnableMessageLoop = SDL_TRUE;
+SDL_nez_b32_t g_WindowFrameUsableWhileCursorHidden = SDL_TRUE;
 
 static void SDLCALL
 UpdateWindowsEnableMessageLoop(void *userdata, const char *name, const char *oldValue, const char *newValue)
@@ -122,9 +122,9 @@ WIN_CreateDevice(int devindex)
 
     data->userDLL = SDL_LoadObject("USER32.DLL");
     if (data->userDLL) {
-        data->CloseTouchInputHandle = (BOOL (WINAPI *)(HTOUCHINPUT)) SDL_LoadFunction(data->userDLL, "CloseTouchInputHandle");
-        data->GetTouchInputInfo = (BOOL (WINAPI *)(HTOUCHINPUT, UINT, PTOUCHINPUT, int)) SDL_LoadFunction(data->userDLL, "GetTouchInputInfo");
-        data->RegisterTouchWindow = (BOOL (WINAPI *)(HWND, ULONG)) SDL_LoadFunction(data->userDLL, "RegisterTouchWindow");
+        data->CloseTouchInputHandle = (nez_b32_t (WINAPI *)(HTOUCHINPUT)) SDL_LoadFunction(data->userDLL, "CloseTouchInputHandle");
+        data->GetTouchInputInfo = (nez_b32_t (WINAPI *)(HTOUCHINPUT, UINT, PTOUCHINPUT, int)) SDL_LoadFunction(data->userDLL, "GetTouchInputInfo");
+        data->RegisterTouchWindow = (nez_b32_t (WINAPI *)(HWND, ULONG)) SDL_LoadFunction(data->userDLL, "RegisterTouchWindow");
     } else {
         SDL_ClearError();
     }
@@ -255,7 +255,7 @@ WIN_VideoQuit(_THIS)
 #define D3D_DEBUG_INFO
 #include <d3d9.h>
 
-SDL_bool 
+SDL_nez_b32_t 
 D3D_LoadDLL(void **pD3DDLL, IDirect3D9 **pDirect3D9Interface)
 {
     *pD3DDLL = SDL_LoadObject("D3D9.DLL");
@@ -342,7 +342,7 @@ SDL_Direct3D9GetAdapterIndex(int displayIndex)
 #define COBJMACROS
 #include <dxgi.h>
 
-static SDL_bool
+static SDL_nez_b32_t
 DXGI_LoadDLL(void **pDXGIDLL, IDXGIFactory **pDXGIFactory)
 {
     *pDXGIDLL = SDL_LoadObject("DXGI.DLL");
@@ -373,7 +373,7 @@ DXGI_LoadDLL(void **pDXGIDLL, IDXGIFactory **pDXGIFactory)
 #endif
 
 
-SDL_bool
+SDL_nez_b32_t
 SDL_DXGIGetOutputInfo(int displayIndex, int *adapterIndex, int *outputIndex)
 {
 #if !HAVE_DXGI_H

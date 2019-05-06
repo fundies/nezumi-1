@@ -24,7 +24,7 @@
 #include "SDL_rect_c.h"
 #include "SDL_assert.h"
 
-SDL_bool
+SDL_nez_b32_t
 SDL_HasIntersection(const SDL_Rect * A, const SDL_Rect * B)
 {
     int Amin, Amax, Bmin, Bmax;
@@ -71,7 +71,7 @@ SDL_HasIntersection(const SDL_Rect * A, const SDL_Rect * B)
     return SDL_TRUE;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IntersectRect(const SDL_Rect * A, const SDL_Rect * B, SDL_Rect * result)
 {
     int Amin, Amax, Bmin, Bmax;
@@ -188,7 +188,7 @@ SDL_UnionRect(const SDL_Rect * A, const SDL_Rect * B, SDL_Rect * result)
     result->h = Amax - Amin;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_EnclosePoints(const SDL_Point * points, int count, const SDL_Rect * clip,
                   SDL_Rect * result)
 {
@@ -209,7 +209,7 @@ SDL_EnclosePoints(const SDL_Point * points, int count, const SDL_Rect * clip,
     }
 
     if (clip) {
-        SDL_bool added = SDL_FALSE;
+        SDL_nez_b32_t added = SDL_FALSE;
         const int clip_minx = clip->x;
         const int clip_miny = clip->y;
         const int clip_maxx = clip->x+clip->w-1;
@@ -313,7 +313,7 @@ ComputeOutCode(const SDL_Rect * rect, int x, int y)
     return code;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_IntersectRectAndLine(const SDL_Rect * rect, int *X1, int *Y1, int *X2,
                          int *Y2)
 {
@@ -465,7 +465,7 @@ SDL_IntersectRectAndLine(const SDL_Rect * rect, int *X1, int *Y1, int *X2,
     return SDL_TRUE;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_GetSpanEnclosingRect(int width, int height,
                          int numrects, const SDL_Rect * rects, SDL_Rect *span)
 {

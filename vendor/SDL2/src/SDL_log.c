@@ -323,7 +323,7 @@ SDL_LogOutput(void *userdata, int category, SDL_LogPriority priority,
         LPTSTR tstr;
 
 #if !defined(HAVE_STDIO_H) && !defined(__WINRT__)
-        BOOL attachResult;
+        nez_b32_t attachResult;
         DWORD attachError;
         unsigned long charsWritten; 
         DWORD consoleMode;

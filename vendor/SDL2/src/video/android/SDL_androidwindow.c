@@ -100,7 +100,7 @@ Android_SetWindowTitle(_THIS, SDL_Window * window)
 }
 
 void
-Android_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_bool fullscreen)
+Android_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_nez_b32_t fullscreen)
 {
     /* If the window is being destroyed don't change visible state */
     if (!window->is_destroying) {
@@ -160,7 +160,7 @@ Android_DestroyWindow(_THIS, SDL_Window * window)
     }
 }
 
-SDL_bool
+SDL_nez_b32_t
 Android_GetWindowWMInfo(_THIS, SDL_Window * window, SDL_SysWMinfo * info)
 {
     SDL_WindowData *data = (SDL_WindowData *) window->driverdata;

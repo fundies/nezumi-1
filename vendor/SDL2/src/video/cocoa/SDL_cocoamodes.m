@@ -40,7 +40,7 @@
 
 
 static void
-Cocoa_ToggleMenuBar(const BOOL show)
+Cocoa_ToggleMenuBar(const nez_b32_t show)
 {
     /* !!! FIXME: keep an eye on this.
      * ShowMenuBar/HideMenuBar is officially unavailable for 64-bit binaries.
@@ -99,7 +99,7 @@ CG_SetError(const char *prefix, CGDisplayErr result)
     return SDL_SetError("%s: %s", prefix, error);
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 GetDisplayMode(_THIS, CGDisplayModeRef vidmode, CVDisplayLinkRef link, SDL_DisplayMode *mode)
 {
     SDL_DisplayModeData *data;

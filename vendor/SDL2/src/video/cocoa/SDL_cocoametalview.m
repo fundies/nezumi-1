@@ -40,7 +40,7 @@
 }
 
 /* Indicate the view wants to draw using a backing layer instead of drawRect. */
-- (BOOL)wantsUpdateLayer
+- (nez_b32_t)wantsUpdateLayer
 {
     return YES;
 }
@@ -54,7 +54,7 @@
 }
 
 - (instancetype)initWithFrame:(NSRect)frame
-                      highDPI:(BOOL)highDPI
+                      highDPI:(nez_b32_t)highDPI
 {
     if ((self = [super initWithFrame:frame])) {
         self.highDPI = highDPI;
@@ -105,7 +105,7 @@ Cocoa_Mtl_AddMetalView(SDL_Window* window)
 {
     SDL_WindowData* data = (__bridge SDL_WindowData *)window->driverdata;
     NSView *view = data->nswindow.contentView;
-    BOOL highDPI = (window->flags & SDL_WINDOW_ALLOW_HIGHDPI) != 0;
+    nez_b32_t highDPI = (window->flags & SDL_WINDOW_ALLOW_HIGHDPI) != 0;
     SDL_cocoametalview *metalview;
 
     metalview = [[SDL_cocoametalview alloc] initWithFrame:view.frame highDPI:highDPI];

@@ -53,8 +53,8 @@ int Cocoa_Vulkan_LoadLibrary(_THIS, const char *path)
 {
     VkExtensionProperties *extensions = NULL;
     Uint32 extensionCount = 0;
-    SDL_bool hasSurfaceExtension = SDL_FALSE;
-    SDL_bool hasMacOSSurfaceExtension = SDL_FALSE;
+    SDL_nez_b32_t hasSurfaceExtension = SDL_FALSE;
+    SDL_nez_b32_t hasMacOSSurfaceExtension = SDL_FALSE;
     PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr = NULL;
 
     if (_this->vulkan_config.loader_handle) {
@@ -165,7 +165,7 @@ void Cocoa_Vulkan_UnloadLibrary(_THIS)
     }
 }
 
-SDL_bool Cocoa_Vulkan_GetInstanceExtensions(_THIS,
+SDL_nez_b32_t Cocoa_Vulkan_GetInstanceExtensions(_THIS,
                                           SDL_Window *window,
                                           unsigned *count,
                                           const char **names)
@@ -182,7 +182,7 @@ SDL_bool Cocoa_Vulkan_GetInstanceExtensions(_THIS,
             extensionsForCocoa);
 }
 
-SDL_bool Cocoa_Vulkan_CreateSurface(_THIS,
+SDL_nez_b32_t Cocoa_Vulkan_CreateSurface(_THIS,
                                   SDL_Window *window,
                                   VkInstance instance,
                                   VkSurfaceKHR *surface)

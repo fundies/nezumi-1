@@ -42,7 +42,7 @@ KMSDRM_GLES_LoadLibrary(_THIS, const char *path) {
 
 SDL_EGL_CreateContext_impl(KMSDRM)
 
-SDL_bool
+SDL_nez_b32_t
 KMSDRM_GLES_SetupCrtc(_THIS, SDL_Window * window) {
     SDL_WindowData *wdata = ((SDL_WindowData *) window->driverdata);
     SDL_DisplayData *displaydata = (SDL_DisplayData *) SDL_GetDisplayForWindow(window)->driverdata;

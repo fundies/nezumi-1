@@ -46,12 +46,12 @@
 typedef struct _SDL_HIDAPI_DeviceDriver
 {
     const char *hint;
-    SDL_bool enabled;
-    SDL_bool (*IsSupportedDevice)(Uint16 vendor_id, Uint16 product_id, Uint16 version, int interface_number);
+    SDL_nez_b32_t enabled;
+    SDL_nez_b32_t (*IsSupportedDevice)(Uint16 vendor_id, Uint16 product_id, Uint16 version, int interface_number);
     const char *(*GetDeviceName)(Uint16 vendor_id, Uint16 product_id);
-    SDL_bool (*Init)(SDL_Joystick *joystick, hid_device *dev, Uint16 vendor_id, Uint16 product_id, void **context);
+    SDL_nez_b32_t (*Init)(SDL_Joystick *joystick, hid_device *dev, Uint16 vendor_id, Uint16 product_id, void **context);
     int (*Rumble)(SDL_Joystick *joystick, hid_device *dev, void *context, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms);
-    SDL_bool (*Update)(SDL_Joystick *joystick, hid_device *dev, void *context);
+    SDL_nez_b32_t (*Update)(SDL_Joystick *joystick, hid_device *dev, void *context);
     void (*Quit)(SDL_Joystick *joystick, hid_device *dev, void *context);
 
 } SDL_HIDAPI_DeviceDriver;
@@ -64,7 +64,7 @@ extern SDL_HIDAPI_DeviceDriver SDL_HIDAPI_DriverXbox360;
 extern SDL_HIDAPI_DeviceDriver SDL_HIDAPI_DriverXboxOne;
 
 /* Return true if a HID device is present and supported as a joystick */
-extern SDL_bool HIDAPI_IsDevicePresent(Uint16 vendor_id, Uint16 product_id, Uint16 version);
+extern SDL_nez_b32_t HIDAPI_IsDevicePresent(Uint16 vendor_id, Uint16 product_id, Uint16 version);
 
 /* Return the name of an Xbox 360 or Xbox One controller */
 extern const char *HIDAPI_XboxControllerName(Uint16 vendor_id, Uint16 product_id);

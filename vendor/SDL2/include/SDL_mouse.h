@@ -159,7 +159,7 @@ extern DECLSPEC int SDLCALL SDL_WarpMouseGlobal(int x, int y);
  *
  *  \sa SDL_GetRelativeMouseMode()
  */
-extern DECLSPEC int SDLCALL SDL_SetRelativeMouseMode(SDL_bool enabled);
+extern DECLSPEC int SDLCALL SDL_SetRelativeMouseMode(SDL_nez_b32_t enabled);
 
 /**
  *  \brief Capture the mouse, to track input outside an SDL window.
@@ -190,14 +190,14 @@ extern DECLSPEC int SDLCALL SDL_SetRelativeMouseMode(SDL_bool enabled);
  *
  *  \return 0 on success, or -1 if not supported.
  */
-extern DECLSPEC int SDLCALL SDL_CaptureMouse(SDL_bool enabled);
+extern DECLSPEC int SDLCALL SDL_CaptureMouse(SDL_nez_b32_t enabled);
 
 /**
  *  \brief Query whether relative mouse mode is enabled.
  *
  *  \sa SDL_SetRelativeMouseMode()
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_GetRelativeMouseMode(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_GetRelativeMouseMode(void);
 
 /**
  *  \brief Create a cursor, using the specified bitmap data and

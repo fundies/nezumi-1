@@ -596,7 +596,7 @@ SDL_RWFromFile(const char *file, const char *mode)
 
 #ifdef HAVE_STDIO_H
 SDL_RWops *
-SDL_RWFromFP(FILE * fp, SDL_bool autoclose)
+SDL_RWFromFP(FILE * fp, SDL_nez_b32_t autoclose)
 {
     SDL_RWops *rwops = NULL;
 
@@ -615,7 +615,7 @@ SDL_RWFromFP(FILE * fp, SDL_bool autoclose)
 }
 #else
 SDL_RWops *
-SDL_RWFromFP(void * fp, SDL_bool autoclose)
+SDL_RWFromFP(void * fp, SDL_nez_b32_t autoclose)
 {
     SDL_SetError("SDL not compiled with stdio support");
     return NULL;

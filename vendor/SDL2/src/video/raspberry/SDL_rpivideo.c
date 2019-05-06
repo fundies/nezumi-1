@@ -317,7 +317,7 @@ RPI_CreateWindow(_THIS, SDL_Window * window)
 
     /* Start generating vsync callbacks if necesary */
     wdata->double_buffer = SDL_FALSE;
-    if (SDL_GetHintBoolean(SDL_HINT_VIDEO_DOUBLE_BUFFER, SDL_FALSE)) {
+    if (SDL_GetHintnez_b32_tean(SDL_HINT_VIDEO_DOUBLE_BUFFER, SDL_FALSE)) {
         wdata->vsync_cond = SDL_CreateCond();
         wdata->vsync_cond_mutex = SDL_CreateMutex();
         wdata->double_buffer = SDL_TRUE;
@@ -412,7 +412,7 @@ RPI_RestoreWindow(_THIS, SDL_Window * window)
 {
 }
 void
-RPI_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed)
+RPI_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed)
 {
 
 }
@@ -421,7 +421,7 @@ RPI_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed)
 /* SDL Window Manager function                                               */
 /*****************************************************************************/
 #if 0
-SDL_bool
+SDL_nez_b32_t
 RPI_GetWindowWMInfo(_THIS, SDL_Window * window, struct SDL_SysWMinfo *info)
 {
     if (info->version.major <= SDL_MAJOR_VERSION) {

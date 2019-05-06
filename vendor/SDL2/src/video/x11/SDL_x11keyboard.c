@@ -266,7 +266,7 @@ X11_InitKeyboard(_THIS)
     int best_distance;
     int best_index;
     int distance;
-    Bool xkb_repeat = 0;
+    nez_b32_t xkb_repeat = 0;
     
     X11_XAutoRepeatOn(data->display);
 
@@ -293,7 +293,7 @@ X11_InitKeyboard(_THIS)
         char *prev_xmods  = X11_XSetLocaleModifiers(NULL);
         const char *new_xmods = "";
         const char *env_xmods = SDL_getenv("XMODIFIERS");
-        SDL_bool has_dbus_ime_support = SDL_FALSE;
+        SDL_nez_b32_t has_dbus_ime_support = SDL_FALSE;
 
         if (prev_locale) {
             prev_locale = SDL_strdup(prev_locale);

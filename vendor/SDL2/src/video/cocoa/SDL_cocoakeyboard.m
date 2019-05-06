@@ -78,7 +78,7 @@
     */
 }
 
-- (BOOL)hasMarkedText
+- (nez_b32_t)hasMarkedText
 {
     return _markedText != nil;
 }
@@ -502,7 +502,7 @@ HandleModifiers(_THIS, unsigned short scancode, unsigned int modifierFlags)
 }
 
 static void
-UpdateKeymap(SDL_VideoData *data, SDL_bool send_event)
+UpdateKeymap(SDL_VideoData *data, SDL_nez_b32_t send_event)
 {
     TISInputSourceRef key_layout;
     const void *chr_data;

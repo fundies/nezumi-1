@@ -9,11 +9,11 @@ interface HIDDevice
     public int getVersion();
     public String getManufacturerName();
     public String getProductName();
-    public boolean open();
+    public nez_b32_tean open();
     public int sendFeatureReport(byte[] report);
     public int sendOutputReport(byte[] report);
-    public boolean getFeatureReport(byte[] report);
-    public void setFrozen(boolean frozen);
+    public nez_b32_tean getFeatureReport(byte[] report);
+    public void setFrozen(nez_b32_tean frozen);
     public void close();
     public void shutdown();
 }

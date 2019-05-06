@@ -292,7 +292,7 @@ SDL_SetColorKey(SDL_Surface * surface, int flag, Uint32 key)
     return 0;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_HasColorKey(SDL_Surface * surface)
 {
     if (!surface) {
@@ -541,7 +541,7 @@ SDL_GetSurfaceBlendMode(SDL_Surface * surface, SDL_BlendMode *blendMode)
     return 0;
 }
 
-SDL_bool
+SDL_nez_b32_t
 SDL_SetClipRect(SDL_Surface * surface, const SDL_Rect * rect)
 {
     SDL_Rect full_rect;
@@ -1022,7 +1022,7 @@ SDL_ConvertSurface(SDL_Surface * surface, const SDL_PixelFormat * format,
     surface->map->info.flags = copy_flags;
     SDL_InvalidateMap(surface->map);
     if (copy_flags & SDL_COPY_COLORKEY) {
-        SDL_bool set_colorkey_by_color = SDL_FALSE;
+        SDL_nez_b32_t set_colorkey_by_color = SDL_FALSE;
 
         if (surface->format->palette) {
             if (format->palette &&
@@ -1110,7 +1110,7 @@ SDL_ConvertSurfaceFormat(SDL_Surface * surface, Uint32 pixel_format,
 /*
  * Create a surface on the stack for quick blit operations
  */
-static SDL_INLINE SDL_bool
+static SDL_INLINE SDL_nez_b32_t
 SDL_CreateSurfaceOnStack(int width, int height, Uint32 pixel_format,
                          void * pixels, int pitch, SDL_Surface * surface,
                          SDL_PixelFormat * format, SDL_BlitMap * blitmap)

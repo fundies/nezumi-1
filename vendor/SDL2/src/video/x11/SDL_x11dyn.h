@@ -78,7 +78,7 @@ extern "C"
 #endif
 
 /* evil function signatures... */
-typedef Bool(*SDL_X11_XESetWireToEventRetType) (Display *, XEvent *, xEvent *);
+typedef nez_b32_t(*SDL_X11_XESetWireToEventRetType) (Display *, XEvent *, xEvent *);
 typedef int (*SDL_X11_XSynchronizeRetType) (Display *);
 typedef Status(*SDL_X11_XESetEventToWireRetType) (Display *, XEvent *, xEvent *);
 

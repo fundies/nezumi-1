@@ -55,7 +55,7 @@ static SDL_Renderer *GL_CreateRenderer(SDL_Window * window, Uint32 flags);
 static void GL_WindowEvent(SDL_Renderer * renderer,
                            const SDL_WindowEvent *event);
 static int GL_GetOutputSize(SDL_Renderer * renderer, int *w, int *h);
-static SDL_bool GL_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode);
+static SDL_nez_b32_t GL_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode);
 static int GL_CreateTexture(SDL_Renderer * renderer, SDL_Texture * texture);
 static int GL_UpdateTexture(SDL_Renderer * renderer, SDL_Texture * texture,
                             const SDL_Rect * rect, const void *pixels,
@@ -115,22 +115,22 @@ typedef struct
 {
     SDL_GLContext context;
 
-    SDL_bool debug_enabled;
-    SDL_bool GL_ARB_debug_output_supported;
+    SDL_nez_b32_t debug_enabled;
+    SDL_nez_b32_t GL_ARB_debug_output_supported;
     int errors;
     char **error_messages;
     GLDEBUGPROCARB next_error_callback;
     GLvoid *next_error_userparam;
 
-    SDL_bool GL_ARB_texture_non_power_of_two_supported;
-    SDL_bool GL_ARB_texture_rectangle_supported;
+    SDL_nez_b32_t GL_ARB_texture_non_power_of_two_supported;
+    SDL_nez_b32_t GL_ARB_texture_rectangle_supported;
     struct {
         GL_Shader shader;
         Uint32 color;
         SDL_BlendMode blendMode;
     } current;
 
-    SDL_bool GL_EXT_framebuffer_object_supported;
+    SDL_nez_b32_t GL_EXT_framebuffer_object_supported;
     GL_FBOList *framebuffers;
 
     /* OpenGL functions */
@@ -139,7 +139,7 @@ typedef struct
 #undef SDL_PROC
 
     /* Multitexture support */
-    SDL_bool GL_ARB_multitexture_supported;
+    SDL_nez_b32_t GL_ARB_multitexture_supported;
     PFNGLACTIVETEXTUREARBPROC glActiveTextureARB;
     GLint num_texture_units;
 
@@ -167,8 +167,8 @@ typedef struct
     SDL_Rect locked_rect;
 
     /* YUV texture support */
-    SDL_bool yuv;
-    SDL_bool nv12;
+    SDL_nez_b32_t yuv;
+    SDL_nez_b32_t nv12;
     GLuint utexture;
     GLuint vtexture;
 
@@ -392,7 +392,7 @@ GL_CreateRenderer(SDL_Window * window, Uint32 flags)
     GLint value;
     Uint32 window_flags;
     int profile_mask = 0, major = 0, minor = 0;
-    SDL_bool changed_window = SDL_FALSE;
+    SDL_nez_b32_t changed_window = SDL_FALSE;
 
     SDL_GL_GetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, &profile_mask);
     SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &major);
@@ -527,7 +527,7 @@ GL_CreateRenderer(SDL_Window * window, Uint32 flags)
     }
 
     /* Check for shader support */
-    if (SDL_GetHintBoolean(SDL_HINT_RENDER_OPENGL_SHADERS, SDL_TRUE)) {
+    if (SDL_GetHintnez_b32_tean(SDL_HINT_RENDER_OPENGL_SHADERS, SDL_TRUE)) {
         data->shaders = GL_CreateShaderContext();
     }
     SDL_LogInfo(SDL_LOG_CATEGORY_RENDER, "OpenGL shaders: %s",
@@ -637,7 +637,7 @@ static GLenum GetBlendEquation(SDL_BlendOperation operation)
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 GL_SupportsBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode)
 {
     SDL_BlendFactor srcColorFactor = SDL_GetBlendModeSrcColorFactor(blendMode);
@@ -672,7 +672,7 @@ power_of_2(int input)
     return value;
 }
 
-SDL_FORCE_INLINE SDL_bool
+SDL_FORCE_INLINE SDL_nez_b32_t
 convert_format(GL_RenderData *renderdata, Uint32 pixel_format,
                GLint* internalFormat, GLenum* format, GLenum* type)
 {

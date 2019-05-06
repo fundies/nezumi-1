@@ -123,11 +123,11 @@ WIN_GL_LoadLibrary(_THIS, const char *path)
         SDL_LoadFunction(handle, "wglGetProcAddress");
     _this->gl_data->wglCreateContext = (HGLRC(WINAPI *) (HDC))
         SDL_LoadFunction(handle, "wglCreateContext");
-    _this->gl_data->wglDeleteContext = (BOOL(WINAPI *) (HGLRC))
+    _this->gl_data->wglDeleteContext = (nez_b32_t(WINAPI *) (HGLRC))
         SDL_LoadFunction(handle, "wglDeleteContext");
-    _this->gl_data->wglMakeCurrent = (BOOL(WINAPI *) (HDC, HGLRC))
+    _this->gl_data->wglMakeCurrent = (nez_b32_t(WINAPI *) (HDC, HGLRC))
         SDL_LoadFunction(handle, "wglMakeCurrent");
-    _this->gl_data->wglShareLists = (BOOL(WINAPI *) (HGLRC, HGLRC))
+    _this->gl_data->wglShareLists = (nez_b32_t(WINAPI *) (HGLRC, HGLRC))
         SDL_LoadFunction(handle, "wglShareLists");
 
     if (!_this->gl_data->wglGetProcAddress ||
@@ -340,7 +340,7 @@ WIN_GL_ChoosePixelFormat(HDC hdc, PIXELFORMATDESCRIPTOR * target)
     return best;
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 HasExtension(const char *extension, const char *extensions)
 {
     const char *start;
@@ -420,13 +420,13 @@ WIN_GL_InitExtensions(_THIS)
     /* Check for WGL_ARB_pixel_format */
     _this->gl_data->HAS_WGL_ARB_pixel_format = SDL_FALSE;
     if (HasExtension("WGL_ARB_pixel_format", extensions)) {
-        _this->gl_data->wglChoosePixelFormatARB = (BOOL(WINAPI *)
+        _this->gl_data->wglChoosePixelFormatARB = (nez_b32_t(WINAPI *)
                                                    (HDC, const int *,
                                                     const FLOAT *, UINT,
                                                     int *, UINT *))
             WIN_GL_GetProcAddress(_this, "wglChoosePixelFormatARB");
         _this->gl_data->wglGetPixelFormatAttribivARB =
-            (BOOL(WINAPI *) (HDC, int, int, UINT, const int *, int *))
+            (nez_b32_t(WINAPI *) (HDC, int, int, UINT, const int *, int *))
             WIN_GL_GetProcAddress(_this, "wglGetPixelFormatAttribivARB");
 
         if ((_this->gl_data->wglChoosePixelFormatARB != NULL) &&
@@ -649,13 +649,13 @@ WIN_GL_SetupWindow(_THIS, SDL_Window * window)
     return retval;
 }
 
-SDL_bool
+SDL_nez_b32_t
 WIN_GL_UseEGL(_THIS)
 {
     SDL_assert(_this->gl_data != NULL);
     SDL_assert(_this->gl_config.profile_mask == SDL_GL_CONTEXT_PROFILE_ES);
 
-    return (SDL_GetHintBoolean(SDL_HINT_OPENGL_ES_DRIVER, SDL_FALSE)
+    return (SDL_GetHintnez_b32_tean(SDL_HINT_OPENGL_ES_DRIVER, SDL_FALSE)
             || _this->gl_config.major_version == 1 /* No WGL extension for OpenGL ES 1.x profiles. */
             || _this->gl_config.major_version > _this->gl_data->es_profile_max_supported_version.major
             || (_this->gl_config.major_version == _this->gl_data->es_profile_max_supported_version.major
@@ -869,12 +869,12 @@ WIN_GL_DeleteContext(_THIS, SDL_GLContext context)
 }
 
 
-SDL_bool
+SDL_nez_b32_t
 WIN_GL_SetPixelFormatFrom(_THIS, SDL_Window * fromWindow, SDL_Window * toWindow)
 {
     HDC hfromdc = ((SDL_WindowData *) fromWindow->driverdata)->hdc;
     HDC htodc = ((SDL_WindowData *) toWindow->driverdata)->hdc;
-    BOOL result;
+    nez_b32_t result;
 
     /* get the pixel format of the fromWindow */
     int pixel_format = GetPixelFormat(hfromdc);

@@ -244,7 +244,7 @@ class SDL_BWin:public BDirectWindow
         BDirectWindow::FrameResized(width, height);
     }
 
-    virtual bool QuitRequested() {
+    virtual nez_b32_t QuitRequested() {
         BMessage msg(BAPP_WINDOW_CLOSE_REQUESTED);
         _PostWindowEvent(msg);
 
@@ -252,9 +252,9 @@ class SDL_BWin:public BDirectWindow
         return false;
     }
 
-    virtual void WindowActivated(bool active) {
+    virtual void WindowActivated(nez_b32_t active) {
         BMessage msg(BAPP_KEYBOARD_FOCUS);  /* Mouse focus sold separately */
-        msg.AddBool("focusGained", active);
+        msg.Addnez_b32_t("focusGained", active);
         _PostWindowEvent(msg);
     }
 
@@ -291,7 +291,7 @@ class SDL_BWin:public BDirectWindow
         _PostWindowEvent(msg);
     }
 
-    virtual void Minimize(bool minimize) {
+    virtual void Minimize(nez_b32_t minimize) {
         BDirectWindow::Minimize(minimize);
         int32 minState = (minimize ? BAPP_MINIMIZE : BAPP_RESTORE);
 
@@ -430,20 +430,20 @@ class SDL_BWin:public BDirectWindow
 
 
     /* Accessor methods */
-    bool IsShown() { return _shown; }
+    nez_b32_t IsShown() { return _shown; }
     int32 GetID() { return _id; }
     uint32 GetRowBytes() { return _row_bytes; }
     int32 GetFbX() { return _bounds.left; }
     int32 GetFbY() { return _bounds.top; }
-    bool ConnectionEnabled() { return !_connection_disabled; }
-    bool Connected() { return _connected; }
+    nez_b32_t ConnectionEnabled() { return !_connection_disabled; }
+    nez_b32_t Connected() { return _connected; }
     clipping_rect *GetClips() { return _clips; }
     int32 GetNumClips() { return _num_clips; }
     uint8* GetBufferPx() { return _bits; }
     int32 GetBytesPerPx() { return _bytes_per_px; }
-    bool CanTrashWindowBuffer() { return _trash_window_buffer; }
-    bool BufferExists() { return _buffer_created; }
-    bool BufferIsDirty() { return _buffer_dirty; }
+    nez_b32_t CanTrashWindowBuffer() { return _trash_window_buffer; }
+    nez_b32_t BufferExists() { return _buffer_created; }
+    nez_b32_t BufferIsDirty() { return _buffer_dirty; }
     BBitmap *GetBitmap() { return _bitmap; }
 #if SDL_VIDEO_OPENGL
     BGLView *GetGLView() { return _SDL_GLView; }
@@ -452,11 +452,11 @@ class SDL_BWin:public BDirectWindow
 
     /* Setter methods */
     void SetID(int32 id) { _id = id; }
-    void SetBufferExists(bool bufferExists) { _buffer_created = bufferExists; }
+    void SetBufferExists(nez_b32_t bufferExists) { _buffer_created = bufferExists; }
     void LockBuffer() { _buffer_locker->Lock(); }
     void UnlockBuffer() { _buffer_locker->Unlock(); }
-    void SetBufferDirty(bool bufferDirty) { _buffer_dirty = bufferDirty; }
-    void SetTrashBuffer(bool trash) { _trash_window_buffer = trash;     }
+    void SetBufferDirty(nez_b32_t bufferDirty) { _buffer_dirty = bufferDirty; }
+    void SetTrashBuffer(nez_b32_t trash) { _trash_window_buffer = trash;     }
     void SetBitmap(BBitmap *bitmap) { _bitmap = bitmap; }
 
 
@@ -481,10 +481,10 @@ private:
         }
     }
 
-    void _MouseFocusEvent(bool focusGained) {
+    void _MouseFocusEvent(nez_b32_t focusGained) {
         _mouse_focused = focusGained;
         BMessage msg(BAPP_MOUSE_FOCUS);
-        msg.AddBool("focusGained", focusGained);
+        msg.Addnez_b32_t("focusGained", focusGained);
         _PostWindowEvent(msg);
 
 /* FIXME: Why were these here?
@@ -587,16 +587,16 @@ private:
     }
 
     void _SetBordered(BMessage *msg) {
-        bool bEnabled;
-        if(msg->FindBool("window-border", &bEnabled) != B_OK) {
+        nez_b32_t bEnabled;
+        if(msg->Findnez_b32_t("window-border", &bEnabled) != B_OK) {
             return;
         }
         SetLook(bEnabled ? B_TITLED_WINDOW_LOOK : B_NO_BORDER_WINDOW_LOOK);
     }
 
     void _SetResizable(BMessage *msg) {
-        bool bEnabled;
-        if(msg->FindBool("window-resizable", &bEnabled) != B_OK) {
+        nez_b32_t bEnabled;
+        if(msg->Findnez_b32_t("window-resizable", &bEnabled) != B_OK) {
             return;
         }
         if (bEnabled) {
@@ -618,9 +618,9 @@ private:
     }
 
     void _SetFullScreen(BMessage *msg) {
-        bool fullscreen;
+        nez_b32_t fullscreen;
         if(
-            msg->FindBool("fullscreen", &fullscreen) != B_OK
+            msg->Findnez_b32_t("fullscreen", &fullscreen) != B_OK
         ) {
             return;
         }
@@ -635,14 +635,14 @@ private:
 
     int32 _last_buttons;
     int32 _id;  /* Window id used by SDL_BApp */
-    bool  _mouse_focused;       /* Does this window have mouse focus? */
-    bool  _shown;
-    bool  _inhibit_resize;
+    nez_b32_t  _mouse_focused;       /* Does this window have mouse focus? */
+    nez_b32_t  _shown;
+    nez_b32_t  _inhibit_resize;
 
     BRect *_prev_frame; /* Previous position and size of the window */
 
     /* Framebuffer members */
-    bool            _connected,
+    nez_b32_t            _connected,
                     _connection_disabled,
                     _buffer_created,
                     _buffer_dirty,

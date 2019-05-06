@@ -95,7 +95,7 @@ typedef int SDL_SpinLock;
  *
  * \return SDL_TRUE if the lock succeeded, SDL_FALSE if the lock is already held.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_AtomicTryLock(SDL_SpinLock *lock);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_AtomicTryLock(SDL_SpinLock *lock);
 
 /**
  * \brief Lock a spin lock by setting it to a non-zero value.
@@ -204,7 +204,7 @@ typedef struct { int value; } SDL_atomic_t;
  *
  * \note If you don't know what this function is for, you shouldn't use it!
 */
-extern DECLSPEC SDL_bool SDLCALL SDL_AtomicCAS(SDL_atomic_t *a, int oldval, int newval);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_AtomicCAS(SDL_atomic_t *a, int oldval, int newval);
 
 /**
  * \brief Set an atomic variable to a value.
@@ -251,7 +251,7 @@ extern DECLSPEC int SDLCALL SDL_AtomicAdd(SDL_atomic_t *a, int v);
  *
  * \note If you don't know what this function is for, you shouldn't use it!
 */
-extern DECLSPEC SDL_bool SDLCALL SDL_AtomicCASPtr(void **a, void *oldval, void *newval);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_AtomicCASPtr(void **a, void *oldval, void *newval);
 
 /**
  * \brief Set a pointer to a value atomically.

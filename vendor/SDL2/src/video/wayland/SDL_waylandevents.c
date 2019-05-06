@@ -243,7 +243,7 @@ pointer_handle_motion(void *data, struct wl_pointer *pointer,
     }
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 ProcessHitTest(struct SDL_WaylandInput *input, uint32_t serial)
 {
     SDL_WindowData *window_data = input->pointer_focus;
@@ -771,7 +771,7 @@ data_device_handle_enter(void *data, struct wl_data_device *wl_data_device,
                          wl_fixed_t x, wl_fixed_t y, struct wl_data_offer *id)
 {
     SDL_WaylandDataDevice *data_device = data;
-    SDL_bool has_mime = SDL_FALSE;
+    SDL_nez_b32_t has_mime = SDL_FALSE;
     uint32_t dnd_action = WL_DATA_DEVICE_MANAGER_DND_ACTION_NONE; 
         
     data_device->drag_serial = serial;

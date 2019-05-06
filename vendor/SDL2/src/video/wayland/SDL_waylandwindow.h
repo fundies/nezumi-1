@@ -37,7 +37,7 @@ typedef struct {
         struct zxdg_toplevel_v6 *toplevel;
         struct zxdg_popup_v6 *popup;
     } roleobj;
-    SDL_bool initial_configure_seen;
+    SDL_nez_b32_t initial_configure_seen;
 } SDL_zxdg_shell_surface;
 
 typedef struct {
@@ -46,7 +46,7 @@ typedef struct {
         struct xdg_toplevel *toplevel;
         struct xdg_popup *popup;
     } roleobj;
-    SDL_bool initial_configure_seen;
+    SDL_nez_b32_t initial_configure_seen;
 } SDL_xdg_shell_surface;
 
 typedef struct {
@@ -71,7 +71,7 @@ typedef struct {
 extern void Wayland_ShowWindow(_THIS, SDL_Window *window);
 extern void Wayland_SetWindowFullscreen(_THIS, SDL_Window * window,
                                         SDL_VideoDisplay * _display,
-                                        SDL_bool fullscreen);
+                                        SDL_nez_b32_t fullscreen);
 extern void Wayland_MaximizeWindow(_THIS, SDL_Window * window);
 extern void Wayland_RestoreWindow(_THIS, SDL_Window * window);
 extern int Wayland_CreateWindow(_THIS, SDL_Window *window);
@@ -79,9 +79,9 @@ extern void Wayland_SetWindowSize(_THIS, SDL_Window * window);
 extern void Wayland_SetWindowTitle(_THIS, SDL_Window * window);
 extern void Wayland_DestroyWindow(_THIS, SDL_Window *window);
 
-extern SDL_bool
+extern SDL_nez_b32_t
 Wayland_GetWindowWMInfo(_THIS, SDL_Window * window, SDL_SysWMinfo * info);
-extern int Wayland_SetWindowHitTest(SDL_Window *window, SDL_bool enabled);
+extern int Wayland_SetWindowHitTest(SDL_Window *window, SDL_nez_b32_t enabled);
 
 #endif /* SDL_waylandwindow_h_ */
 

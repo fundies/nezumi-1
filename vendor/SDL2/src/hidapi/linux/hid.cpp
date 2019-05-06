@@ -74,7 +74,7 @@ struct hid_device_info HID_API_EXPORT * HID_API_CALL hid_enumerate(unsigned shor
 
 	for ( usb_dev = usb_devs; usb_dev; usb_dev = usb_dev->next )
 	{
-		bool bFound = false;
+		nez_b32_t bFound = false;
 		for ( raw_dev = raw_devs; raw_dev; raw_dev = raw_dev->next )
 		{
 			if ( usb_dev->vendor_id == raw_dev->vendor_id && usb_dev->product_id == raw_dev->product_id )

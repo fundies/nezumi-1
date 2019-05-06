@@ -39,7 +39,7 @@ static pascal OSErr HandleWildCardMessage(const AppleEvent *theAppleEvent, Apple
 
 OSStatus AEHandler(EventHandlerCallRef inCaller, EventRef inEvent, void* inRefcon) 
 { 
-    Boolean     release = false; 
+    nez_b32_tean     release = false; 
     EventRecord eventRecord; 
     OSErr       ignoreErrForThisSample; 
 	
@@ -122,7 +122,7 @@ void
 check_apple_events()
 {
 	RgnHandle       cursorRgn = NULL; 
-	Boolean         gotEvent=TRUE; 
+	nez_b32_tean         gotEvent=TRUE; 
 	EventRecord     event; 
 
 	while (gotEvent) { 

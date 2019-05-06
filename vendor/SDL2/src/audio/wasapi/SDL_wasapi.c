@@ -61,7 +61,7 @@ static const IID SDL_IID_IAudioCaptureClient = { 0xc8adbd64, 0xe71e, 0x48a0,{ 0x
 static const GUID SDL_KSDATAFORMAT_SUBTYPE_PCM = { 0x00000001, 0x0000, 0x0010,{ 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71 } };
 static const GUID SDL_KSDATAFORMAT_SUBTYPE_IEEE_FLOAT = { 0x00000003, 0x0000, 0x0010,{ 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71 } };
 
-static SDL_bool
+static SDL_nez_b32_t
 WStrEqual(const WCHAR *a, const WCHAR *b)
 {
     while (*a) {
@@ -99,7 +99,7 @@ WStrDupe(const WCHAR *wstr)
 
 
 void
-WASAPI_RemoveDevice(const SDL_bool iscapture, LPCWSTR devid)
+WASAPI_RemoveDevice(const SDL_nez_b32_t iscapture, LPCWSTR devid)
 {
     DevIdList *i;
     DevIdList *next;
@@ -121,7 +121,7 @@ WASAPI_RemoveDevice(const SDL_bool iscapture, LPCWSTR devid)
 }
 
 void
-WASAPI_AddDevice(const SDL_bool iscapture, const char *devname, LPCWSTR devid)
+WASAPI_AddDevice(const SDL_nez_b32_t iscapture, const char *devname, LPCWSTR devid)
 {
     DevIdList *devidlist;
 
@@ -176,7 +176,7 @@ WASAPI_GetPendingBytes(_THIS)
     return ((int) frames) * this->hidden->framesize;
 }
 
-static SDL_INLINE SDL_bool
+static SDL_INLINE SDL_nez_b32_t
 WasapiFailed(_THIS, const HRESULT err)
 {
     if (err == S_OK) {
@@ -250,7 +250,7 @@ UpdateAudioStream(_THIS, const SDL_AudioSpec *oldspec)
 
 static void ReleaseWasapiDevice(_THIS);
 
-static SDL_bool
+static SDL_nez_b32_t
 RecoverWasapiDevice(_THIS)
 {
     ReleaseWasapiDevice(this);  /* dump the lost device's handles. */
@@ -274,11 +274,11 @@ RecoverWasapiDevice(_THIS)
     return SDL_TRUE;  /* okay, carry on with new device details! */
 }
 
-static SDL_bool
+static SDL_nez_b32_t
 RecoverWasapiIfLost(_THIS)
 {
     const int generation = this->hidden->default_device_generation;
-    SDL_bool lost = this->hidden->device_lost;
+    SDL_nez_b32_t lost = this->hidden->device_lost;
 
     if (!SDL_AtomicGet(&this->enabled)) {
         return SDL_FALSE;  /* already failed. */
@@ -381,7 +381,7 @@ WASAPI_CaptureFromDevice(_THIS, void *buffer, int buflen)
             const int total = ((int) frames) * this->hidden->framesize;
             const int cpy = SDL_min(buflen, total);
             const int leftover = total - cpy;
-            const SDL_bool silent = (flags & AUDCLNT_BUFFERFLAGS_SILENT) ? SDL_TRUE : SDL_FALSE;
+            const SDL_nez_b32_t silent = (flags & AUDCLNT_BUFFERFLAGS_SILENT) ? SDL_TRUE : SDL_FALSE;
 
             if (silent) {
                 SDL_memset(buffer, this->spec.silence, cpy);
@@ -507,7 +507,7 @@ WASAPI_UnrefDevice(_THIS)
 
 /* This is called once a device is activated, possibly asynchronously. */
 int
-WASAPI_PrepDevice(_THIS, const SDL_bool updatestream)
+WASAPI_PrepDevice(_THIS, const SDL_nez_b32_t updatestream)
 {
     /* !!! FIXME: we could request an exclusive mode stream, which is lower latency;
        !!!  it will write into the kernel's audio buffer directly instead of
@@ -530,7 +530,7 @@ WASAPI_PrepDevice(_THIS, const SDL_bool updatestream)
     WAVEFORMATEX *waveformat = NULL;
     SDL_AudioFormat test_format = SDL_FirstAudioFormat(this->spec.format);
     SDL_AudioFormat wasapi_format = 0;
-    SDL_bool valid_format = SDL_FALSE;
+    SDL_nez_b32_t valid_format = SDL_FALSE;
     HRESULT ret = S_OK;
     DWORD streamflags = 0;
 

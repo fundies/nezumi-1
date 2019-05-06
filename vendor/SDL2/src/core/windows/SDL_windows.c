@@ -97,7 +97,7 @@ WIN_CoUninitialize(void)
 }
 
 #ifndef __WINRT__
-static BOOL
+static nez_b32_t
 IsWindowsVersionOrGreater(WORD wMajorVersion, WORD wMinorVersion, WORD wServicePackMajor)
 {
     OSVERSIONINFOEXW osvi;
@@ -118,7 +118,7 @@ IsWindowsVersionOrGreater(WORD wMajorVersion, WORD wMinorVersion, WORD wServiceP
 }
 #endif
 
-BOOL WIN_IsWindowsVistaOrGreater(void)
+nez_b32_t WIN_IsWindowsVistaOrGreater(void)
 {
 #ifdef __WINRT__
     return TRUE;
@@ -127,7 +127,7 @@ BOOL WIN_IsWindowsVistaOrGreater(void)
 #endif
 }
 
-BOOL WIN_IsWindows7OrGreater(void)
+nez_b32_t WIN_IsWindows7OrGreater(void)
 {
 #ifdef __WINRT__
     return TRUE;
@@ -167,7 +167,7 @@ WIN_LookupAudioDeviceName(const WCHAR *name, const GUID *guid)
     const unsigned char *ptr;
     char keystr[128];
     WCHAR *strw = NULL;
-    SDL_bool rc;
+    SDL_nez_b32_t rc;
     HKEY hkey;
     DWORD len = 0;
     char *retval = NULL;
@@ -216,13 +216,13 @@ WIN_LookupAudioDeviceName(const WCHAR *name, const GUID *guid)
 #endif /* if __WINRT__ / else */
 }
 
-BOOL
+nez_b32_t
 WIN_IsEqualGUID(const GUID * a, const GUID * b)
 {
     return (SDL_memcmp(a, b, sizeof (*a)) == 0);
 }
 
-BOOL
+nez_b32_t
 WIN_IsEqualIID(REFIID a, REFIID b)
 {
     return (SDL_memcmp(a, b, sizeof (*a)) == 0);

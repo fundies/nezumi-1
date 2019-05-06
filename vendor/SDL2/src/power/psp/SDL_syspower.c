@@ -28,7 +28,7 @@
 #include <psppower.h>
 
 
-SDL_bool
+SDL_nez_b32_t
 SDL_GetPowerInfo_PSP(SDL_PowerState * state, int *seconds,
                             int *percent)
 {

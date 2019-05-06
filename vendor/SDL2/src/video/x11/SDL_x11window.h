@@ -49,13 +49,13 @@ typedef struct
     Colormap colormap;
 #ifndef NO_SHARED_MEMORY
     /* MIT shared memory extension information */
-    SDL_bool use_mitshm;
+    SDL_nez_b32_t use_mitshm;
     XShmSegmentInfo shminfo;
 #endif
     XImage *ximage;
     GC gc;
     XIC ic;
-    SDL_bool created;
+    SDL_nez_b32_t created;
     int border_left;
     int border_right;
     int border_top;
@@ -95,16 +95,16 @@ extern void X11_RaiseWindow(_THIS, SDL_Window * window);
 extern void X11_MaximizeWindow(_THIS, SDL_Window * window);
 extern void X11_MinimizeWindow(_THIS, SDL_Window * window);
 extern void X11_RestoreWindow(_THIS, SDL_Window * window);
-extern void X11_SetWindowBordered(_THIS, SDL_Window * window, SDL_bool bordered);
-extern void X11_SetWindowResizable(_THIS, SDL_Window * window, SDL_bool resizable);
-extern void X11_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_bool fullscreen);
+extern void X11_SetWindowBordered(_THIS, SDL_Window * window, SDL_nez_b32_t bordered);
+extern void X11_SetWindowResizable(_THIS, SDL_Window * window, SDL_nez_b32_t resizable);
+extern void X11_SetWindowFullscreen(_THIS, SDL_Window * window, SDL_VideoDisplay * display, SDL_nez_b32_t fullscreen);
 extern int X11_SetWindowGammaRamp(_THIS, SDL_Window * window, const Uint16 * ramp);
-extern void X11_SetWindowGrab(_THIS, SDL_Window * window, SDL_bool grabbed);
+extern void X11_SetWindowGrab(_THIS, SDL_Window * window, SDL_nez_b32_t grabbed);
 extern void X11_DestroyWindow(_THIS, SDL_Window * window);
-extern SDL_bool X11_GetWindowWMInfo(_THIS, SDL_Window * window,
+extern SDL_nez_b32_t X11_GetWindowWMInfo(_THIS, SDL_Window * window,
                                     struct SDL_SysWMinfo *info);
-extern int X11_SetWindowHitTest(SDL_Window *window, SDL_bool enabled);
-extern void X11_AcceptDragAndDrop(SDL_Window * window, SDL_bool accept);
+extern int X11_SetWindowHitTest(SDL_Window *window, SDL_nez_b32_t enabled);
+extern void X11_AcceptDragAndDrop(SDL_Window * window, SDL_nez_b32_t accept);
 
 #endif /* SDL_x11window_h_ */
 

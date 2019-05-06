@@ -54,7 +54,7 @@
 #if defined(HAVE_ALTIVEC_H) && !defined(__APPLE_ALTIVEC__) && !defined(SDL_DISABLE_ALTIVEC_H)
 #include <altivec.h>
 #undef pixel
-#undef bool
+#undef nez_b32_t
 #endif
 #endif
 #if defined(__ARM_NEON__) && !defined(SDL_DISABLE_ARM_NEON_H)
@@ -110,67 +110,67 @@ extern DECLSPEC int SDLCALL SDL_GetCPUCacheLineSize(void);
 /**
  *  This function returns true if the CPU has the RDTSC instruction.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasRDTSC(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasRDTSC(void);
 
 /**
  *  This function returns true if the CPU has AltiVec features.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasAltiVec(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasAltiVec(void);
 
 /**
  *  This function returns true if the CPU has MMX features.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasMMX(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasMMX(void);
 
 /**
  *  This function returns true if the CPU has 3DNow! features.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_Has3DNow(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_Has3DNow(void);
 
 /**
  *  This function returns true if the CPU has SSE features.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasSSE(void);
 
 /**
  *  This function returns true if the CPU has SSE2 features.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE2(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasSSE2(void);
 
 /**
  *  This function returns true if the CPU has SSE3 features.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE3(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasSSE3(void);
 
 /**
  *  This function returns true if the CPU has SSE4.1 features.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE41(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasSSE41(void);
 
 /**
  *  This function returns true if the CPU has SSE4.2 features.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE42(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasSSE42(void);
 
 /**
  *  This function returns true if the CPU has AVX features.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasAVX(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasAVX(void);
 
 /**
  *  This function returns true if the CPU has AVX2 features.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasAVX2(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasAVX2(void);
 
 /**
  *  This function returns true if the CPU has AVX-512F (foundation) features.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasAVX512F(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasAVX512F(void);
 
 /**
  *  This function returns true if the CPU has NEON (ARM SIMD) features.
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_HasNEON(void);
+extern DECLSPEC SDL_nez_b32_t SDLCALL SDL_HasNEON(void);
 
 /**
  *  This function returns the amount of RAM configured in the system, in MB.

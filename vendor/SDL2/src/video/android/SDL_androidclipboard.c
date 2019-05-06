@@ -38,7 +38,7 @@ Android_GetClipboardText(_THIS)
     return Android_JNI_GetClipboardText();
 }
 
-SDL_bool Android_HasClipboardText(_THIS)
+SDL_nez_b32_t Android_HasClipboardText(_THIS)
 {
     return Android_JNI_HasClipboardText();
 }

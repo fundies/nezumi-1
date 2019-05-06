@@ -57,7 +57,7 @@ static IMMDeviceEnumerator *enumerator = NULL;
 /* handle to Avrt.dll--Vista and later!--for flagging the callback thread as "Pro Audio" (low latency). */
 static HMODULE libavrt = NULL;
 typedef HANDLE(WINAPI *pfnAvSetMmThreadCharacteristicsW)(LPWSTR, LPDWORD);
-typedef BOOL(WINAPI *pfnAvRevertMmThreadCharacteristics)(HANDLE);
+typedef nez_b32_t(WINAPI *pfnAvRevertMmThreadCharacteristics)(HANDLE);
 static pfnAvSetMmThreadCharacteristicsW pAvSetMmThreadCharacteristicsW = NULL;
 static pfnAvRevertMmThreadCharacteristics pAvRevertMmThreadCharacteristics = NULL;
 
@@ -195,7 +195,7 @@ SDLMMNotificationClient_OnDeviceStateChanged(IMMNotificationClient *ithis, LPCWS
         if (SUCCEEDED(IMMDevice_QueryInterface(device, &SDL_IID_IMMEndpoint, (void **) &endpoint))) {
             EDataFlow flow;
             if (SUCCEEDED(IMMEndpoint_GetDataFlow(endpoint, &flow))) {
-                const SDL_bool iscapture = (flow == eCapture);
+                const SDL_nez_b32_t iscapture = (flow == eCapture);
                 if (dwNewState == DEVICE_STATE_ACTIVE) {
                     char *utf8dev = GetWasapiDeviceName(device);
                     if (utf8dev) {
@@ -314,7 +314,7 @@ WASAPI_PlatformThreadDeinit(_THIS)
 }
 
 int
-WASAPI_ActivateDevice(_THIS, const SDL_bool isrecovery)
+WASAPI_ActivateDevice(_THIS, const SDL_nez_b32_t isrecovery)
 {
     LPCWSTR devid = this->hidden->devid;
     IMMDevice *device = NULL;
@@ -383,7 +383,7 @@ static int sort_endpoints(const void *_a, const void *_b)
 }
 
 static void
-WASAPI_EnumerateEndpointsForFlow(const SDL_bool iscapture)
+WASAPI_EnumerateEndpointsForFlow(const SDL_nez_b32_t iscapture)
 {
     IMMDeviceCollection *collection = NULL;
     EndpointItem *items;

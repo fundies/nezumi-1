@@ -222,7 +222,7 @@ Cocoa_InitMouseEventTap(SDL_MouseData* driverdata)
 }
 
 void
-Cocoa_EnableMouseEventTap(SDL_MouseData *driverdata, SDL_bool enabled)
+Cocoa_EnableMouseEventTap(SDL_MouseData *driverdata, SDL_nez_b32_t enabled)
 {
     SDL_MouseEventTapData *tapdata = (SDL_MouseEventTapData*)driverdata->tapdata;
     if (tapdata && tapdata->tap)
@@ -270,7 +270,7 @@ Cocoa_InitMouseEventTap(SDL_MouseData *unused)
 }
 
 void
-Cocoa_EnableMouseEventTap(SDL_MouseData *driverdata, SDL_bool enabled)
+Cocoa_EnableMouseEventTap(SDL_MouseData *driverdata, SDL_nez_b32_t enabled)
 {
 }
 
