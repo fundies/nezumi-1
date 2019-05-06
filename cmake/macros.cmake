@@ -19,7 +19,7 @@ ENDMACRO ()
 MACRO (NEZUMI_MODULE_OPTION MODULE DOCSTRING)
     # Set the cache option to the module's default value.
     SET (${MODULE} "${${MODULE}_DEFAULT}" CACHE STRING ${DOCSTRING})
-    
+
     # Set the STRINGS property to the module's entry list.
     SET_PROPERTY (CACHE ${MODULE} PROPERTY STRINGS "${${MODULE}_ENTRIES}")
 
