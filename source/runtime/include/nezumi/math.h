@@ -18,9 +18,9 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#ifndef NEZUMI_RUNTIME_MATH_HPP
-#define NEZUMI_RUNTIME_MATH_HPP
+#ifndef NEZUMI_RUNTIME_MATH_H
+#define NEZUMI_RUNTIME_MATH_H
 
-#define nez_clamp(v, l, h) v < l ? l : (v > h ? h : v); 
+#define nez_clamp(v, l, h) v < l ? l : (v > h ? h : v) 
 
 #endif
