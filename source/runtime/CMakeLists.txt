@@ -33,7 +33,7 @@ IF (NEZUMI_PLATFORM_WINDOWS)
     NEZUMI_MODULE_ENTRY (RUNTIME_MODULE_WINDOW "SDL2" SOURCES "source/nezumi/window/sdl2/window.sdl2.c" LIBRARIES "SDL2main;SDL2-static;imm32;version;winmm" EXTERNAL "SDL2" PROVIDES "SDL2main;SDL2-static")
 
     # Windows - Timer
-    NEZUMI_MODULE_ENTRY (RUNTIME_MODULE_TIMER "Win32" SOURCES "source/nezumi/timer/win32/timer.win32.c")
+    NEZUMI_MODULE_ENTRY (RUNTIME_MODULE_TIMER "Win32" SOURCES "source/nezumi/timer/win32/timer.win32.c" LIBRARIES "User32.lib")
 ELSE ()
     # Other Platform
     MESSAGE (WARNING "This platform has no supported runtime modules!")
